@@ -27,10 +27,10 @@ p.small {
 <cfinclude template="bootstrap.html">
 <p>
 <ul>
-  <li><a href="./Home.cfm">Home</a></li>
-  <li><a href="./index.cfm">Application</a></li>
+  <li><a href="./index.cfm">Home</a></li>
+  <li><a href="./Page1.cfm">Application</a></li>
   <li><a href="./Message.cfm">Messages</a></li>
   <li style="float:right"><a href="./Signout.cfm">Signout</a></li>
-  <li style="float:right"><a href="">Name</a></li>
+  <li style="float:right"><a href="./Login.cfm">Login</a></li>
 </ul>
 </p>
