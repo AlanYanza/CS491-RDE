@@ -2,7 +2,9 @@
 <div class="container">
 	<h3>Progress</h3>
 	<div class="progress">
-		<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">50%</div>
+		<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
+			40% Completed
+		</div>
 	</div>
 	
 	<!--<strong>APPLICATION FOR PARTICIPATION IN THE AIDS DRUG DISTRIBUTION PROGRAM AND/OR HEALTH INSURANCE CONTINUATION PROGRAM (Continued)</strong>-->
@@ -15,7 +17,7 @@
 		<br/>
 		<label class="radio-inline"><input type="radio" name="healthInsurance" value="Y"/>Yes</label>
 		<label class="radio-inline"><input type="radio" name="healthInsurance" value="N"/>No</label>
-		<label class="radio-inline"><input type="radio" name="healthInsurance" value="DK"/>Don't Know</label>
+		<label class="radio-inline"><input type="radio" name="healthInsurance" value="Don't Know"/>Don't Know</label>
 	</div>
 	
 	<div class="form-group">
@@ -119,89 +121,155 @@
 		</div></div>
 	</div>	
 		
-		<strong>b. If yes, check all types that you currently have:</strong>
-		<div class="row">
-			<div class="col-sm-12 col-sm-offset-1">
-				<div class="row">
-					<div class="checkbox col-sm-2"><label><input type="checkbox" name="Medicaid" value="Medicaid"/>Medicaid</label></div>
-					<div class="checkbox col-sm-2"><label><input type="checkbox" name="MedicareAB" value="MedicareAB"/>Medicare A/B</label></div>
-					<div class="checkbox col-sm-2"><label><input type="checkbox" name="MedicareD" value="MedicareD"/>Medicare D</label></div>
-					<div class="checkbox col-sm-2"><label><input type="checkbox" name="PI" value="PI"/>Private Insurance</label></div>
-					<div class="checkbox col-sm-2"><label><input type="checkbox" name="CHIP" value="CHIP"/>CHIP</label></div>
-					<div class="checkbox col-sm-2"><label><input type="checkbox" name="COBRA" value="COBRA"/>COBRA</label></div>
-				</div>
+	<strong>b. If yes, check all types that you currently have:</strong>
+	<div class="row">
+		<div class="col-sm-12 col-sm-offset-1">
+			<div class="row">
+				<div class="checkbox col-sm-2"><label><input type="checkbox" name="Medicaid" value="Medicaid"/>Medicaid</label></div>
+				<div class="checkbox col-sm-2"><label><input type="checkbox" name="MedicareAB" value="MedicareAB"/>Medicare A/B</label></div>
+				<div class="checkbox col-sm-2"><label><input type="checkbox" name="MedicareD" value="MedicareD"/>Medicare D</label></div>
+				<div class="checkbox col-sm-2"><label><input type="checkbox" name="PI" value="PI"/>Private Insurance*</label></div>
+				<div class="checkbox col-sm-2"><label><input type="checkbox" name="CHIP" value="CHIP"/>CHIP</label></div>
+				<div class="checkbox col-sm-2"><label><input type="checkbox" name="COBRA" value="COBRA"/>COBRA**</label></div>
 			</div>
 		</div>
-		<div class="form-group">
-			<label>(1) When does it start?</label>
+	</div>
+	
+	<div class="form-horizontal">
+		<label class="control-label col-sm-4">(1) When does it start?</label>
+		<div class="col-sm-8">
 			<input type="date" class="form-control" id="start" name="start">
 		</div>
-		
-		<div class="form-group">
-			<label>(2) When does it end?</label>
+	</div>
+	
+	<div class="form-horizontal">
+		<label class="control-label col-sm-4">(2) When does it end?</label>
+		<div class="col-sm-8">
 			<input type="date" class="form-control" id="end" name="end">
 		</div>
-		
-		<div class="form-group">
-			<label>c. When is the next premium due?</label>
+	</div>
+	
+	<div class="row">
+		<label class="col-sm-4">c. When is the next premium due?</label>
+		<div class="col-sm-8">
 			<input type="date" class="form-control" id="premium" name="premium">
 		</div>
+	</div>
+	
+	<div class="form-group">
+		<label>d. Other(specify):</label>
+		<input type="text" class="form-control" id="OS" name="OS">
+	</div>
+	
+	<div class="form-group">
+		<label>e. If you have insurance, does it provide prescription coverage?</label>
+		<br/>
+		<label class="radio-inline"><input type="radio" name="coverage" value="Y"/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="coverage" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="coverage" value="Don't Know"/>Don't Know</label>
+	</div>
 		
-		<div class="form-group">
-			<label>d. Other(specify):</label>
-			<input type="text" class="form-control" id="OS" name="OS">
+	<div class="form-group">
+		<label>(1) If you have prescription drug coverage through insurance, is there a cap on the annual amount your insurance will pay for medications?</label>
+		<br/>
+		<label class="radio-inline"><input type="radio" name="prescription drug" value="Y"/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="prescription drug" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="prescription drug" value="Don't Know"/>Don't Know</label>
+	</div>
+	
+	<div class="row">
+		<label class="col-sm-4">(2) If yes, what is the amount of the cap?</label>
+		<div class="input-group col-sm-8">
+			<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+			<input type="number" class="form-control" id="cap" name="cap">
 		</div>
-		
-		<div class="form-group">
-			<label>e. If you have insurance, does it provide prescription coverage?</label>
-			<br/>
-			<label class="radio-inline"><input type="radio" name="coverage" value="Y"/>Yes</label>
-			<label class="radio-inline"><input type="radio" name="coverage" value="N"/>No</label>
-			<label class="radio-inline"><input type="radio" name="coverage" value="DK"/>Don't Know</label>
+	</div>
+	
+	<div class="form-group">
+		<label>(2) If yes, what is the amount of the cap?</label>
+		<br/>
+		<label class="radio-inline"><input type="radio" name="capAmount" value="Y"/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="capAmount" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="capAmount" value="Don't Know"/>Don't Know</label>
+	</div>
+	
+	<div class="form-group">
+		<label>f. Do you have prescription coverage through a mail order company?</label>
+		<br/>
+		<label class="radio-inline"><input type="radio" name="mailOrderCompany" value="Y"/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="mailOrderCompany" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="mailOrderCompany" value="Partial"/>Partial</label>
+	</div>
+	
+	<p><strong>A dedicated pharmacy is required even if not utilized</strong></p>
+	
+	<div class="form-group">
+		<label>26. Are you applying or have applied for Medicaid?</label>
+		<br/>
+		<label class="radio-inline"><input type="radio" name="Medicaid" value="Y"/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="Medicaid" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="Medicaid" value="Don't Know"/>Don't Know</label>
+	</div>
+	
+	<div class="row">
+		<label class="col-sm-4"> a. If yes, when did you apply for Medicaid?</label>
+		<div class="col-sm-5">
+			<input type="date" class="form-control" id="medicaidDate" name="medicaidDate">
 		</div>
-		
-		(1) If you have prescription drug coverage through insurance, is there a cap on the annual amount your insurance will pay for medications?<br/>
-		<input type="checkbox" name="Y" value="Y"/>Yes
-		<input type="checkbox" name="N" value="N"/>No
-		<input type="checkbox" name="DK" value="DK"/>Don't Know<br/>
-		(2) If yes, what is the amount of the cap?<br/>
-		<input type="checkbox" name="Y" value="Y"/>Yes
-		<input type="checkbox" name="N" value="N"/>No
-		<input type="checkbox" name="DK" value="DK"/>Don't Know
-		<br/><br/>
-		<strong>f. Do you have prescription coverage through a mail order company?</strong><br/>
-		<input type="checkbox" name="Y" value="Y"/>Yes
-		  <input type="checkbox" name="N" value="N"/>No
-		  <input type="checkbox" name="P" value="P"/>Partial
-	<br/>
-	<center><strong>A dedicated pharmacy is required even if not utilized</strong></center><br/><br/>
-	<strong>26. Are you applying or have applied for Medicare?</strong><br/>
-	  <input type="checkbox" name="Insurance" value="Insurance"/>Yes
-	  <input type="checkbox" name="Insurance" value="Insurance"/>No
-	  <input type="checkbox" name="Insurance" value="Insurance"/>Don't Know <br/>
-	  a. If yes, when did you apply for Medicaid?
-	  <input type="date" class="form-control" id="Medi" name="Medi"><br/>
-	  b. Have you received a response?
-	  <input type="checkbox" name="Y" value="Y"/>Yes
-	  <input type="checkbox" name="N" value="N"/>No<br/><br/>
-	<strong>27. Are you applying or have applied for Medicare?</strong><br/>
-	  <input type="checkbox" name="Insurance" value="Insurance"/>Yes
-	  <input type="checkbox" name="Insurance" value="Insurance"/>No
-	  <input type="checkbox" name="Insurance" value="Insurance"/>Don't Know <br/>
-	  a. If yes, when did you apply for Medicaid?
-	  <input type="date" class="form-control" id="Medi" name="Medi"><br/>
-	  b. Have you received a response?<br/>
-	  <input type="checkbox" name="Y" value="Y"/>Yes
-	  <input type="checkbox" name="N" value="N"/>No<br/>
-	  c. If yes, have you applied for Medicare Part D(medical coverage)<br/>
-	  <input type="checkbox" name="Y" value="Y"/>Yes
-	  <input type="checkbox" name="N" value="N"/>No
-	  <input type="checkbox" name="DK" value="Dk"/>Don't Know<br/>
-	  (1) If yes, have you applied for Low Income Subsidy (LIS)<br/>
-	  <input type="checkbox" name="Y" value="Y"/>Yes
-	  <input type="checkbox" name="N" value="N"/>No
-	  <input type="checkbox" name="DK" value="Dk"/>Don't Know
-	</form><br/>
+		<div class="checkbox col-sm-3">
+			<label><input type="checkbox" name="medicaidDate" value="Unsure"/>Unsure</label>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label>b. Have you received a response?</label>
+		<br/>
+		<label class="radio-inline"><input type="radio" name="medicaidResponse" value="Y"/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="medicaidResponse" value="N"/>No</label>
+	</div>
+	
+	<div class="form-group">
+		<label>27. Are you applying or have applied for Medicare?</label>
+		<br/>
+		<label class="radio-inline"><input type="radio" name="Medicare" value="Y"/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="Medicare" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="Medicare" value="Don't Know"/>Don't Know</label>
+	</div>
+	
+	<div class="row">
+		<label class="col-sm-4">a. If yes, when did you apply for Medicare?</label>
+		<div class="col-sm-5">
+			<input type="date" class="form-control" id="medicareDate" name="medicareDate">
+		</div>
+		<div class="checkbox col-sm-3">
+			<label><input type="checkbox" name="medicareDate" value="Unsure"/>Unsure</label>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label>b. Have you received a response?</label>
+		<br/>
+		<label class="radio-inline"><input type="radio" name="medicareResponse" value="Y"/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="medicareResponse" value="N"/>No</label>
+	</div>
+	
+	<div class="form-group">
+		<label>c. If yes, have you applied for Medicare Part D(medical coverage)</label>
+		<br/>
+		<label class="radio-inline"><input type="radio" name="medicarePartD" value="Y"/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="medicarePartD" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="medicarePartD" value="Don't Know"/>Don't Know</label>
+	</div>
+	
+	<div class="form-group">
+		<label>(1) If yes, have you applied for Low Income Subsidy (LIS)</label>
+		<br/>
+		<label class="radio-inline"><input type="radio" name="appliedLIS" value="Y"/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="appliedLIS" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="appliedLIS" value="Don't Know"/>Don't Know</label>
+	</div>
+	
+	</form>
 	<div class="row">
 		<div class="col-sm-6">
 			* Private Insurance Definition: Plans provided by the private insurance industry as a benefit of employment or through the 
