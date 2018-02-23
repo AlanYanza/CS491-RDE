@@ -37,7 +37,8 @@ BEGIN
 		appID int IDENTITY(1,1) PRIMARY KEY,
 		formTypeID int NOT NULL FOREIGN KEY REFERENCES "Forms"(formTypeID),
 		HICPApp char(1) NOT NULL CHECK (HICPApp IN('Y','N')),
-		dateEligDet datetime 
+		dateEligDet datetime,
+		status char(1) NOT NULL DEFAULT('R') CHECK (status IN('R','A','D','N'))
 	);
 END
 ---------------------------------------------------------------------------------
