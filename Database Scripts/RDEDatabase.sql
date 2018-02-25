@@ -4,7 +4,7 @@ Note:There is a separate SQL script to add each Form
      See documentation ERD diagrams for Database Design
 	 **Connect first to database that you wish to populate*/
 /********************************************************************/
-
+PRINT 'Create Base Tables for RDE Form Application....';
 --Create User Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
               WHERE TABLE_NAME=N'User')
@@ -191,5 +191,16 @@ BEGIN
 		email varchar(100)
 	);
 END
-
-
+---------------------------------------------------------------------------------
+--Create OtherIncome Table
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
+			  WHERE TABLE_NAME=N'OtherIncome')
+BEGIN
+	CREATE TABLE "OtherIncome" (
+		dataID int NOT NULL FOREIGN KEY REFERENCES "UserFormData"(dataID),
+		formTypeID int NOT NULL FOREIGN KEY REFERENCES "Forms"(formTypeID),
+		incomeType varchar(50) NOT NULL DEFAULT(''),
+		amount decimal(14,2) DEFAULT(0.00)
+	);
+END
+PRINT 'Successfully create Base Tables for RDE Form Application....';
