@@ -69,8 +69,10 @@ BEGIN
 			NHPI varchar(2) CHECK(NHPI IN('NH','G','S','O')),
 			preg char(1) CHECK(preg IN('Y','N')),
 		);
+		PRINT 'Successfully created "NJSection1" Table';
 	END
-
+	ELSE
+		PRINT '"NJSection1" Table already exist';
 	----------------------------------------------------------------------------------------------------
 	--Create NJSection2 Table
 	IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -104,8 +106,10 @@ BEGIN
 			RcGA char(1) CHECK(RcGA IN('Y','N')),
 			RcSNAP char(1) CHECK(RcSNAP IN('Y','N')),
 		);
+		PRINT 'Successfully created "NJSection2" Table';
 	END
-
+	ELSE
+	PRINT '"NJSection2" Table already exist';
 	----------------------------------------------------------------------------------------------------
 	--Create NJSection3A Table
 	IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -147,8 +151,10 @@ BEGIN
 			AMedicareD char(1) CHECK(AMedicareD IN('Y','N','U')),
 			ALIS char(1) CHECK(ALIS IN('Y','N','U')),
 		);
+		PRINT 'Successfully created "NJSection3A" Table';
 	END
-
+	ELSE
+		PRINT '"NJSection3A" Table already exist';
 	----------------------------------------------------------------------------------------------------
 	--Create NJSection3B Table
 	IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -203,6 +209,9 @@ BEGIN
 			EligVetDrugBen char(1) CHECK(EligVetDrugBen IN('Y','N')),
 			RecPresDrugBen char(1) CHECK(RecPresDrugBen IN('Y','N')),
 		);
+		PRINT 'Successfully created "NJSection3B" Table';
 	END
+	ELSE
+		PRINT '"NJSection3B" Table already exist';
 	PRINT 'Successfully Added NJ Form Tables to Database';
 END

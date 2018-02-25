@@ -4,7 +4,7 @@ Note:There is a separate SQL script to add each Form
      See documentation ERD diagrams for Database Design
 	 **Connect first to database that you wish to populate*/
 /********************************************************************/
-PRINT 'Create Base Tables for RDE Form Application....';
+PRINT 'Creating Base Tables for RDE Form Application....';
 --Create User Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
               WHERE TABLE_NAME=N'User')
@@ -16,7 +16,10 @@ BEGIN
 		accessLevel varchar(50) NOT NULL
 		CHECK (accessLevel IN('user','admin'))
 	);
+	PRINT 'Successfully created "User" Table';
 END
+ELSE
+	PRINT '"User" Table already exist';
 -----------------------------------------------------------------------------------
 --Create Forms Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -26,7 +29,10 @@ BEGIN
 		formTypeID int IDENTITY(1,1) PRIMARY KEY,
 		state varchar(2) NOT NULL
 	);
+	PRINT 'Successfully created "Forms" Table';
 END
+ELSE
+	PRINT '"Forms" Table already exist';
 -----------------------------------------------------------------------------------
 --Create UserApplication Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -40,7 +46,10 @@ BEGIN
 		dateEligDet datetime,
 		status char(1) NOT NULL DEFAULT('R') CHECK (status IN('R','A','D','N'))
 	);
+	PRINT 'Successfully created "UserApplication" Table';
 END
+ELSE
+	PRINT '"UserApplication" Table already exist';
 ---------------------------------------------------------------------------------
 --Create Message Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -50,10 +59,13 @@ BEGIN
 		msgID int IDENTITY(1,1) PRIMARY KEY,
 		sender varchar(100) NOT NULL,
 		receipient varchar(255) NOT NULL,
-		message varchar(1000),
-		dateSent datetime NOT NULL 
+		message varchar(1000) NOT NULL DEFAULT(''),
+		dateSent datetime NOT NULL DEFAULT(getutcdate())
 	);
+	PRINT 'Successfully created "Message" Table';
 END
+ELSE
+	PRINT '"Message" Table already exist';
 ---------------------------------------------------------------------------------
 --Create FormTables Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -63,7 +75,10 @@ BEGIN
 		formTypeID int NOT NULL FOREIGN KEY REFERENCES "Forms"(formTypeID),
 		tableName varchar(100) NOT NULL
 	);
+	PRINT 'Successfully created "FormTables" Table';
 END
+ELSE
+	PRINT '"FormTables" Table already exist';
 ---------------------------------------------------------------------------------
 --Create AppDocument Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -75,7 +90,10 @@ BEGIN
 		isRequired char(1) NOT NULL CHECK (isRequired IN('Y','N')),
 		received char(1) NOT NULL CHECK (received IN('Y','N'))
 	);
+	PRINT 'Successfully created "AppDocument" Table';
 END
+ELSE
+	PRINT '"AppDocument" Table already exist';
 ---------------------------------------------------------------------------------
 --Create Inbox Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -87,7 +105,10 @@ BEGIN
 		msgID int NOT NULL FOREIGN KEY REFERENCES "Message"(msgID),
 		readStatus char(1) NOT NULL CHECK (readStatus IN('Y','N'))
 	);
+	PRINT 'Successfully created "Inbox" Table';
 END
+ELSE
+	PRINT '"Inbox" Table already exist';
 ---------------------------------------------------------------------------------
 --Create Sent Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -97,7 +118,10 @@ BEGIN
 		username varchar(100) NOT NULL FOREIGN KEY REFERENCES "User"(username),
 		msgID int NOT NULL FOREIGN KEY REFERENCES "Message"(msgID)
 	);
+	PRINT 'Successfully created "Sent" Table';
 END
+ELSE
+	PRINT '"Sent" Table already exist';
 ---------------------------------------------------------------------------------
 --Create Trash Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -107,7 +131,10 @@ BEGIN
 		username varchar(100) NOT NULL FOREIGN KEY REFERENCES "User"(username),
 		msgID int NOT NULL FOREIGN KEY REFERENCES "Message"(msgID)
 	);
+	PRINT 'Successfully created "Trash" Table';
 END
+ELSE
+	PRINT '"Trash" Table already exist';
 ---------------------------------------------------------------------------------
 --Create UserFormData Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -117,7 +144,10 @@ BEGIN
 		appID int NOT NULL FOREIGN KEY REFERENCES "UserApplication"(appID),
 		dataID int PRIMARY KEY
 	);
+	PRINT 'Successfully created "UserFormData" Table';
 END
+ELSE
+	PRINT '"UserFormData" Table already exist';
 ---------------------------------------------------------------------------------
 --Create Signature Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -131,7 +161,10 @@ BEGIN
 		spouseSig image,
 		spouseSigDate datetime
 	);
+	PRINT 'Successfully created "Signature" Table';
 END
+ELSE
+	PRINT '"Signature" Table already exist';
 ---------------------------------------------------------------------------------
 --Create Preparer Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -140,12 +173,15 @@ BEGIN
 	CREATE TABLE "Preparer" (
 		dataID int NOT NULL FOREIGN KEY REFERENCES "UserFormData"(dataID),
 		formTypeID int NOT NULL FOREIGN KEY REFERENCES "Forms"(formTypeID),
-		FName varchar(100),
-		MName varchar(100),
-		LName varchar(100),
-		phone varchar(16)
+		FName varchar(100) NOT NULL DEFAULT(''),
+		MName varchar(100) NOT NULL DEFAULT(''),
+		LName varchar(100) NOT NULL DEFAULT(''),
+		phone varchar(16) NOT NULL DEFAULT('')
 	);
+	PRINT 'Successfully created "Preparer" Table';
 END
+ELSE
+	PRINT '"Preparer" Table already exist';
 ---------------------------------------------------------------------------------
 --Create ContactPerson Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -156,19 +192,22 @@ BEGIN
 		formTypeID int NOT NULL FOREIGN KEY REFERENCES "Forms"(formTypeID),
 		perm char(1) CHECK (perm IN('Y','N')),
 		HIVAware char(1) CHECK (HIVAware IN('Y','N')),
-		FName varchar(100),
-		MName varchar(100),
-		LName varchar(100),
-		relation varchar(50),
-		street varchar(50),
-		city varchar(100),
-		state varchar(2),
-		zip varchar(12),
-		HPhone varchar(16),
-		WPhone varchar(16),
-		CPhone varchar(16)
+		FName varchar(100) NOT NULL DEFAULT(''),
+		MName varchar(100) NOT NULL DEFAULT(''),
+		LName varchar(100) NOT NULL DEFAULT(''),
+		relation varchar(50) NOT NULL DEFAULT(''),
+		street varchar(50) NOT NULL DEFAULT(''),
+		city varchar(100) NOT NULL DEFAULT(''),
+		state varchar(2) NOT NULL DEFAULT(''),
+		zip varchar(12) NOT NULL DEFAULT(''),
+		HPhone varchar(16) NOT NULL DEFAULT(''),
+		WPhone varchar(16) NOT NULL DEFAULT(''),
+		CPhone varchar(16) NOT NULL DEFAULT('')
 	);
+	PRINT 'Successfully created "ContactPerson" Table';
 END
+ELSE
+	PRINT '"ContactPerson" Table already exist';
 ---------------------------------------------------------------------------------
 --Create CaseManager Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -177,20 +216,23 @@ BEGIN
 	CREATE TABLE "CaseManager" (
 		dataID int NOT NULL FOREIGN KEY REFERENCES "UserFormData"(dataID),
 		formTypeID int NOT NULL FOREIGN KEY REFERENCES "Forms"(formTypeID),
-		FName varchar(100),
-		MName varchar(100),
-		LName varchar(100),
-		agency varchar(100),
-		street varchar(50),
-		city varchar(100),
-		state varchar(2),
-		zip varchar(12),
-		WPhone varchar(16),
-		FaxNum varchar(16),
-		CPhone varchar(16),
-		email varchar(100)
+		FName varchar(100) NOT NULL DEFAULT(''),
+		MName varchar(100) NOT NULL DEFAULT(''),
+		LName varchar(100) NOT NULL DEFAULT(''),
+		agency varchar(100) NOT NULL DEFAULT(''),
+		street varchar(50) NOT NULL DEFAULT(''),
+		city varchar(100) NOT NULL DEFAULT(''),
+		state varchar(2) NOT NULL DEFAULT(''),
+		zip varchar(12) NOT NULL DEFAULT(''),
+		WPhone varchar(16) NOT NULL DEFAULT(''),
+		FaxNum varchar(16) NOT NULL DEFAULT(''),
+		CPhone varchar(16) NOT NULL DEFAULT(''),
+		email varchar(100) NOT NULL DEFAULT('')
 	);
+	PRINT 'Successfully created "CaseManager" Table';
 END
+ELSE
+	PRINT '"CaseManager" Table already exist';
 ---------------------------------------------------------------------------------
 --Create OtherIncome Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -202,5 +244,8 @@ BEGIN
 		incomeType varchar(50) NOT NULL DEFAULT(''),
 		amount decimal(14,2) DEFAULT(0.00)
 	);
+	PRINT 'Successfully created "OtherIncome" Table';
 END
-PRINT 'Successfully create Base Tables for RDE Form Application....';
+ELSE
+	PRINT '"OtherIncome" Table already exist';
+PRINT 'Successfully created Base Tables for RDE Form Application';
