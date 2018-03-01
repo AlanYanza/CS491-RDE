@@ -13,11 +13,19 @@ div.smaller {
 }
 table, th, td {
     border: 1px solid black;
-	
+
 }
 form{ display: inline-block; }
 </style>
 <cfinclude template="header.cfm">
+<div class="container">
+	<h3>Progress</h3>
+	<div class="progress">
+		<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%">
+			60% Completed
+		</div>
+	</div>
+</div>
 <br><br>
 <center><div class="solid">
 <CFOUTPUT><b>APPLICATION FOR PARTICIPATION IN THE AIDS DRUG DISTRIBUTION PROGRAM AND/OR HEALTH INSURANCE CONTINUATION PROGRAM (Continued)</b></CFOUTPUT><br><br>
@@ -114,7 +122,7 @@ form{ display: inline-block; }
 <center><CFOUTPUT><b>NOTE: You MUST include a photocopy of the FRONT and BACK of your insurance card(s)/prescription card(s)
 and any notice from your Insurance Company regarding Medicare Part D.</b></CFOUTPUT></center>
 </div> <br>
-</div> 
+</div>
 <form method="get" action="./Page6.cfm">
     <button type="submit">Back</button>
 </form>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
