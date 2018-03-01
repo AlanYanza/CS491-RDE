@@ -1,0 +1,45 @@
+.selected {
+	background-color: #80b6fc !important;
+}
+
+.read {
+	font-weight: bold !important;
+}
+
+#sidebar {
+	border: 0.1px solid gray;
+	min-height: 100vh;
+	padding: 0;
+}
+
+.title {
+	background-color: #f0f0f0;
+	border-bottom: 1px solid #ddd;
+
+}
+
+.mail {
+	list-style-type: none;
+	left:0;
+	width:100%;
+	padding: 0;
+}
+
+.mail li {
+	/*position: relative;*/
+	left: 0;
+	background-color:white;
+	border-bottom: 0.1px solid #f0f0f0;
+	padding: 10px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+
+.nav-mail {
+	background-color: #f0f0f0;
+}
+
+#content {
+	padding: 0;
+}

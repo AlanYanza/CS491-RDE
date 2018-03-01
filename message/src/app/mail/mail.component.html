@@ -1,0 +1,28 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-3 container-fluid" id="sidebar">
+			<ul class="nav nav-tabs nav-mail">
+				<li class="nav-item">
+					<a class="nav-link active" href="#">Inbox</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Sent</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">
+					Trash</a>
+				</li>
+			</ul>
+			<ul class="mail">
+				<li *ngFor="let msg of mail" [class.selected]="msg === selectedMsg" [class.read]="!msg.read" (click)="onSelect(msg)"> 
+					<!-- <span class="badge">{{msg.msgID}}</span>  -->
+					<div class="subject">{{msg.subject}} {{msg.DateSent}}</div>
+					<div class="sender">{{msg.sender}}</div>
+				</li>
+			</ul>
+		</div>
+		<div class="col-lg-9 hidden-xs hidden-sm hidden-md" id="content">
+			<app-mail-content [msg]="selectedMsg"></app-mail-content>
+		</div>
+	</div>
+</div>
