@@ -1,9 +1,13 @@
+<html>
+<head>
+<cfinclude template="head.cfm">
 <style>
 p.solid {
 	border-style: solid;
 	width: 95%;
 }
 </style>
+</head>
 <cfinclude template="header.cfm">
 <br><br>
 <center><p class="solid"><CFOUTPUT><b>New Jersey Department of Health</b></CFOUTPUT><br>
@@ -72,3 +76,5 @@ Part B deducted from their Social Security check.</CFOUTPUT><br><br>
 <form method="get" action="./Page2.cfm">
     <button type="submit">Next</button>
 </p></center>
+
+</html>

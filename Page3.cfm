@@ -1,3 +1,6 @@
+<html>
+<head>
+<cfinclude template="head.cfm">
 <style>
 div.solid {
 	border-style: solid;
@@ -13,6 +16,7 @@ table, th, td {
 }
 form{ display: inline-block; }
 </style>
+</head>
 <cfinclude template="header.cfm">
 <br><br>
 <center><div class="solid">
@@ -67,3 +71,4 @@ CIRCUMSTANCES THAT WOULD IMPACT ELIGIBILITY FOR ADDP OR HICP.</b></CFOUTPUT><br>
     <button type="submit">Next</button>
 </form>
 </center>
+</html>

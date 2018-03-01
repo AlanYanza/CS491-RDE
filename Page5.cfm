@@ -1,3 +1,7 @@
+<html>
+<head>
+<cfinclude template="head.cfm">
+</head>
 <cfinclude template="header.cfm">
 <div class="container">
 	<h3>Progress</h3>

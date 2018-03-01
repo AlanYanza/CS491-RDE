@@ -1,3 +1,6 @@
+<html>
+<head>
+<cfinclude template="head.cfm">
 <style>
 div.solid {
 	border-style: solid;
@@ -17,6 +20,7 @@ table, th, td {
 }
 form{ display: inline-block; }
 </style>
+</head>
 <cfinclude template="header.cfm">
 <div class="container">
 	<h3>Progress</h3>
@@ -120,3 +124,4 @@ arise concerning the application.</CFOUTPUT><br>
     <button type="submit">Next</button>
 </form>
 </center>
+<html>
