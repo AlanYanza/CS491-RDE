@@ -1,3 +1,4 @@
+<cfinclude template="header.cfm">
 <style>
 p.solid {
 	border-style: solid;
@@ -5,11 +6,10 @@ p.solid {
 }
 table, th, td {
     border: 1px solid black;
-	
+
 }
 form{ display: inline-block; }
 </style>
-<cfinclude template="header.cfm ">
 <br><br>
 <center><p class="solid"><CFOUTPUT><b>INSTRUCTIONS FOR COMPLETING THE APPLICATION FOR PARTICIPATION IN THE
 AIDS DRUG DISTRIBUTION PROGRAM AND/OR HEALTH INSURANCE CONTINUATION PROGRAM
