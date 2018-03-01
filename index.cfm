@@ -1,3 +1,9 @@
+<html>
+<head>
+  <title>Application</title>
+  <cfinclude template="head.cfm">
+</head>
+<body>
 <cfinclude template="header.cfm">
 <div class="container">
 <center><b><font size="6" color="black">ADDP Application Page</font></b></center>
@@ -27,3 +33,5 @@ function Gone() {
     </div>
   </div>
 </div>
+</body>
+</html>
