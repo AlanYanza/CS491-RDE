@@ -6,7 +6,7 @@ Tables:NJSection1
 	   NJSection3B*/
 /********************************************************************/
 --Check if Base Tables created using RDEDatabase.sql if not Do not attempt to create NJForm Tables
-IF (NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'Forms') AND 
+IF (NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'Forms') AND
 	NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'UserFormData') )
 	PRINT 'ERROR: Mising Required Base Tables, Please Install Base Tables using RDEDatabase.sql and Retry';
 ELSE
@@ -15,7 +15,7 @@ BEGIN
 	--Insert NJ Form into Forms Table
 	IF (NOT EXISTS(SELECT state FROM Forms WHERE state='NJ'))
 	BEGIN
-		INSERT INTO Forms (state) VALUES('NJ') 
+		INSERT INTO Forms (state) VALUES('NJ')
 	END
 
 	--Retrieve FormTypeID of Form
@@ -28,7 +28,7 @@ BEGIN
 	IF (NOT EXISTS(SELECT * FROM FormTables WHERE formTypeID=@NJFORMID AND tableName='NJSection2'))
 		INSERT INTO FormTables(formTypeID,tableName) VALUES(@NJFORMID,'NJSection2');
 	IF (NOT EXISTS(SELECT * FROM FormTables WHERE formTypeID=@NJFORMID AND tableName='NJSection3A'))
-		INSERT INTO FormTables(formTypeID,tableName) VALUES(@NJFORMID,'NJSection3A'); 
+		INSERT INTO FormTables(formTypeID,tableName) VALUES(@NJFORMID,'NJSection3A');
 	IF (NOT EXISTS(SELECT * FROM FormTables WHERE formTypeID=@NJFORMID AND tableName='NJSection3B'))
 		INSERT INTO FormTables(formTypeID,tableName) VALUES(@NJFORMID,'NJSection3B');
 
@@ -64,9 +64,29 @@ BEGIN
 			USCitizen char(1) CHECK(USCitizen IN('Y','N')),
 			veteran char(1) CHECK(veteran IN('Y','N')),
 			RelStatus varchar(2) CHECK(RelStatus IN('S','M','C','DP','D','W','SP')),
-			race varchar(2) CHECK(race IN('W','B','A','NH','U','AI')),
-			asain char(1) CHECK(asain IN('AI','C','F','J','K','V','O')),
-			NHPI varchar(2) CHECK(NHPI IN('NH','G','S','O')),
+			RWhite varchar(1) CHECK(RWhite IN('Y','N')),
+			RBlack varchar(1) CHECK(RBlack IN('Y','N')),
+			RAsian varchar(1) CHECK(RAsian IN('Y','N')),
+				AAsInd varchar(1) CHECK(AAsInd IN('Y','N')),
+				AChinese varchar(1) CHECK(AChinese IN('Y','N')),
+				AFilipino varchar(1) CHECK(AFilipino IN('Y','N')),
+				AJap varchar(1) CHECK(AJap IN('Y','N')),
+				AKorean varchar(1) CHECK(AKorean IN('Y','N')),
+				AViet varchar(1) CHECK(AViet IN('Y','N')),
+				AOther varchar(1) CHECK(AOther IN('Y','N')),
+			RAmInd varchar(1) CHECK(RAmInd IN('Y','N')),
+			RNatHa varchar(1) CHECK(RNatHa IN('Y','N')),
+				NHNatHaw varchar(1) CHECK(NHNatHaw IN('Y','N')),
+				NHGua varchar(1) CHECK(NHGua IN('Y','N')),
+				NHSam varchar(1) CHECK(NHSam IN('Y','N')),
+				NHOther varchar(1) CHECK(NHOther IN('Y','N')),
+			RUnk varchar(1) CHECK(RUnk IN('Y','N')),
+			EHisp varchar(1) CHECK(EHisp IN('Y','N')),
+				HispMex varchar(1) CHECK(HispMex IN('Y','N')),
+				HispPR varchar(1) CHECK(HispPR IN('Y','N')),
+				HispCub varchar(1) CHECK(HispCub IN('Y','N')),
+				HispOther varchar(1) CHECK(HispOther IN('Y','N')),
+			ENonHisp varchar(1) CHECK(ENonHisp IN('Y','N')),
 			preg char(1) CHECK(preg IN('Y','N')),
 		);
 		PRINT 'Successfully created "NJSection1" Table';
@@ -120,10 +140,7 @@ BEGIN
 			insured char(1) CHECK(insured IN('Y','N','U')),
 			Medium char(1) CHECK(Medium IN('C','F','U','S')),
 			EmpUnName varchar(100) NOT NULL DEFAULT(''),
-			EmpUnAddrSt varchar(50) NOT NULL DEFAULT(''),
-			EmpUnAddrCity varchar(50) NOT NULL DEFAULT(''),
-			EmpUnAddrState varchar(2) NOT NULL DEFAULT(''),
-			EmpUnAddrZip varchar(12) NOT NULL DEFAULT(''),
+			EmpUnAddr varchar(200) NOT NULL DEFAULT(''),
 			EmpUnContact varchar(150) NOT NULL DEFAULT(''),
 			EmpUnPhone varchar(16) NOT NULL DEFAULT(''),
 			Medicaid char(1) CHECK(Medicaid IN('Y','N')),
@@ -178,30 +195,18 @@ BEGIN
 			relation char(1) CHECK(relation IN('S','P','C','O')),
 			relOther varchar(50) NOT NULL DEFAULT(''),
 			InsName varchar(100) NOT NULL DEFAULT(''),
-			InsAddrSt varchar(50) NOT NULL DEFAULT(''),
-			InsAddrCity varchar(50) NOT NULL DEFAULT(''),
-			InsAddrState varchar(2) NOT NULL DEFAULT(''),
-			InsAddrZip varchar(12) NOT NULL DEFAULT(''),
+			InsAddr varchar(200) NOT NULL DEFAULT(''),
 			InsAddrCounty varchar(50) NOT NULL DEFAULT(''),
 			InsSS varchar(15) NOT NULL DEFAULT(''),
 			InsPhone varchar(16) NOT NULL DEFAULT(''),
 			InsCarrier varchar(100) NOT NULL DEFAULT(''),
-			InsCarAddrSt varchar(50) NOT NULL DEFAULT(''),
-			InsCarAddrCity varchar(50) NOT NULL DEFAULT(''),
-			InsCarAddrState varchar(2) NOT NULL DEFAULT(''),
-			InsCarAddrZip varchar(12) NOT NULL DEFAULT(''),
+			InsCarAddr varchar(200) NOT NULL DEFAULT(''),
 			InsCarPhone varchar(16) NOT NULL DEFAULT(''),
 			InsCarPolicyNum varchar(50) NOT NULL DEFAULT(''),
 			EmpUnName varchar(100) NOT NULL DEFAULT(''),
-			EmpUnAddrSt varchar(50) NOT NULL DEFAULT(''),
-			EmpUnAddrCity varchar(50) NOT NULL DEFAULT(''),
-			EmpUnAddrState varchar(2) NOT NULL DEFAULT(''),
-			EmpUnAddrZip varchar(12) NOT NULL DEFAULT(''),
+			EmpUnAddr varchar(200) NOT NULL DEFAULT(''),
 			PresCar varchar(50) NOT NULL DEFAULT(''),
-			PresCarAddrSt varchar(50) NOT NULL DEFAULT(''),
-			PresCarAddrCity varchar(50) NOT NULL DEFAULT(''),
-			PresCarAddrState varchar(2) NOT NULL DEFAULT(''),
-			PresCarAddrZip varchar(12) NOT NULL DEFAULT(''),
+			PresCarAddr varchar(200) NOT NULL DEFAULT(''),
 			PresCarPhone varchar(16) NOT NULL DEFAULT(''),
 			PresCarID varchar(50) NOT NULL DEFAULT(''),
 			PresCoPay decimal(14,2),
