@@ -29,7 +29,7 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 		    <ul class="nav navbar-nav">
-		      <li><a href="home.cfm">Home</li>
+		      <li><a href="../home.cfm">Home</a></li>
 		      <li class="active"><a href="#">Application</a></li>
 		      <li><a href="./message.cfm">Messages <span class="badge">1</span></a></li>
 		    </ul>		
