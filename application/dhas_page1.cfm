@@ -41,9 +41,8 @@
 
 	<p class="text-center"><strong>APPLICATION FOR PARTICIPATION IN THE AIDS DRUG DISTRIBUTION PROGRAM AND/OR HEALTH INSURANCE CONTINUATION PROGRAM</strong></p>
 	<p>
-		Please print clearly and answer all questions. Review the attached instructions before you begin. If you need assistance completing this
-		application, call toll free 1-877-613-4533 for ADDP questions or 1-800-353-3232 for HICP questions. Mail the completed application to the
-		ADDP/HICP Program at the address given above or fax to 609-588-7037. Send copies of any requested documents. Do NOT send original
+		Please answer all questions. Review the instructions pages before you begin. If you need assistance completing this
+		application, call toll free 1-877-613-4533 for ADDP questions or 1-800-353-3232 for HICP questions. Send copies of any requested documents. Do NOT send original
 		documents as they WILL NOT be returned.
 	</p>
 	<form action="">

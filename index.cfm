@@ -26,12 +26,13 @@
 	</div>
 </nav>
 <div class="container">
+	<div class="page-header">
+		<h1>Login</h1>
+	</div>
 	<div class="row">
 		<!-- Login Section-->
 		<div class="col-sm-6">
-			<div class="page-header">
-				<h1>Login</h1>
-			</div>
+			
 			<p>Not a member? <a href="register.cfm">Register here</a></p>
 			<br/>
 
@@ -51,52 +52,6 @@
 				<div class="form-group">
 			    	<div class="col-sm-offset-2 col-sm-10">
 			      		<button type="submit" class="btn btn-default">Submit</button>
-				    </div>
-				</div>
-			</form>
-		</div>
-
-		<div class="col-sm-6">
-			<div class="page-header">
-				<h1>Register</h1>
-			</div>
-			<p>Already a member? <a href="index.cfm">Log in here</a></p>
-			<br/>
-
-			<form class="form-horizontal" action="#">
-				<div class="form-group">
-				    <label class="control-label col-sm-3" for="email">Email:</label>
-				    <div class="col-sm-9">
-				    	<input type="email" class="form-control" id="email" placeholder="Enter email">
-				    </div>
-				</div>
-				<div class="form-group">
-				    <label class="control-label col-sm-3" for="password">Password:</label>
-				    <div class="col-sm-9">
-				    	<input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
-				    </div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-3"  for="confirm_password">Confirm Password:</label>
-					<div class="col-sm-9">
-						<input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm password" required/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-3"  for="firstName">First Name:</label>
-					<div class="col-sm-9">
-						<input type="text" class="form-control" name="firstName" required/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-3"  for="lastName">Last Name:</label>
-					<div class="col-sm-9">
-						<input type="text" class="form-control" name="lastName" required/>
-					</div>
-				</div>
-				<div class="form-group">
-			    	<div class="col-sm-offset-3 col-sm-9">
-			      		<button type="submit" class="btn btn-default">Register</button>
 				    </div>
 				</div>
 			</form>
