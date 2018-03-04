@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 	<title>Application</title>
-	<cfinclude template="head.cfm"/></head>
+	<cfinclude template="../head.cfm"/></head>
 <body>
-<cfinclude template="navbar.cfm">
+<cfinclude template="../navbar.cfm">
 <div class="container">
 	<div>
 		<p  style="text-align: center;"><strong>	

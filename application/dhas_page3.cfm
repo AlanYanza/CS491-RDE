@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<title>Application</title>
-	<cfinclude template="head.cfm"/>
+	<cfinclude template="../head.cfm"/>
 	<script type="text/javascript">
   	"use strict";
 	$(document).ready(
@@ -13,7 +13,7 @@
   </script>
 </head>
 <body>
-<cfinclude template="navbar.cfm">
+<cfinclude template="../navbar.cfm">
 <div class="container">
 	<h3>Progress</h3>
 	<div class="progress">

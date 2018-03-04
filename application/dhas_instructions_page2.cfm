@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   	<title>Application</title>
-  	<cfinclude template="head.cfm"/>
+  	<cfinclude template="../head.cfm"/>
 </head>
 <body>
-<cfinclude template="navbar.cfm">
+<cfinclude template="../navbar.cfm">
 <div class="container">
 	<p><strong>INSTRUCTIONS FOR COMPLETING THE APPLICATION FOR PARTICIPATION IN THE
 	AIDS DRUG DISTRIBUTION PROGRAM AND/OR HEALTH INSURANCE CONTINUATION PROGRAM
