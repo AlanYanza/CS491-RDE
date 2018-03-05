@@ -1,12 +1,20 @@
-<cfinclude template="header.cfm">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Administration</title>
+    <cfinclude template="head.cfm"/>
+    <script>
+	$(document).ready(function(){
+	    $('[data-toggle="tooltip"]').tooltip();   
+	});
+	</script>
+</head>
+<body>
+	<cfinclude template="navbar.cfm"/>
 <div class="container">
 <center><b><font size="6" color="black">ADMIN PAGE</font></b></center>
 <br><br>
-<script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
-});
-</script>
+
     <div class="panel panel-success">
       <div class="panel-heading">Applications to review</div>
 		<div class="panel-body">
@@ -101,3 +109,5 @@ $(document).ready(function(){
       </div>
   </div>
 </div>
+<body>
+<html/>
