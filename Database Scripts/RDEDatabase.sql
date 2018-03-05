@@ -4,14 +4,18 @@ Note:There is a separate SQL script to add each Form
      See documentation ERD diagrams for Database Design
 	 **Connect first to database that you wish to populate*/
 /********************************************************************/
+/*replace first line with USE[DatabaseName]*/ 
+USE [RDESystems];
 PRINT 'Creating Base Tables for RDE Form Application....';
 --Create User Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
               WHERE TABLE_NAME=N'User')
 BEGIN
 	CREATE TABLE "User" (
-		username varchar(100) PRIMARY KEY,
+		userID int PRIMARY KEY IDENTITY(1,1),
 		email varchar(150) NOT NULL,
+		FirstName varchar(150) NOT NULL,
+		LastName varchar(150) NOT NULL,
 		password binary(64) NOT NULL,
 		accessLevel varchar(50) NOT NULL
 		CHECK (accessLevel IN('user','admin'))
@@ -39,7 +43,7 @@ IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 			  WHERE TABLE_NAME=N'UserApplication')
 BEGIN
 	CREATE TABLE "UserApplication" (
-		username varchar(100) NOT NULL FOREIGN KEY REFERENCES "User"(username),
+		userID int NOT NULL FOREIGN KEY REFERENCES "User"(userID),
 		appID int IDENTITY(1,1) PRIMARY KEY,
 		formTypeID int NOT NULL FOREIGN KEY REFERENCES "Forms"(formTypeID),
 		HICPApp char(1) NOT NULL CHECK (HICPApp IN('Y','N')),
@@ -59,6 +63,7 @@ BEGIN
 		msgID int IDENTITY(1,1) PRIMARY KEY,
 		sender varchar(100) NOT NULL,
 		receipient varchar(255) NOT NULL,
+		subject varchar(100) NOT NULL DEFAULT(''),
 		message varchar(1000) NOT NULL DEFAULT(''),
 		dateSent datetime NOT NULL DEFAULT(getutcdate())
 	);
@@ -88,7 +93,8 @@ BEGIN
 		appID int NOT NULL FOREIGN KEY REFERENCES "UserApplication"(appID),
 		document varchar(100) NOT NULL,
 		isRequired char(1) NOT NULL CHECK (isRequired IN('Y','N')),
-		received char(1) NOT NULL CHECK (received IN('Y','N'))
+		received char(1) NOT NULL CHECK (received IN('Y','N')),
+		dateReceived dateTime 
 	);
 	PRINT 'Successfully created "AppDocument" Table';
 END
@@ -100,7 +106,7 @@ IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 			  WHERE TABLE_NAME=N'Inbox')
 BEGIN
 	CREATE TABLE "Inbox" (
-		username varchar(100) NOT NULL FOREIGN KEY REFERENCES "User"(username),
+		userID int NOT NULL FOREIGN KEY REFERENCES "User"(userID),
 		dateRevc datetime NOT NULL,
 		msgID int NOT NULL FOREIGN KEY REFERENCES "Message"(msgID),
 		readStatus char(1) NOT NULL CHECK (readStatus IN('Y','N'))
@@ -115,7 +121,7 @@ IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 			  WHERE TABLE_NAME=N'Sent')
 BEGIN
 	CREATE TABLE "Sent" (
-		username varchar(100) NOT NULL FOREIGN KEY REFERENCES "User"(username),
+		userID int NOT NULL FOREIGN KEY REFERENCES "User"(userID),
 		msgID int NOT NULL FOREIGN KEY REFERENCES "Message"(msgID)
 	);
 	PRINT 'Successfully created "Sent" Table';
@@ -128,7 +134,7 @@ IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 			  WHERE TABLE_NAME=N'Trash')
 BEGIN
 	CREATE TABLE "Trash" (
-		username varchar(100) NOT NULL FOREIGN KEY REFERENCES "User"(username),
+		userID int NOT NULL FOREIGN KEY REFERENCES "User"(userID),
 		msgID int NOT NULL FOREIGN KEY REFERENCES "Message"(msgID)
 	);
 	PRINT 'Successfully created "Trash" Table';

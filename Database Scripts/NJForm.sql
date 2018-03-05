@@ -5,6 +5,8 @@ Tables:NJSection1
 	   NJSecion3A
 	   NJSection3B*/
 /********************************************************************/
+/*replace first line with USE[DatabaseName]*/ 
+USE [RDESystems];
 --Check if Base Tables created using RDEDatabase.sql if not Do not attempt to create NJForm Tables
 IF (NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'Forms') AND
 	NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'UserFormData') )
