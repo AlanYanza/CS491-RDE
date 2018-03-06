@@ -4,16 +4,8 @@ Note: Remove all Forms from Database bofore executing*/
 /********************************************************************/
 /*replace first line with USE[DatabaseName]*/ 
 USE [RDESystems];
+GO
 PRINT 'Removing Base Tables....';
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
-              WHERE TABLE_NAME=N'OtherIncome')
-BEGIN
-	DROP TABLE OtherIncome;
-	PRINT 'DROPPED "OtherIncome" Table';
-END
-ELSE
-	PRINT '"OtherIncome" does not exist in database';
------------------------------------------------------------------------------------
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
               WHERE TABLE_NAME=N'AppDocument')
 BEGIN
@@ -23,42 +15,7 @@ END
 ELSE
 	PRINT '"AppDocument" does not exist in database';
 -----------------------------------------------------------------------------------
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
-              WHERE TABLE_NAME=N'CaseManager')
-BEGIN
-	DROP TABLE CaseManager;
-	PRINT 'DROPPED "CaseManager" Table';
-END
-ELSE
-	PRINT '"CaseManager" does not exist in database';
------------------------------------------------------------------------------------
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
-              WHERE TABLE_NAME=N'ContactPerson')
-BEGIN
-	DROP TABLE ContactPerson;
-	PRINT 'DROPPED "ContactPerson" Table';
-END
-ELSE
-	PRINT '"ContactPerson" does not exist in database';
------------------------------------------------------------------------------------
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
-              WHERE TABLE_NAME=N'Preparer')
-BEGIN
-	DROP TABLE Preparer;
-	PRINT 'DROPPED "Preparer" Table';
-END
-ELSE
-	PRINT '"Preparer" does not exist in database';
------------------------------------------------------------------------------------
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
-              WHERE TABLE_NAME=N'Signature')
-BEGIN
-	DROP TABLE Signature;
-	PRINT 'DROPPED "Signature" Table';
-END
-ELSE
-	PRINT '"Signature" does not exist in database';
------------------------------------------------------------------------------------
+GO
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
               WHERE TABLE_NAME=N'UserFormData')
 BEGIN
