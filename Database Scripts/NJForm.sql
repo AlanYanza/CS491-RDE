@@ -5,6 +5,8 @@ Tables:NJSection1
 	   NJSecion3A
 	   NJSection3B*/
 /********************************************************************/
+/*replace first line with USE[DatabaseName]*/
+USE [RDESystems];
 --Check if Base Tables created using RDEDatabase.sql if not Do not attempt to create NJForm Tables
 IF (NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'Forms') AND
 	NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'UserFormData') )
@@ -32,7 +34,7 @@ BEGIN
 	IF (NOT EXISTS(SELECT * FROM FormTables WHERE formTypeID=@NJFORMID AND tableName='NJSection3B'))
 		INSERT INTO FormTables(formTypeID,tableName) VALUES(@NJFORMID,'NJSection3B');
 
-	----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 	--Create NJSection1 Table
 	IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 				  WHERE TABLE_NAME=N'NJSection1')
@@ -93,7 +95,7 @@ BEGIN
 	END
 	ELSE
 		PRINT '"NJSection1" Table already exist';
-	----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 	--Create NJSection2 Table
 	IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 				  WHERE TABLE_NAME=N'NJSection2')
@@ -112,6 +114,7 @@ BEGIN
 			socialSecurity decimal(14,2),
 			pension decimal(14,2),
 			allimony decimal(14,2),
+			OtherIncome decimal(14,2),
 			totalHIncome decimal(14,2),
 			taxFile char(1) CHECK(taxFile IN('Y','N')),
 			dependant char(1) CHECK(dependant IN('Y','N')),
@@ -130,7 +133,7 @@ BEGIN
 	END
 	ELSE
 	PRINT '"NJSection2" Table already exist';
-	----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 	--Create NJSection3A Table
 	IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 				  WHERE TABLE_NAME=N'NJSection3A')
@@ -172,7 +175,7 @@ BEGIN
 	END
 	ELSE
 		PRINT '"NJSection3A" Table already exist';
-	----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 	--Create NJSection3B Table
 	IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 				  WHERE TABLE_NAME=N'NJSection3B')
@@ -218,5 +221,38 @@ BEGIN
 	END
 	ELSE
 		PRINT '"NJSection3B" Table already exist';
+----------------------------------------------------------------------------------------------------
+		--Create NJSection4 Table
+		IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
+					  WHERE TABLE_NAME=N'NJSection4')
+		BEGIN
+			CREATE TABLE "NJSection4" (
+				CMName varchar(100) NOT NULL DEFAULT(''),
+				agency varchar(100) NOT NULL DEFAULT(''),
+				CMaddr varchar(200) NOT NULL DEFAULT(''),
+				CMWPhone varchar(16) NOT NULL DEFAULT(''),
+				CMFaxNum varchar(16) NOT NULL DEFAULT(''),
+				CMCPhone varchar(16) NOT NULL DEFAULT(''),
+				email varchar(100) NOT NULL DEFAULT(''),
+				perm char(1) CHECK (perm IN('Y','N')),
+				HIVAware char(1) CHECK (HIVAware IN('Y','N')),
+				CPName varchar(100) NOT NULL DEFAULT(''),
+				relation varchar(50) NOT NULL DEFAULT(''),
+				CPAddr varchar(200) NOT NULL DEFAULT(''),
+				CPHPhone varchar(16) NOT NULL DEFAULT(''),
+				CPWPhone varchar(16) NOT NULL DEFAULT(''),
+				CPCPhone varchar(16) NOT NULL DEFAULT(''),
+				PName varchar(100) NOT NULL DEFAULT(''),
+				PPhone varchar(16) NOT NULL DEFAULT(''),
+				signature image,
+				signatureDate datetime,
+				spouseSig image,
+				spouseSigDate datetime
+			);
+			PRINT 'Successfully created "NJSection4" Table';
+		END
+		ELSE
+			PRINT '"NJSection4" Table already exist';
+----------------------------------------------------------------------------------------------------
 	PRINT 'Successfully Added NJ Form Tables to Database';
 END
