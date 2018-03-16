@@ -4,8 +4,9 @@
 <cfparam name = "form.lastName" type = "string" default = "">
 
 <cfquery name = "register" datasource = "Database"> 
-    INSERT INTO [User] VALUES('sms46', '#form.email#', HASHBYTES('sha2_512', '#form.password#'), 'user')
+    INSERT INTO [User](email,FirstName,LastName,password,accessLevel) VALUES('#form.email#','#form.firstName#','#form.lastName#', 
+    HASHBYTES('sha2_512', '#form.password#'), 'user')
 </cfquery>
 
-<cflocation url="../home.cfm">
+<cflocation url="../index.cfm?registered">
 <cfabort>

@@ -1,5 +1,6 @@
 <cfset SessionClass=createObject('component','components.SessionTools')/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<cfset SessionClass.checkIfuser()/>
 
 <!DOCTYPE html>
 <html lang="en">

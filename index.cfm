@@ -7,6 +7,9 @@
 <body>
 <cfinclude template="navbar.cfm">
 <div class="container">
+	<cfif IsDefined('url.registered')>
+		<cfoutput><b>Successfully registered</b></cfoutput>
+	</cfif>
 	<div class="page-header">
 		<h1>Login</h1>
 	</div>
@@ -17,17 +20,17 @@
 			<p>Not a member? <a href="register.cfm">Register here</a></p>
 			<br/>
 
-			<form class="form-horizontal" action="#">
+			<form class="form-horizontal" method="POST" action="scripts/login.cfm">
 				<div class="form-group">
 				    <label class="control-label col-sm-2" for="email">Email:</label>
 				    <div class="col-sm-10">
-				    	<input type="email" class="form-control" id="email" placeholder="Enter email">
+				    	<input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
 				    </div>
 				</div>
 				<div class="form-group">
 				    <label class="control-label col-sm-2" for="pwd">Password:</label>
 				    <div class="col-sm-10">
-				    	<input type="password" class="form-control" id="pwd" placeholder="Enter password">
+				    	<input type="password" class="form-control" id="pwd" name="pwd" placeholder="Enter password">
 				    </div>
 				</div>
 				<div class="form-group">

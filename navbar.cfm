@@ -14,8 +14,10 @@
 		      <li><a href="/CS491-RDE/message.cfm">Messages <span class="badge">1</span></a></li>
 		    </ul>		
 			<ul class="nav navbar-nav navbar-right">
-		      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Name</a></li>
-		      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Signout</a></li>
+			  <cfif IsDefined('session.firstName')>
+			  	<li><a href="#"><span class="glyphicon glyphicon-user"></span> <cfoutput>#session.firstName# #session.lastName#</cfoutput></a></li>
+			  </cfif>
+		      <li><a href="/CS491-RDE/scripts/signout.cfm"><span class="glyphicon glyphicon-log-in"></span> Signout</a></li>
 		    </ul>
 		</div>
 	</div>
