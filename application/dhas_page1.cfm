@@ -21,7 +21,9 @@
 		documents as they WILL NOT be returned.
 	</p>
 	<form action="">
-	  	<div class="text-center checkbox">
+  <input type="text" hidden="true" id="formState" name="formState" value="NJ">
+  <input type="text" hidden="true" id="formPage" name="formPage" value="page1">
+	<div class="text-center checkbox">
 	    	<input type="checkbox" name="HICP" value="HICP"/> I am also applying for HICP
 	  	</div>
 	<div class="well text-center"><h4>Section 1 - APPLICANT INCOME</h4></div>
@@ -35,7 +37,7 @@
 			<input type="text" class="form-control" id="firstname" name="firstname"></div></div>
 		<div class="col-sm-2"><div class="form-group">
 			<label for="mi">MI:</label>
-			<input type="text" class="form-control" id="mi" name="mi"></div></div>			
+			<input type="text" class="form-control" id="mi" name="mi"></div></div>
 		<div class="col-sm-2"><div class="form-group">
 			<label for="dob">2. Date of Birth:</label>
 			<input type="date" class="form-control" id="dob" name="dob"></div></div>
@@ -117,8 +119,8 @@
 		<div class="col-sm-3"><div class="form-group">
 			<label for="County">4. County</label>
 			<input type="text" class="form-control" id="County" name="County"></div></div>
-	</div>	
-		
+	</div>
+
 	<hr/>
 
 	<div class="row">
@@ -198,7 +200,7 @@
 		<div class="col-sm-3"><div class="form-group">
 			<label for="MCounty">4. County</label>
 			<input type="text" class="form-control" id="MCounty" name="MCounty"></div></div>
-	</div>			
+	</div>
 
 	<hr/>
 
@@ -226,7 +228,7 @@
 		<label><input type="radio" name="Residency" value="Yes"/>Yes</label>
 		<label><input type="radio" name="Residency" value="No"/>No</label>
 	</div>
-			
+
 	<p><strong><em>
 	NOTE: Two (2) proofs of residency MUST accompany this application. See Instructions.
 	<br/>
@@ -255,7 +257,7 @@
 			<label><input type="radio" name="Veteran" value="No"/>No</label>
 		</div>
 	</div>
-	
+
 	<hr/>
 
 	<div class="form-group">
@@ -272,7 +274,7 @@
 		</select>
 		<em>*(See instructions, Page 1. Applicant information.)</em>
 	</div>
-	
+
 	<hr/>
 
 	<div class="form-group">
@@ -285,7 +287,7 @@
 			<option value="Transgendered Female to Male">Transgendered Female to Male</option>
 		</select>
 	</div>
-	 
+
 	<hr/>
 
 	<div class="form-group">
@@ -296,7 +298,7 @@
 	</div>
 
 	<hr/>
-	
+
 	<div class="form-group">
 		<label for="race">14. Race</label>
 		<select class="form-control" name="Race">
@@ -309,7 +311,7 @@
 			<option value="Unknown">Unknown</option>
 		</select>
 	</div>
-	
+
 	<div class="form-group" id="asian">
 		<select class="form-control" name="Race">
 			<option selected>Select one</option>
@@ -321,7 +323,7 @@
 			<option value="Vietnamese">Vietnamese</option>
 		</select>
 	</div>
-	
+
 	<div class="form-group" id="nativeHawaiian">
 		<select class="form-control" name="Race">
 			<option selected>Select one</option>
@@ -331,7 +333,7 @@
 			<option value="Other Pacific Islander">Other Pacific Islander</option>
 		</select>
 	</div>
-	
+
 	<hr/>
 
 	<div class="form-group">
@@ -340,7 +342,7 @@
 		<label class="radio-inline"><input type="radio" name="ethnicity" value="Hispanic/Latino"/>Hispanic/Latino</label>
 		<label class="radio-inline"><input type="radio" name="ethnicity" value="Non-Hispanic"/>Non-Hispanic</label>
 	</div>
-	
+
 	<div class="form-group" id="hispanic|latino">
 		<select class="form-control" name="Race">
 			<option selected>Select one</option>
@@ -350,7 +352,7 @@
 			<option value="Other Hispanic, Latino/a, or Spanish Origin">Other Hispanic, Latino/a, or Spanish Origin</option>
 		</select>
 	</div>
-	
+
 	<label>16. Female Applicants Only:</label>
 	<div class="form-group">
 		<label for="pregnant">Are you pregnant?</label>
@@ -359,7 +361,7 @@
 		<label class="radio-inline"><input type="radio" name="pregnant" value="No"/> No</label>
 	</div>
 	</form>
-	
+
 	<ul class="pager">
 		<li class="previous"><a href="./dhas_instructions_page3.cfm">Previous</a></li>
 		<li class="next"><a href="./dhas_page2.cfm">Next</a></li>

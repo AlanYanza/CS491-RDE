@@ -1,3 +1,5 @@
+<cfset SessionClass=createObject('component','components.SessionTools')/>
+<cfset SessionClass.checkIfLoggedIn()/>
 <html !DOCTYPE>
 <head>
 	<title>Message Center</title>

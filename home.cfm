@@ -1,3 +1,6 @@
+<cfset SessionClass=createObject('component','components.SessionTools')/>
+<cfset SessionClass.checkIfLoggedIn()/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +9,7 @@
     <script>
         function myFunction() {
             document.getElementById("demo").innerHTML = "<form action=''><input type='file' name='pic' accept='image/*'></form>";
-        
+
         }
         function Gone() {
             document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
@@ -21,7 +24,7 @@
         <div class="panel-body">
             <ul>
                 <li><a href="application/dhas_instructions_page1.cfm">Participation in the AIDS Drug Distribution Program (ADDP) and Health Insurance Continuation Program (HICP)</a></li>
-            </ul> 
+            </ul>
         </div>
     </div>
     <div class="panel panel-default">

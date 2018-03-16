@@ -24,7 +24,7 @@
 		in the Instructions); if I move from New Jersey; if I change my present residential address or telephone number; if there is any change
 		in premium payments or policy type; if I become Medicaid/Welfare/PAAD eligible; or if there is a change in any other information
 		pertinent to my participation in ADDP and/or HICP. I authorize the release of information necessary to determine my ADDP and/or
-		HICP eligibility from the records in possession of the Social Security Administration, Internal Revenue Service and New Jersey 
+		HICP eligibility from the records in possession of the Social Security Administration, Internal Revenue Service and New Jersey
 		Division of Taxation, employers, banks and others as the need arises. I authorize my physician to release information concerning
 		prescriptions which have been paid on my behalf by ADDP, or my eligibility for HICP. I hereby assign the State of New Jersey as my
 		authorized representative, any right to drug benefits to which I may be entitled under any other plan of assistance or insurance, from
@@ -36,8 +36,9 @@
 
 	<hr/>
 
-	<form>
-
+	<form action="">
+  <input type="text" hidden="true" id="formState" name="formState" value="NJ">
+  <input type="text" hidden="true" id="formPage" name="formPage" value="page4">
 	<div class="row">
 		<div class="col-sm-9">
 			<label for="signature">33. Signature of Applicant</label>
@@ -98,7 +99,7 @@
 		  	<input type="tel" class="form-control" id="contactCellNumber" name="contactCellNumber">
 		</div></div>
 	</div>
-	
+
 	<hr/>
 
 	<b>36. Preparer: </b><br/>
@@ -119,7 +120,7 @@
 		<div class="col-sm-6"><div class="form-group">
 			<label for="agencyAffiliation">Agency Affiliation:</label>
 			<input type="text" class="form-control" id="agencyAffiliation" name="agencyAffiliation"></div></div>
-		
+
 	</div>
 
 	<div class="row">
@@ -216,7 +217,7 @@
 	</div>
 
 	<!--<b>FOR ADDP STAFF USE ONLY:</b>
-	Date eligibility determined: 
+	Date eligibility determined:
 	<input type="date" class="form-control" id="WP" name="WP">-->
 
 	</form>
