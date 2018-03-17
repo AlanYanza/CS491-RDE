@@ -1,0 +1,57 @@
+<!-- Determine which page form came from -->
+<cfset formSource=FORM.formPage/>
+<cfset databaseMethod=FORM.databaseMethod/>
+<cfset subformObj=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID)/>
+<cfset appExist=subformObj.checkIfAppExist()/>
+<!-- if first page of form, determine status of HICP checkbox -->
+<cfif StructKeyExists(form,'HICP')>  
+   <cfset HICPStatus= "Y" />  
+<cfelse>  
+   <cfset HICPStatus= "N" />  
+</cfif> 
+
+
+
+
+
+
+
+
+<!-- Redirect to desired destination page(performed last) -->
+<cfif formSource eq 'page1'>
+	<cfif IsDefined("FORM.previous")>
+		<cflocation url="/CS491-RDE/application/dhas_instructions_page3.cfm">
+	<cfelseif IsDefined("FORM.next")>
+		<!-- create an entry in the UserApplication Table(if insert) -->
+		<cfif appExist eq 0>
+			<cfset subFormObj.createApplication(HICPStatus)/>
+		</cfif>
+  		<cflocation url="/CS491-RDE/application/dhas_page2.cfm">
+	</cfif>
+<cfelseif formSource eq 'page2'>
+	<cfif IsDefined("FORM.previous")>
+		<cflocation url="/CS491-RDE/application/dhas_page1.cfm">
+	<cfelseif IsDefined("FORM.next")>
+  		<cflocation url="/CS491-RDE/application/dhas_page3.cfm">
+	</cfif>
+<cfelseif formSource eq 'page3A'>
+	<cfif IsDefined("FORM.previous")>
+		<cflocation url="/CS491-RDE/application/dhas_page2.cfm">
+	<cfelseif IsDefined("FORM.next")>
+  		<cflocation url="/CS491-RDE/application/dhas_page4.cfm">
+	</cfif>
+<cfelseif formSource eq 'page3B'>
+	<cfif IsDefined("FORM.previous")>
+		<cflocation url="/CS491-RDE/application/dhas_page3.cfm">
+	<cfelseif IsDefined("FORM.next")>
+  		<cflocation url="/CS491-RDE/application/dhas_page5.cfm">
+	</cfif>
+<cfelseif formSource eq 'page4'>
+	<cfif IsDefined("FORM.previous")>
+		<cflocation url="/CS491-RDE/application/dhas_page4.cfm">
+	<cfelseif IsDefined("FORM.next")>
+		<!-- Change status of Application to Review-->
+		<cfset subformObj.updateApplicationStatus("R")/>
+  		<cflocation url="/CS491-RDE/home.cfm?submitApplication">
+	</cfif>--->
+</cfif>

@@ -1,5 +1,17 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID)/>
+<!-- Check ApplicationStattus and redirect to homePage is needed -->
+<cfset appStatus=subformClass.CheckApplicationStatus()/>
+<cfif appStatus neq "M" AND appStatus neq "P" AND appStatus neq "N">
+	<cflocation url="/CS491-RDE/home.cfm">
+</cfif>
+<!--Determine if INSERT or UPDATE required -->
+<cfif subformClass.checkIfDataExist() neq 0>
+	<cfset method="UPDATE"/>
+<cfelse>
+	<cfset method="INSERT"/>
+</cfif> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,9 +33,9 @@
 
 	<div class="well text-center"><h4>Section 2 - HOUSEHOLD INCOME</h4></div>
 
-	<form action="">
-	<input type="text" hidden="true" id="formState" name="formState" value="NJ">
+	<form action="../scripts/NJScript.cfm" method="POST">
 	<input type="text" hidden="true" id="formPage" name="formPage" value="page2">
+	<input type="text" hidden="true" id="databaseMethod" name="databaseMethod" value="<cfoutput>#method#</cfoutput>" >
 	<div class="form-group">
 		<label for="employment">17. What if your current employment status?</label>
 		<select class="form-control" name="employment">
@@ -169,13 +181,10 @@
 		<div class="col-sm-8">Supplemental Nutrition Assistance Program (SNAP) (formerly Food Stamps)</div>
 		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SNAP" value="A"/>Applied For<label></div>
 		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SNAP" value="R"/>Receiving<label></div>
-
 	</div>
-
+	<button type="submit" class="btn btn-default" name="previous" value="prevous">previous</button>
+	<button type="submit" class="btn btn-default" name="next" value="next">next</button>
 	</form>
-	<ul class="pager">
-		<li class="previous"><a href="./dhas_page1.cfm">Previous</a></li>
-		<li class="next"><a href="./dhas_page3.cfm">Next</a></li>
-	</ul>
+
 </body>
 </html>

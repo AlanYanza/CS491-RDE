@@ -47,7 +47,7 @@ BEGIN
 		formTypeID int NOT NULL FOREIGN KEY REFERENCES "Forms"(formTypeID),
 		HICPApp char(1) NOT NULL CHECK (HICPApp IN('Y','N')),
 		dateEligDet datetime,
-		status char(1) NOT NULL DEFAULT('R') CHECK (status IN('R','A','D','N'))
+		status char(1) NOT NULL DEFAULT('R') CHECK (status IN('R','A','D','N','P'))
 	);
 	PRINT 'Successfully created "UserApplication" Table';
 END

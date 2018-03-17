@@ -19,6 +19,9 @@
 </head>
 <body>
 <cfinclude template="navbar.cfm">
+<cfif IsDefined('url.submitApplication')>
+	<cfoutput><b>Submit Application Successfully: Application is under Review</b></cfoutput>
+</cfif>
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">Start New Application</div>

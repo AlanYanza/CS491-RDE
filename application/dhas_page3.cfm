@@ -1,5 +1,17 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID)/>
+<!-- Check ApplicationStattus and redirect to homePage is needed -->
+<cfset appStatus=subformClass.CheckApplicationStatus()/>
+<cfif appStatus neq "M" AND appStatus neq "P" AND appStatus neq "N">
+	<cflocation url="/CS491-RDE/home.cfm">
+</cfif>
+<!--Determine if INSERT or UPDATE required -->
+<cfif subformClass.checkIfDataExist() neq 0>
+	<cfset method="UPDATE"/>
+<cfelse>
+	<cfset method="INSERT"/>
+</cfif> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,9 +40,9 @@
 	<!--<strong>APPLICATION FOR PARTICIPATION IN THE AIDS DRUG DISTRIBUTION PROGRAM AND/OR HEALTH INSURANCE CONTINUATION PROGRAM (Continued)</strong>-->
 
 	<div class="well text-center"><h4>Section 3 - INSURANCE STATUS</h4></div>
-	<form action="">
-	<input type="text" hidden="true" id="formState" name="formState" value="NJ">
+	<form action="../scripts/NJScript.cfm" method="POST">
 	<input type="text" hidden="true" id="formPage" name="formPage" value="page3A">
+	<input type="text" hidden="true" id="databaseMethod" name="databaseMethod" value="<cfoutput>#method#</cfoutput>" >
 	<div class="form-group">
 		<label>25. Do you currently have any type of health insurance?</label>
 		<br/>
@@ -284,7 +296,8 @@
 		<label class="radio-inline"><input type="radio" name="appliedLIS" value="N"/>No</label>
 		<label class="radio-inline"><input type="radio" name="appliedLIS" value="Don't Know"/>Don't Know</label>
 	</div>
-
+	<button type="submit" class="btn btn-default" name="previous" value="prevous">previous</button>
+	<button type="submit" class="btn btn-default" name="next" value="next">next</button>
 	</form>
 	<!--<div class="row">
 		<div class="col-sm-6">
@@ -301,11 +314,6 @@
 			from the date of the qualifying event for a limited period of time.
 		</div>
 	</div>-->
-
-	<ul class="pager">
-		<li class="previous"><a href="./dhas_page2.cfm">Previous</a></li>
-		<li class="next"><a href="./dhas_page4.cfm">Next</a></li>
-	</ul>
 	</div>
 </body>
 </html>

@@ -17,5 +17,5 @@
 			<cflocation url="/CS491-RDE/admin.cfm">
 		</cfif>
 	</cffunction>
-	
+		
 </cfcomponent>

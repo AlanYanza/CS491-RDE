@@ -1,5 +1,17 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID)/>
+<!-- Check ApplicationStattus and redirect to homePage is needed -->
+<cfset appStatus=subformClass.CheckApplicationStatus()/>
+<cfif appStatus neq "M" AND appStatus neq "P" AND appStatus neq "N">
+	<cflocation url="/CS491-RDE/home.cfm">
+</cfif>
+<!--Determine if INSERT or UPDATE required -->
+<cfif subformClass.checkIfDataExist() neq 0>
+	<cfset method="UPDATE"/>
+<cfelse>
+	<cfset method="INSERT"/>
+</cfif> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,9 +51,9 @@
 
 	<hr/>
 
-	<form action="">
-  <input type="text" hidden="true" id="formState" name="formState" value="NJ">
+	<form action="../scripts/NJScript.cfm" method="POST">
   <input type="text" hidden="true" id="formPage" name="formPage" value="page4">
+  <input type="text" hidden="true" id="databaseMethod" name="databaseMethod" value="<cfoutput>#method#</cfoutput>" >
 	<div class="row">
 		<div class="col-sm-9">
 			<label for="signature">33. Signature of Applicant</label>
@@ -222,13 +234,10 @@
 	<!--<b>FOR ADDP STAFF USE ONLY:</b>
 	Date eligibility determined:
 	<input type="date" class="form-control" id="WP" name="WP">-->
-
+	<button type="submit" class="btn btn-default" name="previous" value="prevous">previous</button>
+	<button type="submit" class="btn btn-default" name="next" value="next">Submit</button>
 	</form>
 
-	<ul class="pager">
-		<li><a href="./Page6.cfm">Previous</a></li>
-		<li><a href="#">Submit</a></li>
-	</ul>
 </div>
 </body>
 </html>

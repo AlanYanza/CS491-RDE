@@ -1,5 +1,18 @@
+<!-- Check to see if user is logged  in -->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID)/>
+<!-- Check ApplicationStattus and redirect to homePage is needed -->
+<cfset appStatus=subformClass.CheckApplicationStatus()/>
+<cfif appStatus neq "M" AND appStatus neq "P" AND appStatus neq "N">
+	<cflocation url="/CS491-RDE/home.cfm">
+</cfif>
+<!--Determine if INSERT or UPDATE required -->
+<cfif subformClass.checkIfDataExist() neq 0>
+	<cfset method="UPDATE"/>
+<cfelse>
+	<cfset method="INSERT"/>
+</cfif> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,9 +36,9 @@
 		application, call toll free 1-877-613-4533 for ADDP questions or 1-800-353-3232 for HICP questions. Send copies of any requested documents. Do NOT send original
 		documents as they WILL NOT be returned.
 	</p>
-	<form action="">
-  <input type="text" hidden="true" id="formState" name="formState" value="NJ">
+	<form action="../scripts/NJScript.cfm" method="POST">
   <input type="text" hidden="true" id="formPage" name="formPage" value="page1">
+  <input type="text" hidden="true" id="databaseMethod" name="databaseMethod" value="<cfoutput>#method#</cfoutput>" >
 	<div class="text-center checkbox">
 	    	<input type="checkbox" name="HICP" value="HICP"/> I am also applying for HICP
 	  	</div>
@@ -363,12 +376,9 @@
 		<label class="radio-inline"><input type="radio" name="pregnant" value="Yes"/> Yes</label>
 		<label class="radio-inline"><input type="radio" name="pregnant" value="No"/> No</label>
 	</div>
+	<button type="submit" class="btn btn-default" name="previous" value="prevous">previous</button>
+	<button type="submit" class="btn btn-default" name="next" value="next">next</button>
 	</form>
-
-	<ul class="pager">
-		<li class="previous"><a href="./dhas_instructions_page3.cfm">Previous</a></li>
-		<li class="next"><a href="./dhas_page2.cfm">Next</a></li>
-	</ul>
 </div>
 </body>
 </html>
