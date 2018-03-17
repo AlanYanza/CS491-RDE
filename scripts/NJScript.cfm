@@ -1,7 +1,8 @@
 <!-- Determine which page form came from -->
 <cfset formSource=FORM.formPage/>
 <cfset databaseMethod=FORM.databaseMethod/>
-<cfset subformObj=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID)/>
+<cfset tableName=FORM.tableName/>
+<cfset subformObj=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName)/>
 <cfset appExist=subformObj.checkIfAppExist()/>
 <!-- if first page of form, determine status of HICP checkbox -->
 <cfif StructKeyExists(form,'HICP')>  
@@ -10,6 +11,12 @@
    <cfset HICPStatus= "N" />  
 </cfif> 
 
+<!-- Form Page 1 processing -->
+<cfif formSource eq 'page1'>
+	<cfif appExist eq 1>
+		<cfset subformObj.updateHICPStatus(HICPStatus)/>
+	</cfif>
+</cfif>
 
 
 

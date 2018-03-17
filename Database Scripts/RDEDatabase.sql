@@ -147,7 +147,7 @@ IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 BEGIN
 	CREATE TABLE "UserFormData" (
 		appID int NOT NULL FOREIGN KEY REFERENCES "UserApplication"(appID),
-		dataID int PRIMARY KEY
+		dataID int IDENTITY(1,1) PRIMARY KEY
 	);
 	PRINT 'Successfully created "UserFormData" Table';
 END

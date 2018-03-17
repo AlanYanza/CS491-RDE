@@ -1,6 +1,7 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
-<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID)/>
+<cfset tableName='NJSection2'/>
+<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName)/>
 <!-- Check ApplicationStattus and redirect to homePage is needed -->
 <cfset appStatus=subformClass.CheckApplicationStatus()/>
 <cfif appStatus neq "M" AND appStatus neq "P" AND appStatus neq "N">
@@ -35,6 +36,7 @@
 
 	<form action="../scripts/NJScript.cfm" method="POST">
 	<input type="text" hidden="true" id="formPage" name="formPage" value="page2">
+	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
 	<input type="text" hidden="true" id="databaseMethod" name="databaseMethod" value="<cfoutput>#method#</cfoutput>" >
 	<div class="form-group">
 		<label for="employment">17. What if your current employment status?</label>

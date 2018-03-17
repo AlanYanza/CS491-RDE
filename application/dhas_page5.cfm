@@ -1,6 +1,7 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
-<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID)/>
+<cfset tableName='NJSection4'/>
+<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName)/>
 <!-- Check ApplicationStattus and redirect to homePage is needed -->
 <cfset appStatus=subformClass.CheckApplicationStatus()/>
 <cfif appStatus neq "M" AND appStatus neq "P" AND appStatus neq "N">
@@ -53,6 +54,7 @@
 
 	<form action="../scripts/NJScript.cfm" method="POST">
   <input type="text" hidden="true" id="formPage" name="formPage" value="page4">
+  <input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
   <input type="text" hidden="true" id="databaseMethod" name="databaseMethod" value="<cfoutput>#method#</cfoutput>" >
 	<div class="row">
 		<div class="col-sm-9">

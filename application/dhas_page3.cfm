@@ -1,6 +1,7 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
-<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID)/>
+<cfset tableName='NJSection3A'/>
+<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName)/>
 <!-- Check ApplicationStattus and redirect to homePage is needed -->
 <cfset appStatus=subformClass.CheckApplicationStatus()/>
 <cfif appStatus neq "M" AND appStatus neq "P" AND appStatus neq "N">
@@ -42,6 +43,7 @@
 	<div class="well text-center"><h4>Section 3 - INSURANCE STATUS</h4></div>
 	<form action="../scripts/NJScript.cfm" method="POST">
 	<input type="text" hidden="true" id="formPage" name="formPage" value="page3A">
+	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
 	<input type="text" hidden="true" id="databaseMethod" name="databaseMethod" value="<cfoutput>#method#</cfoutput>" >
 	<div class="form-group">
 		<label>25. Do you currently have any type of health insurance?</label>

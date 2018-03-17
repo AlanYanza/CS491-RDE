@@ -25,6 +25,12 @@
 				<cfqueryparam value="P" cfsqltype="cf_sql_varchar" >
 			)
 		</cfquery>
+		<cfset Var appID=getAppID()/>
+		<cfquery >
+			INSERT INTO UserFormData (appID) VALUES(
+				<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer">
+			)			
+		</cfquery>
 	</cffunction>
 	
 	<!-- update an existing application Status -->
@@ -34,6 +40,17 @@
 		<cfset Var appID=getAppID() />
 		<cfquery >
 			UPDATE UserApplication SET status=<cfqueryparam value="#status#" cfsqltype="cf_sql_varchar" >
+		</cfquery>
+	</cffunction>
+	
+	<!-- update an existing application HICP Status -->
+	<cffunction name="updateHICPStatus">
+		<cfargument name="HICPStatusInput" type="string" >
+		<cfset HICP=HICPStatusInput />
+		<cfset Var appID=getAppID() />
+		<cfquery>
+			UPDATE UserApplication SET HICPApp=<cfqueryparam value="#HICP#" cfsqltype="cf_sql_varchar" >
+			WHERE appID=<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer" >
 		</cfquery>
 	</cffunction>
 	

@@ -1,7 +1,8 @@
 <!-- Check to see if user is logged  in -->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
-<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID)/>
+<cfset tableName='NJSection1'/>
+<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName)/>
 <!-- Check ApplicationStattus and redirect to homePage is needed -->
 <cfset appStatus=subformClass.CheckApplicationStatus()/>
 <cfif appStatus neq "M" AND appStatus neq "P" AND appStatus neq "N">
@@ -38,6 +39,7 @@
 	</p>
 	<form action="../scripts/NJScript.cfm" method="POST">
   <input type="text" hidden="true" id="formPage" name="formPage" value="page1">
+  <input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
   <input type="text" hidden="true" id="databaseMethod" name="databaseMethod" value="<cfoutput>#method#</cfoutput>" >
 	<div class="text-center checkbox">
 	    	<input type="checkbox" name="HICP" value="HICP"/> I am also applying for HICP
