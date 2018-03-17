@@ -46,7 +46,7 @@ BEGIN
 		appID int IDENTITY(1,1) PRIMARY KEY,
 		formTypeID int NOT NULL FOREIGN KEY REFERENCES "Forms"(formTypeID),
 		HICPApp char(1) NOT NULL CHECK (HICPApp IN('Y','N')),
-		dateEligDet datetime,
+		dateEligDet date,
 		status char(1) NOT NULL DEFAULT('R') CHECK (status IN('R','A','D','N','P'))
 	);
 	PRINT 'Successfully created "UserApplication" Table';
@@ -93,7 +93,7 @@ BEGIN
 		document varchar(100) NOT NULL,
 		isRequired char(1) NOT NULL CHECK (isRequired IN('Y','N')),
 		received char(1) NOT NULL CHECK (received IN('Y','N')),
-		dateReceived dateTime
+		dateReceived date
 	);
 	PRINT 'Successfully created "AppDocument" Table';
 END
