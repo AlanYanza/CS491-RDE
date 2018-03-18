@@ -237,6 +237,24 @@
 		  	<input type="tel" class="form-control" id="WorkNumber" name="WorkNumber">
 		</div></div>
 	</div>
+	<strong>May ADDP/HICP staff leave a detailed voice mail message on(check all that apply)</strong>
+	<div class="row">
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="VHomePhone" value="VHomePhone"/> Home Phone
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="VCellPhone" value="VCellPhone"/> Cell Phone
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="VWorkPhone" value="VWorkPhone"/> Work Phone
+		</div></div>
+	</div>
+	<p><b>I do not have a phone but my alternate contact and/or case manager may be contacted and message left?<b><br>
+	Note: please provide alternate contact information on Page 4</b>
+	<div class="radio">
+		<label><input type="radio" name="Residency" value="Yes"/>Yes</label>
+		<label><input type="radio" name="Residency" value="No"/>No</label>
+	</div>
 
 	<hr/>
 
@@ -316,40 +334,66 @@
 	</div>
 
 	<hr/>
-
-	<div class="form-group">
-		<label for="race">14. Race</label>
-		<select class="form-control" name="Race">
-			<option selected>Select one</option>
-			<option value="White">White</option>
-			<option value="Black">Black</option>
-			<option value="Asian">Asian</option>
-			<option value="American Indian/Alaskan Native">American Indian/Alaskan Native</option>
-			<option value="Native Hawaiian/Pacific Islander">Native Hawaiian/Pacific Islander</option>
-			<option value="Unknown">Unknown</option>
-		</select>
+	
+	<strong>Race</strong>
+	<div class="row">
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="White" value="White"/> White
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="Black" value="Black"/> Black
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="Asian" value="Asian"/> Asian
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="AmIndAlaNat" value="AmIndAlanat"/> American Indian/Alaskan Native
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="NatHawPacIs" value="NatHawPacIs"/> Native Hawaiian/Pacific Islander
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="Unknown" value="Unknown"/> Unknown
+		</div></div>
 	</div>
-
-	<div class="form-group" id="asian">
-		<select class="form-control" name="Race">
-			<option selected>Select one</option>
-			<option value="Asian Indian">Asian Indian</option>
-			<option value="Chinese">Chinese</option>
-			<option value="Filipino">Filipino</option>
-			<option value="Japanese">Japanese</option>
-			<option value="Korean">Korean</option>
-			<option value="Vietnamese">Vietnamese</option>
-		</select>
+	<div class="row">
+		<p>If Selected Asian: <br>Note: Javascript to be done later with make this section disappear<p>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="AsianIndian" value="AsianIndian"/> Asian Indian
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="Chinese" value="Chinese"/> Chinese
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="Filipino" value="Filipino"/> Filipino
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="Japanese" value="Japanese"/> Japanese
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="Korean" value="Korean"/> Korean
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="Vietnamese" value="Vietnamese"/> Vietnamese
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="Other Asian" value="Other Asian"/> Other Asian
+		</div></div>
 	</div>
-
-	<div class="form-group" id="nativeHawaiian">
-		<select class="form-control" name="Race">
-			<option selected>Select one</option>
-			<option value="Native Hawaiian">Native Hawaiian</option>
-			<option value="Guamanian or Chamorro">Guamanian or Chamorro</option>
-			<option value="Samoan">Samoan</option>
-			<option value="Other Pacific Islander">Other Pacific Islander</option>
-		</select>
+	<div class="row">
+		<p>If Selected Native Hawaiian/Pacific Islander: <br>Note: Javascript to be done later with make this section disappear<p>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="NativeHawaiian" value="NativeHawaiian"/> Native Hawaiian
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="GuamanianChamorro" value="GuamanianChamorro"/> Guamanian or Chamorro
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="Samoan" value="Samoan"/> Samoan
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="OtherPacificIslander" value="OtherPacficIslander"/> OtherPacificIslander
+		</div></div>
 	</div>
 
 	<hr/>
@@ -360,17 +404,23 @@
 		<label class="radio-inline"><input type="radio" name="ethnicity" value="Hispanic/Latino"/>Hispanic/Latino</label>
 		<label class="radio-inline"><input type="radio" name="ethnicity" value="Non-Hispanic"/>Non-Hispanic</label>
 	</div>
-
-	<div class="form-group" id="hispanic|latino">
-		<select class="form-control" name="Race">
-			<option selected>Select one</option>
-			<option value="Mexican, Mexican American, Chicano/a">Mexican, Mexican American, Chicano/a</option>
-			<option value="Puerto Rican">Puerto Rican </option>
-			<option value="Cuban">Cuban</option>
-			<option value="Other Hispanic, Latino/a, or Spanish Origin">Other Hispanic, Latino/a, or Spanish Origin</option>
-		</select>
+	
+	<div class="row">
+		<p>If Selected Hispanic/Latino: <br>Note: Javascript to be done later with make this section disappear<p>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="MexAmChic" value="MexAmChic"/> Mexican, Mexican American, Chicano/a
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="PuertoRican" value="PuertoRican"/> Puerto Rican
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="Cuban" value="Cuban"/> Cuban
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="OtherHispanic" value="OtherHispanic"/> Other Hsipanic, Latino/a, or Spanish Origin
+		</div></div>
 	</div>
-
+	
 	<label>16. Female Applicants Only:</label>
 	<div class="form-group">
 		<label for="pregnant">Are you pregnant?</label>

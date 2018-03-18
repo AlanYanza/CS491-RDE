@@ -38,13 +38,20 @@
   <input type="text" hidden="true" id="formPage" name="formPage" value="page3B">
   <input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
   <input type="text" hidden="true" id="databaseMethod" name="databaseMethod" value="<cfoutput>#method#</cfoutput>" >
-	<div class="form-group">
-		<label>28. Are you applying or have you applied for Social Security Income (SSI) or Social Security Disability Income (SSDI)?</label>
-		<br/>
-		<label class="radio-inline"><input type="radio" name="SSI_SSDIApply" value="Yes_SSI"/>Yes, for SSI</label>
-		<label class="radio-inline"><input type="radio" name="SSI_SSDIApply" value="Yes_SSDI"/>Yes, for SSDI</label>
-		<label class="radio-inline"><input type="radio" name="SSI_SSDIApply" value="N"/>No</label>
-		<label class="radio-inline"><input type="radio" name="SSI_SSDIApply" value="Don't Know"/>Don't Know</label>
+  	<strong>Are you apply or having applied for Social Security Income(SSI) or Social Security Income(SSDI)?</strong>
+	<div class="row">
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="YesSSI" value="YesSSI"/> Yes for SSI 
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="YesSSDI" value="YesSSDI"/> Yes for SSDI
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="NoASSISSDI" value="NoASSISSDI"/> No
+		</div></div>
+		<div class="col-sm-4"><div class="form-group">
+			<input type="checkbox" name="UASSISSDI" value="UASSISSDI"/> Don't know
+		</div></div>
 	</div>
 
 	<div class="row">
@@ -135,9 +142,9 @@
 			ID Number:
 			<input type="" class="form-control" name="IDN"/><br>
 			What is the Co-Pay Amount?
-			<input type="" class="form-control" name="CPA"/><br>
+			<input type="number" class="form-control" id="CoPay" name="CoPay"/>
 			What is the Deductible?
-			<input type="" class="form-control" name="D"/><br>
+			<input type="number" class="form-control" id="Deductible" name="Deductible"/>
 		</div>
 	</div>
 
