@@ -373,6 +373,7 @@
 		<label class="radio-inline"><input type="radio" name="pregnant" value="No"/> No</label>
 	</div>
 	<button type="submit" class="btn btn-default" name="previous" value="prevous">previous</button>
+	<button type="submit" class="btn btn-default" name="save" value="save">Exit & Save Progress</button>
 	<button type="submit" class="btn btn-default" name="next" value="next">next</button>
 	</form>
 </div>

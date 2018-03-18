@@ -24,6 +24,10 @@
 
 
 <!-- Redirect to desired destination page(performed last) -->
+<!-- If 'save progress' button hit submit form and redirect to homepage(do not change application status) -->
+<cfif IsDefined('Form.save')>
+	<cflocation url="/CS491-RDE/home.cfm?savedApplication">
+</cfif>
 <cfif formSource eq 'page1'>
 	<cfif IsDefined("FORM.previous")>
 		<cflocation url="/CS491-RDE/application/dhas_instructions_page3.cfm">

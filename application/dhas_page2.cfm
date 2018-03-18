@@ -177,6 +177,7 @@
 		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SNAP" value="R"/>Receiving<label></div>
 	</div>
 	<button type="submit" class="btn btn-default" name="previous" value="prevous">previous</button>
+	<button type="submit" class="btn btn-default" name="save" value="save">Exit & Save Progress</button>
 	<button type="submit" class="btn btn-default" name="next" value="next">next</button>
 	</form>
 

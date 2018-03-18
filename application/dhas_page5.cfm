@@ -157,6 +157,7 @@
 	Date eligibility determined:
 	<input type="date" class="form-control" id="WP" name="WP">-->
 	<button type="submit" class="btn btn-default" name="previous" value="prevous">previous</button>
+	<button type="submit" class="btn btn-default" name="save" value="save">Exit & Save Progress</button>
 	<button type="submit" class="btn btn-default" name="next" value="next">Submit</button>
 	</form>
 
