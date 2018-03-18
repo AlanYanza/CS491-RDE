@@ -55,6 +55,17 @@
 		</cfquery>
 	</cffunction>
 	
+	<!-- retreive HICP status -->
+	<cffunction name="retrieveHICPStatus" returntype="String" >
+		<cfset Var appID=getAppID()/>
+		<cfquery name="HICPStatusResult" result="queryStats">
+			SELECT HICPApp from UserApplication WHERE
+			appID=<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer" >
+		</cfquery> 
+		<cfset Var HICPStatus=HICPStatusResult.HICPApp />
+		<cfreturn HICPStatus />
+	</cffunction>
+	
 	<!-- CheckApplicationStatus -->
 	<cffunction name="CheckApplicationStatus" returntype="String" >
 		<cfset Var appExist=checkIfAppExist()/>

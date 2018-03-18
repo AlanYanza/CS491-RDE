@@ -38,7 +38,7 @@
 	</cffunction>
 	
 	<!-- Retrieve data from subform -->
-	<cffunction name="retrieveDataFromForm" returntype="Query" >
+	<cffunction name="retrieveDataFromSubform" returntype="Query" >
 		<cfset Var dataID=getDataID()/>
 		<cfquery name="formValues">
 			SELECT * FROM #tableName# WHERE

@@ -7,6 +7,8 @@
 <!-- Application Page preprocessing -->
 <cfset subFormClass.createApplication()/>
 <cfset subformClass.createSubformData()/>
+<cfset subformData=subformClass.retrieveDataFromSubform()/>
+<cfset HICPStatus=subformClass.retrieveHICPStatus()/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,32 +43,32 @@
 	<div class="row">
 		<div class="col-sm-4"><div class="form-group">
 			<label for="lastname">1. Last Name:</label>
-			<input type="text" class="form-control" id="lastname" name="lastname"></div></div>
+			<input type="text" class="form-control" id="lastname" name="lastname" value="<cfoutput>#subformData.LName#</cfoutput>"></div></div>
 		<div class="col-sm-4"><div class="form-group">
 			<label for="firstname">First Name:</label>
-			<input type="text" class="form-control" id="firstname" name="firstname"></div></div>
+			<input type="text" class="form-control" id="firstname" name="firstname" value="<cfoutput>#subformData.FName#</cfoutput>"></div></div>
 		<div class="col-sm-2"><div class="form-group">
 			<label for="mi">MI:</label>
-			<input type="text" class="form-control" id="mi" name="mi"></div></div>
+			<input type="text" class="form-control" id="mi" name="mi" value="<cfoutput>#subformData.MName#</cfoutput>"></div></div>
 		<div class="col-sm-2"><div class="form-group">
 			<label for="dob">2. Date of Birth:</label>
-			<input type="date" class="form-control" id="dob" name="dob"></div></div>
+			<input type="date" class="form-control" id="dob" name="dob" value="<cfoutput>#subformData.DateBirth#</cfoutput>"></div></div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-9"><div class="form-group">
 			<label for="StreetAddress">3. Street Address</label>
-			<input type="text" class="form-control" id="StreetAddress" name="StreetAddress">
+			<input type="text" class="form-control" id="StreetAddress" name="StreetAddress" value="<cfoutput>#subformData.street#</cfoutput>">
 		</div></div>
 		<div class="col-sm-3"><div class="form-group">
 			<label for="AptNumber">Apt. #</label>
-			<input type="text" class="form-control" id="AptNumber" name="AptNumber">
+			<input type="text" class="form-control" id="AptNumber" name="AptNumber" value="<cfoutput>#subformData.aptNum#</cfoutput>">
 		</div></div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-3"><div class="form-group"><label for="City">City</label>
-			<input type="text" class="form-control" id="City" name="City"></div></div>
+			<input type="text" class="form-control" id="City" name="City" value="<cfoutput>#subformData.city#</cfoutput>"></div></div>
 		<div class="col-sm-3"><label for="state">State</label>
 			<select class="form-control" name="state">
 			<option selected>Select one</option>
@@ -125,10 +127,10 @@
 			</select>
 		</div>
 		<div class="col-sm-3"><div class="form-group"><label for="Zip">Zip Code</label>
-			<input type="text" class="form-control" id="Zip" name="Zip"></div></div>
+			<input type="text" class="form-control" id="Zip" name="Zip" value="<cfoutput>#subformData.zip#</cfoutput>"></div></div>
 		<div class="col-sm-3"><div class="form-group">
 			<label for="County">4. County</label>
-			<input type="text" class="form-control" id="County" name="County"></div></div>
+			<input type="text" class="form-control" id="County" name="County" value="<cfoutput>#subformData.county#</cfoutput>"></div></div>
 	</div>
 
 	<hr/>
@@ -137,17 +139,17 @@
 		<div class="col-sm-9"><div class="form-group">
 			<label for="MailingAddress">5. Mailing Address</label>
 			<label class="checkbox-inline"><input type="checkbox"/>Same as above</label>
-			<input type="text" class="form-control" id="MAddresss" name="MAddress">
+			<input type="text" class="form-control" id="MailStreet" name="MailStreet" value="<cfoutput>#subformData.MStreet#</cfoutput>">
 		</div></div>
 		<div class="col-sm-3"><div class="form-group">
 			<label for="MAptNumber">Apt. #</label>
-			<input type="text" class="form-control" id="MAptNumber" name="MAptNumber">
+			<input type="text" class="form-control" id="MAptNumber" name="MAptNumber" value="<cfoutput>#subformData.MaptNum#</cfoutput>">
 		</div></div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-3"><div class="form-group"><label for="MCity">City</label>
-			<input type="text" class="form-control" id="MCity" name="MCity"></div></div>
+			<input type="text" class="form-control" id="MCity" name="MCity" value="<cfoutput>#subformData.MCity#</cfoutput>"></div></div>
 		<div class="col-sm-3"><label for="Mstate">State</label>
 			<select class="form-control" name="MState">
 			<option selected>Select one</option>
@@ -206,10 +208,10 @@
 			</select>
 		</div>
 		<div class="col-sm-3"><div class="form-group"><label for="MZip">Zip Code</label>
-			<input type="text" class="form-control" id="MZip" name="MZip"></div></div>
+			<input type="text" class="form-control" id="MZip" name="MZip" value="<cfoutput>#subformData.MZip#</cfoutput>"></div></div>
 		<div class="col-sm-3"><div class="form-group">
 			<label for="MCounty">4. County</label>
-			<input type="text" class="form-control" id="MCounty" name="MCounty"></div></div>
+			<input type="text" class="form-control" id="MCounty" name="MCounty" value="<cfoutput>#subformData.MCounty#</cfoutput>"></div></div>
 	</div>
 
 	<hr/>
@@ -218,29 +220,21 @@
 	<div class="row">
 		<div class="col-sm-4"><div class="form-group">
 			<label for="HomeNumber">Home Phone Number </label>
-			<input type="tel" class="form-control" id="HomeNumber" name="HomeNumber">
+			<input type="tel" class="form-control" id="HomeNumber" name="HomeNumber" value="<cfoutput>#subformData.HPhone#</cfoutput>">
 		</div></div>
 		<div class="col-sm-4"><div class="form-group">
 		  	<label for="CellNumber">Cell Phone Number </label>
-		  	<input type="tel" class="form-control" id="CellNumber" name="CellNumber">
+		  	<input type="tel" class="form-control" id="CellNumber" name="CellNumber" value="<cfoutput>#subformData.WPhone#</cfoutput>">
 		</div></div>
 		<div class="col-sm-4"><div class="form-group">
 		  	<label for="WorkNumber">Work Phone Number </label>
-		  	<input type="tel" class="form-control" id="WorkNumber" name="WorkNumber">
+		  	<input type="tel" class="form-control" id="WorkNumber" name="WorkNumber" value="<cfoutput>#subformData.CPhone#</cfoutput>">
 		</div></div>
 	</div>
-	<strong>May ADDP/HICP staff leave a detailed voice mail message on(check all that apply)</strong>
-	<div class="row">
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="VHomePhone" value="VHomePhone"/> Home Phone
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="VCellPhone" value="VCellPhone"/> Cell Phone
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="VWorkPhone" value="VWorkPhone"/> Work Phone
-		</div></div>
-	</div>
+	<strong>May ADDP/HICP staff leave a detailed voice mail message on(check all that apply)</strong><br>
+		<label class="checkbox-inline"><input type="checkbox" name="VoiceMail" value="VHome"/>Home Phone</label>
+		<label class="checkbox-inline"><input type="checkbox" name="VoiceMail" value="VCell"/>Cell Phone</label>
+		<label class="checkbox-inline"><input type="checkbox" name="VoiceMail" value="VWork"/>Work Phone</label>
 	<p><b>I do not have a phone but my alternate contact and/or case manager may be contacted and message left?<b><br>
 	Note: please provide alternate contact information on Page 4</b>
 	<div class="radio">
@@ -266,7 +260,7 @@
 	<hr/>
 	<div class="form-group">
 		<label for="SSN">8. What is your Social Security Number (if you have one)?</label>
-		<input type="text" class="form-control" id="SSN" name="SSN">
+		<input type="text" class="form-control" id="SSN" name="SSN" value="<cfoutput>#subformData.SSNum#</cfoutput>">
 	</div>
 	<div class="form-group">
 		<label for="citizenship">9. Are you a U.S. citizen? (Responding to this question will not affect your eligibility for ADDP.)</label>
@@ -327,65 +321,31 @@
 
 	<hr/>
 	
-	<strong>Race</strong>
-	<div class="row">
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="White" value="White"/> White
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="Black" value="Black"/> Black
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="Asian" value="Asian"/> Asian
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="AmIndAlaNat" value="AmIndAlanat"/> American Indian/Alaskan Native
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="NatHawPacIs" value="NatHawPacIs"/> Native Hawaiian/Pacific Islander
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="Unknown" value="Unknown"/> Unknown
-		</div></div>
+	<strong>Race</strong><br>
+	<div>
+		<label class="checkbox-inline"><input type="checkbox" name="Race" value="White"/>White</label>
+		<label class="checkbox-inline"><input type="checkbox" name="Race" value="Black"/>Black</label>
+		<label class="checkbox-inline"><input type="checkbox" name="Race" value="Asian"/>Asian</label>
+		<label class="checkbox-inline"><input type="checkbox" name="Race" value="AmIndAlaNat"/>Amercan Indian/Alaskan Native</label>
+		<label class="checkbox-inline"><input type="checkbox" name="Race" value="NatHawPacIs"/>Native Hawaiian/Pacific Islander</label>
+		<label class="checkbox-inline"><input type="checkbox" name="Race" value="Unknown"/>Unknown</label>
 	</div>
-	<div class="row">
+	<div>
 		<p>If Selected Asian: <br>Note: Javascript to be done later with make this section disappear<p>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="AsianIndian" value="AsianIndian"/> Asian Indian
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="Chinese" value="Chinese"/> Chinese
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="Filipino" value="Filipino"/> Filipino
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="Japanese" value="Japanese"/> Japanese
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="Korean" value="Korean"/> Korean
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="Vietnamese" value="Vietnamese"/> Vietnamese
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="Other Asian" value="Other Asian"/> Other Asian
-		</div></div>
+		<label class="checkbox-inline"><input type="checkbox" name="Asian" value="Asian Indian"/>Asian Indian</label>
+		<label class="checkbox-inline"><input type="checkbox" name="Asian" value="Japanese"/>Japanese</label>
+		<label class="checkbox-inline"><input type="checkbox" name="Asian" value="Filipino"/>Filipino</label>
+		<label class="checkbox-inline"><input type="checkbox" name="Asian" value="Chinese"/>Chinese</label>
+		<label class="checkbox-inline"><input type="checkbox" name="Asian" value="Korean"/>Korean</label>
+		<label class="checkbox-inline"><input type="checkbox" name="Asian" value="Vietnamese"/>Vietnamese</label>
+		<label class="checkbox-inline"><input type="checkbox" name="Asian" value="OtherAsian"/>OtherAsian</label>
 	</div>
-	<div class="row">
+	<div>
 		<p>If Selected Native Hawaiian/Pacific Islander: <br>Note: Javascript to be done later with make this section disappear<p>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="NativeHawaiian" value="NativeHawaiian"/> Native Hawaiian
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="GuamanianChamorro" value="GuamanianChamorro"/> Guamanian or Chamorro
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="Samoan" value="Samoan"/> Samoan
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="OtherPacificIslander" value="OtherPacficIslander"/> OtherPacificIslander
-		</div></div>
+		<label class="checkbox-inline"><input type="checkbox" name="NatHawPacIs" value="NativeHawaiian"/>Native Hawaiian</label>
+		<label class="checkbox-inline"><input type="checkbox" name="NatHawPacIs" value="GuamanianChamorro"/>Guamanian or Chamorro</label>
+		<label class="checkbox-inline"><input type="checkbox" name="NatHawPacIs" value="Samoan"/>Samoan</label>
+		<label class="checkbox-inline"><input type="checkbox" name="NatHawPacIs" value="OtherPacificIslander"/>Other Pacific Islander</label>
 	</div>
 
 	<hr/>
@@ -397,20 +357,12 @@
 		<label class="radio-inline"><input type="radio" name="ethnicity" value="Non-Hispanic"/>Non-Hispanic</label>
 	</div>
 	
-	<div class="row">
+	<div>
 		<p>If Selected Hispanic/Latino: <br>Note: Javascript to be done later with make this section disappear<p>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="MexAmChic" value="MexAmChic"/> Mexican, Mexican American, Chicano/a
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="PuertoRican" value="PuertoRican"/> Puerto Rican
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="Cuban" value="Cuban"/> Cuban
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-			<input type="checkbox" name="OtherHispanic" value="OtherHispanic"/> Other Hsipanic, Latino/a, or Spanish Origin
-		</div></div>
+		<label class="checkbox-inline"><input type="checkbox" name="HispLat" value="MexAmChi"/>Mexican, Mexican American, or Chicano/a</label>
+		<label class="checkbox-inline"><input type="checkbox" name="HispLat" value="PuertoRican"/>Puerto Rican</label>
+		<label class="checkbox-inline"><input type="checkbox" name="HispLat" value="Cuban"/>Cuban</label>
+		<label class="checkbox-inline"><input type="checkbox" name="HispLat" value="OtherHisp"/>Other Hispanic, Latino/a, or Spanish Origin</label>
 	</div>
 	
 	<label>16. Female Applicants Only:</label>

@@ -5,6 +5,7 @@
 <cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
 <!-- Application Page pre-processing -->
 <cfset subformClass.createSubformData()/>
+<cfset subformData=subformClass.retrieveDataFromSubform()/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +71,7 @@
 
 	<div class="form-inline">
 	  <label for="NumberHousehold">21. Number of person in your household unit (include yourself):</label>
-	  <input type="number" class="form-control" id="NumberHousehold" name="NumberHousehold">
+	  <input type="number" class="form-control" id="NumberHousehold" name="NumberHousehold" value="<cfoutput>#subformData.HPersonNum#</cfoutput>">
 	</div>
 
 	<hr/>
@@ -80,47 +81,47 @@
 	  	<label class="control-label col-sm-3" for="Salary/Wages">Salary/Wages:</label>
 	  	<div class="col-sm-9 input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-			<input type="number" class="form-control" id="Salary/Wages" name="Salary/Wages"/>
+			<input type="number" class="form-control" id="Salary/Wages" name="Salary/Wages" value="<cfoutput>#subformData.salary#</cfoutput>"/>
 	  	</div>
 	  	<label class="control-label col-sm-3" for="DisabilityBenefits">Disability Benefit:</label>
 	  	<div class="col-sm-9 input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-			<input type="number" class="form-control" id="DisabilityBenefits" name="DisabilityBenefits"/>
+			<input type="number" class="form-control" id="DisabilityBenefits" name="DisabilityBenefits" value="<cfoutput>#subformData.disBen#</cfoutput>"/>
 	  	</div>
 	  	<label class="control-label col-sm-3" for="GeneralAssistance">General Assistance:</label>
 	  	<div class="col-sm-9 input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-			<input type="number" class="form-control" id="GeneralAssistance" name="GeneralAssistance"/>
+			<input type="number" class="form-control" id="GeneralAssistance" name="GeneralAssistance" value="<cfoutput>#subformData.genAssist#</cfoutput>"/>
 	  	</div>
 	  	<label class="control-label col-sm-3" for="Unemployment">Unemployment:</label>
 	  	<div class="col-sm-9 input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-			<input type="number" class="form-control" id="Unemployment" name="Unemployment"/>
+			<input type="number" class="form-control" id="Unemployment" name="Unemployment" value="<cfoutput>#subformData.unemploy#</cfoutput>"/>
 	  	</div>
 	  	<label class="control-label col-sm-3" for="SocialSecurity">Social Security:</label>
 	  	<div class="col-sm-9 input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-			<input type="number" class="form-control" id="SocialSecurity" name="SocialSecurity"/>
+			<input type="number" class="form-control" id="SocialSecurity" name="SocialSecurity" value="<cfoutput>#subformData.socialSecurity#</cfoutput>"/>
 	  	</div>
 	  	<label class="control-label col-sm-3" for="PensionRetirement">Pension/Retirement:</label>
 	  	<div class="col-sm-9 input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-			<input type="number" class="form-control" id="PensionRetirement" name="PensionRetirement"/>
+			<input type="number" class="form-control" id="PensionRetirement" name="PensionRetirement" value="<cfoutput>#subformData.pension#</cfoutput>"/>
 	  	</div>
 	  	<label class="control-label col-sm-3" for="AlimonyPalimony">Alimony/Palimony:</label>
 	  	<div class="col-sm-9 input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-			<input type="number" class="form-control" id="AlimonyPalimony" name="AlimonyPalimony"/>
+			<input type="number" class="form-control" id="AlimonyPalimony" name="AlimonyPalimony" value="<cfoutput>#subformData.allimony#</cfoutput>"/>
 	  	</div>
 	  	<label class="control-label col-sm-3" for="Other">Other:</label>
 	  	<div class="col-sm-9 input-group">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-	    	<input type="number" class="form-control" id="Other" name="Other"/>
+	    	<input type="number" class="form-control" id="Other" name="Other" value="<cfoutput>#subformData.OtherIncome#</cfoutput>"/>
 	  	</div>
 	  	<label class="control-label col-sm-3" for="TotalIncome">Total Annual Household Income:</label>
 	  	<div class="col-sm-9 input-group">
 	    	<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-	    	<input type="number" class="form-control" id="TotalIncome" name="TotalIncome"/>
+	    	<input type="number" class="form-control" id="TotalIncome" name="TotalIncome" value="<cfoutput>#subformData.totalHIncome#</cfoutput>"/>
 	  	</div>
 	</div>
 

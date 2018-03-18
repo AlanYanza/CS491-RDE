@@ -5,6 +5,7 @@
 <cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
 <!-- Application Page pre-processing -->
 <cfset subformClass.createSubformData()/>
+<cfset subformData=subformClass.retrieveDataFromSubform()/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,86 +59,23 @@
 	<br/>
 
 	<div class="row">
-	<div class="col-sm-5"><div class="form-group">
+	<div class="col-md-auto"><div class="form-group">
 			<label for="Name">(a) Name:</label>
-			<input type="text" class="form-control" id="Name" name="Name">
-		</div></div>
-		<div class="col-sm-7"><div class="form-group">
-			<label for="StreetAddress">(b) Address:</label>
-			<input type="text" class="form-control" id="StreetAddress" name="StreetAddress">
+			<input type="text" class="form-control" id="Name" name="Name" value="<cfoutput>#subformData.EmpUnName#</cfoutput>">
 		</div></div>
 	</div>
 	<div class="row">
-		<div class="col-sm-4"><div class="form-group"><label for="City">(c) City</label>
-			<input type="text" class="form-control" id="City" name="City"></div></div>
-		<div class="col-sm-4"><label for="state">State</label>
-			<select class="form-control" name="state">
-				<option selected>Select one</option>
-				<option value="AL">AL - Alabama</option>
-				<option value="AK">AK - Alaska</option>
-				<option value="AZ">AZ - Arizona</option>
-				<option value="AR">AR - Arkansas</option>
-				<option value="CA">CA - California</option>
-				<option value="CO">CO - Colorado</option>
-				<option value="CT">CT - Connecticut</option>
-				<option value="DC">DC - District of Columbia</option>
-				<option value="DE">DE - Delaware</option>
-				<option value="FL">FL - Florida</option>
-				<option value="GA">GA - Georgia</option>
-				<option value="HI">HI - Hawaii</option>
-				<option value="ID">ID - Idaho</option>
-				<option value="IL">IL - Illinois</option>
-				<option value="IN">IN - Indiana</option>
-				<option value="IA">IA - Iowa</option>
-				<option value="KS">KS - Kansas</option>
-				<option value="KY">KY - Kentucky</option>
-				<option value="LA">LA - Louisiana</option>
-				<option value="ME">ME - Maine</option>
-				<option value="MD">MD - Maryland</option>
-				<option value="MA">MA - Massachusetts</option>
-				<option value="MI">MI - Michigan</option>
-				<option value="MN">MN - Minnesota</option>
-				<option value="MS">MS - Mississippi</option>
-				<option value="MO">MO - Missouri</option>
-				<option value="MT">MT - Montana</option>
-				<option value="NE">NE - Nebraska</option>
-				<option value="NV">NV - Nevada</option>
-				<option value="NH">NH - New Hampshire</option>
-				<option value="NJ">NJ - New Jersey</option>
-				<option value="NM">NM - New Mexico</option>
-				<option value="NY">NY - New York</option>
-				<option value="NC">NC - North Carolina</option>
-				<option value="ND">ND - North Dakota</option>
-				<option value="OH">OH - Ohio</option>
-				<option value="OK">OK - Oklahoma</option>
-				<option value="OR">OR - Oregon</option>
-				<option value="PA">PA - Pennsylvania</option>
-				<option value="PR">PR - Puerto Rico</option>
-				<option value="RI">RI - Rhode Island</option>
-				<option value="SC">SC - South Carolina</option>
-				<option value="SD">SD - South Dakota</option>
-				<option value="TN">TN - Tennessee</option>
-				<option value="TX">TX - Texas</option>
-				<option value="UT">UT - Utah</option>
-				<option value="VT">VT - Vermont</option>
-				<option value="VA">VA - Virginia</option>
-				<option value="WA">WA - Washington</option>
-				<option value="WV">WV - West Virginia</option>
-				<option value="WI">WI - Wisconsin</option>
-				<option value="WY">WY - Wyoming</option>
-			</select>
-		</div>
-		<div class="col-sm-4"><div class="form-group"><label for="Zip">Zip Code</label>
-			<input type="text" class="form-control" id="Zip" name="Zip"></div></div>
+		<div class="col-md-auto"><div class="form-group"><label for="EmpAddress">(c) EmpAddress</label>
+			<input type="text" class="form-control" id="EmpAddress" name="EmpAddress" value="<cfoutput>#subformData.EmpUnAddr#</cfoutput>"></div></div>
 	</div>
 	<div class="row">
 		<div class="col-sm-6"><div class="form-group">
 			<label for="contact">(d) Contact</label>
-			<input type="text" class="form-control" id="contact" name="contact">
+			<input type="text" class="form-control" id="contact" name="contact" value="<cfoutput>#subformData.EmpUnContact#</cfoutput>">
 		</div></div>
 		<div class="col-sm-6"><div class="form-group">
 			<label for="TelNumber">(e) Telephone Number</label>
-			<input type="tel" class="form-control" id="TelNumber" name="TelNumber">
+			<input type="tel" class="form-control" id="TelNumber" name="TelNumber" value="<cfoutput>#subformData.EmpUnPhone#</cfoutput>">
 		</div></div>
 	</div>
 
@@ -163,27 +101,27 @@
 		<div class="form-horizontal">
 			<label class="control-label col-sm-4">(1) When does it start?</label>
 			<div class="col-sm-8">
-				<input type="date" class="form-control" id="start" name="start">
+				<input type="date" class="form-control" id="start" name="start" value="<cfoutput>#subformData.COBRAStart#</cfoutput>">
 			</div>
 		</div>
 
 		<div class="form-horizontal">
 			<label class="control-label col-sm-4">(2) When does it end?</label>
 			<div class="col-sm-8">
-				<input type="date" class="form-control" id="end" name="end">
+				<input type="date" class="form-control" id="end" name="end" value="<cfoutput>#subformData.COBRAEnd#</cfoutput>">
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<label class="col-sm-4">c. When is the next premium due?</label>
 		<div class="col-sm-8">
-			<input type="date" class="form-control" id="premium" name="premium">
+			<input type="date" class="form-control" id="premium" name="premium" value="<cfoutput>#subformData.NxtPremDue#</cfoutput>">
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label>d. Other(specify):</label>
-		<input type="text" class="form-control" id="OS" name="OS">
+		<input type="text" class="form-control" id="OS" name="OS" value="<cfoutput>#subformData.Other#</cfoutput>">
 	</div>
 
 	<div class="form-group">
@@ -206,7 +144,7 @@
 		<label class="col-sm-4">(2) If yes, what is the amount of the cap?</label>
 		<div class="input-group col-sm-8">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-			<input type="number" class="form-control" id="cap" name="cap"/>
+			<input type="number" class="form-control" id="cap" name="cap" value="<cfoutput>#subformData.PresCovCapAmt#</cfoutput>"/>
 		</div>
 	</div>
 
@@ -233,7 +171,7 @@
 	<div class="row">
 		<label class="col-sm-4"> a. If yes, when did you apply for Medicaid?</label>
 		<div class="col-sm-5">
-			<input type="date" class="form-control" id="medicaidDate" name="medicaidDate">
+			<input type="date" class="form-control" id="medicaidDate" name="medicaidDate" value="<cfoutput>#subformData.AMedicaidDate#</cfoutput>">
 		</div>
 		<div class="checkbox col-sm-3">
 			<label><input type="checkbox" name="medicaidDate" value="Unsure"/>Unsure</label>
@@ -260,7 +198,7 @@
 	<div class="row">
 		<label class="col-sm-4">a. If yes, when did you apply for Medicare?</label>
 		<div class="col-sm-5">
-			<input type="date" class="form-control" id="medicareDate" name="medicareDate">
+			<input type="date" class="form-control" id="medicareDate" name="medicareDate" value="<cfoutput>#subformData.AMedicareDate#</cfoutput>">
 		</div>
 		<div class="checkbox col-sm-3">
 			<label><input type="checkbox" name="medicareDate" value="Unsure"/>Unsure</label>
