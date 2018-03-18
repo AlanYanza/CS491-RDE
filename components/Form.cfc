@@ -15,22 +15,23 @@
 	
 	<!-- add a new Application to Database -->
 	<cffunction name="createApplication">
-		<cfargument name="HICPStatusInput" type="string" >
-		<cfset HICPStatus=HICPStatusInput/>
-		<cfQuery>
-			INSERT INTO UserApplication (userID,formTypeID,HICPApp,status) VALUES(
-				<cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" >,
-				<cfqueryparam value="#formTypeID#" cfsqltype="cf_sql_integer" >,
-				<cfqueryparam value="#HICPStatus#" cfsqltype="cf_sql_varchar" >,
-				<cfqueryparam value="P" cfsqltype="cf_sql_varchar" >
-			)
-		</cfquery>
-		<cfset Var appID=getAppID()/>
-		<cfquery >
-			INSERT INTO UserFormData (appID) VALUES(
-				<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer">
-			)			
-		</cfquery>
+		<cfset appStatus=CheckApplicationStatus()/>
+		<cfif appStatus eq 'M'>
+			<cfQuery>
+				INSERT INTO UserApplication (userID,formTypeID,HICPApp,status) VALUES(
+					<cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" >,
+					<cfqueryparam value="#formTypeID#" cfsqltype="cf_sql_integer" >,
+					<cfqueryparam value="N" cfsqltype="cf_sql_varchar" >,
+					<cfqueryparam value="P" cfsqltype="cf_sql_varchar" >
+				)
+			</cfquery>
+			<cfset Var appID=getAppID()/>
+			<cfquery >
+				INSERT INTO UserFormData (appID) VALUES(
+					<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer">
+				)			
+			</cfquery>
+		</cfif>
 	</cffunction>
 	
 	<!-- update an existing application Status -->
@@ -81,7 +82,7 @@
 	</cffunction>
 	
 	<!-- Retrieved a Application's dataID(helper method) -->
-	<cffunction name="getDataID" returntype="numeric" access="private">
+	<cffunction name="getDataID" returntype="numeric" >
 		<cfset Var appID=getAppID() />
 		<cfquery name="dataIDResult" result="queryStats">
 			SELECT dataID FROM UserFormData WHERE 
@@ -118,6 +119,16 @@
 		</cfquery>
 		<cfset formTypeID=#formIDResult.formTypeID#/>
 		<cfreturn formTypeID>
+	</cffunction>
+	
+	<!-- redirect if no permission to edit Application -->
+	<cffunction name="noAccessRedirect" >
+		<cfargument name="destinationInput" type="string" >
+		<cfset destination=destinationInput />
+		<cfset appStatus=CheckApplicationStatus()/>
+		<cfif appStatus neq "M" AND appStatus neq "P" AND appStatus neq "N">
+			<cflocation url="#destination#">
+		</cfif>
 	</cffunction>
 	
 </cfcomponent>

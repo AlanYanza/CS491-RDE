@@ -2,17 +2,9 @@
 <cfset SessionClass.checkIfLoggedIn()/>
 <cfset tableName='NJSection3A'/>
 <cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName)/>
-<!-- Check ApplicationStattus and redirect to homePage is needed -->
-<cfset appStatus=subformClass.CheckApplicationStatus()/>
-<cfif appStatus neq "M" AND appStatus neq "P" AND appStatus neq "N">
-	<cflocation url="/CS491-RDE/home.cfm">
-</cfif>
-<!--Determine if INSERT or UPDATE required -->
-<cfif subformClass.checkIfDataExist() neq 0>
-	<cfset method="UPDATE"/>
-<cfelse>
-	<cfset method="INSERT"/>
-</cfif> 
+<cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
+<!-- Application Page pre-processing -->
+<cfset subformClass.createSubformData()/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +36,6 @@
 	<form action="../scripts/NJScript.cfm" method="POST">
 	<input type="text" hidden="true" id="formPage" name="formPage" value="page3A">
 	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
-	<input type="text" hidden="true" id="databaseMethod" name="databaseMethod" value="<cfoutput>#method#</cfoutput>" >
 	<div class="form-group">
 		<label>25. Do you currently have any type of health insurance?</label>
 		<br/>

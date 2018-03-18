@@ -1,6 +1,5 @@
 <!-- Determine which page form came from -->
 <cfset formSource=FORM.formPage/>
-<cfset databaseMethod=FORM.databaseMethod/>
 <cfset tableName=FORM.tableName/>
 <cfset subformObj=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName)/>
 <cfset appExist=subformObj.checkIfAppExist()/>
@@ -29,10 +28,6 @@
 	<cfif IsDefined("FORM.previous")>
 		<cflocation url="/CS491-RDE/application/dhas_instructions_page3.cfm">
 	<cfelseif IsDefined("FORM.next")>
-		<!-- create an entry in the UserApplication Table(if insert) -->
-		<cfif appExist eq 0>
-			<cfset subFormObj.createApplication(HICPStatus)/>
-		</cfif>
   		<cflocation url="/CS491-RDE/application/dhas_page2.cfm">
 	</cfif>
 <cfelseif formSource eq 'page2'>
