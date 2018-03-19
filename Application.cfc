@@ -7,5 +7,4 @@
 <!---	<cfset this.datasource='LocalDatabase'/> <!--Local Docker Database -->--->
 	<cfset this.sessionManagement=true /> <!--allows for Session scope variables -->
 	
-	
 </cfcomponent>
