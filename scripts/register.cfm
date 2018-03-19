@@ -3,7 +3,7 @@
 <cfparam name = "form.firstName" type = "string" default = "">
 <cfparam name = "form.lastName" type = "string" default = "">
 
-<cfquery name = "register" datasource = "Database"> 
+<cfquery name = "register"> 
     INSERT INTO [User](email,FirstName,LastName,password,accessLevel) VALUES('#form.email#','#form.firstName#','#form.lastName#', 
     HASHBYTES('sha2_512', '#form.password#'), 'user')
 </cfquery>
