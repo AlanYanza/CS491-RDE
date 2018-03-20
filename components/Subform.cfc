@@ -9,10 +9,12 @@
 		<cfargument name="stateInput" type="string" />
 		<cfargument name="userIDInput" type="string" />
 		<cfargument name="tableNameInput" type="string" >
-		<cfargument name="fieldNamesInput" type="array">
+		<cfargument name="fieldNamesInput" type="array" required="false">
 		<cfset super.init(stateInput,userIDInput)/>
 		<cfset tableName=tableNameInput/>
-		<cfset fieldNames=fieldNamesInput />
+		<cfif IsDefined('arguments.fieldNameInput')>
+			<cfset fieldNames=fieldNamesInput />
+		</cfif>
 		<cfset dataID=getDataID()/>
 		<cfreturn this>
 	</cffunction>
