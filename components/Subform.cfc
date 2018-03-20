@@ -2,6 +2,7 @@
 	<cfset Variables.tableName='' />
 	<cfset Variables.fieldNames= []/>
 	<cfset Variables.fieldValues= {}/>
+	<cfset Variables.dataID=0/>
 	
 	<!-- Constructor -->
 	<cffunction name="init" >
@@ -12,6 +13,7 @@
 		<cfset super.init(stateInput,userIDInput)/>
 		<cfset tableName=tableNameInput/>
 		<cfset fieldNames=fieldNamesInput />
+		<cfset dataID=getDataID()/>
 		<cfreturn this>
 	</cffunction>
 	
@@ -30,13 +32,7 @@
 			<cfset StructInsert(fieldValues,fieldName,fieldValue)/>
 		</cfloop> 
 	</cffunction>
-	
-	<!-- Testing purposes-->
-	<cffunction name="testing" >
-		<cfdump var="#fieldNames#" >
-		<cfdump var="#fieldValues#" >
-	</cffunction>
-		
+			
 	<!-- check if data already exist for subform -->
 	<cffunction name="checkIfDataExist" returntype="boolean" >
 		<cfset Var dataID=getDataID() />
@@ -71,6 +67,30 @@
 			dataID=<cfqueryparam value="#dataID#" cfsqltype="cf_sql_integer" >
 		</cfquery>
 		<cfreturn formValues>
-	</cffunction>   
+	</cffunction>  
+	
+	<!-- Update Subform Data in the Subform Table -->
+	<cffunction name="updateSubformData" >
+		<!-- Prepare Set Statements-->
+		<cfset Var arrayCount=0 />
+		<cfset setStr=''/>
+		<cfoutput >#setStr#</cfoutput>
+		<cfset Var queryStr="field3 = ""E""" />
+		<cfquery >
+			UPDATE <cfoutput>#tableName#</cfoutput> SET
+			<!--- loop through fieldValues and add it to query--->
+			<cfloop array="#fieldNames#" index="i">
+		    	<cfset arrayCount=arrayCount+1 />
+		    	<cfif arrayCount neq ArrayLen(#fieldNames#)>
+		    		<!--- if not last elements in array use , --->
+		 			<cfoutput> #i# = '#fieldValues[i]#', </cfoutput>
+		 		<cfelse>
+		 			<!--- if last element in array do not add ,--->
+		 			<cfoutput> #i# = '#fieldValues[i]#' </cfoutput>
+		    	</cfif>
+	 		</cfloop> 	
+	 		WHERE dataID=<cfqueryparam value="#dataID#">
+		</cfquery>
+	</cffunction> 
 	
 </cfcomponent>
