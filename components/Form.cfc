@@ -27,7 +27,6 @@
 					<cfqueryparam value="P" cfsqltype="cf_sql_varchar" >
 				)
 			</cfquery>
-<!---			<cfset Var appID=getAppID()/>--->
 			<cfquery >
 				INSERT INTO UserFormData (appID) VALUES(
 					<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer">
@@ -40,7 +39,6 @@
 	<cffunction name="updateApplicationStatus">
 		<cfargument name="statusInput" type="string" required="false" >
 		<cfset status=statusInput />
-<!---		<cfset Var appID=getAppID() />--->
 		<cfquery >
 			UPDATE UserApplication SET status=<cfqueryparam value="#status#" cfsqltype="cf_sql_varchar" >
 		</cfquery>
@@ -50,7 +48,6 @@
 	<cffunction name="updateHICPStatus">
 		<cfargument name="HICPStatusInput" type="string" >
 		<cfset HICP=HICPStatusInput />
-<!---		<cfset Var appID=getAppID() />--->
 		<cfquery>
 			UPDATE UserApplication SET HICPApp=<cfqueryparam value="#HICP#" cfsqltype="cf_sql_varchar" >
 			WHERE appID=<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer" >
@@ -59,7 +56,6 @@
 	
 	<!-- retreive HICP status -->
 	<cffunction name="retrieveHICPStatus" returntype="String" >
-<!---		<cfset Var appID=getAppID()/>--->
 		<cfquery name="HICPStatusResult" result="queryStats">
 			SELECT HICPApp from UserApplication WHERE
 			appID=<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer" >
@@ -74,7 +70,6 @@
 		<cfif appExist eq 0>
 			<cfset Var status="M">
 		<cfelse>
-<!---			<cfset Var appID=getAppID()/>--->
 			<cfquery name="statusResult" result="queryStats">
 				SELECT status from UserApplication WHERE 
 				appID=<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer">
@@ -86,7 +81,6 @@
 	
 	<!-- check if Application exist -->
 	<cffunction name="checkIfAppExist" returntype="boolean" >
-<!---		<cfset Var AppID=getAppID() />--->
 		<cfif AppID eq 0>
 			<cfreturn false>
 		<cfelse>
@@ -96,7 +90,6 @@
 	
 	<!-- Retrieved a Application's dataID(helper method) -->
 	<cffunction name="getDataID" returntype="numeric" >
-<!---		<cfset Var appID=getAppID() />--->
 		<cfquery name="dataIDResult" result="queryStats">
 			SELECT dataID FROM UserFormData WHERE 
 			appID=<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer" >
