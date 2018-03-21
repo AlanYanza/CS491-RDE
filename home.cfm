@@ -4,6 +4,7 @@
 <cfset UserObj=createObject('component','components.User').init(session.userID)/>
 <cfset editableApplications=UserObj.getEditableApplication()/>
 <cfset allApplications=UserObj.getAllApplication()/>
+<cfset directLink=UserObj.getDirectLink('NJ')/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,9 +62,11 @@
 			<cfelse>
 				<cfset outputStatus='Application Requires Attention'/>
 			</cfif>
-			<!-- create html row for Application-->
+			<!-- determine the direct Link based on state -->
+			<cfset outputLink=UserObj.getDirectLink(outputState)/>
+			<!-- create html row for Application -->
 			<cfoutput><tr><td>#outputState#</td><td>#outputStatus#</td>
-				<td><a href="/CS491-RDE/application/dhas_page1.cfm">edit Application</td></tr>
+				<td><a href="#outputLink#">edit Application</td></tr>
 				</cfoutput>
 		</cfloop>
 		</table>

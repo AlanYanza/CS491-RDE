@@ -61,6 +61,22 @@
 		<cfreturn formTypeID>
 	</cffunction>
 	
+	<!-- Get Application Link based on a state -->
+	<cffunction name="getDirectLink" displayname="getDirectLinkFromState" hint="retrieve the direct link for a indicated State" 
+	returntype="String" >
+		<cfargument name="stateInput" hint="state of Interest to get formTypeID for" type="string" >
+		<cfquery name="directLinkResult" result="queryStat">
+			SELECT directLink FROM ApplicationLinks WHERE
+			state=<cfqueryparam value="#arguments.stateInput#" cfsqltype="cf_sql_varchar" >
+		</cfquery>
+		<cfif queryStat.recordCount neq 1>
+			<cfset Var directLink=''/>
+		<cfelse>
+			<cfset Var directLink=directLinkResult.directLink />
+		</cfif>
+		<cfreturn directLink />
+	</cffunction>
+	
 	<!-- Get State from formTypeID--->
 	<cffunction name="getState" displayname="getStateFromFormTypeID" hint="retrieves the state using formTypeID" >
 		<cfargument name="formtypeIDInput" type="numeric" hint="formTypeID retrieve from UserApplication Queries" >
