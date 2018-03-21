@@ -6,7 +6,7 @@
 <cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
 <!-- Application Page pre-processing -->
 <cfset subformClass.createSubformData()/>
-<cfset subformData=subformClass.retrieveDataFromSubform()/>
+<cfset subformData=subformClass.retrieveDataForSubform()/>
 
 <!DOCTYPE html>
 <html lang="en">

@@ -8,7 +8,7 @@
 <!-- Application Page preprocessing -->
 <cfset subFormClass.createApplication()/>
 <cfset subformClass.createSubformData()/>
-<cfset subformData=subformClass.retrieveDataFromSubform()/>
+<cfset subformData=subformClass.retrieveDataForSubform()/>
 <cfset HICPStatus=subformClass.retrieveHICPStatus()/>
 
 <!DOCTYPE html>

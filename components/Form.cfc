@@ -5,7 +5,7 @@
 	<cfset Variables.appID=0 />
 	
 	<!-- Constructor -->
-	<cffunction name="init" >
+	<cffunction name="init" displayname="Form constructor" hint="Form CFC constructor" >
 		<cfargument name="stateInput" type="string" />
 		<cfargument name="userIDInput" type="string" />
 		<cfset state=stateInput /> 
@@ -16,7 +16,8 @@
 	</cffunction>
 	
 	<!-- add a new Application to Database -->
-	<cffunction name="createApplication">
+	<cffunction name="createApplication" displayname="createNewApplicationTableEntry" 
+	hint="create an new entry in the UserApplication Table">
 		<cfset appStatus=CheckApplicationStatus()/>
 		<cfif appStatus eq 'M'>
 			<cfQuery>
@@ -36,7 +37,8 @@
 	</cffunction>
 	
 	<!-- update an existing application Status -->
-	<cffunction name="updateApplicationStatus">
+	<cffunction name="updateApplicationStatus" displayname="UpdateExistingApplicationTableEntry"
+	hint="update data about an existing UserApplication Table Entry">
 		<cfargument name="statusInput" type="string" required="false" >
 		<cfset status=statusInput />
 		<cfquery >
@@ -45,7 +47,7 @@
 	</cffunction>
 	
 	<!-- update an existing application HICP Status -->
-	<cffunction name="updateHICPStatus">
+	<cffunction name="updateHICPStatus" displayname="updateHICPStatus" hint="updates HICP Status for an application">
 		<cfargument name="HICPStatusInput" type="string" >
 		<cfset HICP=HICPStatusInput />
 		<cfquery>
@@ -55,7 +57,8 @@
 	</cffunction>
 	
 	<!-- retreive HICP status -->
-	<cffunction name="retrieveHICPStatus" returntype="String" >
+	<cffunction name="retrieveHICPStatus" displayname="retrieveHICPStatus" hint="get the current HICP status" 
+	returntype="String" >
 		<cfquery name="HICPStatusResult" result="queryStats">
 			SELECT HICPApp from UserApplication WHERE
 			appID=<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer" >
@@ -65,7 +68,8 @@
 	</cffunction>
 	
 	<!-- CheckApplicationStatus -->
-	<cffunction name="CheckApplicationStatus" returntype="String" >
+	<cffunction name="CheckApplicationStatus" displayname="CheckApplicationStatus" hint="checks the current Application status" 
+	returntype="String"  >
 		<cfset Var appExist=checkIfAppExist()/>
 		<cfif appExist eq 0>
 			<cfset Var status="M">
@@ -80,7 +84,7 @@
 	</cffunction>
 	
 	<!-- check if Application exist -->
-	<cffunction name="checkIfAppExist" returntype="boolean" >
+	<cffunction name="checkIfAppExist" returntype="boolean" displayname="checkIfAppExist" hint="Checks to see if user has an application" >
 		<cfif AppID eq 0>
 			<cfreturn false>
 		<cfelse>
@@ -89,7 +93,7 @@
 	</cffunction>
 	
 	<!-- Retrieved a Application's dataID(helper method) -->
-	<cffunction name="getDataID" returntype="numeric" >
+	<cffunction name="getDataID" returntype="numeric" displayname="retrieveApplicationDataID" hint="retrieves the dataID associated with an Application" >
 		<cfquery name="dataIDResult" result="queryStats">
 			SELECT dataID FROM UserFormData WHERE 
 			appID=<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer" >
@@ -102,8 +106,9 @@
 		<cfreturn dataID>
 	</cffunction>
 	
-	<!-- Retrieve a Form's AppID, returns 0 if none found(helper method)-->
-	<cffunction name="getAppID" returntype="Numeric" access="private" >
+	<!-- Retrieve a Form's AppID, returns 0 if none found -->
+	<cffunction name="getAppID" displayname="getUserApplicationID" hint="get the Application associted for the User" 
+	returntype="Numeric"  >
 		<cfquery name="AppIDResult" result="queryStats">
 			SELECT appID FROM UserApplication WHERE 
 			userID=<cfqueryparam value="#Variables.userID#" cfsqltype="cf_sql_integer" > AND 
@@ -117,8 +122,9 @@
 		<cfreturn AppID>
 	</cffunction>
 	
-	<!-- Retrieve a Form's FormID'(helper method)-->
-	<cffunction name="getFormID" returntype="Numeric" access="private" >
+	<!-- Retrieve a Form's FormID-->
+	<cffunction name="getFormID"  displayname="getFormIDForAState" hint="retrieves the formID for a specified State" 
+	returntype="Numeric" >
 		<cfquery name="FormIDResult" result="queryStats">
 			SELECT formTypeID FROM Forms WHERE
 			state=<cfqueryparam value="#state#" cfsqltype="varchar">
@@ -128,7 +134,8 @@
 	</cffunction>
 	
 	<!-- redirect if no permission to edit Application -->
-	<cffunction name="noAccessRedirect" >
+	<cffunction name="noAccessRedirect" displayname="ifNoAccessToApplicationRedirect"
+	hint="If user doesn't have access to edit form, redirect to specific location">
 		<cfargument name="destinationInput" type="string" >
 		<cfset destination=destinationInput />
 		<cfset appStatus=CheckApplicationStatus()/>
