@@ -38,6 +38,24 @@
 	<form action="../scripts/NJScript.cfm" method="POST">
 	<input type="text" hidden="true" id="formPage" name="formPage" value="page3A">
 	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
+	<!--- hidden fields to communiate coldFusion resultSet with javascript Functions (auto-generated in a external tool and copied in) --->
+	<input type="text" hidden="true" name="HFinsured" value="#subformData.insured#"> <input type="text" hidden="true" name="HFMedium" value="#subformData.Medium#"> 
+	<input type="text" hidden="true" name="HFEmpUnName" value="#subformData.EmpUnName#"> <input type="text" hidden="true" name="HFEmpUnAddr" value="#subformData.EmpUnAddr#"> 
+	<input type="text" hidden="true" name="HFEmpUnContact" value="#subformData.EmpUnContact#"> <input type="text" hidden="true" name="HFEmpUnPhone" value="#subformData.EmpUnPhone#"> 
+	<input type="text" hidden="true" name="HFMedicaid" value="#subformData.Medicaid#"> <input type="text" hidden="true" name="HFMedicareAB" value="#subformData.MedicareAB#"> 
+	<input type="text" hidden="true" name="HFMedicareD" value="#subformData.MedicareD#"> <input type="text" hidden="true" name="HFPrivateIns" value="#subformData.PrivateIns#"> 
+	<input type="text" hidden="true" name="HFCHIP" value="#subformData.CHIP#"> <input type="text" hidden="true" name="HFCOBRA" value="#subformData.COBRA#"> 
+	<input type="text" hidden="true" name="HFCOBRAStart" value="#subformData.COBRAStart#"> <input type="text" hidden="true" name="HFCOBRAEND" value="#subformData.COBRAEND#"> 
+	<input type="text" hidden="true" name="HFNxtPremDue" value="#subformData.NxtPremDue#"> <input type="text" hidden="true" name="HFOther" value="#subformData.Other#"> 
+	<input type="text" hidden="true" name="HFPresCov" value="#subformData.PresCov#"> <input type="text" hidden="true" name="HFPresCovCap" value="#subformData.PresCovCap#"> 
+	<input type="text" hidden="true" name="HFPresCovCapAmt" value="#subformData.PresCovCapAmt#"> <input type="text" hidden="true" name="HFPresCovMail" value="#subformData.PresCovMail#"> 
+	<input type="text" hidden="true" name="HFAMedicaid" value="#subformData.AMedicaid#"> <input type="text" hidden="true" name="HFAMedicaidDate" value="#subformData.AMedicaidDate#"> 
+	<input type="text" hidden="true" name="HFUMedicaidDate" value="#subformData.UMedicaidDate#"> <input type="text" hidden="true" name="HFRespMedicaid" value="#subformData.RespMedicaid#"> 
+	<input type="text" hidden="true" name="HFAMedicare" value="#subformData.AMedicare#"> <input type="text" hidden="true" name="HFAMedicareDate" value="#subformData.AMedicareDate#"> 
+	<input type="text" hidden="true" name="HFUMedicareDate" value="#subformData.UMedicareDate#"> <input type="text" hidden="true" name="HFRespMedicare" value="#subformData.RespMedicare#"> 
+	<input type="text" hidden="true" name="HFAmedicareD" value="#subformData.AmedicareD#"> <input type="text" hidden="true" name="HFALIS" value="#subformData.ALIS#"> 
+
+
 	<div class="form-group">
 		<label>25. Do you currently have any type of health insurance?</label>
 		<br/>

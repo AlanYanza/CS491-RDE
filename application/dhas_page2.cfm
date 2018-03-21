@@ -31,6 +31,20 @@
 	<form action="../scripts/NJScript.cfm" method="POST">
 	<input type="text" hidden="true" id="formPage" name="formPage" value="page2">
 	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
+	<!--- hidden fields to communiate coldFusion resultSet with javascript Functions (auto-generated in a external tool and copied in) --->
+	<input type="text" hidden="true" name="HFEmplyStatus" value="#subformData.EmplyStatus#"> <input type="text" hidden="true" name="HFunableWork" value="#subformData.unableWork#"> 
+	<input type="text" hidden="true" name="HFunable12LMonth" value="#subformData.unable12LMonth#"> <input type="text" hidden="true" name="HFunable12MMonth" value="#subformData.unable12MMonth#"> 
+	<input type="text" hidden="true" name="HFHPersonNum" value="#subformData.HPersonNum#"> <input type="text" hidden="true" name="HFsalary" value="#subformData.salary#"> 
+	<input type="text" hidden="true" name="HFdisBen" value="#subformData.disBen#"> <input type="text" hidden="true" name="HFgenAssist" value="#subformData.genAssist#"> 
+	<input type="text" hidden="true" name="HFunemploy" value="#subformData.unemploy#"> <input type="text" hidden="true" name="HFsocialSecurity" value="#subformData.socialSecurity#"> 
+	<input type="text" hidden="true" name="HFpersion" value="#subformData.persion#"> <input type="text" hidden="true" name="HFallimony" value="#subformData.allimony#"> 
+	<input type="text" hidden="true" name="HFOtherIncome" value="#subformData.OtherIncome#"> <input type="text" hidden="true" name="HFtotalHIncome" value="#subformData.totalHIncome#"> 
+	<input type="text" hidden="true" name="HFtaxFile" value="#subformData.taxFile#"> <input type="text" hidden="true" name="HFdependant" value="#subformData.dependant#"> 
+	<input type="text" hidden="true" name="HFTANF" value="#subformData.TANF#"> <input type="text" hidden="true" name="HFSAIF" value="#subformData.SAIF#"> 
+	<input type="text" hidden="true" name="HFSSI" value="#subformData.SSI#"> <input type="text" hidden="true" name="HFGA" value="#subformData.GA#">
+	<input type="text" hidden="true" name="HFSNAP" value="#subformData.SNAP#"> 
+
+
 	<div class="form-group">
 		<label for="employment">17. What if your current employment status?</label>
 		<select class="form-control" name="employment">
