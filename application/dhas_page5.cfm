@@ -49,16 +49,6 @@
 	<form action="../scripts/NJScript.cfm" method="POST">
   <input type="text" hidden="true" id="formPage" name="formPage" value="page4">
   <input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
-  <!--- hidden fields to communiate coldFusion resultSet with javascript Functions (auto-generated in a external tool and copied in) --->
-  <input type="text" hidden="true" name="HFCName" value="#subformData.CName#"> <input type="text" hidden="true" name="HFagency" value="#subformData.agency#"> 
-  <input type="text" hidden="true" name="HFCMaddr" value="#subformData.CMaddr#"> <input type="text" hidden="true" name="HFCMWPhone" value="#subformData.CMWPhone#"> 
-  <input type="text" hidden="true" name="HFCMFaxNum" value="#subformData.CMFaxNum#"> <input type="text" hidden="true" name="HFCMCPhone" value="#subformData.CMCPhone#"> 
-  <input type="text" hidden="true" name="HFemail" value="#subformData.email#"> <input type="text" hidden="true" name="HFperm" value="#subformData.perm#"> 
-  <input type="text" hidden="true" name="HFHIVAware" value="#subformData.HIVAware#"> <input type="text" hidden="true" name="HFCPName" value="#subformData.CPName#"> 
-  <input type="text" hidden="true" name="HFrelation" value="#subformData.relation#"> <input type="text" hidden="true" name="HFCPAddr" value="#subformData.CPAddr#"> 
-  <input type="text" hidden="true" name="HFCPHPhone" value="#subformData.CPHPhone#"> <input type="text" hidden="true" name="HFCPWPhone" value="#subformData.CPWPhone#"> 
-  <input type="text" hidden="true" name="HFCPCPhone" value="#subformData.CPCPhone#"> <input type="text" hidden="true" name="HFPName" value="#subformData.PName#"> 
-  <input type="text" hidden="true" name="HFPhone" value="#subformData.Phone#"> 
 
 	<div class="row">
 		<div class="col-sm-9">

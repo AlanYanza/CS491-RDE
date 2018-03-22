@@ -35,34 +35,6 @@
 	<form action="../scripts/NJScript.cfm" method="POST">
   <input type="text" hidden="true" id="formPage" name="formPage" value="page1">
   <input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
-  <!--- hidden fields to c	ommuniate coldFusion resultSet with javascript Functions (auto-generated in a external tool and copied in) --->
-  <input type="text" hidden="true" name="HFFName" value="#subformData.FName#"> <input type="text" hidden="true" name="HFMName" value="#subformData.MName#"> 
-  <input type="text" hidden="true" name="HFLName" value="#subformData.LName#"> <input type="text" hidden="true" name="HFDateBirth" value="#subformData.DateBirth#"> 
-  <input type="text" hidden="true" name="HFgender" value="#subformData.gender#"> <input type="text" hidden="true" name="HFgenderBirth" value="#subformData.genderBirth#"> 
-  <input type="text" hidden="true" name="HFSSNum" value="#subformData.SSNum#"> <input type="text" hidden="true" name="HFstreet" value="#subformData.street#"> 
-  <input type="text" hidden="true" name="HFcity" value="#subformData.city#"> <input type="text" hidden="true" name="HFstate" value="#subformData.state#"> 
-  <input type="text" hidden="true" name="HFzip" value="#subformData.zip#"> <input type="text" hidden="true" name="HFcounty" value="#subformData.county#"> 
-  <input type="text" hidden="true" name="HFaptNum" value="#subformData.aptNum#"> <input type="text" hidden="true" name="HFHPhone" value="#subformData.HPhone#"> 
-  <input type="text" hidden="true" name="HFWPhone" value="#subformData.WPhone#"> <input type="text" hidden="true" name="HFCPhone" value="#subformData.CPhone#"> 
-  <input type="text" hidden="true" name="HFVHomeMsgPerm" value="#subformData.VHomeMsgPerm#"> <input type="text" hidden="true" name="HFVCellMsgPerm" value="#subformData.VCellMsgPerm#"> 
-  <input type="text" hidden="true" name="HFVWorkMsgPerm" value="#subformData.VWorkMsgPerm#"> <input type="text" hidden="true" name="HFAltComPerm" value="#subformData.AltComPerm#"> 
-  <input type="text" hidden="true" name="HFAddrRes" value="#subformData.AddrRes#"> <input type="text" hidden="true" name="HFMStreet" value="#subformData.MStreet#"> 
-  <input type="text" hidden="true" name="HFMCity" value="#subformData.MCity#"> <input type="text" hidden="true" name="HFMState" value="#subformData.MState#"> 
-  <input type="text" hidden="true" name="HFMZip" value="#subformData.MZip#"> <input type="text" hidden="true" name="HFMCountry" value="#subformData.MCountry#"> 
-  <input type="text" hidden="true" name="HFMaptNum" value="#subformData.MaptNum#"> <input type="text" hidden="true" name="HFUSCitizen" value="#subformData.USCitizen#"> 
-  <input type="text" hidden="true" name="HFveteran" value="#subformData.veteran#"> <input type="text" hidden="true" name="HFRelStatus" value="#subformData.RelStatus#"> 
-  <input type="text" hidden="true" name="HFRWhite" value="#subformData.RWhite#"> <input type="text" hidden="true" name="HFRBlack" value="#subformData.RBlack#"> 
-  <input type="text" hidden="true" name="HFRAsian" value="#subformData.RAsian#"> <input type="text" hidden="true" name="HFRAmInd" value="#subformData.RAmInd#"> 
-  <input type="text" hidden="true" name="HFRNatHa" value="#subformData.RNatHa#"> <input type="text" hidden="true" name="HFRUnk" value="#subformData.RUnk#"> 
-  <input type="text" hidden="true" name="HFAAsInd" value="#subformData.AAsInd#"> <input type="text" hidden="true" name="HFAChinese" value="#subformData.AChinese#"> 
-  <input type="text" hidden="true" name="HFAJap" value="#subformData.AJap#"> <input type="text" hidden="true" name="HFAKorean" value="#subformData.AKorean#"> 
-  <input type="text" hidden="true" name="HFAViet" value="#subformData.AViet#"> <input type="text" hidden="true" name="HFAOther" value="#subformData.AOther#"> 
-  <input type="text" hidden="true" name="HFNHNatHa" value="#subformData.NHNatHa#"> <input type="text" hidden="true" name="HFNHGua" value="#subformData.NHGua#"> 
-  <input type="text" hidden="true" name="HFNHSam" value="#subformData.NHSam#"> <input type="text" hidden="true" name="HFNHOther" value="#subformData.NHOther#"> 
-  <input type="text" hidden="true" name="HFEHisp" value="#subformData.EHisp#"> <input type="text" hidden="true" name="HFENonHisp" value="#subformData.ENonHisp#"> 
-  <input type="text" hidden="true" name="HFHispMex" value="#subformData.HispMex#"> <input type="text" hidden="true" name="HFHispPR" value="#subformData.HispPR#"> 
-  <input type="text" hidden="true" name="HFHispCub" value="#subformData.HispCub#"> <input type="text" hidden="true" name="HFHispOther" value="#subformData.HispOther#"> 
-
 
 	<div class="text-center checkbox">
 	    	<input type="checkbox" name="HICP" value="HICP"/> I am also applying for HICP

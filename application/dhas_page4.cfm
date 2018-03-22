@@ -31,26 +31,7 @@
 	<form  action="../scripts/NJScript.cfm" method="POST">
   <input type="text" hidden="true" id="formPage" name="formPage" value="page3B">
   <input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
-  <!--- hidden fields to communiate coldFusion resultSet with javascript Functions (auto-generated in a external tool and copied in) --->
-<input type="text" hidden="true" name="HFNoASSISSDI" value="#subformData.NoASSISSDI#"> <input type="text" hidden="true" name="HFUASSISSDI" value="#subformData.UASSISSDI#"> 
-<input type="text" hidden="true" name="HFYesSSI" value="#subformData.YesSSI#"> <input type="text" hidden="true" name="HFYesSSDI" value="#subformData.YesSSDI#"> 
-<input type="text" hidden="true" name="HFASSISSDIDate" value="#subformData.ASSISSDIDate#"> <input type="text" hidden="true" name="HFUASSISSDIDate" value="#subformData.UASSISSDIDate#"> 
-<input type="text" hidden="true" name="HFRespASSISSI" value="#subformData.RespASSISSI#"> <input type="text" hidden="true" name="HFAMarket" value="#subformData.AMarket#"> 
-<input type="text" hidden="true" name="HFAMarketDate" value="#subformData.AMarketDate#"> <input type="text" hidden="true" name="HFUMarketDate" value="#subformData.UMarketDate#"> 
-<input type="text" hidden="true" name="HFCovMed" value="#subformData.CovMed#"> <input type="text" hidden="true" name="HFCovPres" value="#subformData.CovPres#"> 
-<input type="text" hidden="true" name="HFCovOther" value="#subformData.CovOther#"> <input type="text" hidden="true" name="HFCovOtherTxt" value="#subformData.CovOtherTxt#"> 
-<input type="text" hidden="true" name="HFCovOtherTxt" value="#subformData.CovOtherTxt#"> <input type="text" hidden="true" name="HFrelation" value="#subformData.relation#"> 
-<input type="text" hidden="true" name="HFrelOther" value="#subformData.relOther#"> <input type="text" hidden="true" name="HFInsName" value="#subformData.InsName#"> 
-<input type="text" hidden="true" name="HFInsAddr" value="#subformData.InsAddr#"> <input type="text" hidden="true" name="HFInsAddrCounty" value="#subformData.InsAddrCounty#"> 
-<input type="text" hidden="true" name="HFInsSS" value="#subformData.InsSS#"> <input type="text" hidden="true" name="HFInsPhone" value="#subformData.InsPhone#"> 
-<input type="text" hidden="true" name="HFInsCarrier" value="#subformData.InsCarrier#"> <input type="text" hidden="true" name="HFInsCarAddr" value="#subformData.InsCarAddr#"> 
-<input type="text" hidden="true" name="HFInsCarPhone" value="#subformData.InsCarPhone#"> <input type="text" hidden="true" name="HFInsCarPolicyNum" value="#subformData.InsCarPolicyNum#"> 
-<input type="text" hidden="true" name="HFEmpUnmame" value="#subformData.EmpUnmame#"> <input type="text" hidden="true" name="HFEmpUnAddr" value="#subformData.EmpUnAddr#"> 
-<input type="text" hidden="true" name="HFPresCar" value="#subformData.PresCar#"> <input type="text" hidden="true" name="HFPresCarAddr" value="#subformData.PresCarAddr#"> 
-<input type="text" hidden="true" name="HFPresCarPhone" value="#subformData.PresCarPhone#"> <input type="text" hidden="true" name="HFPresCarID" value="#subformData.PresCarID#"> 
-<input type="text" hidden="true" name="HFPresCoPay" value="#subformData.PresCoPay#"> <input type="text" hidden="true" name="HFPresDeduct" value="#subformData.PresDeduct#"> 
-<input type="text" hidden="true" name="HFEligVetDrugBen" value="#subformData.EligVetDrugBen#"> <input type="text" hidden="true" name="HFRecPresDrugBen" value="#subformData.RecPresDrugBen#"> 
-
+ 
   	<strong>Are you apply or having applied for Social Security Income(SSI) or Social Security Income(SSDI)?</strong>
   	<div>
 		<label class="checkbox-inline"><input type="checkbox" name="Apply" value="YesSSI"/>Yes for SSI</label>
