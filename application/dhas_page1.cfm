@@ -6,7 +6,6 @@
 <cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName,fields)/>
 <cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
 <!-- Application Page preprocessing -->
-<cfset subFormClass.createApplication()/>
 <cfset subformClass.createSubformData()/>
 <cfset subformData=subformClass.retrieveDataForSubform()/>
 <cfset HICPStatus=subformClass.retrieveHICPStatus()/>

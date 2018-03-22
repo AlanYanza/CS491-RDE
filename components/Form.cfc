@@ -28,6 +28,7 @@
 					<cfqueryparam value="P" cfsqltype="cf_sql_varchar" >
 				)
 			</cfquery>
+			<cfset Var appID=getAppID()/>
 			<cfquery >
 				INSERT INTO UserFormData (appID) VALUES(
 					<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer">
