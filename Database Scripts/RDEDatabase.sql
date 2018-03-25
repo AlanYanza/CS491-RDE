@@ -4,7 +4,7 @@ Note:There is a separate SQL script to add each Form
      See documentation ERD diagrams for Database Design*/
 /********************************************************************/
 /*replace first line with USE[DatabaseName]*/
-USE [RDESystemsLocal];
+USE [RDESystems];
 PRINT 'Creating Base Tables for RDE Form Application....';
 --Create User1 Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -153,5 +153,18 @@ BEGIN
 END
 ELSE
 	PRINT '"UserFormData" Table already exist';
+---------------------------------------------------------------------------------
+--Create ApplicationLinks Table
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
+			  WHERE TABLE_NAME=N'ApplicationLinks')
+BEGIN
+	CREATE TABLE [ApplicationLinks] (
+		state varchar(2) PRIMARY KEY,
+		directLink varchar(200) 
+	);
+	PRINT 'Successfully created [ApplicationLinks] Table';
+END
+ELSE
+	PRINT '"ApplicationLinks" Table already exist';
 ---------------------------------------------------------------------------------
 PRINT 'Successfully created Base Tables for RDE Form Application';

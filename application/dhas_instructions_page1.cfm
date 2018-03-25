@@ -2,10 +2,8 @@
 <cfset SessionClass.checkIfLoggedIn()/>
 <cfset FormClass=createObject('component','CS491-RDE.components.Form').init('NJ',session.userID)/>
 <!-- Check ApplicationStatus and redirect to homePage is needed -->
-<cfset appStatus=FormClass.CheckApplicationStatus()/>
-<cfif appStatus neq "M" AND appStatus neq "P" AND appStatus neq "N">
-	<cflocation url="/CS491-RDE/home.cfm">
-</cfif>
+<cfset FormClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
+<cfset FormClass.createApplication()/>
 
 <!DOCTYPE html>
 <html lang="en">

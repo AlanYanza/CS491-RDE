@@ -1,11 +1,12 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
 <cfset tableName='NJSection4'/>
-<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName)/>
+<cfset fields=[] />
+<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName,fields)/>
 <cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
 <!-- Application Page pre-processing -->
 <cfset subformClass.createSubformData()/>
-<cfset subformData=subformClass.retrieveDataFromSubform()/>
+<cfset subformData=subformClass.retrieveDataForSubform()/>
 
 <!DOCTYPE html>
 <html lang="en">

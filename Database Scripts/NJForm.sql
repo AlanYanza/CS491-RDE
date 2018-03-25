@@ -6,14 +6,19 @@ Tables:NJSection1
 	   NJSection3B*/
 /********************************************************************/
 /*replace first line with USE[DatabaseName]*/
-USE [RDESystemsLocal];
+USE [RDESystems];
 --Check if Base Tables created using RDEDatabase.sql if not Do not attempt to create NJForm Tables
 IF (NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'Forms') AND
-	NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'UserFormData') )
+	NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'UserFormData') AND
+	NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'ApplicationLinks') )
 	PRINT 'ERROR: Mising Required Base Tables, Please Install Base Tables using RDEDatabase.sql and Retry';
 ELSE
 BEGIN
 	PRINT 'Adding NJ Form Tables to Database....';
+	--Insert form into ApplicationLinks Table
+	IF (NOT EXISTS(SELECT * FROM ApplicationLinks WHERE state='NJ'))
+		INSERT INTO ApplicationLinks VALUES('NJ','/CS491-RDE/application/dhas_page1.cfm');
+
 	--Insert NJ Form into Forms Table
 	IF (NOT EXISTS(SELECT state FROM Forms WHERE state='NJ'))
 	BEGIN
