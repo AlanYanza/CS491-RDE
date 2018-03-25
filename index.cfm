@@ -10,6 +10,12 @@
 	<cfif IsDefined('url.registered')>
 		<cfoutput><b>Successfully registered</b></cfoutput>
 	</cfif>
+	<cfif IsDefined('url.noUser')>
+		<cfoutput><b>Indicated User Doesn't Exist: Please try again</b></cfoutput>
+	</cfif>
+	<cfif IsDefined('url.wrongLogin')>
+		<cfoutput><b>Incorrect Login credentials: Please try again</b></cfoutput>
+	</cfif>
 	<div class="page-header">
 		<h1>Login</h1>
 	</div>

@@ -9,11 +9,16 @@ Tables:NJSection1
 USE [RDESystems];
 --Check if Base Tables created using RDEDatabase.sql if not Do not attempt to create NJForm Tables
 IF (NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'Forms') AND
-	NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'UserFormData') )
+	NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'UserFormData') AND
+	NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'ApplicationLinks') )
 	PRINT 'ERROR: Mising Required Base Tables, Please Install Base Tables using RDEDatabase.sql and Retry';
 ELSE
 BEGIN
 	PRINT 'Adding NJ Form Tables to Database....';
+	--Insert form into ApplicationLinks Table
+	IF (NOT EXISTS(SELECT * FROM ApplicationLinks WHERE state='NJ'))
+		INSERT INTO ApplicationLinks VALUES('NJ','/CS491-RDE/application/dhas_page1.cfm');
+
 	--Insert NJ Form into Forms Table
 	IF (NOT EXISTS(SELECT state FROM Forms WHERE state='NJ'))
 	BEGIN
@@ -41,8 +46,8 @@ BEGIN
 	IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 				  WHERE TABLE_NAME=N'NJSection1')
 	BEGIN
-		CREATE TABLE "NJSection1" (
-			dataID int NOT NULL FOREIGN KEY REFERENCES "UserFormData"(dataID),
+		CREATE TABLE [NJSection1] (
+			dataID int NOT NULL FOREIGN KEY REFERENCES [UserFormData](dataID),
 			FName varchar(100) NOT NULL DEFAULT(''),
 			MName varchar(100) NOT NULL DEFAULT(''),
 			LName varchar(100) NOT NULL DEFAULT(''),
@@ -75,7 +80,7 @@ BEGIN
 			RelStatus varchar(2) CHECK(RelStatus IN('S','M','C','DP','D','W','SP','X')) DEFAULT('X'),
 			RWhite varchar(1) CHECK(RWhite IN('Y','N')) DEFAULT('N'),
 			RBlack varchar(1) CHECK(RBlack IN('Y','N')) DEFAULT('N'),
-			RAsian varchar(1) CHECK(RAsian IN('Y','N')) DEFAULT('N'), 
+			RAsian varchar(1) CHECK(RAsian IN('Y','N')) DEFAULT('N'),
 				AAsInd varchar(1) CHECK(AAsInd IN('Y','N')) DEFAULT('N'),
 				AChinese varchar(1) CHECK(AChinese IN('Y','N')) DEFAULT('N'),
 				AFilipino varchar(1) CHECK(AFilipino IN('Y','N')) DEFAULT('N'),
@@ -107,8 +112,8 @@ BEGIN
 	IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 				  WHERE TABLE_NAME=N'NJSection2')
 	BEGIN
-		CREATE TABLE "NJSection2" (
-			dataID int NOT NULL FOREIGN KEY REFERENCES "UserFormData"(dataID),
+		CREATE TABLE [NJSection2] (
+			dataID int NOT NULL FOREIGN KEY REFERENCES [UserFormData](dataID),
 			EmplyStatus char(1) CHECK(EmplyStatus IN('F','P','N','X')) DEFAULT('X'),
 			unableWork char(1) CHECK(unableWork IN('Y','N')) DEFAULT('N'),
 			unable12LMonth char(1) CHECK(unable12LMonth IN('Y','N')) DEFAULT('N'),
@@ -140,8 +145,8 @@ BEGIN
 	IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 				  WHERE TABLE_NAME=N'NJSection3A')
 	BEGIN
-		CREATE TABLE "NJSection3A" (
-			dataID int NOT NULL FOREIGN KEY REFERENCES "UserFormData"(dataID),
+		CREATE TABLE [NJSection3A] (
+			dataID int NOT NULL FOREIGN KEY REFERENCES [UserFormData](dataID),
 			insured char(1) CHECK(insured IN('Y','N','U','X')) DEFAULT('X'),
 			Medium char(1) CHECK(Medium IN('C','F','U','S','X')) DEFAULT('X') ,
 			EmpUnName varchar(100) NOT NULL DEFAULT(''),
@@ -182,8 +187,8 @@ BEGIN
 	IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 				  WHERE TABLE_NAME=N'NJSection3B')
 	BEGIN
-		CREATE TABLE "NJSection3B" (
-			dataID int NOT NULL FOREIGN KEY REFERENCES "UserFormData"(dataID),
+		CREATE TABLE [NJSection3B] (
+			dataID int NOT NULL FOREIGN KEY REFERENCES [UserFormData](dataID),
 			NoASSISSDI char(1) CHECK(NoASSISSDI IN('Y','N')) DEFAULT('N'),
 			UASSISSDI char(1) CHECK(UASSISSDI IN('Y','N')) DEFAULT('N'),
 			YesSSI char(1) CHECK(YesSSI IN('Y','N')) DEFAULT('N'),
@@ -230,8 +235,8 @@ BEGIN
 		IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 					  WHERE TABLE_NAME=N'NJSection4')
 		BEGIN
-			CREATE TABLE "NJSection4" (
-				dataID int NOT NULL FOREIGN KEY REFERENCES "UserFormData"(dataID),
+			CREATE TABLE [NJSection4] (
+				dataID int NOT NULL FOREIGN KEY REFERENCES [UserFormData](dataID),
 				CMName varchar(100) NOT NULL DEFAULT(''),
 				agency varchar(100) NOT NULL DEFAULT(''),
 				CMaddr varchar(200) NOT NULL DEFAULT(''),
