@@ -421,7 +421,7 @@
 	<div class="form-group" id="RasianOption">
 		<label class="checkbox-inline"><input type="checkbox" name="Asind" value="Y"/>Asian Indian</label>
 		<label class="checkbox-inline"><input type="checkbox" name="AJap" value="Y"/>Japanese</label>
-		<label class="checkbox-inline"><input type="checkbox" name="AFil" value="Y"/>Filipino</label>
+		<label class="checkbox-inline"><input type="checkbox" name="AFilipino" value="Y"/>Filipino</label>
 		<label class="checkbox-inline"><input type="checkbox" name="AChinese" value="Y"/>Chinese</label>
 		<label class="checkbox-inline"><input type="checkbox" name="AKorean" value="Y"/>Korean</label>
 		<label class="checkbox-inline"><input type="checkbox" name="AViet" value="Y"/>Vietnamese</label>
@@ -456,8 +456,8 @@
 		<br/>
 		<label for="pregnant">Are you pregnant?</label>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="pregnant" value="Y" required /> Yes</label>
-		<label class="radio-inline"><input type="radio" name="pregnant" value="N"/> No</label>
+		<label class="radio-inline"><input type="radio" name="preg" value="Y" required /> Yes</label>
+		<label class="radio-inline"><input type="radio" name="preg" value="N"/> No</label>
 	</div>
 
 	<div class="text-center">

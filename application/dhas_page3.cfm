@@ -210,9 +210,9 @@
 		<div class="form-group">
 			<label>f. Do you have prescription coverage through a mail order company?</label>
 			<br/>
-			<label class="radio-inline"><input type="radio" name="mailOrderCompany" value="Y"/>Yes</label>
-			<label class="radio-inline"><input type="radio" name="mailOrderCompany" value="N"/>No</label>
-			<label class="radio-inline"><input type="radio" name="mailOrderCompany" value="P"/>Partial</label>
+			<label class="radio-inline"><input type="radio" name="presCovMail" value="Y"/>Yes</label>
+			<label class="radio-inline"><input type="radio" name="presCovMail" value="N"/>No</label>
+			<label class="radio-inline"><input type="radio" name="presCovMail" value="P"/>Partial</label>
 		</div>
 
 		<p><strong><em>A dedicated pharmacy is required even if not utilized</em></strong></p>
