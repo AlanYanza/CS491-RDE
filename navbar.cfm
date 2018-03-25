@@ -20,7 +20,7 @@
 			<ul class="nav navbar-nav navbar-right">
 			  <cfif IsDefined('session.firstName')>
 			  	<cfoutput>
-				  	<li><a href="##"><span class="glyphicon glyphicon-user"></span> >#session.firstName# #session.lastName#</a></li>
+				  	<li><a href="##"><span class="glyphicon glyphicon-user"></span> #session.firstName# #session.lastName#</a></li>
 				  	<li><a href="/CS491-RDE/scripts/signout.cfm"><span class="glyphicon glyphicon-log-in"></span> Signout</a></li>
 			  	</cfoutput>
 			  </cfif>		      
