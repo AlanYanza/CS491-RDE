@@ -1,28 +1,26 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-3 container-fluid" id="sidebar">
-			<ul class="nav nav-tabs nav-mail">
-				<li class="nav-item">
+			<ul ng-init="selectedTab = 'inbox'" class="nav nav-tabs nav-mail">
+				<li ng-class="{'active':selectedTab ==='inbox'}" ng-click="selectedTab='inbox'" class="nav-item">
 					<a class="nav-link active" href="#">Inbox</a>
 				</li>
-				<li class="nav-item">
+				<li ng-class="{'active':selectedTab ==='sent'}" ng-click="selectedTab='sent'" class="nav-item">
 					<a class="nav-link" href="#">Sent</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">
-					Trash</a>
+				<li ng-class="{'active':selectedTab ==='trash'}" ng-click="selectedTab='trash'" class="nav-item">
+					<a class="nav-link" href="#">Trash</a>
 				</li>
 			</ul>
 			<ul class="mail">
-				<li *ngFor="let msg of mail" [class.selected]="msg === selectedMsg" [class.read]="!msg.read" (click)="onSelect(msg)"> 
-					<!-- <span class="badge">{{msg.msgID}}</span>  -->
-					<div class="subject">{{msg.subject}} {{msg.DateSent}}</div>
+				<li *ngFor="let msg of mail" [class.selected]="msg === selectedMsg" [class.read]="!msg.read" [routerLink] = "['/message', msg.msgID]"> 
+					<div><span class="subject">{{msg.subject}}</span><span class="date">{{msg.DateSent}}</span></div>
 					<div class="sender">{{msg.sender}}</div>
 				</li>
 			</ul>
 		</div>
-		<div class="col-lg-9 hidden-xs hidden-sm hidden-md" id="content">
-			<app-mail-content [msg]="selectedMsg"></app-mail-content>
+		<div class="col-lg-9 hidden-xs hidden-sm hidden-md" id="content" [class.show]="msg">
+			<router-outlet></router-outlet>
 		</div>
 	</div>
 </div>

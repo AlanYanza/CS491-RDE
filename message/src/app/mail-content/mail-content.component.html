@@ -1,16 +1,18 @@
 <ul class="nav nav-tabs nav-mail">
 	<li class="nav-item">
+		<a class="nav-link">X</a>
+	</li>
+	<li class="nav-item">
 		<a class="nav-link disabled">{{title}}</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link">Write</a>
+		<a class="nav-link pull-right" [routerLink] = "['/']">Write</a>
 	</li>
 
 </ul>
 <div *ngIf="msg">
-	<div class="labeled"><label>Subject:</label> {{msg.subject}} Details</div>
-<!-- 			  	<div><span>id: </span>{{selectedMsg.msgID}}</div>
--->			  	<div class="labeled"><label>From:</label> {{msg.sender}}</div>
-	<div class="labeled"><label>To:</label> {{msg.recipient}}</div>
+	<div class="labeled"><label for="subject" class="col-sm-1">Subject:</label> {{msg.subject}}</div>
+	<div class="labeled"><label for="from" class="col-sm-1">From:</label> {{msg.sender}}</div>
+	<div class="labeled"><label for="sendTo" class="col-sm-1">To:</label> {{msg.recipient}}</div>
 	<div class="message">{{msg.message}}</div>
 </div>
