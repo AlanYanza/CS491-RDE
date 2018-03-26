@@ -22,6 +22,29 @@
 </script>
 </head>
 <body>
+<style>
+table {
+    font-family: arial, sans-serif;
+	font-size: 14px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+   
+}
+</style> 
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
 <cfinclude template="navbar.cfm">
 <cfif IsDefined('url.submitApplication')>
 	<cfoutput><b>Submit Application Successfully: Application is under Review</b></cfoutput>
@@ -32,25 +55,22 @@
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">Start New Application</div>
-        <div class="panel-body">
-            <ul>
-            	<cfset appExistNJ=UserObj.stateAppExist('NJ')/>
-            	
-                <li>NJ-Participation in the AIDS Drug Distribution Program (ADDP) / Health Insurance Continuation Program (HICP)</li>
+            	<!---<cfset appExistNJ=UserObj.stateAppExist('NJ')/>--->
+            	<center><table>
+				<tr><th style="width: 50%;">Application Type</th><th>Status</th></tr><td>
+                <cfoutput>NJ-Participation in (ADDP) / HICP</cfoutput></td>
                 <cfset NJAppExist=UserObj.stateAppExist('NJ')/>
                 <cfif NJAppExist eq 0>
-                	<cfoutput><a href="application/dhas_instructions_page1.cfm">start New Application</a></cfoutput>
+                	<cfoutput><td><a href="application/dhas_instructions_page1.cfm">start New Application</a></td></cfoutput>
                 <cfelse>
-                	<cfoutput>Application already exist</cfoutput>
+                	<cfoutput><td>Application already exist</td></cfoutput>
                </cfif>
-            </ul>
-        </div>
+			  </table></center> 
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">Edit Existing Application</div>
-        <div class="panel-body">Pick up where you left off or make edits to your application<br>
-        <table>
-        	<tr><th>State</th><th>Status</th><th></th></tr>
+        <center><table>
+        	<tr><th style="width: 50%;">State</th><th>Status</th></tr>
         <!-- Interate though resultSet and display data-->
 		<cfloop query="editableApplications">
 			<cfoutput><tr></cfoutput>
@@ -69,17 +89,15 @@
 				<td><a href="#outputLink#">edit Application</td></tr>
 				</cfoutput>
 		</cfloop>
-		</table>
-    	</div>
+		</table></center>
     </div>
     
     <div class="panel panel-default">
         <div class="panel-heading">Application Status</div>
-        <table>
-        	<tr><th>State</th><th>Status</th></tr>
+        <center><table>
+        	<tr><th style="width: 50%;">State</th><th>Status</th></tr>
         <!-- Interate though resultSet and display data-->
 		<cfloop query="allApplications">
-			<cfoutput><tr></cfoutput>
 			<!-- Determine State of Form-->
 			<cfset outputState=UserObj.getState(#formTypeID#)/>
 			<!-- Determine the Status of Application -->
@@ -88,24 +106,19 @@
 			<cfelseif #status# eq 'N'>
 				<cfset outputStatus='Application Requires Attention'/>
 			<cfelseif #status# eq 'R'>
-				<cfset outputStatus='Application Under Review'/>
+				<cfset outputStatus='Pending'/>
 			<cfelseif #status# eq 'A'>
 				<cfset outputStatus='Application Approved'/>		
 			<cfelseif #status# eq 'D'>
 				<cfset outputStatus='Application Denied'/>		
 			</cfif>
 			<!-- create html row for Application-->
-			<cfoutput><tr><td>#outputState#</td><td>#outputStatus#</td></tr></cfoutput>
+			<cfoutput><tr><td><a href="/CS491-RDE/DocumentStatus.cfm" data-toggle="tooltip" title="Click Here to See Submitted Documents">#outputState#</a></td><td>#outputStatus#</td></tr></cfoutput>
 		</cfloop>
-		</table>
-        <p id="demo"></p>
+		</table></center>
     </div>
    
-    <div class="panel panel-default">
-        <div class="panel-heading">External Documents</div>
-        <div class="panel-body">You do not have any needed Documents for any Applications</div>
-        <p id="demo"></p>
-    </div>
+    
 </div>
 </body>
 </html>
