@@ -11,11 +11,23 @@
 </cfif> 
 
 <!-- Form Page 1 processing -->
+<!-- Update HICP Stauts-->
 <cfif formSource eq 'page1'>
 	<cfif appExist eq 1>
 		<cfset subformObj.updateHICPStatus(HICPStatus)/>
 	</cfif>
 </cfif>
+<cfset fields=['FName','MName','LName','DateBirth','gender','genderBirth','SSNum','street','city','state','zip','county','aptNum',
+'HPhone','WPhone','CPhone','MStreet','MCity','MState','MZip','MCounty',
+'MaptNum','USCitizen','veteran','RelStatus'] />
+<cfset checkFields=['VHomeMsgPerm','VCellMsgPerm','AltComPerm','AddrRes','RWhite','RBlack','RAsian','RAmInd','RNatHa','RUnk','AAsind','AChinese','AJap',
+'AKorean','AViet','AOther','NHNatHaw','NHGua','NHSam','NHOther','EHisp','HispMex','HispPR','HispCub','HispOther']/>
+<cfset subformObj.setFields(fields)/>
+<cfset subformObj.setCheckFields(checkFields)/>
+<cfset subformObj.extractFormData()/>
+<cfset subformObj.extractCheckboxData()/>
+<cfset subformObj.updateSubformData()/>
+<cfset subformObj.updateCheckboxData()/>
 
 
 

@@ -2,8 +2,7 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
 <cfset tableName='NJSection1'/>
-<cfset fields=[] />
-<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName,fields)/>
+<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName)/>
 <cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
 <!-- Application Page preprocessing -->
 <cfset subformClass.createSubformData()/>
@@ -152,7 +151,7 @@
 			<input type="text" class="form-control" id="city" name="city" value="<cfoutput>#subformData.city#</cfoutput>" required /></div></div>
 		<div class="col-sm-3"><label for="state">State</label>
 			<select class="form-control" id="state" name="state" required />
-			<option selected>Select one</option>
+			<option value="X" selected>Select one</option>
 				<option value="AL">AL - Alabama</option>
 				<option value="AK">AK - Alaska</option>
 				<option value="AZ">AZ - Arizona</option>
@@ -233,7 +232,7 @@
 			<input type="text" class="form-control" id="MCity" name="MCity" value="<cfoutput>#subformData.MCity#</cfoutput>" required /></div></div>
 		<div class="col-sm-3"><label for="MState">State</label>
 			<select class="form-control" id="MState" name="MState" required />
-			<option selected>Select one</option>
+			<option value="X" selected>Select one</option>
 				<option value="AL">AL - Alabama</option>
 				<option value="AK">AK - Alaska</option>
 				<option value="AZ">AZ - Arizona</option>
@@ -388,7 +387,7 @@
 	<div class="form-group">
 		<label for="gender">12. Gender</label>
 		<select class="form-control" name="gender" required >
-			<option selected>Select one</option>
+			<option value="X" selected>Select one</option>
 			<option value="Male">Male</option>
 			<option value="Female">Female</option>
 			<option value="Transgendered Male to Female">Transgendered Male to Female</option>
