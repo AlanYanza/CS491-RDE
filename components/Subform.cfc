@@ -60,7 +60,6 @@
 	<cffunction name="extractCheckboxData" displayname="getDataFromField" hint="Extract the data contain the form field elements" >
 		<cfloop array="#checkFieldNames#" index="i" >
 			<cfset fieldName=#i#/>
-			<!-- If element is undefined (not selected) put 'X' as its value -->
 			<cfif NOT IsDefined('form.#i#') >
 				<cfset fieldValue='N'/>
 			<!-- If element is defined get it value -->
@@ -142,7 +141,7 @@
 			 <!---loop through fieldValues and add it to query--->
 			<cfloop array="#checkFieldNames#" index="i">
 		    	<cfset arrayCount=arrayCount+1 />
-		    	<cfif arrayCount neq ArrayLen(#fieldNames#)>
+		    	<cfif arrayCount neq ArrayLen(#checkFieldNames#)>
 		    		<!--- if not last elements in array use , --->
 		 			<cfoutput> #i# = '#fieldValues[i]#', </cfoutput>
 		 		<cfelse>
@@ -153,5 +152,46 @@
 	 		WHERE dataID=<cfqueryparam value="#dataID#" cfsqltype="cf_sql_integer" >
 		</cfquery>
 	</cffunction> 
+	
+	<!-- Represent Checkbox Field in Subform-->
+	<cffunction name="showCheckbox" displayname="Represent Checkbox Value in subform" hint="represent a checkbox value based on query results" 
+	 returntype="string">
+	 	<cfargument name="fieldNameInput" hint="fieldName of interest to present query value with" type="string" >
+	 	<cfargument name="resultSetInput" hint="resultSet to look for fieldName value" type="query" >
+	 	<cfset var fieldName=fieldNameInput />
+	 	<cfset var tmpResultSet=resultSetInput />
+	 	<cfset value=tmpResultSet[#fieldName#]/>
+		<cfif value eq 'Y'>
+			<cfoutput>checked</cfoutput>
+		</cfif>
+	</cffunction>
+	
+	<!-- Represent Radiobutton Field in Subform-->
+	<cffunction name="showRadioButton" displayname="Represent RadioButton Value in subform" hint="represent a RadioButton value based on query results" 
+	 returntype="string">
+	 	<cfargument name="fieldNameInput" hint="fieldName of interest to present query value with" type="string" >
+	 	<cfargument name="resultSetInput" hint="resultSet to look for fieldName value" type="query" >
+	 	<cfargument name="valueInput" hint="desired value to check on" type="string" >
+	 	<cfset var fieldName=fieldNameInput />
+	 	<cfset var tmpResultSet=resultSetInput />
+	 	<cfset value=tmpResultSet[#fieldName#]/>
+		<cfif value eq arguments.valueInput>
+			<cfoutput>checked</cfoutput>
+		</cfif>
+	</cffunction>
+	
+		<!-- Represent Selection Fields in Subform-->
+	<cffunction name="showSelectionField" displayname="Represent Selection Field Value in subform" hint="represent a Selection Field value based on query results" 
+	 returntype="string">
+	 	<cfargument name="fieldNameInput" hint="fieldName of interest to present query value with" type="string" >
+	 	<cfargument name="resultSetInput" hint="resultSet to look for fieldName value" type="query" >
+	 	<cfargument name="valueInput" hint="desired value to check on" type="string" >
+	 	<cfset var fieldName=fieldNameInput />
+	 	<cfset var tmpResultSet=resultSetInput />
+	 	<cfset value=tmpResultSet[#fieldName#]/>
+		<cfif value eq arguments.valueInput>
+			<cfoutput>selected</cfoutput>
+		</cfif>
+	</cffunction>
 	
 </cfcomponent>
