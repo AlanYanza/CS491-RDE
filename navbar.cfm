@@ -9,15 +9,21 @@
 			</button>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
-		    <ul class="nav navbar-nav">
-		      <li><a href="/CS491-RDE/home.cfm">Home</a></li>
-		      <li><a href="/CS491-RDE/message.cfm">Messages <span class="badge">1</span></a></li>
-		    </ul>		
+			<ul class="nav navbar-nav">
+				<li><a href="/CS491-RDE/home.cfm">Home</a></li>
+				<cfif IsDefined('session.firstName')>
+				  	<cfoutput>
+						<li><a href="/CS491-RDE/message.cfm">Messages <span class="badge">1</span></a></li>
+					</cfoutput>
+				</cfif>
+			</ul>		
 			<ul class="nav navbar-nav navbar-right">
 			  <cfif IsDefined('session.firstName')>
-			  	<li><a href="#"><span class="glyphicon glyphicon-user"></span> <cfoutput>#session.firstName# #session.lastName#</cfoutput></a></li>
-			  </cfif>
-		      <li><a href="/CS491-RDE/scripts/signout.cfm"><span class="glyphicon glyphicon-log-in"></span> Signout</a></li>
+			  	<cfoutput>
+				  	<li><a href="##"><span class="glyphicon glyphicon-user"></span> #session.firstName# #session.lastName#</a></li>
+				  	<li><a href="/CS491-RDE/scripts/signout.cfm"><span class="glyphicon glyphicon-log-in"></span> Signout</a></li>
+			  	</cfoutput>
+			  </cfif>		      
 		    </ul>
 		</div>
 	</div>

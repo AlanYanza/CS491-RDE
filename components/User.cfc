@@ -98,5 +98,23 @@
 		<cfdump var="#userID#" >
 	</cffunction>
 	
-	<cf 
+	<!-- Get Document and Results ---> 
+	<cffunction name="getDocuments">
+	<cfquery  name="DocumentResult" result="queryStats">
+		SELECT userID 
+		FROM UserApplication
+		WHERE userID = <cfqueryparam value="#userID#">
+	</cfquery>
+	
+	<cfset var appID = DocumentResult.userID />
+	
+	<cfquery name="DocumentName" result="queryStats">
+		SELECT document,isRequired, received, DateReceived
+		FROM AppDocument
+		WHERE appID = <cfqueryparam value="#appID#">
+	</cfquery>
+	<cfreturn DocumentName />
+	</cffunction>
+	
+	
 </cfcomponent>
