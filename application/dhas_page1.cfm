@@ -8,8 +8,6 @@
 <cfset subformClass.createSubformData()/>
 <cfset subformData=subformClass.retrieveDataForSubform()/>
 <cfset HICPStatus=subformClass.retrieveHICPStatus()/>
-<cfdump var="#subformData#" >
-<cfdump var="#HICPStatus#" >
 
 <!DOCTYPE html>
 <html lang="en">

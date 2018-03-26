@@ -24,20 +24,20 @@
 	<cffunction name="setFields" displayname="setSubformFields" hint="Set the fields for the subform" >
 		<cfargument name="fieldArrayInput" type="array" hint="array with the fields for the subform"  >
 		<cfset Var numElem=ArrayLen(fieldArrayInput)/>
-		<cfdump var="#numElem#" >
 		<cfloop from="1" to=#numElem#  step="1" index="i"  >
 			<cfset fieldNames[i]=fieldArrayInput[i]/>
 		</cfloop>
+		<!---<cfdump var="#fieldNames#" >--->
 	</cffunction>
 	
 	<!-- Setter for Checkbox fields(if not provided) -->
 	<cffunction name="setCheckFields" displayname="setSubformFields" hint="Set the fields for the subform" >
 		<cfargument name="fieldArrayInput" type="array" hint="array with the fields for the subform"  >
 		<cfset Var numElem=ArrayLen(fieldArrayInput)/>
-		<cfdump var="#numElem#" >
 		<cfloop from="1" to=#numElem#  step="1" index="i"  >
 			<cfset checkFieldNames[i]=fieldArrayInput[i]/>
 		</cfloop>
+		<!--- <cfdump var="#checkFieldNames#" >--->
 	</cffunction>
 	
 	<!-- dynamically get the data contained in the Form(non-checkboxes)-->
@@ -53,7 +53,8 @@
 			</cfif>
 			<!-- Insert form field data into fieldValues-->
 			<cfset StructInsert(fieldValues,fieldName,fieldValue)/>
-		</cfloop> 
+		</cfloop>
+		<!---<cfdump var="#fieldValues#" >---> 
 	</cffunction>
 	
 	<!-- dynamically get the data contained in the Checkboxes-->
@@ -68,7 +69,8 @@
 			</cfif>
 			<!-- Insert form field data into fieldValues-->
 			<cfset StructInsert(fieldValues,fieldName,fieldValue)/>
-		</cfloop> 
+		</cfloop>
+		<!--- <cfdump var="#fieldValues#" > --->
 	</cffunction>
 			
 	<!-- check if data already exist for subform -->
