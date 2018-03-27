@@ -33,27 +33,27 @@
 	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
 	<strong>Are you apply or having applied for Social Security Income(SSI) or Social Security Income(SSDI)?</strong>
 	<div>
-		<label class="checkbox-inline"><input type="checkbox" name="YesSSI" value="Y"/>Yes for SSI</label>
-		<label class="checkbox-inline"><input type="checkbox" name="YesSSDI" value="Y"/>Yes for SSDI</label>
-		<label class="checkbox-inline"><input type="checkbox" name="NoSSISSDI" value="N"/>No</label>
-		<label class="checkbox-inline"><input type="checkbox" name="USSISSDI" value="U"/>Don't know</label>
+		<label class="checkbox-inline"><input type="checkbox" name="YesSSI" value="Y" <cfset subformClass.showCheckbox('YesSSI',subformData)/>/>Yes for SSI</label>
+		<label class="checkbox-inline"><input type="checkbox" name="YesSSDI" value="Y" <cfset subformClass.showCheckbox('YEsSSDI',subformData)/>/>Yes for SSDI</label>
+		<label class="checkbox-inline"><input type="checkbox" name="NoASSISSDI" value="Y" <cfset subformClass.showCheckbox('NoASSISSDI',subformData)/>/>No</label>
+		<label class="checkbox-inline"><input type="checkbox" name="UASSISSDI" value="Y" <cfset subformClass.showCheckbox('UASSISSDI',subformData)/>/>Don't know</label>
 	</div>
 
 	<div class="row">
 		<label class="col-sm-4">a. If yes, when did you apply for SSI/SSDI?</label>
 		<div class="col-sm-5">
-			<input type="date" class="form-control" name="ASSI_SSDIDate" value="<cfoutput>#subformData.ASSISSDIDate#</cfoutput>">
+			<input type="date" class="form-control" name="ASSISSDIDate" value="<cfoutput>#subformData.ASSISSDIDate#</cfoutput>">
 		</div>
 		<div class="checkbox col-sm-3">
-			<label><input type="checkbox" name="ASSI_SSDIDate" value="Unsure"/>Unsure</label>
+			<label><input type="checkbox" name="UASSISSDIDate" value="Y" <cfset subformClass.showCheckbox('UASSISSDIDate',subformData)/>/>Unsure</label>
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label>b. Have you received a response?</label>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="RespSSI_SSI" value="Y"/>Yes</label>
-		<label class="radio-inline"><input type="radio" name="RespSSI_SSI" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="RespASSISSI" value="Y" <cfset subformClass.showRadioButton('RespASSISSI',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="RespASSISSI" value="N" <cfset subformClass.showRadioButton('RespASSISSI',subformData,'N')/>/>No</label>
 	</div>
 
 	<hr/>
@@ -61,9 +61,9 @@
 	<div class="form-group">
 		<label>29. Are you applying or have you applied for insurance through the health Insurance Reform Act (Marketplace/Exchange)?</label>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="AMarket" value="Y"/>Yes</label>
-		<label class="radio-inline"><input type="radio" name="AMarket" value="N"/>No</label>
-		<label class="radio-inline"><input type="radio" name="AMarket" value="Don't Know"/>Don't Know</label>
+		<label class="radio-inline"><input type="radio" name="AMarket" value="Y" <cfset subformClass.showRadioButton('AMarket',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="AMarket" value="N" <cfset subformClass.showRadioButton('AMarket',subformData,'N')/>/>No</label>
+		<label class="radio-inline"><input type="radio" name="AMarket" value="U" <cfset subformClass.showRadioButton('AMarket',subformData,'U')/>/>Don't Know</label>
 	</div>
 
 	<div class="row">
@@ -72,15 +72,15 @@
 			<input type="date" class="form-control" name="AMarketDate" value="<cfoutput>#subformData.AMarketDate#</cfoutput>">
 		</div>
 		<div class="checkbox col-sm-3">
-			<label><input type="checkbox" name="UMarketDate" value="Unsure"/>Unsure</label>
+			<label><input type="checkbox" name="UMarketDate" value="Y" <cfset subformClass.showCheckbox('UMarketDate',subformData)/>/>Unsure</label>
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label>b. Have you received a response?</label>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="RespAMarket" value="Y"/>Yes</label>
-		<label class="radio-inline"><input type="radio" name="RespAMarket" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="RespAMarket" value="Y" <cfset subformClass.showRadioButton('RespAMarket',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="RespAMarket" value="N" <cfset subformClass.showRadioButton('RespAMarket',subformData,'N')/>/>No</label>
 	</div>
 
 	<hr/>
@@ -92,9 +92,9 @@
 	<strong>Type of Coverage(Check all that apply):</strong>
 	<div class="form-group row">		
 		<div class="col-sm-5">
-			<label class="checkbox-inline"><input type="checkbox" name="CovMed" value="Y"/>Medical Plan</label>
-			<label class="checkbox-inline"><input type="checkbox" name="CovPres" value="Y"/>Prescription Plan</label>
-			<label class="checkbox-inline"><input type="checkbox" name="CovOther" value="Y"/>Other (Specify)</label>
+			<label class="checkbox-inline"><input type="checkbox" name="CovMed" value="Y" <cfset subformClass.showCheckbox('CovMed',subformData)/>/>Medical Plan</label>
+			<label class="checkbox-inline"><input type="checkbox" name="CovPres" value="Y" <cfset subformClass.showCheckbox('CovPres',subformData)/>/>Prescription Plan</label>
+			<label class="checkbox-inline"><input type="checkbox" name="CovOther" value="Y" <cfset subformClass.showCheckbox('CovOther',subformData)/>/>Other (Specify)</label>
 		</div>
 		<div class="col-sm-7">
 			<input type="text" class="form-control" name="CovOtherTxt" value="<cfoutput>#subformData.CovOtherTxt#</cfoutput>"/>
@@ -107,7 +107,7 @@
 			Insurance Carrier:
 			<input type="text" class="form-control" name="InsCarrier" value="<cfoutput>#subformData.InsCarrier#</cfoutput>"/><br/>
 			Address:
-			<textarea type="text" class="form-control" name="InsCarAddr" value="<cfoutput>#subformData.InsCarAddr#</cfoutput>"></textarea><br/>
+			<textarea type="text" class="form-control" name="InsCarAddr"><cfoutput>#subformData.InsCarAddr#</cfoutput></textarea><br/>
 			Telephone Number:
 			<input type="text" class="form-control" name="InsCarPhone" value="<cfoutput>#subformData.InsCarPhone#</cfoutput>" /><br/>
 			Policy Number:
@@ -116,7 +116,7 @@
 			Employer/Union Name:
 			<input type="text" class="form-control" name="EmpUnName" value="<cfoutput>#subformData.EmpUnName#</cfoutput>"/><br/>
 			Address:
-			<textarea type="text" class="form-control" name="EmpUnAddr" value="<cfoutput>#subformData.EmpUnAddr#</cfoutput>"></textarea><br/>
+			<textarea type="text" class="form-control" name="EmpUnAddr"><cfoutput>#subformData.EmpUnAddr#</cfoutput></textarea><br/>
 		</div>
 
 		<div class="col-sm-6">
@@ -124,7 +124,7 @@
 			Insurance Carrier:
 			<input type="text" class="form-control" name="PresCar" value="<cfoutput>#subformData.PresCar#</cfoutput>"/><br/>
 			Address:
-			<textarea type="text" class="form-control" name="PresCarAddr" value="<cfoutput>#subformData.PresCarAddr#</cfoutput>"></textarea><br/>
+			<textarea type="text" class="form-control" name="PresCarAddr"><cfoutput>#subformData.PresCarAddr#</cfoutput></textarea><br/>
 			Telephone Number:
 			<input type="text" class="form-control" name="PresCarPhone" value="<cfoutput>#subformData.PresCarPhone#</cfoutput>"/><br/>
 			ID Number:
@@ -142,10 +142,10 @@
 	<br/>
 	<div class="form-group row">
 		<div class="col-sm-5">		
-			<label class="radio-inline"><input type="radio" name="relation" value="Self"/>Self</label>
-			<label class="radio-inline"><input type="radio" name="relation" value="Spouse/Partner"/>Spouse/Partner</label>
-			<label class="radio-inline"><input type="radio" name="relation" value="Child"/>Child</label>
-			<label class="radio-inline"><input type="radio" name="relation"/>Other (Specify)</label>
+			<label class="radio-inline"><input type="radio" name="relation" value="S" <cfset subformClass.showRadioButton('relation',subformData,'S')/>/>Self</label>
+			<label class="radio-inline"><input type="radio" name="relation" value="P" <cfset subformClass.showRadioButton('relation',subformData,'P')/>/>Spouse/Partner</label>
+			<label class="radio-inline"><input type="radio" name="relation" value="C" <cfset subformClass.showRadioButton('relation',subformData,'C')/>/>Child</label>
+			<label class="radio-inline"><input type="radio" name="relation" value="O" <cfset subformClass.showRadioButton('relation',subformData,'O')/>/>Other (Specify)</label>
 		</div>
 		<div class="col-sm-7">
 			<input type="text" class="form-control" name="relOther" value="<cfoutput>#subformData.relOther#</cfoutput>"/>
@@ -182,13 +182,13 @@
 	<div class="form-group">
 		<strong>32. a. Are you eligible for Veterans Administration prescription drug benefits?</strong>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="EliVetDrugBen" value="Y"/>Yes</label>
-		<label class="radio-inline"><input type="radio" name="EliVetDrugBen" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="EligVetDrugBen" value="Y" <cfset subformClass.showRadioButton('EligVetDrugBen',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="EligVetDrugBen" value="N" <cfset subformClass.showRadioButton('EligVetDrugBen',subformData,'N')/>/>No</label>
 		<br/>
 		<strong>b. Are you currently receiving prescription drug benefits?</strong>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="RecPresDrugBen" value="Y"/>Yes</label>
-		<label class="radio-inline"><input type="radio" name="RecPresDrugBen" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="RecPresDrugBen" value="Y" <cfset subformClass.showRadioButton('RecPresDrugBen',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="RecPresDrugBen" value="N" <cfset subformClass.showRadioButton('RecPresDrugBen',subformData,'N')/>/>No</label>
 	</div>
 
 	<div class="text-center">

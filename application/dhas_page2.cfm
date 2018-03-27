@@ -43,10 +43,10 @@
 	<div class="form-group">
 		<label for="EmplyStatus">17. What if your current employment status?</label>
 		<select class="form-control" name="EmplyStatus">
-			<option selected>Choose one</option>
-			<option value="Full time">Full Time (35 or more hours per week)</option>
-			<option value="Part time">Part Time (less than 35 hours per week)</option>
-			<option value="Not employed">Not employed</option>
+			<option value='X' <cfset subformClass.showSelectionField('EmplyStatus',subformData,'X')/>>Choose one</option>
+			<option value="F" <cfset subformClass.showSelectionField('EmplyStatus',subformData,'F')/>>Full Time (35 or more hours per week)</option>
+			<option value="P" <cfset subformClass.showSelectionField('EmplyStatus',subformData,'P')/>>Part Time (less than 35 hours per week)</option>
+			<option value="N" <cfset subformClass.showSelectionField('EmplyStatus',subformData,'N')/>>Not employed</option>
 		</select>
 	</div>
 
@@ -55,8 +55,8 @@
 	<div class="form-group">
 		<label> 18. Are you medically UNABLE to work?</label>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="unableWork" value="Y"/>Yes</label>
-		<label class="radio-inline"><input type="radio" name="unableWork" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="unableWork" value="Y" <cfset subformClass.showRadioButton('unableWork',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="unableWork" value="N" <cfset subformClass.showRadioButton('unableWork',subformData,'N')/>/>No</label>
 	</div>
 
 	<hr/>
@@ -64,8 +64,8 @@
 	<div class="form-group">
 		<label>19. Medically unable to work LESS than 12 months?</label>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="unable12LMonth" value="Y"/>Yes</label>
-		<label class="radio-inline"><input type="radio" name="unable12LMonth" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="unable12LMonth" value="Y" <cfset subformClass.showRadioButton('unable12LMonth',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="unable12LMonth" value="N" <cfset subformClass.showRadioButton('unable12LMonth',subformData,'N')/>/>No</label>
 	</div>
 
 	<hr/>
@@ -73,8 +73,8 @@
 	<div class="form-group">
 		<label>20. Medically unable to work MORE than 12 months?</label>
 		<br>
-			<label class="radio-inline"><input type="radio" name="unable12MMonth" value="Y"/>Yes</label>
-			<label class="radio-inline"><input type="radio" name="unable12MMonth" value="N"/>No</label>
+			<label class="radio-inline"><input type="radio" name="unable12MMonth" value="Y" <cfset subformClass.showRadioButton('unable12MMonth',subformData,'Y')/>/>Yes</label>
+			<label class="radio-inline"><input type="radio" name="unable12MMonth" value="N" <cfset subformClass.showRadioButton('unable12MMonth',subformData,'N')/>/>No</label>
 	</div>
 
 	<hr/>
@@ -142,8 +142,8 @@
 	  	<div class="col-sm-11">
 		  	<label>a. Did you and/or any member of your household file a Federal, State or City Income Tax return last year?</label>
 		  	<br/>
-		  	<label class="radio-inline"><input type="radio" name="taxFile" value="Y"/>Yes</label>
-		  	<label class="radio-inline"><input type="radio" name="taxFile" value="N"/>No</label>
+		  	<label class="radio-inline"><input type="radio" name="taxFile" value="Y" <cfset subformClass.showRadioButton('taxFile',subformData,'Y')/>/>Yes</label>
+		  	<label class="radio-inline"><input type="radio" name="taxFile" value="N" <cfset subformClass.showRadioButton('taxFile',subformData,'N')/>/>No</label>
 	  	</div>
 	</div>
 
@@ -151,8 +151,8 @@
 		<div class="col-sm-12 col-sm-offset-1">
 			<label>b. Were you listed as a dependent on a family member's Federal, State, or City Income tax return last year?</label>
 			<br/>
-			<label class="radio-inline"><input type="radio" name="dependent" value="Y"/>Yes</label>
-			<label class="radio-inline"><input type="radio" name="dependent" value="N"/>No</label>
+			<label class="radio-inline"><input type="radio" name="dependant" value="Y" <cfset subformClass.showRadioButton('dependant',subformData,'Y')/>/>Yes</label>
+			<label class="radio-inline"><input type="radio" name="dependant" value="N" <cfset subformClass.showRadioButton('dependant',subformData,'N')/>/>No</label>
 		</div>
 	</div>
 
@@ -163,28 +163,28 @@
 	<br/>
 	<div class="row">
 		<div class="col-sm-8">Temporary Assistance to Needy Families (TANF)</div>
-		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="TANF" value="A"/>Applied For</label></div>
-		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="TANF" value="R"/>Receiving</label></div>
+		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="TANF" value="A" <cfset subformClass.showRadioButton('TANF',subformData,'A')/>/>Applied For</label></div>
+		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="TANF" value="R" <cfset subformClass.showRadioButton('TANF',subformData,'R')/>/>Receiving</label></div>
 	</div>
 	<div class="row">
 		<div class="col-sm-8">Supportive Assistance to Individuals and Families (SAIF) Program</div>
-		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SAIF" value="A"/>Applied For</label></div>
-		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SAIF" value="R"/>Receiving</label></div>
+		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SAIF" value="A" <cfset subformClass.showRadioButton('SAIF',subformData,'A')/>/>Applied For</label></div>
+		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SAIF" value="R" <cfset subformClass.showRadioButton('SAIF',subformData,'R')/>/>Receiving</label></div>
 	</div>
 	<div class="row">
 		<div class="col-sm-8">Supplemental Security Income (SSI) Program</div>
-		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SSI" value="A"/>Applied For</label></div>
-		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SSI" value="R"/>Receiving</label></div>
+		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SSI" value="A" <cfset subformClass.showRadioButton('SSI',subformData,'A')/>/>Applied For</label></div>
+		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SSI" value="R" <cfset subformClass.showRadioButton('SSI',subformData,'R')/>/>Receiving</label></div>
 	</div>
 	<div class="row">
 		<div class="col-sm-8">General Assistance (GA)</div>
-		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="GA" value="A"/>Applied For</label></div>
-		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="GA" value="R"/>Receiving</label></div>
+		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="GA" value="A" <cfset subformClass.showRadioButton('GA',subformData,'A')/>>Applied For</label></div>
+		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="GA" value="R" <cfset subformClass.showRadioButton('GA',subformData,'R')/>/>Receiving</label></div>
 	</div>
 	<div class="row">
 		<div class="col-sm-8">Supplemental Nutrition Assistance Program (SNAP) (formerly Food Stamps)</div>
-		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SNAP" value="A"/>Applied For</label></div>
-		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SNAP" value="R"/>Receiving</label></div>
+		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SNAP" value="A" <cfset subformClass.showRadioButton('SNAP',subformData,'A')/>/>Applied For</label></div>
+		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SNAP" value="R" <cfset subformClass.showRadioButton('SNAP',subformData,'R')/>/>Receiving</label></div>
 	</div>
 
 	<div class="text-center">

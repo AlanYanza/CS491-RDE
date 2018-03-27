@@ -76,15 +76,15 @@
 		<strong>35. Contact Person</strong><br/>
 		<label>May the Department of Human Services and the Department of Health contact an alternate person?</label>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="perm" value="Y"/>Yes</label>
-		<label class="radio-inline"><input type="radio" name="perm" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="perm" value="Y" <cfset subformClass.showRadioButton('perm',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="perm" value="N" <cfset subformClass.showRadioButton('perm',subformData,'N')/>/>No</label>
 		<br/>
 		In the event that we need information regarding your participation in the program and you are unavailable, please indicate someone
 		we may contact on your behalf.<br/>
 		<label>Is this person aware of your HIV Status?</label>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="HIVAware" value="Y"/>Yes</label>
-		<label class="radio-inline"><input type="radio" name="HIVAware" value="N"/>No</label>
+		<label class="radio-inline"><input type="radio" name="HIVAware" value="Y" <cfset subformClass.showRadioButton('HIVAware',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="HIVAware" value="N" <cfset subformClass.showRadioButton('HIVAware',subformData,'N')/>/>No</label>
 	</div>
 
 	<div class="row">
@@ -105,7 +105,7 @@
 			<input type="tel" class="form-control" name="CPWPhone" value="<cfoutput>#subformData.CPWPhone#</cfoutput>">
 		</div></div>
 		<div class="col-sm-4"><div class="form-group">
-		  	<label for="CPHPhone">Fax Number</label>
+		  	<label for="CPHPhone">Home Number</label>
 		  	<input type="tel" class="form-control" name="CPHPhone" value="<cfoutput>#subformData.CPHPhone#</cfoutput>">
 		</div></div>
 		<div class="col-sm-4"><div class="form-group">
@@ -152,7 +152,7 @@
 		</div></div>
 		<div class="col-sm-4"><div class="form-group">
 		  	<label for="CMFaxNum">Fax Number</label>
-		  	<input type="tel" class="form-control" ame="CMFaxNum" value="<cfoutput>#subformData.CMFaxNum#</cfoutput>">
+		  	<input type="tel" class="form-control" name="CMFaxNum" value="<cfoutput>#subformData.CMFaxNum#</cfoutput>">
 		</div></div>
 		<div class="col-sm-4"><div class="form-group">
 		  	<label for="CMCPhone">Cell Number</label>
@@ -171,7 +171,7 @@
 	<div class="text-center">
 		<button type="submit" class="btn btn-default" name="previous" value="prevous">Previous</button>
 		<button type="submit" class="btn btn-default" name="save" value="save">Save Progress &#38; Exit</button>
-		<button type="submit" class="btn btn-default" name="next" value="next">Next</button>
+		<button type="submit" class="btn btn-default" name="next" value="next">Submit Application</button>
 	</div>
 	</form>
 
