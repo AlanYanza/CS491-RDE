@@ -86,7 +86,7 @@ $(document).ready(function(){
 			<cfset outputLink=UserObj.getDirectLink(outputState)/>
 			<!-- create html row for Application -->
 			<cfoutput><tr><td>#outputState#</td><td>#outputStatus#</td>
-				<!---<td><a href="#outputLink#">edit Application</td>---></tr>
+				<td><a href="#outputLink#">edit Application</td></tr>
 				</cfoutput>
 		</cfloop>
 		</table></center>
