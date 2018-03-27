@@ -69,7 +69,7 @@
 
 	<ul class="pager">
 		<li class="previous"><a href="./dhas_instructions_page2.cfm">Previous</a></li>
-		<li class="next"><a href="./dhas_page1.cfm">Next</a></li>
+		<li class="next"><a href="./dhas_page1.cfm">Begin Application</a></li>
 	</ul>
 </div>
 </body>

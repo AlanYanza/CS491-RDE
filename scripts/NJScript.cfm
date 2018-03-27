@@ -3,16 +3,16 @@
 <cfset tableName=FORM.tableName/>
 <cfset subformObj=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName)/>
 <cfset appExist=subformObj.checkIfAppExist()/>
-<!--- if first page of form, determine status of HICP checkbox --->
-<cfif StructKeyExists(form,'HICP')>  
-   <cfset HICPStatus= "Y" />  
-<cfelse>  
-   <cfset HICPStatus= "N" />  
-</cfif> 
 
 <!--- Form Page 1 processing --->
 <cfif formSource eq 'page1'>
-	<!--- Update HICP Stauts--->
+	<!--- Determined HICP Status--->
+	<cfif StructKeyExists(form,'HICP')>  
+   		<cfset HICPStatus= "Y" />  
+	<cfelse>  
+   		<cfset HICPStatus= "N" />  
+	</cfif> 
+	<!--- Update HICP Status--->
 	<cfif appExist eq 1>
 		<cfset subformObj.updateHICPStatus(HICPStatus)/>
 	</cfif>
@@ -119,8 +119,43 @@
 	<cfif IsDefined("FORM.previous")>
 		<cflocation url="/CS491-RDE/application/dhas_page4.cfm">
 	<cfelseif IsDefined("FORM.next")>
-		<!-- Change status of Application to Review-->
+		<!--- Insert Documents into AppDocument Table--->
+		<cfset InsertNJDocuments()/> 
+		<!--- Change status of Application to Review--->
 		<cfset subformObj.updateApplicationStatus("R")/>
   		<cflocation url="/CS491-RDE/home.cfm?submitApplication">
 	</cfif>
 </cfif>
+
+<!--- Function that inserts Documents for NJ Application into AppDocument Table--->
+<cffunction name="InsertNJDocuments" displayname="InsertNJDocumentsIntoAppDocumetTable" 
+hint="Inserts Documents for NJ Appliation into the AppDocument Table" >
+	<cfset var label="Verification of Income<br> <b>Note</b>:current pay stubs, unemployment records,etc"/>
+	<cfset subformObj.insertDocument(label,'Y') />
+	
+	<cfset var label="Most Recent Tax Return(Federal, State, and/or City)<br> 
+	<b>Note:</b>If no tax return, submit most recent W-2 form(s),1099 forms(s) etc"/>
+	<cfset subformObj.insertDocument(label,'Y') />
+	
+	<cfset var label="Heath Insurance/Prescription Card<br> <b>Note:</b>Front and Back"/>
+	<cfset subformObj.insertDocument(label,'Y') />
+	
+	<cfset var label="Certified by Physician form(DHAS-37)<br> <b>Note:</b>Completed and Signed"/>
+	<cfset subformObj.insertDocument(label,'Y') />
+	
+	<cfset var label="Certified by Pharmacist form(DHAS-38)<br> <b>Note:</b>Completed and Signed"/>
+	<cfset subformObj.insertDocument(label,'Y') />
+		
+	<cfset var label="Certification of Seperation form(DHAS-40)<br> <b>Note:</b>Completed and Signed"/>
+	<cfset subformObj.insertDocument(label,'N') />
+	
+	<cfset var label="Social Security Disability benefits Notice of Award"/>
+	<cfset subformObj.insertDocument(label,'N') />
+	
+	<cfset var label="Current health insurance premium notice<br> 
+	<b>Note:</b>must include premium identification number,premimum amounts, payment due dates, and where to send payments"/>
+	<cfset subformObj.insertDocument(label,'N') />
+	
+	<cfset var label="Completed COBRA election form and/or current COBRA billing invoice"/>
+	<cfset subformObj.insertDocument(label,'N') />
+</cffunction>

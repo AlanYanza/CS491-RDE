@@ -43,7 +43,8 @@
 		<cfargument name="statusInput" type="string" required="false" >
 		<cfset status=statusInput />
 		<cfquery >
-			UPDATE UserApplication SET status=<cfqueryparam value="#status#" cfsqltype="cf_sql_varchar" >
+			UPDATE UserApplication SET status=<cfqueryparam value="#status#" cfsqltype="cf_sql_varchar" > WHERE
+			userID=<cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" > 
 		</cfquery>
 	</cffunction>
 	
@@ -143,6 +144,20 @@
 		<cfif appStatus neq "M" AND appStatus neq "P" AND appStatus neq "N">
 			<cflocation url="#destination#">
 		</cfif>
+	</cffunction>
+	
+	<!-- Insert Required Document into Documents Table -->
+	<cffunction name="insertDocument" displayname="insertDocumentForApplication" 
+	hint="add a entry into the Application Documents Table for a specified Document" >
+		<cfargument name="documentlabelInput" hint="label on website for document to be inserted" type="string" >
+		<cfargument name="requiredInput" hint="specifies if document to be inserted is required by user" type="string" > 
+		<cfquery >
+			INSERT INTO AppDocument VALUES(
+				<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer" >,
+				<cfqueryparam value="#arguments.documentlabelInput#" cfsqltype="cf_sql_varchar" >,
+				<cfqueryparam value="#arguments.requiredInput#" cfsqltype="cf_sql_varchar" >,
+				'N',NULL)
+		</cfquery>
 	</cffunction>
 	
 </cfcomponent>

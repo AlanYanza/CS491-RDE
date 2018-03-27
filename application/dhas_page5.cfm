@@ -171,7 +171,7 @@
 	<div class="text-center">
 		<button type="submit" class="btn btn-default" name="previous" value="prevous">Previous</button>
 		<button type="submit" class="btn btn-default" name="save" value="save">Save Progress &#38; Exit</button>
-		<button type="submit" class="btn btn-default" name="next" value="next">Next</button>
+		<button type="submit" class="btn btn-default" name="next" value="next">Submit Application</button>
 	</div>
 	</form>
 
