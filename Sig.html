@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Signature Pad</title>
+  <title>Signature Pad demo</title>
   <meta name="description" content="Signature Pad - HTML5 canvas based smooth signature drawing using variable width spline interpolation.">
 
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
@@ -27,32 +27,33 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   </script>
-
 </head>
 <body onselectstart="return false">
+
+
   <div id="signature-pad" class="signature-pad">
-  
     <div class="signature-pad--body">
       <canvas></canvas>
     </div>
     <div class="signature-pad--footer">
-	
       <div class="description"><font size="3" color="black">Sign Above</font></div>
 
       <div class="signature-pad--actions">
         <div>
           <button type="button" class="button clear" data-action="clear">Clear</button>
+          <button type="button" class="button" data-action="change-color" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">Change color</button>
           <button type="button" class="button" data-action="undo">Undo</button>
 
         </div>
         <div>
-          <button type="button" class="button save" data-action="save-png">Submit</button>
+          <button type="button" class="button save" data-action="save-png">Save as PNG</button>
+         
         </div>
       </div>
     </div>
   </div>
 
-  <script src="js/signature_pad.js"></script>
+  <script src="js/signature_pad.umd.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
