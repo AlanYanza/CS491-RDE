@@ -3,16 +3,17 @@
 		<a class="nav-link">X</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link disabled">{{title}}</a>
+		<a class="nav-link disabled">{{ title | uppercase }}</a>
 	</li>
-	<li class="nav-item">
-		<a class="nav-link pull-right" [routerLink] = "['/']">Write</a>
+	<li class="nav-item pull-right">
+		<a class="nav-link" [routerLink] = "['/']">Write</a>
 	</li>
 
 </ul>
-<div *ngIf="msg">
-	<div class="labeled"><label for="subject" class="col-sm-1">Subject:</label> {{msg.subject}}</div>
-	<div class="labeled"><label for="from" class="col-sm-1">From:</label> {{msg.sender}}</div>
-	<div class="labeled"><label for="sendTo" class="col-sm-1">To:</label> {{msg.recipient}}</div>
-	<div class="message">{{msg.message}}</div>
+<!-- {{ msg | async | json }} -->
+<div *ngIf="(msg | async)">
+	<div class="labeled"><label for="subject" class="col-sm-1">Subject:</label> {{ (msg | async).subject  }}</div>
+	<div class="labeled"><label for="from" class="col-sm-1">From:</label> {{ (msg | async).sender }}</div>
+	<div class="labeled"><label for="sendTo" class="col-sm-1">To:</label> {{ (msg | async).recipient }}</div>
+	<div class="message">{{ (msg | async).message }}</div>
 </div>

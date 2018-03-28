@@ -6,5 +6,8 @@ export const MAIL: Msg[] = [
 	{ msgID: 3, sender: "Admin", subject: "test", recipient: "Alan Yanza", message: "This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.", DateSent: "1/1/11", read: true }, 
 	{ msgID: 4, sender: "Admin", subject: "test", recipient: "Taylor Tu", message: "Hello", DateSent: "1/1/11", read: true }, 
 	{ msgID: 5, sender: "Admin", subject: "test", recipient: "Taylor Tu", message: "Hello", DateSent: "1/1/11", read: true }, 
-	{ msgID: 6, sender: "Admin", subject: "test", recipient: "Taylor Tu", message: "Hello", DateSent: "1/1/11", read: true }
+	{ msgID: 6, sender: "Admin", subject: "test", recipient: "Taylor Tu", message: "Hello", DateSent: "1/1/11", read: true },
+	{ msgID: 7, sender: "Admin", subject: "test", recipient: "Taylor Tu", message: "Hello", DateSent: "1/1/11", read: true },
+	{ msgID: 8, sender: "Admin", subject: "test", recipient: "Taylor Tu", message: "Hello", DateSent: "1/1/11", read: true },
+	{ msgID: 9, sender: "Admin", subject: "test", recipient: "Taylor Tu", message: "Hello", DateSent: "1/1/11", read: true }
 ];

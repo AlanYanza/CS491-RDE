@@ -7,10 +7,10 @@ import { Msg } from '../msg';
   styleUrls: ['./write-message.component.css']
 })
 export class WriteMessageComponent implements OnInit {
+  
+  title ="New Message";
 
-	title = "Write Message";
-
-	msg : Msg; 
+  msg : Msg; 
 
   constructor() { }
 

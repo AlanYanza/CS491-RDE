@@ -18,10 +18,17 @@ export class MailComponent implements OnInit {
 
 	selectedMsg: Msg; 
 
+	num:any;
+
   constructor(private mailService : MailService) { }
 
   ngOnInit() {
   	this.getMessages();
+  }
+
+  test(): void {
+  	this.mailService.test()
+  		.subscribe(num => this.num = num);
   }
 
   getMessages(): void {

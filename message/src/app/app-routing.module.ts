@@ -5,6 +5,8 @@ import { WriteMessageComponent } from './write-message/write-message.component';
 import { MailContentComponent } from './mail-content/mail-content.component';
 
 import { MessageResolverService } from './message-resolver.service'; 
+import { MailService } from './mail.service'; 
+
 
 const routes: Routes = [
 	{
@@ -15,7 +17,7 @@ const routes: Routes = [
 		path: 'message/:msgID',
 		component: MailContentComponent,
 		resolve: {
-			message: MessageResolverService
+			message: MailService
 		}
 	}
 ];

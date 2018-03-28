@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { MailService } from './mail.service';
 import { MessageResolverService } from './message-resolver.service';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,11 +25,13 @@ import { MessageResolverService } from './message-resolver.service';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     MailService,
-    MessageResolverService
+    MessageResolverService,
+
     ],
   bootstrap: [AppComponent]
 })
