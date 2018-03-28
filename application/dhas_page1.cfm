@@ -1,6 +1,6 @@
 <!-- Check to see if user is logged  in -->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
-<cfset SessionClass.checkIfLoggedIn()/>
+<cfset SessionClass.checkIfLoggedIn()/>d
 <cfset tableName='NJSection1'/>
 <cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName)/>
 <cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
@@ -32,28 +32,26 @@
 			});
 
 			function asianCheck() {
-				
 				if ($("input[type=checkbox][name=RAsian]").is(":checked")) {
 					$("#RasianOption").show("slow");
-				}					
+				}
 				else {
-					$("#RasianOption").hide();
+					$("#RasianOption").hide("slow");
 				}
 			}
 
 			function RNatHaCheck() {
-				
 				if ($("input[type=checkbox][name=RNatHa]").is(":checked")) {
 					$("#RNatHaOption").show("slow");
-				}					
+				}
 				else {
-					$("#RNatHaOption").hide();
+					$("#RNatHaOption").hide("slow");
 				}
 			}
 
 			function EHispCheck() {
 				if (typeof $("input[type=radio][name=EHisp]:checked").val() === "undefined") {
-					$("#EHispOption").hide();
+					$("#EHispOption").hide("slow");
 					return;
 				}
 
@@ -61,7 +59,7 @@
 					$("#EHispOption").show("slow");
 				}					
 				else {
-					$("#EHispOption").hide();
+					$("#EHispOption").hide("slow");
 				}
 			}
 
@@ -69,12 +67,12 @@
 				if (typeof $("input[type=radio][name=genderBirth]:checked").val() === "undefined") {
 					return;
 				}
-				if ($("input[type=radio][name=genderBirth]:checked").val().toLowerCase() == "male") {
-					$("#preg").hide();
+				if ($("input[type=radio][name=genderBirth]:checked").val().toLowerCase() == "m") {
+					$("#preg").hide("slow");
 					$("#preg").children().removeAttr("required");
 				}
 				else {
-					$("#preg").show();
+					$("#preg").show("slow");
 					$("#preg").children().attr("required", "true");
 				}
 			}

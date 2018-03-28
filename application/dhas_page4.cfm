@@ -13,6 +13,70 @@
 <head>
 	<title>Application</title>
 	<cfinclude template="../head.cfm"/>
+	<script>
+	  	"use strict";
+		$(document).ready(function(){
+			$('[data-toggle="popover"]').popover();
+
+			function SSISSDICheck() {
+				
+				if (($("input[type=radio][name=SSISSDI]:checked").val() == "N") || ($("input[type=radio][name=SSISSDI]:checked").val() == "U")) {
+					$("#SSISSDIOption").hide("slow");
+					$("#SSISSDIOption").find("input").removeAttr("required");
+				}
+				else {
+					$("#SSISSDIOption").show("slow");					
+				}
+			}
+
+			function SSISSDIDateCheck() {
+				if ($("input[type=checkbox][name=UASSISSDIDate]").is(":checked")) {					
+					$("input[type=date][name=ASSISSDIDate]").val("1111-11-11");
+					$("input[type=date][name=ASSISSDIDate]").attr("readonly", "true");
+					$("input[type=date][name=ASSISSDIDate]").removeAttr("required");
+				}
+				else {
+					$("input[type=date][name=ASSISSDIDate]").removeAttr("readonly");
+					$("input[type=date][name=ASSISSDIDate]").attr("required", "true");
+				}
+			}
+
+			function marketCheck() {
+				if (typeof $("input[type=radio][name=AMarket]:checked").val() === "undefined") {
+					return;
+				}				
+				if (($("input[type=radio][name=AMarket]:checked").val() != "Y"))  {
+					$("#marketOption").hide("slow");
+					$("#marketOption").find("input").removeAttr("required");
+				}
+				else {
+					$("#marketOption").show("slow");					
+				}
+			}
+
+			function marketDateCheck() {
+				if ($("input[type=checkbox][name=UMarketDate]").is(":checked")) {					
+					$("input[type=date][name=AMarketDate]").val("1111-11-11");
+					$("input[type=date][name=AMarketDate]").attr("readonly", "true");
+					$("input[type=date][name=AMarketDate]").removeAttr("required");
+				}
+				else {
+					$("input[type=date][name=AMarketDate]").removeAttr("readonly");
+					$("input[type=date][name=AMarketDate]").attr("required", "true");
+				}
+			}
+
+			SSISSDICheck();
+			SSISSDIDateCheck();
+			marketCheck();
+			marketDateCheck();
+
+			$("input[type=radio][name=SSISSDI]").change(SSISSDICheck);
+			$("input[type=checkbox][name=UASSISSDIDate]").click(SSISSDIDateCheck);
+			$("input[type=radio][name=AMarket]").change(marketCheck);
+			$("input[type=checkbox][name=UMarketDate]").click(marketDateCheck);
+		});
+	</script>
 </head>
 <body>
 <cfinclude template="../navbar.cfm">
@@ -39,21 +103,23 @@
 		<label class="checkbox-inline"><input type="checkbox" name="UASSISSDI" value="Y" <cfset subformClass.showCheckbox('UASSISSDI',subformData)/>/>Don't know</label>
 	</div>
 
-	<div class="row">
-		<label class="col-sm-4">a. If yes, when did you apply for SSI/SSDI?</label>
-		<div class="col-sm-5">
-			<input type="date" class="form-control" name="ASSISSDIDate" value="<cfoutput>#subformData.ASSISSDIDate#</cfoutput>">
+	<div id="SSISSDIOption">
+		<div class="row">
+			<label class="col-sm-4">a. If yes, when did you apply for SSI/SSDI?</label>
+			<div class="col-sm-5">
+				<input type="date" class="form-control" name="ASSISSDIDate" value="<cfoutput>#subformData.ASSISSDIDate#</cfoutput>">
+			</div>
+			<div class="checkbox col-sm-3">
+				<label><input type="checkbox" name="UASSISSDIDate" value="Y" <cfset subformClass.showCheckbox('UASSISSDIDate',subformData)/>/>Unsure</label>
+			</div>
 		</div>
-		<div class="checkbox col-sm-3">
-			<label><input type="checkbox" name="UASSISSDIDate" value="Y" <cfset subformClass.showCheckbox('UASSISSDIDate',subformData)/>/>Unsure</label>
-		</div>
-	</div>
 
-	<div class="form-group">
-		<label>b. Have you received a response?</label>
-		<br/>
-		<label class="radio-inline"><input type="radio" name="RespASSISSI" value="Y" <cfset subformClass.showRadioButton('RespASSISSI',subformData,'Y')/>/>Yes</label>
-		<label class="radio-inline"><input type="radio" name="RespASSISSI" value="N" <cfset subformClass.showRadioButton('RespASSISSI',subformData,'N')/>/>No</label>
+		<div class="form-group">
+			<label>b. Have you received a response?</label>
+			<br/>
+			<label class="radio-inline"><input type="radio" name="RespASSISSI" value="Y" <cfset subformClass.showRadioButton('RespASSISSI',subformData,'Y')/>/>Yes</label>
+			<label class="radio-inline"><input type="radio" name="RespASSISSI" value="N" <cfset subformClass.showRadioButton('RespASSISSI',subformData,'N')/>/>No</label>
+		</div>
 	</div>
 
 	<hr/>
@@ -66,21 +132,23 @@
 		<label class="radio-inline"><input type="radio" name="AMarket" value="U" <cfset subformClass.showRadioButton('AMarket',subformData,'U')/>/>Don't Know</label>
 	</div>
 
-	<div class="row">
-		<label class="col-sm-4">a. If yes, when did you apply?</label>
-		<div class="col-sm-5">
-			<input type="date" class="form-control" name="AMarketDate" value="<cfoutput>#subformData.AMarketDate#</cfoutput>">
+	<div id="marketOption">
+		<div class="row">
+			<label class="col-sm-4">a. If yes, when did you apply?</label>
+			<div class="col-sm-5">
+				<input type="date" class="form-control" name="AMarketDate" value="<cfoutput>#subformData.AMarketDate#</cfoutput>">
+			</div>
+			<div class="checkbox col-sm-3">
+				<label><input type="checkbox" name="UMarketDate" value="Y" <cfset subformClass.showCheckbox('UMarketDate',subformData)/>/>Unsure</label>
+			</div>
 		</div>
-		<div class="checkbox col-sm-3">
-			<label><input type="checkbox" name="UMarketDate" value="Y" <cfset subformClass.showCheckbox('UMarketDate',subformData)/>/>Unsure</label>
-		</div>
-	</div>
 
-	<div class="form-group">
-		<label>b. Have you received a response?</label>
-		<br/>
-		<label class="radio-inline"><input type="radio" name="RespAMarket" value="Y" <cfset subformClass.showRadioButton('RespAMarket',subformData,'Y')/>/>Yes</label>
-		<label class="radio-inline"><input type="radio" name="RespAMarket" value="N" <cfset subformClass.showRadioButton('RespAMarket',subformData,'N')/>/>No</label>
+		<div class="form-group">
+			<label>b. Have you received a response?</label>
+			<br/>
+			<label class="radio-inline"><input type="radio" name="RespAMarket" value="Y" <cfset subformClass.showRadioButton('RespAMarket',subformData,'Y')/>/>Yes</label>
+			<label class="radio-inline"><input type="radio" name="RespAMarket" value="N" <cfset subformClass.showRadioButton('RespAMarket',subformData,'N')/>/>No</label>
+		</div>
 	</div>
 
 	<hr/>
