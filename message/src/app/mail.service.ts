@@ -12,9 +12,11 @@ import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable()
 export class MailService implements Resolve<Msg> {
-	private mailUrl = 'https://jsonplaceholder.typicode.com/posts/1';
-	private testURL = 'http://localhost:8500/CS491-RDE/rest/message.cfm?msgID=1';
-  
+
+	MAILTEST: Observable<Msg[]>;
+
+	private messageURL = 'http://localhost:8500/CS491-RDE/rest/message.cfm';
+
   constructor(
   	private http: HttpClient
   	) { }
@@ -23,23 +25,16 @@ export class MailService implements Resolve<Msg> {
  		return MAIL.find(msg => msg.msgID === +routeSnapshot.params.msgID);
  	}
 
-  getMessages(): Observable<Msg[]> { 
-  	return of(MAIL); 
-  }	
+  // getMessages(): Observable<Msg[]> { 
+  // 	return of(MAIL); 
+  // }	
 
-  test(): Observable<any> {
-  	return this.http.get<any>(this.testURL)
+  getMessages(): Observable<Msg[]> { 
+  	this.MAILTEST = this.http.get<any>(this.messageURL)
   	.pipe(
   		tap( res => console.log('HTTP response:', res))
   		);
+  	return this.MAILTEST; 
   }
-
-  // getMessages(): Observable<Msg[]>  {
-  // 	return this.http.get<string>(this.mailUrl);
-  // }
-
-  // getMessage(msgID: number): Observable<Msg> { 
-  // 	return of(MAIL.find(msg => msg.msgID === msgID)); 
-  // }	
 
 }

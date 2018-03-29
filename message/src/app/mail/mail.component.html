@@ -13,9 +13,9 @@
 				</li>
 			</ul>
 			<ul class="mail">
-				<li *ngFor="let msg of mail" [class.selected]="msg === selectedMsg" [class.read]="!msg.read" [routerLink] = "['/message', msg.msgID]"> 
-					<div><span class="subject">{{msg.subject}}</span><span class="date">{{msg.DateSent}}</span></div>
-					<div class="sender">{{msg.sender}}</div>
+				<li *ngFor="let msg of mail" [class.selected]="msg === selectedMsg" [class.read]="!msg.read" [routerLink] = "['/message', msg.MSGID]"> 
+					<div><span class="subject">{{msg.SUBJECT}}</span><span class="date">{{msg.DATESENT}}</span></div>
+					<div class="sender">{{msg.SENDER}}</div>
 				</li>
 			</ul>
 		</div>
