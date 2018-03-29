@@ -1,3 +1,5 @@
+<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
+<cfset SessionClass.checkIfLoggedIn()/>
 <!--- Determine which page form came from --->
 <cfset formSource=FORM.formPage/>
 <cfset tableName=FORM.tableName/>

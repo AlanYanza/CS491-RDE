@@ -6,7 +6,7 @@ Tables:NJSection1
 	   NJSection3B*/
 /********************************************************************/
 /*replace first line with USE[DatabaseName]*/
-USE [RDESystems];
+USE [RDESystemsLocal];
 --Check if Base Tables created using RDEDatabase.sql if not Do not attempt to create NJForm Tables
 IF (NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'Forms') AND
 	NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'UserFormData') AND
@@ -95,13 +95,12 @@ BEGIN
 				NHSam varchar(1) CHECK(NHSam IN('Y','N')) DEFAULT('N'),
 				NHOther varchar(1) CHECK(NHOther IN('Y','N')) DEFAULT('N'),
 			RUnk varchar(1) CHECK(RUnk IN('Y','N')) DEFAULT('N'),
-			EHisp varchar(1) CHECK(EHisp IN('Y','N')) DEFAULT('N'),
+			EHisp varchar(1) CHECK(EHisp IN('Y','N','X')) DEFAULT('X'),
 				HispMex varchar(1) CHECK(HispMex IN('Y','N')) DEFAULT('N'),
 				HispPR varchar(1) CHECK(HispPR IN('Y','N')) DEFAULT('N'),
 				HispCub varchar(1) CHECK(HispCub IN('Y','N')) DEFAULT('N'),
 				HispOther varchar(1) CHECK(HispOther IN('Y','N')) DEFAULT('N'),
-			ENonHisp varchar(1) CHECK(ENonHisp IN('Y','N')) DEFAULT('N'),
-			preg char(1) CHECK(preg IN('Y','N')) DEFAULT('N'),
+			preg char(1) CHECK(preg IN('Y','N','X')) DEFAULT('X'),
 		);
 		PRINT 'Successfully created "NJSection1" Table';
 	END
@@ -115,9 +114,9 @@ BEGIN
 		CREATE TABLE [NJSection2] (
 			dataID int NOT NULL FOREIGN KEY REFERENCES [UserFormData](dataID),
 			EmplyStatus char(1) CHECK(EmplyStatus IN('F','P','N','X')) DEFAULT('X'),
-			unableWork char(1) CHECK(unableWork IN('Y','N')) DEFAULT('N'),
-			unable12LMonth char(1) CHECK(unable12LMonth IN('Y','N')) DEFAULT('N'),
-			unable12MMonth char(1) CHECK(unable12MMonth IN('Y','N')) DEFAULT('N'),
+			unableWork char(1) CHECK(unableWork IN('Y','N','X')) DEFAULT('X'),
+			unable12LMonth char(1) CHECK(unable12LMonth IN('Y','N','X')) DEFAULT('X'),
+			unable12MMonth char(1) CHECK(unable12MMonth IN('Y','N','X')) DEFAULT('X'),
 			HPersonNum int DEFAULT(0),
 			salary decimal(14,2) DEFAULT(0.00),
 			disBen decimal(14,2) DEFAULT(0.00),
@@ -196,7 +195,7 @@ BEGIN
 			ASSISSDIDate date DEFAULT NULL,
 			UASSISSDIDate char(1) CHECK(UASSISSDIDate IN('Y','N','X')) DEFAULT('X'),
 			RespASSISSI char(1) CHECK(RespASSISSI IN('Y','N','X')) DEFAULT('X'),
-			AMarket char(1) CHECK(AMarket IN('Y','N','X')) DEFAULT('X'),
+			AMarket char(1) CHECK(AMarket IN('Y','N','U','X')) DEFAULT('X'),
 			AMarketDate date DEFAULT NULL,
 			UMarketDate char(1) CHECK(UMarketDate IN('Y','N')) DEFAULT('N'),
 			RespAMarket char(1) CHECK(RespAMarket IN('Y','N','X')) DEFAULT('X'),

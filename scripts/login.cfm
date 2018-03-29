@@ -1,13 +1,5 @@
-<!-- If user doesn't exist redirect to home page with feedback -->
-<cfinvoke method="checkIfUserExist" component="/CS491-RDE/components.LoginComponent" returnvariable="userExist"
-email="#form.email#">
-<cfif userExist eq 0>
-	<cflocation url="/CS491-RDE/index.cfm?noUser" > 
-</cfif>
-
 <!-- If user exist, create an UserObj -->
 <cfset UserObj=createObject('component',"CS491-RDE.components.LoginComponent").init(form.email)/>
-<cfset UserObj.test()/>
 
 <!-- validation Password (use SQL Stored Procedure) -->
 <cfset passValid=UserObj.validateInputPassword(form.pwd)/>

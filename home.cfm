@@ -12,50 +12,51 @@
     <title>Application</title>
     <cfinclude template="head.cfm"/>
     <script>
-        function myFunction() {
-            document.getElementById("demo").innerHTML = "<form action=''><input type='file' name='pic' accept='image/*'></form>";
+		$(document).ready(function(){
+			$('[data-toggle="tooltip"]').tooltip();   
+		});
+	</script>
+	<style>
+		table {
+			font-family: arial, sans-serif;
+			font-size: 14px;
+			border-collapse: collapse;
+			width: 100%;
+		}
 
-        }
-        function Gone() {
-            document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
-        }
-</script>
+		td, th {
+			border: 1px solid #dddddd;
+			text-align: center;
+			padding: 8px;
+		}
+
+		tr:nth-child(even) {
+		   
+		}
+	</style> 
 </head>
 <body>
-<style>
-table {
-    font-family: arial, sans-serif;
-	font-size: 14px;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: center;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-   
-}
-</style> 
-<script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
-});
-</script>
 <cfinclude template="navbar.cfm">
-<cfif IsDefined('url.submitApplication')>
-	<cfoutput><b>Submit Application Successfully: Application is under Review</b></cfoutput>
-</cfif>
-<cfif IsDefined('url.savedApplication')>
-	<cfoutput><b>Application Progress saved successfully</b></cfoutput>
-</cfif>
 <div class="container">
+	<cfif IsDefined('url.submitApplication')>
+		<cfoutput>
+			<div class="alert alert-success">
+				<a href="##" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Success! </strong>Application is under Review
+			</div>
+		</cfoutput>
+	</cfif>
+	<cfif IsDefined('url.savedApplication')>
+		<cfoutput>
+			<div class="alert alert-info">
+				<a href="##" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				Application Progress saved.
+			</div>
+		</cfoutput>
+	</cfif>
+
     <div class="panel panel-default">
         <div class="panel-heading">Start New Application</div>
-            	<!---<cfset appExistNJ=UserObj.stateAppExist('NJ')/>--->
             	<center><table>
 				<tr><th style="width: 50%;">Application Type</th><th>Status</th></tr><td>
                 <cfoutput>NJ-Participation in (ADDP) / HICP</cfoutput></td>

@@ -4,7 +4,7 @@ Note:There is a separate SQL script to add each Form
      See documentation ERD diagrams for Database Design*/
 /********************************************************************/
 /*replace first line with USE[DatabaseName]*/
-USE [RDESystems];
+USE [RDESystemsLocal];
 PRINT 'Creating Base Tables for RDE Form Application....';
 --Create User1 Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
@@ -90,7 +90,7 @@ IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 BEGIN
 	CREATE TABLE [AppDocument] (
 		appID int NOT NULL FOREIGN KEY REFERENCES [UserApplication](appID),
-		document varchar(100) NOT NULL,
+		document varchar(1000) NOT NULL,
 		isRequired char(1) NOT NULL CHECK (isRequired IN('Y','N')),
 		received char(1) NOT NULL CHECK (received IN('Y','N')),
 		dateReceived date
