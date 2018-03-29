@@ -91,10 +91,19 @@ ELSE
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
               WHERE TABLE_NAME=N'User')
 BEGIN
-	DROP TABLE "User";
+	DROP TABLE [User];
 	PRINT 'DROPPED "User" Table';
 END
 ELSE
 	PRINT '"User" does not exist in database';
+-----------------------------------------------------------------------------------
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
+              WHERE TABLE_NAME=N'ApplicationLinks')
+BEGIN
+	DROP TABLE ApplicationLinks;
+	PRINT 'DROPPED "ApplicationLinks" Table';
+END
+ELSE
+	PRINT '"ApplicationLinks" does not exist in database';
 -----------------------------------------------------------------------------------
 PRINT 'Successfully Removed Base Tables from Database';

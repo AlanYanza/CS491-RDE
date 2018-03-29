@@ -15,10 +15,6 @@
 			</div>
 		</cfoutput>
 	</cfif>
-	<!--- It's not good practice to let individuals know that a username does not exist. --->
-	<!---<cfif IsDefined('url.noUser')>
-		<cfoutput>Indicated User Doesn't Exist: Please try again</cfoutput>
-	</cfif>--->
 	<cfif IsDefined('url.wrongLogin')>
 		<cfoutput>
 			<div class="alert alert-warning">

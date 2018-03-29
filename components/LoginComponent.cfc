@@ -18,15 +18,7 @@
 		</cfif>
 		<cfreturn this>
 	</cffunction>
-	
-	<!-- Testing purposes-->
-	<cffunction name="test" >
-		<cfoutput >#userID#</cfoutput>
-		<cfoutput >#firstName#</cfoutput>
-		<cfoutput >#lastName#</cfoutput>
-		<cfoutput >#accessLevel#</cfoutput>
-	</cffunction>
-	
+		
 	<!-- Query's for User's login data' -->
 	<cffunction name="getUserLogin" displayname="GetUserLoginInformation'" hint="Used to query for user's login data" 
 	returntype="Query" >

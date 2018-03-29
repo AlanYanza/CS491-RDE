@@ -57,7 +57,6 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">Start New Application</div>
-            	<!---<cfset appExistNJ=UserObj.stateAppExist('NJ')/>--->
             	<center><table>
 				<tr><th style="width: 50%;">Application Type</th><th>Status</th></tr><td>
                 <cfoutput>NJ-Participation in (ADDP) / HICP</cfoutput></td>
