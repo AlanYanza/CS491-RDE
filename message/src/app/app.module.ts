@@ -14,6 +14,7 @@ import { MessageResolverService } from './message-resolver.service';
 
 import { HttpClientModule } from '@angular/common/http';
 import { MessageService } from './message/message.service';
+import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { MessageService } from './message/message.service';
     MailService,
     MessageResolverService,
     MessageService,
-
+    {provide: APP_BASE_HREF, useValue: '/CS491-RDE/'}
     ],
   bootstrap: [AppComponent]
 })
