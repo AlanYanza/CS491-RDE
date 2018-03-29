@@ -35,9 +35,9 @@ export class MailComponent implements OnInit {
   		.subscribe(mail => this.mail = mail);
   }
 
-  // onSelect(msg: Msg): void {
-  // 	this.selectedMsg = msg;
-  // 	msg.read = true;
-  // }
+  onSelect(msg: Msg): void {
+  	this.selectedMsg = msg;
+  	// msg.READSTATUS = true;
+  }
 
 }
