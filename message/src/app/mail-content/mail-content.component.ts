@@ -21,8 +21,6 @@ export class MailContentComponent implements OnInit {
 		return data.message;
 	})
 	); 
-
-  // @Input() msg: Msg; 
   
   constructor(
 	private route: ActivatedRoute,
@@ -31,14 +29,6 @@ export class MailContentComponent implements OnInit {
 	) { }
 
   ngOnInit(): void {
-	// console.log(this.msg);
-	// this.getMessage();
   }
-
-  // getMessage(): void {
-  // 	const msgID = +this.route.snapshot.paramMap.get('msgID');
-  // 	this.mailService.getMessage(msgID)
-  // 		.subscribe(msg => this.msg = msg);
-  // }
 
 }

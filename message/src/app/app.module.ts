@@ -13,6 +13,7 @@ import { MailService } from './mail.service';
 import { MessageResolverService } from './message-resolver.service';
 
 import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from './message/message.service';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     MailService,
     MessageResolverService,
+    MessageService,
 
     ],
   bootstrap: [AppComponent]

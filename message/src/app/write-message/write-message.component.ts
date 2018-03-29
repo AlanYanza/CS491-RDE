@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Msg } from '../msg';
 
+import { MessageService } from '../message/message.service';
+
 @Component({
   selector: 'app-write-message',
   templateUrl: './write-message.component.html',
@@ -8,13 +10,19 @@ import { Msg } from '../msg';
 })
 export class WriteMessageComponent implements OnInit {
   
-  title ="New Message";
+  title = "New Message";
 
-  msg : Msg; 
+  msg: any = {};
 
-  constructor() { }
+  constructor(private messageService: MessageService) { }
 
   ngOnInit() {
+  }
+
+  sendMessage() {
+  	console.log(this.msg);
+  	this.messageService.sendMessages(this.msg)
+  		.subscribe(console.log);
   }
 
 }

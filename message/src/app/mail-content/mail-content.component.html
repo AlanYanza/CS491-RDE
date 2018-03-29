@@ -10,7 +10,6 @@
 	</li>
 
 </ul>
-<!-- {{ msg | async | json }} -->
 <div *ngIf="(msg | async)">
 	<div class="labeled"><label for="subject" class="col-sm-1">Subject:</label> {{ (msg | async).subject  }}</div>
 	<div class="labeled"><label for="from" class="col-sm-1">From:</label> {{ (msg | async).sender }}</div>
