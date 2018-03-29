@@ -56,7 +56,8 @@
 		<div class="col-sm-3">
 			<label for="signature">33. Signature of Applicant</label>	
 			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#signatureModal">Click here to attach/edit your signature</button>
-			<input type="hidden" name="signature" id="signature" value=<cfoutput>#applicantSignature.signature#</cfoutput> />
+			<input type="hidden" name="signature" id="signature" value=<cfoutput>#applicantSignature.signature#</cfoutput> >
+<!---			<input type="text" name="signature" id="signature" value=<cfoutput>#applicantSignature.signature#</cfoutput> >--->
 		</div>
 		<div class="col-sm-6">
 			<div id="signaturePic">
