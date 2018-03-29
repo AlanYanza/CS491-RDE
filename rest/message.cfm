@@ -17,5 +17,5 @@
 
 <cfset EmailGetter=GetEmail()/> 
 
-<cfoutput>#serializeJSON(EmailGetter, "struct")#</cfoutput>
+<cfoutput>#serializeJSON(EmailGetter, 'struct')#</cfoutput>
 

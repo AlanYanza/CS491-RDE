@@ -10,6 +10,8 @@ import { MAIL } from './mock-mail';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; 
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
+import { map } from 'rxjs/operators/map';
+
 @Injectable()
 export class MailService implements Resolve<Msg> {
 
@@ -21,8 +23,15 @@ export class MailService implements Resolve<Msg> {
   	private http: HttpClient
   	) { }
 
- 	resolve(routeSnapshot: ActivatedRouteSnapshot): Msg {
- 		return MAIL.find(msg => msg.msgID === +routeSnapshot.params.msgID);
+ 	resolve(routeSnapshot: ActivatedRouteSnapshot): Observable<Msg> {
+     return this.getMessages()
+      .pipe(
+        map((data: Msg[]) => {
+          return data.find(msg => msg.MSGID === +routeSnapshot.params.msgID);
+        }
+        )
+      );
+ 		// return MAIL.find(msg => msg.msgID === +routeSnapshot.params.msgID);
  	}
 
   // getMessages(): Observable<Msg[]> { 
@@ -30,11 +39,10 @@ export class MailService implements Resolve<Msg> {
   // }	
 
   getMessages(): Observable<Msg[]> { 
-  	this.MAILTEST = this.http.get<any>(this.messageURL)
+  	return this.http.get<Msg[]>(this.messageURL)
   	.pipe(
   		tap( res => console.log('HTTP response:', res))
-  		);
-  	return this.MAILTEST; 
+  		); 
   }
 
 }
