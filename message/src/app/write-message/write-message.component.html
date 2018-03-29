@@ -1,0 +1,29 @@
+<ul class="nav nav-tabs nav-mail">
+	<li class="nav-item">
+		<a class="nav-link">X</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link disabled">NEW MESSAGE</a>
+	</li>
+	<li class="nav-item pull-right">
+		<a class="nav-link" (click)="sendMessage()">Send</a>
+	</li>
+
+</ul>
+<div class="email-form form-group col-*-col*">
+	<div class="labeled">
+		<label for="subject" class="col-sm-1 col-form-label">Subject:</label> 
+		<input type="text" class="input" [(ngModel)]="msg.subject" placeholder="Write subject here">
+	</div>
+<!-- 	<div class="labeled">
+		<label for="staticFrom" class="col-sm-1 col-form-label">From:</label> 
+		<input type="text" readonly class="form-control-plaintext" id="staticFrom" value="{user.email}">
+	</div> -->
+	<div class="labeled">
+		<label for="sendTo" class="col-sm-1 col-form-label">To:</label> 
+		<input  class="input" [(ngModel)]="msg.recipient" placeholder="Write recipient here">
+	</div>
+	<div class="message">
+		<textarea class="input form-control" [(ngModel)]="msg.message" placeholder="Write message here"></textarea>
+	</div>
+</div>

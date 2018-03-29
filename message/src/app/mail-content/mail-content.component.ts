@@ -2,6 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { Msg } from '../msg';
 
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { MailService } from '../mail.service';
+import { map } from 'rxjs/operators/map';
 
 @Component({
   selector: 'app-mail-content',
@@ -10,11 +15,20 @@ import { Msg } from '../msg';
 })
 export class MailContentComponent implements OnInit {
   title = "Message";
-  @Input() msg: Msg; 
-  
-  constructor() { }
 
-  ngOnInit() {
+  msg = this.route.data.pipe(
+	map((data: any): Msg => {
+		return data.message;
+	})
+	); 
+  
+  constructor(
+	private route: ActivatedRoute,
+	private mailService: MailService,
+	private location: Location
+	) { }
+
+  ngOnInit(): void {
   }
 
 }
