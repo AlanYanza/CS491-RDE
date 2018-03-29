@@ -13,6 +13,7 @@
 <head>
   	<title>Application</title>
   	<cfinclude template="../head.cfm"/>
+ 	<link rel="stylesheet" href="../css/signature-pad.css">
 </head>
 <body>
 <cfinclude template="../navbar.cfm">
@@ -48,10 +49,16 @@
 	<form action="../scripts/NJScript.cfm" method="POST">
 	<input type="text" hidden="true" id="formPage" name="formPage" value="page4">
 	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
+
 	<div class="row">
-		<div class="col-sm-9">
-			<label for="signature">33. Signature of Applicant</label>
-			<canvas class="form-control" id="signature" name="signature" style="width: 100%; height: 200px;"></canvas>
+		<div class="col-sm-3">
+			<label for="signature">33. Signature of Applicant</label>	
+			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#signatureModal">Click here to attach/edit your signature</button>
+			<input type="hidden" name="signature" id="signature" value="" />
+		</div>
+		<div class="col-sm-6">
+			<div id="signaturePic">
+			</div>
 		</div>
 		<div class="col-sm-3">
 			<label for="signatureDate">Date</label>
@@ -60,9 +67,11 @@
 	</div>
 
 	<div class="row">
-		<div class="col-sm-9">
+		<div class="col-sm-3">
 			<label for="SpouseSig">34. Signature of Spouse/Partner</label>
-			<canvas class="form-control" name="SpouseSig" style="width: 100%; height: 200px;"></canvas>
+			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#spouseSignatureModal">Click here to attach/edit your signature</button>	
+		</div>
+		<div class="col-sm-6" id="spouseSignaturePic">
 		</div>
 		<div class="col-sm-3">
 			<label for="spouseSigDate">Date</label>
@@ -174,6 +183,39 @@
 		<button type="submit" class="btn btn-default" name="next" value="next">Submit Application</button>
 	</div>
 	</form>
+
+	<div id="signatureModal" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-lg">
+
+			<div class="modal-content">
+				<div class="modal-body">
+					<div id="sigBody">
+						<div id="signature-pad" class="signature-pad">
+						    <div class="signature-pad--body">
+						      <canvas></canvas>
+						    </div>
+						    <div class="signature-pad--footer">
+						      <div class="description"><font size="3" color="black">Sign Above</font></div>
+
+						      <div class="signature-pad--actions">
+						        <div>
+						        	<button type="button" class="button clear" data-action="clear">Clear</button>
+						        	<button type="button" class="button" data-action="change-color" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">Change color</button>
+						        	<button type="button" class="button" data-action="undo">Undo</button>
+						        </div>
+						        <div>
+						          	<button type="button" class="button save" data-action="save">Save</button>
+						        </div>
+						      </div>
+						    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../js/signature_pad.umd.js"></script>
+  	<script src="../js/app.js"></script>
 
 </div>
 </body>
