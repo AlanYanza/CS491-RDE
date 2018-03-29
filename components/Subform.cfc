@@ -73,18 +73,18 @@
 		<!--- <cfdump var="#fieldValues#" > --->
 	</cffunction>
 	
-	<!--- Send User's signature to database'--->
+	<!-- Send User's signature to database'-->
 	<cffunction name="updateSignature" displayname="updateUserSignature" hint="sends user signature to database" >
 		<cfargument name="signatureField" hint="the name of the signature field" >
 		<cfargument name="dateField" hint="the name of the date field" >
 		<cfquery>
-			UPDATE NJSection4 SET #arguments.signatureField#='#form[arguments.signatureField]#' ,
+			UPDATE #tableName# SET #arguments.signatureField#='#form[arguments.signatureField]#' ,
 			#dateField#=getdate()  
 			WHERE dataID=<cfqueryparam value="#dataID#" cfsqltype="cf_sql_integer" >
 		</cfquery>
 	</cffunction>
 	
-	<!--- Retrieve user's signature from database'--->
+	<!-- Retrieve user's signature from database --->
 	<cffunction name="getSignature" displayname="getUserSignatureFromDB" hint="retrieves user signature from database" >
 		<cfargument name="signatureField" hint="the name of the signature field" >
 		<cfquery name="returnSignature" result="queryStat" >
