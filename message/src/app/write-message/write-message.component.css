@@ -1,0 +1,25 @@
+.email-form {
+	display: flex;
+	flex-flow: column;
+	height: 100%;
+}
+
+.email-form .message.textarea {
+	padding: 15px;
+	flex: 1 1 auto;
+}
+
+.email-form .labeled {
+	flex: 0 1 auto;
+}
+
+.labeled {
+	border-bottom: 0.1px solid #f0f0f0;
+	padding: 15px;
+}
+
+.input { 
+	border: none;
+ }
+
+

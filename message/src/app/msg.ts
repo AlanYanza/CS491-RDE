@@ -1,9 +1,9 @@
 export class Msg { 
-	msgID: number;
-	sender: string;
-	recipient: string;
-	message: string;
-	subject: string;
-	DateSent: string;
-	read: boolean;
+	MSGID: number;
+	SENDER: string;
+	RECEIPIENT: string;
+	MESSAGE: string;
+	SUBJECT: string;
+	DATESENT: string;
+	READSTATUS: boolean;
 }
