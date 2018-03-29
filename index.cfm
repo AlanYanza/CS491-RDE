@@ -8,13 +8,24 @@
 <cfinclude template="navbar.cfm">
 <div class="container">
 	<cfif IsDefined('url.registered')>
-		<cfoutput><b>Successfully registered</b></cfoutput>
+		<cfoutput>
+			<div class="alert alert-success">
+				<a href="##" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				Successfully registered
+			</div>
+		</cfoutput>
 	</cfif>
-	<cfif IsDefined('url.noUser')>
-		<cfoutput><b>Indicated User Doesn't Exist: Please try again</b></cfoutput>
-	</cfif>
+	<!--- It's not good practice to let individuals know that a username does not exist. --->
+	<!---<cfif IsDefined('url.noUser')>
+		<cfoutput>Indicated User Doesn't Exist: Please try again</cfoutput>
+	</cfif>--->
 	<cfif IsDefined('url.wrongLogin')>
-		<cfoutput><b>Incorrect Login credentials: Please try again</b></cfoutput>
+		<cfoutput>
+			<div class="alert alert-warning">
+				<a href="##" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				Incorrect login credentials. Please try again.
+			</div>
+		</cfoutput>
 	</cfif>
 	<div class="page-header">
 		<h1>Login</h1>
