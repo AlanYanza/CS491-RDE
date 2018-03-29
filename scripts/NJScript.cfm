@@ -79,6 +79,8 @@
 
 <!--- Form Page 4 processing ---> 
 <cfif formSource eq 'page4'>
+	<!--- Update User's signatures'--->
+	<cfset subformObj.updateSignature("signature","signatureDate")/>
 	<!--- Set fields of the sub-form --->
 	<cfset fields=['CMName','agency','CMaddr','CMWPhone','CMFaxNum','CMCPhone','email','perm','HIVAware','CPName','relation','CPAddr','CPHPhone','CPWPhone','CPCPhone','PName','PPhone'] />
 	<cfset subformObj.setFields(fields)/>
@@ -91,7 +93,7 @@
 <!--- Redirect to desired destination page(performed last) --->
 <!--- If 'save progress' button hit submit form and redirect to homepage(do not change application status) --->
 <cfif IsDefined('Form.save')>
-	<cflocation url="/CS491-RDE/home.cfm?savedApplication">
+<!---	<cflocation url="/CS491-RDE/home.cfm?savedApplication">--->
 </cfif>
 <cfif formSource eq 'page1'>
 	<cfif IsDefined("FORM.previous")>

@@ -1,6 +1,7 @@
 <!-- Check to see if user is logged  in -->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<cfset SessionClass.checkIfuser()/>
 <cfset tableName='NJSection1'/>
 <cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName)/>
 <cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>

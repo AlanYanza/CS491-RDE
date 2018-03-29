@@ -1,5 +1,6 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<cfset SessionClass.checkIfuser()/>
 <cfset tableName='NJSection4'/>
 <cfset fields=[] />
 <cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName,fields)/>
@@ -7,6 +8,7 @@
 <!-- Application Page pre-processing -->
 <cfset subformClass.createSubformData()/>
 <cfset subformData=subformClass.retrieveDataForSubform()/>
+<cfset applicantSignature=subformClass.getSignature("signature")/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +56,7 @@
 		<div class="col-sm-3">
 			<label for="signature">33. Signature of Applicant</label>	
 			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#signatureModal">Click here to attach/edit your signature</button>
-			<input type="hidden" name="signature" id="signature" value="" />
+			<input type="hidden" name="signature" id="signature" value=<cfoutput>#applicantSignature.signature#</cfoutput> />
 		</div>
 		<div class="col-sm-6">
 			<div id="signaturePic">

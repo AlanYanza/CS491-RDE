@@ -1,5 +1,6 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<cfset SessionClass.checkIfuser()/>
 <cfset tableName='NJSection3A'/>
 <cfset fields=[] />
 <cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName,fields)/>
