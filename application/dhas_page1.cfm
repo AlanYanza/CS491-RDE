@@ -1,6 +1,6 @@
 <!-- Check to see if user is logged  in -->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
-<cfset SessionClass.checkIfLoggedIn()/>d
+<cfset SessionClass.checkIfLoggedIn()/>
 <cfset tableName='NJSection1'/>
 <cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName)/>
 <cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
@@ -29,6 +29,13 @@
 					$("#MZip").val($("#zip").val());
 					$("#MCounty").val($("#County").val());
 				}
+			});
+
+			$("button[type=button][name=reveal]").click(function() {
+				$("#SSNum").attr("type", "text");
+				setTimeout(function() {
+				    $("#SSNum").attr("type", "password");
+				}, 3000);
 			});
 
 			function asianCheck() {
@@ -342,9 +349,14 @@
 
 	<hr/>
 
-	<div class="form-group">
-		<label for="SSNum">8. What is your Social Security Number (if you have one)?</label>
-		<input type="text" class="form-control" id="SSNum" name="SSNum"   maxlength="9" value="<cfoutput>#subformData.SSNum#</cfoutput>" />
+	<label for="SSNum">8. What is your Social Security Number (if you have one)?</label>
+	<div class="form-group row">
+		<div class="col-sm-2">			
+			<input type="password" class="form-control" id="SSNum" name="SSNum"  maxlength="9" value="<cfoutput>#subformData.SSNum#</cfoutput>" />
+		</div>
+		<div class="col-sm-10">
+			<button type="button" class="btn btn-default" name="reveal">View SSN</button>
+		</div>
 	</div>
 	<div class="form-group">
 		<label for="USCitizen">9. Are you a U.S. citizen? (Responding to this question will not affect your eligibility for ADDP.)</label>
