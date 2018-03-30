@@ -1,3 +1,7 @@
+<!-- If user is already signed in, prevent them entering -->
+<cfset SessionClass=createObject('component','components.SessionTools')/>
+<cfset SessionClass.ifAlreadySignIn()/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

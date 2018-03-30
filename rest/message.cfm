@@ -1,6 +1,6 @@
 <cfheader name = "Access-Control-Allow-Origin" value="*">
 
-<cffunction name="GetEmail">
+<cffunction name="GetEmail" httpmethod="GET" >
 	<cfset testID = 2/>
 	<cfset userID = #session.userID# />
 	<cfquery name="MailResult">
