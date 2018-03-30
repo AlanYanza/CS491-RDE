@@ -92,21 +92,16 @@
 		</cfif>
 		<cfreturn state>
 	</cffunction>
-	
-	<!-- Test purposes -->
-	<cffunction name="test1" >
-		<cfdump var="#userID#" >
-	</cffunction>
-	
+		
 	<!-- Get Document and Results ---> 
 	<cffunction name="getDocuments">
 	<cfquery  name="DocumentResult" result="queryStats">
-		SELECT userID 
+		SELECT appID 
 		FROM UserApplication
 		WHERE userID = <cfqueryparam value="#userID#">
 	</cfquery>
 	
-	<cfset var appID = DocumentResult.userID />
+	<cfset var appID = DocumentResult.appID />
 	
 	<cfquery name="DocumentName" result="queryStats">
 		SELECT document,isRequired, received, DateReceived

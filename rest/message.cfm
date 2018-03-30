@@ -2,7 +2,7 @@
 
 <cffunction name="GetEmail" httpmethod="GET" >
 	<cfset testID = 2/>
-	<cfset userID = #session.userID# />
+	<cfset userID = session.userID/>
 	<cfquery name="MailResult">
 		SELECT Inbox.msgID, Inbox.readStatus, Message.sender, Message.receipient, Message.subject, Message.message,
 		Message.dateSent 

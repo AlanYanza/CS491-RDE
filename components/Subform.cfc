@@ -111,6 +111,7 @@
 	
 	<!-- Create new subForm data (insert into table blank values) -->
 	<cffunction name="createSubformData" displayname="createSubformData" hint="Insert a new entry into the subforms associated Table"> 
+		<cfdump var="test-Went Here" >
 		<cfset Var dataExist=checkIfDataExist()/>
 		<cfif dataExist eq 0>
 			<cfset dataID=getDataID()/>
