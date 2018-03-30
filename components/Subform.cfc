@@ -27,7 +27,6 @@
 		<cfloop from="1" to=#numElem#  step="1" index="i"  >
 			<cfset fieldNames[i]=fieldArrayInput[i]/>
 		</cfloop>
-		<!---<cfdump var="#fieldNames#" >--->
 	</cffunction>
 	
 	<!-- Setter for Checkbox fields(if not provided) -->
@@ -37,7 +36,6 @@
 		<cfloop from="1" to=#numElem#  step="1" index="i"  >
 			<cfset checkFieldNames[i]=fieldArrayInput[i]/>
 		</cfloop>
-		<!--- <cfdump var="#checkFieldNames#" >--->
 	</cffunction>
 	
 	<!-- dynamically get the data contained in the Form(non-checkboxes)-->
@@ -54,7 +52,6 @@
 			<!-- Insert form field data into fieldValues-->
 			<cfset StructInsert(fieldValues,fieldName,fieldValue)/>
 		</cfloop>
-		<!---<cfdump var="#fieldValues#" >---> 
 	</cffunction>
 	
 	<!-- dynamically get the data contained in the Checkboxes-->
@@ -70,7 +67,6 @@
 			<!-- Insert form field data into fieldValues-->
 			<cfset StructInsert(fieldValues,fieldName,fieldValue)/>
 		</cfloop>
-		<!--- <cfdump var="#fieldValues#" > --->
 	</cffunction>
 	
 	<!-- Send User's signature to database'-->
@@ -111,7 +107,6 @@
 	
 	<!-- Create new subForm data (insert into table blank values) -->
 	<cffunction name="createSubformData" displayname="createSubformData" hint="Insert a new entry into the subforms associated Table"> 
-		<cfdump var="test-Went Here" >
 		<cfset Var dataExist=checkIfDataExist()/>
 		<cfif dataExist eq 0>
 			<cfset dataID=getDataID()/>
@@ -139,7 +134,7 @@
 		<!-- Prepare Set Statements-->
 		<cfset Var arrayCount=0 />
 		<cfquery >
-			UPDATE <cfoutput>#tableName#</cfoutput> SET <!---<cfoutput>#setStr#</cfoutput> --->
+			UPDATE <cfoutput>#tableName#</cfoutput> SET 
 			 <!---loop through fieldValues and add it to query--->
 			<cfloop array="#fieldNames#" index="i">
 		    	<cfset arrayCount=arrayCount+1 />
@@ -161,7 +156,7 @@
 		<!-- Prepare Set Statements-->
 		<cfset Var arrayCount=0 />
 		<cfquery >
-			UPDATE <cfoutput>#tableName#</cfoutput> SET <!---<cfoutput>#setStr#</cfoutput> --->
+			UPDATE <cfoutput>#tableName#</cfoutput> SET 
 			 <!---loop through fieldValues and add it to query--->
 			<cfloop array="#checkFieldNames#" index="i">
 		    	<cfset arrayCount=arrayCount+1 />
