@@ -11,7 +11,7 @@
 	<cfset StructDelete(#session#,'lastName')/>
 </cfif>
 <cfif IsDefined('Application.userID')>
-	<cfset StructDelete(#session#,'userID')/>
+	<cfset StructDelete(#Application#,'userID')/>
 </cfif>
 
 <cflocation url="../index.cfm">
