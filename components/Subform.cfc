@@ -27,7 +27,6 @@
 		<cfloop from="1" to=#numElem#  step="1" index="i"  >
 			<cfset fieldNames[i]=fieldArrayInput[i]/>
 		</cfloop>
-		<!---<cfdump var="#fieldNames#" >--->
 	</cffunction>
 	
 	<!-- Setter for Checkbox fields(if not provided) -->
@@ -37,7 +36,6 @@
 		<cfloop from="1" to=#numElem#  step="1" index="i"  >
 			<cfset checkFieldNames[i]=fieldArrayInput[i]/>
 		</cfloop>
-		<!--- <cfdump var="#checkFieldNames#" >--->
 	</cffunction>
 	
 	<!-- dynamically get the data contained in the Form(non-checkboxes)-->
@@ -54,7 +52,6 @@
 			<!-- Insert form field data into fieldValues-->
 			<cfset StructInsert(fieldValues,fieldName,fieldValue)/>
 		</cfloop>
-		<!---<cfdump var="#fieldValues#" >---> 
 	</cffunction>
 	
 	<!-- dynamically get the data contained in the Checkboxes-->
@@ -70,7 +67,27 @@
 			<!-- Insert form field data into fieldValues-->
 			<cfset StructInsert(fieldValues,fieldName,fieldValue)/>
 		</cfloop>
-		<!--- <cfdump var="#fieldValues#" > --->
+	</cffunction>
+	
+	<!-- Send User's signature to database'-->
+	<cffunction name="updateSignature" displayname="updateUserSignature" hint="sends user signature to database" >
+		<cfargument name="signatureField" hint="the name of the signature field" >
+		<cfargument name="dateField" hint="the name of the date field" >
+		<cfquery>
+			UPDATE #tableName# SET #arguments.signatureField#='#form[arguments.signatureField]#' ,
+			#dateField#=getdate()  
+			WHERE dataID=<cfqueryparam value="#dataID#" cfsqltype="cf_sql_integer" >
+		</cfquery>
+	</cffunction>
+	
+	<!-- Retrieve user's signature from database --->
+	<cffunction name="getSignature" displayname="getUserSignatureFromDB" hint="retrieves user signature from database" >
+		<cfargument name="signatureField" hint="the name of the signature field" >
+		<cfquery name="returnSignature" result="queryStat" >
+			SELECT #signatureField# FROM #tableName# WHERE 
+			dataID=<cfqueryparam value="#dataID#" cfsqltype="cf_sql_integer" >
+		</cfquery>
+		<cfreturn returnSignature /> 
 	</cffunction>
 			
 	<!-- check if data already exist for subform -->
@@ -117,7 +134,7 @@
 		<!-- Prepare Set Statements-->
 		<cfset Var arrayCount=0 />
 		<cfquery >
-			UPDATE <cfoutput>#tableName#</cfoutput> SET <!---<cfoutput>#setStr#</cfoutput> --->
+			UPDATE <cfoutput>#tableName#</cfoutput> SET 
 			 <!---loop through fieldValues and add it to query--->
 			<cfloop array="#fieldNames#" index="i">
 		    	<cfset arrayCount=arrayCount+1 />
@@ -139,7 +156,7 @@
 		<!-- Prepare Set Statements-->
 		<cfset Var arrayCount=0 />
 		<cfquery >
-			UPDATE <cfoutput>#tableName#</cfoutput> SET <!---<cfoutput>#setStr#</cfoutput> --->
+			UPDATE <cfoutput>#tableName#</cfoutput> SET 
 			 <!---loop through fieldValues and add it to query--->
 			<cfloop array="#checkFieldNames#" index="i">
 		    	<cfset arrayCount=arrayCount+1 />

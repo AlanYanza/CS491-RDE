@@ -20,5 +20,12 @@
 			<cflocation url="/CS491-RDE/admin.cfm">
 		</cfif>
 	</cffunction>
-		
+	
+	<cffunction name="ifAlreadySignIn" displayname="IfAlreadySignInDirectHome" 
+	hint="If User is signed in, do not let them into sign-in or registration page" >
+		<cfif IsDefined("session.userID")>
+			<cflocation url="/CS491-RDE/home.cfm" >
+		</cfif>
+	</cffunction>
+	
 </cfcomponent>

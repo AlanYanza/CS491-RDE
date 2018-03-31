@@ -11,9 +11,9 @@ export class MessageService {
 
   sendMessages(msg) {
   	const params = new HttpParams()
-  		.set("subject", msg.subject)
-  		.set("recipient", msg.recipient)
-  		.set("message", msg.message);  		;
+  		.set("subject", msg.SUBJECT)
+  		.set("recipient", msg.RECEIPIENT)
+  		.set("message", msg.MESSAGE);  		;
   	return this.http.post(this.sendMessageAPIUrl, null, {
   		params: params
   	});
