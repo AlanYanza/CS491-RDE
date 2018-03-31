@@ -321,12 +321,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+// import { MAIL } from './mock-mail';
 
 
 var MailService = (function () {
     function MailService(http) {
         this.http = http;
-        this.messageURL = 'http://localhost:8500/CS491-RDE/rest/message.cfm';
+        this.messageURL = 'http://localhost:8500/rest/restTest/MessageSystem/GetEmail';
     }
     MailService.prototype.resolve = function (routeSnapshot) {
         return this.getMessages()
