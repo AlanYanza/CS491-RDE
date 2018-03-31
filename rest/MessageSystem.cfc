@@ -2,6 +2,7 @@
 	
 	<!-- Used to test connection to rest CFC-->
 	<cffunction name="testMethod" access="remote" returntype="String" httpmethod="GET" restpath="test" >
+		<cfdump var="#session.userID#" >
 		<cfset string="testString">
 		<cfreturn string >
 	</cffunction>
@@ -10,13 +11,13 @@
 	<cffunction name="GetEmail" access="remote" returntype="Query" httpmethod="GET" restpath="GetEmail" >
 		<cfheader name = "Access-Control-Allow-Origin" value="*">
 		<cfset testID = 2/>
-		<cfset userID = #session.userID# />
+		<cfset userID = Application.userID >
 		<cfquery name="MailResult">
 			SELECT Inbox.msgID, Inbox.readStatus, Message.sender, Message.receipient, Message.subject, Message.message,
 			Message.dateSent 
 			FROM Inbox 
 			INNER JOIN Message ON Inbox.msgID=Message.msgID
-			WHERE Inbox.userID = #session.userID#
+			WHERE Inbox.userID = #userID#
 		</cfquery>
 		<cfreturn MailResult />
 <!---		<cfoutput>#serializeJSON(mail, 'struct')#</cfoutput>--->

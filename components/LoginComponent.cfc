@@ -66,6 +66,7 @@
 		<cfset session.accessLevel=accessLevel/>
 		<cfset session.firstName=FirstName/>
 		<cfset session.lastName=LastName/>
+		<cfset Application.userID=userID>
 	</cffunction>
 	
 </cfcomponent>
