@@ -1,6 +1,13 @@
 <cfcomponent rest="true" restpath="/MessageSystem" produces="application/json" >
+	
+	<!-- Used to test connection to rest CFC-->
+	<cffunction name="testMethod" access="remote" returntype="String" httpmethod="GET" restpath="test" >
+		<cfset string="testString">
+		<cfreturn string >
+	</cffunction>
 		
-	<cffunction name="GetEmail" returntype="Query" httpmethod="GET" restpath="GetEmail">
+	<!-- Retrieve email for given user -->
+	<cffunction name="GetEmail" access="remote" returntype="Query" httpmethod="GET" restpath="GetEmail" >
 		<cfheader name = "Access-Control-Allow-Origin" value="*">
 		<cfset testID = 2/>
 		<cfset userID = #session.userID# />
@@ -15,7 +22,7 @@
 <!---		<cfoutput>#serializeJSON(mail, 'struct')#</cfoutput>--->
 	</cffunction>
 	
-	<cffunction name="SendEmail" httpmethod="POST" restpath="SendEmail" > 
+<!---	<cffunction name="SendEmail" <!---access="remote"---> httpmethod="POST" > 
 		<cfheader name = "Access-Control-Allow-Origin" value="*">
 		<cfset testID = 2/>
 		<cfset sender = #session.userID# />
@@ -27,6 +34,6 @@
 			INSERT INTO Message (sender, receipient, subject, message, dateSent)
 			VALUES #sender#, #recipient#, #subject#, #message#, #dateSent#
 		</cfquery> 
-	</cffunction>
+	</cffunction>--->
 
 </cfcomponent>

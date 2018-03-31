@@ -1,2 +1,4 @@
 TestScript.cfm
 testForm.cfm
+testRest.cfm
+RestTestCFC.cfc

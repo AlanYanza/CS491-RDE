@@ -124,7 +124,9 @@
 		<cflocation url="/CS491-RDE/application/dhas_page4.cfm">
 	<cfelseif IsDefined("FORM.next")>
 		<!--- Insert Documents into AppDocument Table--->
-		<cfset InsertNJDocuments()/> 
+		<cfif subformObj.CheckApplicationStatus() eq 'P' >
+			<cfset InsertNJDocuments()/> 
+		</cfif>
 		<!--- Change status of Application to Review--->
 		<cfset subformObj.updateApplicationStatus("R")/>
   		<cflocation url="/CS491-RDE/home.cfm?submitApplication">
