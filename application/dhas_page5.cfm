@@ -16,6 +16,12 @@
   	<title>Application</title>
   	<cfinclude template="../head.cfm"/>
  	<link rel="stylesheet" href="../css/signature-pad.css">
+ 	<script>
+ 		"use strict";
+		$(document).ready(function(){
+			$("#signaturePic").html("<img src='" + $("#signature").val() + "' class='img-responsive'  max-width='100%'>");
+		});
+ 	</script>
 </head>
 <body>
 <cfinclude template="../navbar.cfm">
@@ -65,7 +71,7 @@
 		</div>
 		<div class="col-sm-3">
 			<label for="signatureDate">Date</label>
-			<input type="date" class="form-control" name="signatureDate" value="<cfoutput>#subformData.signatureDate#</cfoutput>" readonly />
+			<input type="date" class="form-control" id="signatureDate" name="signatureDate" value="<cfoutput>#subformData.signatureDate#</cfoutput>" readonly />
 		</div>
 	</div>
 
