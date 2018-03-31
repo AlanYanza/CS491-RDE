@@ -20,10 +20,10 @@
 			WHERE Inbox.userID = #userID#
 		</cfquery>
 		<cfreturn MailResult />
-<!---		<cfoutput>#serializeJSON(mail, 'struct')#</cfoutput>--->
+		<cfoutput>#serializeJSON(MailResult, 'struct')#</cfoutput>
 	</cffunction>
 	
-<!---	<cffunction name="SendEmail" <!---access="remote"---> httpmethod="POST" > 
+	<cffunction name="SendEmail" access="remote" httpmethod="POST" restpath="SendEmail"  > 
 		<cfheader name = "Access-Control-Allow-Origin" value="*">
 		<cfset testID = 2/>
 		<cfset sender = #session.userID# />
@@ -35,6 +35,6 @@
 			INSERT INTO Message (sender, receipient, subject, message, dateSent)
 			VALUES #sender#, #recipient#, #subject#, #message#, #dateSent#
 		</cfquery> 
-	</cffunction>--->
+	</cffunction>
 
 </cfcomponent>
