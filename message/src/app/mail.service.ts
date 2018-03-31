@@ -5,7 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { tap } from 'rxjs/operators';
 
 import { Msg } from './msg';
-import { MAIL } from './mock-mail';
+// import { MAIL } from './mock-mail';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http'; 
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
@@ -17,7 +17,7 @@ export class MailService implements Resolve<Msg> {
 
 	MAILTEST: Observable<Msg[]>;
 
-	private messageURL = 'http://localhost:8500/CS491-RDE/rest/message.cfm';
+	private messageURL = 'http://localhost:8500/CS491-RDE/rest/restTest/MessageCenter/getEmail';
 
   constructor(
   	private http: HttpClient

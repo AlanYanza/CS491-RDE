@@ -13,7 +13,7 @@ import { MAIL } from './mock-mail';
 export class MessageResolverService implements Resolve<Msg> {
 
 	resolve(routeSnapshot: ActivatedRouteSnapshot): Msg {
-		return MAIL.find(msg => msg.msgID === routeSnapshot.params.msgID);
+		return MAIL.find(msg => msg.MSGID === routeSnapshot.params.msgID);
 	}
 
   constructor() { }
