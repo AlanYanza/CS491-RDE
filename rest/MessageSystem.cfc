@@ -24,4 +24,56 @@
 		<cfreturn serializeJSON(MailResult, 'struct') /> 
 
 	</cffunction>
+
+	<!-- Send email for given user -->
+	<cffunction name="sendEmail" access="remote" returntype="void" httpmethod="PUT" restpath="sendEmail" >
+		<cfheader name = "Access-Control-Allow-Origin" value="*">
+		<cfheader name = "Access-Control-Allow-Methods" value = "GET, POST, PUT, DELETE, OPTIONS">
+
+		<cfset senderID = #Application.userID# />
+
+		<cfquery name="senderNameResult">
+			SELECT FirstName, LastName FROM "User"
+			WHERE userID=<cfqueryPARAM value="#senderID#" cfsqltype="CF_SQL_INTEGER">
+		</cfquery>
+
+		<cfset senderName= senderNameResult.FirstName&" "&senderNameResult.LastName />
+
+		<cfset subject = url.subject />
+		<cfset recipient = url.recipient /> 
+		<cfset message = url.message />
+		<cfset dateSent = ParseDateTime(Now()) />
+
+	 	<cfquery result="sendToMessageResult">
+			INSERT INTO Message (sender, receipient, subject, message, dateSent)
+			VALUES ( 
+				<cfqueryPARAM value ="#senderName#" cfsqltype="CF_SQL_VARCHAR">,
+				<cfqueryPARAM value ="#recipient#" cfsqltype="CF_SQL_VARCHAR">,
+			 	<cfqueryPARAM value ="#subject#" cfsqltype="CF_SQL_VARCHAR">,
+			 	<cfqueryPARAM value ="#message#" cfsqltype="CF_SQL_VARCHAR">,
+			 	<cfqueryPARAM value ="#dateSent#" cfsqltype="CF_SQL_TIMESTAMP">
+			 )
+		</cfquery> 
+
+		<cfset msgID = sendToMessageResult.generatedkey />
+
+		<cfquery name="recipientUserID">
+			SELECT userID FROM "User"
+			WHERE email=<cfqueryPARAM value="#recipient#" cfsqltype="CF_SQL_VARCHAR">
+		</cfquery>
+
+		<cfset userID=recipientUserID.userID />
+
+		<cfquery name="sendToInbox">
+			INSERT INTO Inbox (userID, dateRevc, msgID, readStatus)
+			VALUES (
+				<cfqueryPARAM value="#userID#" cfsqltype="CF_SQL_INTEGER">,
+			 	<cfqueryPARAM value="#dateSent#" cfsqltype="CF_SQL_TIMESTAMP">,
+			 	<cfqueryPARAM value="#msgID#" cfsqltype="CF_SQL_INTEGER">,
+			 	<cfqueryPARAM value='N' cfsqltype="CF_SQL_IDSTAMP"> 
+			)
+		</cfquery>
+
+	</cffunction>
+
 </cfcomponent>
