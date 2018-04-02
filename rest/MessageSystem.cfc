@@ -9,7 +9,7 @@
 		
 	<!-- Retrieve email for given user -->
 	<cffunction name="GetEmail" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="GetEmail" >
-		<cfheader name = "Access-Control-Allow-Origin" value="*">
+<!---		<cfheader name = "Access-Control-Allow-Origin" value="*">--->
 
 		<cfset testID = 2/>
 		<cfset userID = #Application.userID# >
@@ -26,9 +26,9 @@
 	</cffunction>
 
 	<!-- Send email for given user -->
-	<cffunction name="sendEmail" access="remote" returntype="void" httpmethod="PUT" restpath="sendEmail" >
-		<cfheader name = "Access-Control-Allow-Origin" value="*">
-		<cfheader name = "Access-Control-Allow-Methods" value = "GET, POST, PUT, DELETE, OPTIONS">
+	<cffunction name="sendEmail" access="remote" returntype="Any" httpmethod="PUT" restpath="sendEmail" >
+<!---		<cfheader name = "Access-Control-Allow-Origin" value="*">
+		<cfheader name = "Access-Control-Allow-Methods" value = "GET, POST, PUT, DELETE, OPTIONS">--->
 
 		<cfset senderID = #Application.userID# />
 
