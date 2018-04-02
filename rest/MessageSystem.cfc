@@ -6,7 +6,7 @@
 		<cfset string="testString">
 		<cfreturn string >
 	</cffunction>
-		
+			
 	<!-- Retrieve email for given user -->
 	<cffunction name="GetEmail" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="GetEmail" >
 		<!---<cfheader name = "Access-Control-Allow-Origin" value="*">--->
