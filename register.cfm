@@ -30,19 +30,19 @@
 <body>
 <cfinclude template="navbar.cfm">
 <div class="container">
+	<cfif IsDefined('url.Exist')>
+		<cfoutput>
+			<div class="alert alert-warning">
+				<a href="##" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				Email Already Registered.
+			</div>
+		</cfoutput>
+	</cfif>
 	<div class="page-header">
 		<h1>Register</h1>
 	</div>
 	<div class="row">
 		<div class="col-sm-6">
-			<cfif IsDefined('url.Exist')>
-				<cfoutput>
-					<div class="alert alert-warning">
-						<a href="##" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						Email Already Exists.
-					</div>
-				</cfoutput>
-			</cfif>
 			
 			<p>Already a member? <a href="index.cfm">Log in here</a></p>
 			<br/>

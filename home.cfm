@@ -62,9 +62,9 @@
                 <cfoutput>NJ-Participation in (ADDP) / HICP</cfoutput></td>
                 <cfset NJAppExist=UserObj.stateAppExist('NJ')/>
                 <cfif NJAppExist eq 0>
-                	<cfoutput><td><a href="application/dhas_instructions_page1.cfm">start New Application</a></td></cfoutput>
+                	<cfoutput><td><a href="application/dhas_instructions_page1.cfm">Start new application</a></td></cfoutput>
                 <cfelse>
-                	<cfoutput><td>Application already exist</td></cfoutput>
+                	<cfoutput><td>Application already exist.</td></cfoutput>
                </cfif>
 			  </table></center> 
     </div>
@@ -87,7 +87,7 @@
 			<cfset outputLink=UserObj.getDirectLink(outputState)/>
 			<!-- create html row for Application -->
 			<cfoutput><tr><td>#outputState#</td><td>#outputStatus#</td>
-				<td><a href="#outputLink#">edit Application</td></tr>
+				<td><a href="#outputLink#">Edit application</td></tr>
 				</cfoutput>
 		</cfloop>
 		</table></center>

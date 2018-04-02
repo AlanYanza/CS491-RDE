@@ -144,8 +144,18 @@
 			$("button[type=submit][name=save]").click(function() {
 				$("form").find("input").removeAttr("required");
 			});
+			$("button[type=submit][name=previous]").click(function() {
+				$("form").find("input").removeAttr("required");
+			});
 		});
-</script>
+		$(document).keypress(
+			function(event){
+				if (event.which == '13') {
+					event.preventDefault();
+				}
+			}
+		);
+	</script>
 </head>
 <body>
 <cfinclude template="../navbar.cfm">
