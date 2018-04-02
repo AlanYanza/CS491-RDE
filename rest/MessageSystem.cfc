@@ -18,7 +18,7 @@
 			Message.dateSent 
 			FROM Inbox 
 			INNER JOIN Message ON Inbox.msgID=Message.msgID
-			WHERE Inbox.userID = #userID#
+			WHERE Inbox.userID = <cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" >
 		</cfquery>
 
 		<cfreturn serializeJSON(MailResult, 'struct') /> 
