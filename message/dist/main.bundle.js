@@ -327,7 +327,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var MailService = (function () {
     function MailService(http) {
         this.http = http;
-        this.messageURL = 'http://localhost:8500/rest/restTest/MessageSystem/GetEmail';
+        this.messageURL = 'http://127.0.0.1:8500/rest/restTest/MessageSystem/GetEmail';
     }
     MailService.prototype.resolve = function (routeSnapshot) {
         return this.getMessages()
@@ -481,7 +481,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var MessageService = (function () {
     function MessageService(http) {
         this.http = http;
-        this.sendMessageAPIUrl = "http://localhost:8500/rest/restTest/MessageSystem/sendEmail";
+        this.sendMessageAPIUrl = "http://127.0.0.1:8500/rest/restTest/MessageSystem/sendEmail";
     }
     MessageService.prototype.sendMessages = function (msg) {
         var params = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpParams */]()
