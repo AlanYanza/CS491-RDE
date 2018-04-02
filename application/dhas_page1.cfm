@@ -116,9 +116,18 @@
 			$("input[type=checkbox][name=RNatHa]").click(RNatHaCheck);
 			$("input[type=radio][name=EHisp]").change(EHispCheck);
 			$("input[type=radio][name=genderBirth]").change(pregnant);
+
+			/*
+			$("button[type=button][name=next]").click(function() {
+				if(($("select[name=state]").val() == "X") || ($("select[name=MState]").val() == "X")) {
+					document.getElementById("state").validity;
+					console.log($("form").serialize());
+				}				
+				//$('form').submit();
+			});
+			*/
 		});
-		$(document).keypress(
-			function(event){
+		$(document).keypress(function(event){
 				if (event.which == '13') {
 					event.preventDefault();
 				}
@@ -182,59 +191,59 @@
 			<input type="text" class="form-control" id="city" name="city" value="<cfoutput>#subformData.city#</cfoutput>" required /></div></div>
 		<div class="col-sm-3"><label for="state">State <span style="color: red;">*</span></label>
 			<select class="form-control" id="state" name="state" required />
-			<option value="X" <cfset subformClass.showSelectionField('state',subformData,'X')/>>Select one</option>
-			<option value="AL" <cfset subformClass.showSelectionField('state',subformData,'AL')/>>AL - Alabama</option>
-			<option value="AK" <cfset subformClass.showSelectionField('state',subformData,'AK')/>>AK - Alaska</option>
-			<option value="AZ" <cfset subformClass.showSelectionField('state',subformData,'AZ')/>>AZ - Arizona</option>
-			<option value="AR" <cfset subformClass.showSelectionField('state',subformData,'AR')/>>AR - Arkansas</option>
-			<option value="CA" <cfset subformClass.showSelectionField('state',subformData,'CA')/>>CA - California</option>
-			<option value="CO" <cfset subformClass.showSelectionField('state',subformData,'CO')/>>CO - Colorado</option>
-			<option value="CT" <cfset subformClass.showSelectionField('state',subformData,'CT')/>>CT - Connecticut</option>
-			<option value="DC" <cfset subformClass.showSelectionField('state',subformData,'DC')/>>DC - District of Columbia</option>
-			<option value="DE" <cfset subformClass.showSelectionField('state',subformData,'DE')/>>DE - Delaware</option>
-			<option value="FL" <cfset subformClass.showSelectionField('state',subformData,'FL')/>>FL - Florida</option>
-			<option value="GA" <cfset subformClass.showSelectionField('state',subformData,'GA')/>>GA - Georgia</option>
-			<option value="HI" <cfset subformClass.showSelectionField('state',subformData,'HI')/>>HI - Hawaii</option>
-			<option value="ID" <cfset subformClass.showSelectionField('state',subformData,'ID')/>>ID - Idaho</option>
-			<option value="IL" <cfset subformClass.showSelectionField('state',subformData,'IL')/>>IL - Illinois</option>
-			<option value="IN" <cfset subformClass.showSelectionField('state',subformData,'IN')/>>IN - Indiana</option>
-			<option value="IA" <cfset subformClass.showSelectionField('state',subformData,'IA')/>>IA - Iowa</option>
-			<option value="KS" <cfset subformClass.showSelectionField('state',subformData,'KS')/>>KS - Kansas</option>
-			<option value="KY" <cfset subformClass.showSelectionField('state',subformData,'KY')/>>KY - Kentucky</option>
-			<option value="LA" <cfset subformClass.showSelectionField('state',subformData,'LA')/>>LA - Louisiana</option>
-			<option value="ME" <cfset subformClass.showSelectionField('state',subformData,'ME')/>>ME - Maine</option>
-			<option value="MD" <cfset subformClass.showSelectionField('state',subformData,'MD')/>>MD - Maryland</option>
-			<option value="MA" <cfset subformClass.showSelectionField('state',subformData,'MA')/>>MA - Massachusetts</option>
-			<option value="MI" <cfset subformClass.showSelectionField('state',subformData,'MI')/>>MI - Michigan</option>
-			<option value="MN" <cfset subformClass.showSelectionField('state',subformData,'MN')/>>MN - Minnesota</option>
-			<option value="MS" <cfset subformClass.showSelectionField('state',subformData,'MS')/>>MS - Mississippi</option>
-			<option value="MO" <cfset subformClass.showSelectionField('state',subformData,'MO')/>>MO - Missouri</option>
-			<option value="MT" <cfset subformClass.showSelectionField('state',subformData,'MT')/>>MT - Montana</option>
-			<option value="NE" <cfset subformClass.showSelectionField('state',subformData,'NE')/>>NE - Nebraska</option>
-			<option value="NV" <cfset subformClass.showSelectionField('state',subformData,'NV')/>>NV - Nevada</option>
-			<option value="NH" <cfset subformClass.showSelectionField('state',subformData,'NH')/>>NH - New Hampshire</option>
-			<option value="NJ" <cfset subformClass.showSelectionField('state',subformData,'NJ')/>>NJ - New Jersey</option>
-			<option value="NM" <cfset subformClass.showSelectionField('state',subformData,'NM')/>>NM - New Mexico</option>
-			<option value="NY" <cfset subformClass.showSelectionField('state',subformData,'NY')/>>NY - New York</option>
-			<option value="NC" <cfset subformClass.showSelectionField('state',subformData,'NJ')/>>NC - North Carolina</option>
-			<option value="ND" <cfset subformClass.showSelectionField('state',subformData,'ND')/>>ND - North Dakota</option>
-			<option value="OH" <cfset subformClass.showSelectionField('state',subformData,'OH')/>>OH - Ohio</option>
-			<option value="OK" <cfset subformClass.showSelectionField('state',subformData,'OK')/>>OK - Oklahoma</option>
-			<option value="OR" <cfset subformClass.showSelectionField('state',subformData,'OR')/>>OR - Oregon</option>
-			<option value="PA" <cfset subformClass.showSelectionField('state',subformData,'PA')/>>PA - Pennsylvania</option>
-			<option value="PR" <cfset subformClass.showSelectionField('state',subformData,'PR')/>>PR - Puerto Rico</option>
-			<option value="RI" <cfset subformClass.showSelectionField('state',subformData,'RI')/>>RI - Rhode Island</option>
-			<option value="SC" <cfset subformClass.showSelectionField('state',subformData,'SC')/>>SC - South Carolina</option>
-			<option value="SD" <cfset subformClass.showSelectionField('state',subformData,'SD')/>>SD - South Dakota</option>
-			<option value="TN" <cfset subformClass.showSelectionField('state',subformData,'TN')/>>TN - Tennessee</option>
-			<option value="TX" <cfset subformClass.showSelectionField('state',subformData,'TX')/>>TX - Texas</option>
-			<option value="UT" <cfset subformClass.showSelectionField('state',subformData,'UT')/>>UT - Utah</option>
-			<option value="VT" <cfset subformClass.showSelectionField('state',subformData,'VT')/>>VT - Vermont</option>
-			<option value="VA" <cfset subformClass.showSelectionField('state',subformData,'VA')/>>VA - Virginia</option>
-			<option value="WA" <cfset subformClass.showSelectionField('state',subformData,'WA')/>>WA - Washington</option>
-			<option value="WV" <cfset subformClass.showSelectionField('state',subformData,'WV')/>>WV - West Virginia</option>
-			<option value="WI" <cfset subformClass.showSelectionField('state',subformData,'WI')/>>WI - Wisconsin</option>
-			<option value="WY" <cfset subformClass.showSelectionField('state',subformData,'WY')/>>WY - Wyoming</option>
+				<option value="X" <cfset subformClass.showSelectionField('state',subformData,'X')/>>Select one</option>
+				<option value="AL" <cfset subformClass.showSelectionField('state',subformData,'AL')/>>AL - Alabama</option>
+				<option value="AK" <cfset subformClass.showSelectionField('state',subformData,'AK')/>>AK - Alaska</option>
+				<option value="AZ" <cfset subformClass.showSelectionField('state',subformData,'AZ')/>>AZ - Arizona</option>
+				<option value="AR" <cfset subformClass.showSelectionField('state',subformData,'AR')/>>AR - Arkansas</option>
+				<option value="CA" <cfset subformClass.showSelectionField('state',subformData,'CA')/>>CA - California</option>
+				<option value="CO" <cfset subformClass.showSelectionField('state',subformData,'CO')/>>CO - Colorado</option>
+				<option value="CT" <cfset subformClass.showSelectionField('state',subformData,'CT')/>>CT - Connecticut</option>
+				<option value="DC" <cfset subformClass.showSelectionField('state',subformData,'DC')/>>DC - District of Columbia</option>
+				<option value="DE" <cfset subformClass.showSelectionField('state',subformData,'DE')/>>DE - Delaware</option>
+				<option value="FL" <cfset subformClass.showSelectionField('state',subformData,'FL')/>>FL - Florida</option>
+				<option value="GA" <cfset subformClass.showSelectionField('state',subformData,'GA')/>>GA - Georgia</option>
+				<option value="HI" <cfset subformClass.showSelectionField('state',subformData,'HI')/>>HI - Hawaii</option>
+				<option value="ID" <cfset subformClass.showSelectionField('state',subformData,'ID')/>>ID - Idaho</option>
+				<option value="IL" <cfset subformClass.showSelectionField('state',subformData,'IL')/>>IL - Illinois</option>
+				<option value="IN" <cfset subformClass.showSelectionField('state',subformData,'IN')/>>IN - Indiana</option>
+				<option value="IA" <cfset subformClass.showSelectionField('state',subformData,'IA')/>>IA - Iowa</option>
+				<option value="KS" <cfset subformClass.showSelectionField('state',subformData,'KS')/>>KS - Kansas</option>
+				<option value="KY" <cfset subformClass.showSelectionField('state',subformData,'KY')/>>KY - Kentucky</option>
+				<option value="LA" <cfset subformClass.showSelectionField('state',subformData,'LA')/>>LA - Louisiana</option>
+				<option value="ME" <cfset subformClass.showSelectionField('state',subformData,'ME')/>>ME - Maine</option>
+				<option value="MD" <cfset subformClass.showSelectionField('state',subformData,'MD')/>>MD - Maryland</option>
+				<option value="MA" <cfset subformClass.showSelectionField('state',subformData,'MA')/>>MA - Massachusetts</option>
+				<option value="MI" <cfset subformClass.showSelectionField('state',subformData,'MI')/>>MI - Michigan</option>
+				<option value="MN" <cfset subformClass.showSelectionField('state',subformData,'MN')/>>MN - Minnesota</option>
+				<option value="MS" <cfset subformClass.showSelectionField('state',subformData,'MS')/>>MS - Mississippi</option>
+				<option value="MO" <cfset subformClass.showSelectionField('state',subformData,'MO')/>>MO - Missouri</option>
+				<option value="MT" <cfset subformClass.showSelectionField('state',subformData,'MT')/>>MT - Montana</option>
+				<option value="NE" <cfset subformClass.showSelectionField('state',subformData,'NE')/>>NE - Nebraska</option>
+				<option value="NV" <cfset subformClass.showSelectionField('state',subformData,'NV')/>>NV - Nevada</option>
+				<option value="NH" <cfset subformClass.showSelectionField('state',subformData,'NH')/>>NH - New Hampshire</option>
+				<option value="NJ" <cfset subformClass.showSelectionField('state',subformData,'NJ')/>>NJ - New Jersey</option>
+				<option value="NM" <cfset subformClass.showSelectionField('state',subformData,'NM')/>>NM - New Mexico</option>
+				<option value="NY" <cfset subformClass.showSelectionField('state',subformData,'NY')/>>NY - New York</option>
+				<option value="NC" <cfset subformClass.showSelectionField('state',subformData,'NJ')/>>NC - North Carolina</option>
+				<option value="ND" <cfset subformClass.showSelectionField('state',subformData,'ND')/>>ND - North Dakota</option>
+				<option value="OH" <cfset subformClass.showSelectionField('state',subformData,'OH')/>>OH - Ohio</option>
+				<option value="OK" <cfset subformClass.showSelectionField('state',subformData,'OK')/>>OK - Oklahoma</option>
+				<option value="OR" <cfset subformClass.showSelectionField('state',subformData,'OR')/>>OR - Oregon</option>
+				<option value="PA" <cfset subformClass.showSelectionField('state',subformData,'PA')/>>PA - Pennsylvania</option>
+				<option value="PR" <cfset subformClass.showSelectionField('state',subformData,'PR')/>>PR - Puerto Rico</option>
+				<option value="RI" <cfset subformClass.showSelectionField('state',subformData,'RI')/>>RI - Rhode Island</option>
+				<option value="SC" <cfset subformClass.showSelectionField('state',subformData,'SC')/>>SC - South Carolina</option>
+				<option value="SD" <cfset subformClass.showSelectionField('state',subformData,'SD')/>>SD - South Dakota</option>
+				<option value="TN" <cfset subformClass.showSelectionField('state',subformData,'TN')/>>TN - Tennessee</option>
+				<option value="TX" <cfset subformClass.showSelectionField('state',subformData,'TX')/>>TX - Texas</option>
+				<option value="UT" <cfset subformClass.showSelectionField('state',subformData,'UT')/>>UT - Utah</option>
+				<option value="VT" <cfset subformClass.showSelectionField('state',subformData,'VT')/>>VT - Vermont</option>
+				<option value="VA" <cfset subformClass.showSelectionField('state',subformData,'VA')/>>VA - Virginia</option>
+				<option value="WA" <cfset subformClass.showSelectionField('state',subformData,'WA')/>>WA - Washington</option>
+				<option value="WV" <cfset subformClass.showSelectionField('state',subformData,'WV')/>>WV - West Virginia</option>
+				<option value="WI" <cfset subformClass.showSelectionField('state',subformData,'WI')/>>WI - Wisconsin</option>
+				<option value="WY" <cfset subformClass.showSelectionField('state',subformData,'WY')/>>WY - Wyoming</option>
 			</select>
 		</div>
 		<div class="col-sm-3"><div class="form-group"><label for="zip">Zip Code <span style="color: red;">*</span></label>
@@ -263,7 +272,7 @@
 			<input type="text" class="form-control" id="MCity" name="MCity" value="<cfoutput>#subformData.MCity#</cfoutput>" required /></div></div>
 		<div class="col-sm-3"><label for="MState">State <span style="color: red;">*</span></label>
 			<select class="form-control" id="MState" name="MState" required />
-			<option value="X" <cfset subformClass.showSelectionField('MState',subformData,'X')/>>Select one</option>
+				<option value="X" <cfset subformClass.showSelectionField('MState',subformData,'X')/>>Select one</option>
 				<option value="AL" <cfset subformClass.showSelectionField('MState',subformData,'AL')/>>AL - Alabama</option>
 				<option value="AK" <cfset subformClass.showSelectionField('MState',subformData,'AK')/>>AK - Alaska</option>
 				<option value="AZ" <cfset subformClass.showSelectionField('MState',subformData,'AZ')/>>AZ - Arizona</option>
