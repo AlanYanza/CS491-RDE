@@ -57,8 +57,8 @@
 	If you want more information on the AIDS Drug Distribution Program (ADDP)
 	or the Health Insurance Continuation Program (HICP),
 	please go to our websites at:<br/>
-	<strong>FOR ADDP:</strong><a href="http://nj.gov/health/aids/freemeds.shtml" target="_blank">http://nj.gov/health/aids/freemeds.shtml</a><br/>
-	<strong>FOR HICP:</strong><a href="http://nj.gov/health/aids/keepins.shtml" target="_blank">http://nj.gov/health/aids/keepins.shtml</a><br>
+	<strong>FOR ADDP: </strong><a href="http://nj.gov/health/hivstdtb/hiv-aids/medications.shtml" target="_blank">http://nj.gov/health/hivstdtb/hiv-aids/medications.shtml</a><br/>
+	<strong>FOR HICP: </strong><a href="http://nj.gov/health/hivstdtb/hiv-aids/hicp.shtml" target="_blank">http://nj.gov/health/hivstdtb/hiv-aids/hicp.shtml</a><br>
 
 	<br/>
 	
