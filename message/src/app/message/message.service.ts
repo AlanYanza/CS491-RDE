@@ -13,7 +13,7 @@ export class MessageService {
   	const params = new HttpParams()
   		.set("subject", msg.subject)
   		.set("recipient", msg.recipient)
-  		.set("message", msg.message);  		;
+  		.set("message", msg.message);  		
   	return this.http.put(this.sendMessageAPIUrl, null, {
   		params: params
   	});
