@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 @Injectable()
 export class MessageService {
 
-	sendMessageAPIUrl = "http://localhost:8500/rest/restTest/MessageSystem/sendEmail";
+	sendMessageAPIUrl = "http://127.0.0.1:8500/rest/restTest/MessageSystem/sendEmail";
 
   constructor(private http: HttpClient) { }
 

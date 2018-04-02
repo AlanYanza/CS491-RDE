@@ -17,7 +17,7 @@ export class MailService implements Resolve<Msg> {
 
 	MAILTEST: Observable<Msg[]>;
 
-	private messageURL = 'http://localhost:8500/rest/restTest/MessageSystem/GetEmail';
+	private messageURL = 'http://127.0.0.1:8500/rest/restTest/MessageSystem/GetEmail';
 
   constructor(
   	private http: HttpClient
