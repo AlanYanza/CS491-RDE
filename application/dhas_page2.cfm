@@ -52,8 +52,8 @@
 	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
 
 	<div class="form-group">
-		<label for="EmplyStatus">17. What if your current employment status?</label>
-		<select class="form-control" name="EmplyStatus">
+		<label for="EmplyStatus">What if your current employment status? <span style="color: red;">*</span></label>
+		<select class="form-control" name="EmplyStatus" required>
 			<option value='X' <cfset subformClass.showSelectionField('EmplyStatus',subformData,'X')/>>Choose one</option>
 			<option value="F" <cfset subformClass.showSelectionField('EmplyStatus',subformData,'F')/>>Full Time (35 or more hours per week)</option>
 			<option value="P" <cfset subformClass.showSelectionField('EmplyStatus',subformData,'P')/>>Part Time (less than 35 hours per week)</option>
@@ -64,40 +64,40 @@
 	<hr/>
 
 	<div class="form-group">
-		<label> 18. Are you medically UNABLE to work?</label>
+		<label>Are you medically UNABLE to work? <span style="color: red;">*</span></label>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="unableWork" value="Y" <cfset subformClass.showRadioButton('unableWork',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="unableWork" value="Y" <cfset subformClass.showRadioButton('unableWork',subformData,'Y')/> required />Yes</label>
 		<label class="radio-inline"><input type="radio" name="unableWork" value="N" <cfset subformClass.showRadioButton('unableWork',subformData,'N')/>/>No</label>
 	</div>
 
 	<hr/>
 
 	<div class="form-group">
-		<label>19. Medically unable to work LESS than 12 months?</label>
+		<label>Medically unable to work LESS than 12 months? <span style="color: red;">*</span></label>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="unable12LMonth" value="Y" <cfset subformClass.showRadioButton('unable12LMonth',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="unable12LMonth" value="Y" <cfset subformClass.showRadioButton('unable12LMonth',subformData,'Y')/> required />Yes</label>
 		<label class="radio-inline"><input type="radio" name="unable12LMonth" value="N" <cfset subformClass.showRadioButton('unable12LMonth',subformData,'N')/>/>No</label>
 	</div>
 
 	<hr/>
 
 	<div class="form-group">
-		<label>20. Medically unable to work MORE than 12 months?</label>
+		<label>Medically unable to work MORE than 12 months? <span style="color: red;">*</span></label>
 		<br>
-			<label class="radio-inline"><input type="radio" name="unable12MMonth" value="Y" <cfset subformClass.showRadioButton('unable12MMonth',subformData,'Y')/>/>Yes</label>
+			<label class="radio-inline"><input type="radio" name="unable12MMonth" value="Y" <cfset subformClass.showRadioButton('unable12MMonth',subformData,'Y')/> required />Yes</label>
 			<label class="radio-inline"><input type="radio" name="unable12MMonth" value="N" <cfset subformClass.showRadioButton('unable12MMonth',subformData,'N')/>/>No</label>
 	</div>
 
 	<hr/>
 
 	<div class="form-inline">
-	  <label for="HPersonNum">21. Number of person in your household unit (include yourself):</label>
-	  <input type="number" class="form-control" name="HPersonNum" value="<cfoutput>#subformData.HPersonNum#</cfoutput>">
+	  <label for="HPersonNum">Number of person in your household unit (include yourself): <span style="color: red;">*</span></label>
+	  <input type="number" class="form-control" name="HPersonNum" value="<cfoutput>#subformData.HPersonNum#</cfoutput>" required />
 	</div>
 
 	<hr/>
 
-	<strong>22. List any annual household income:</strong>
+	<strong>List any annual household income:</strong>
 	<div class="form-horizontal">
 	  	<label class="control-label col-sm-3" for="salary">Salary/Wages:</label>
 	  	<div class="col-sm-9 input-group">
@@ -148,28 +148,23 @@
 
 	<hr/>
 
-	<div class="form-group row">
-	  	<div class="col-sm-1"><strong>23.</strong></div>
-	  	<div class="col-sm-11">
-		  	<label>a. Did you and/or any member of your household file a Federal, State or City Income Tax return last year?</label>
-		  	<br/>
-		  	<label class="radio-inline"><input type="radio" name="taxFile" value="Y" <cfset subformClass.showRadioButton('taxFile',subformData,'Y')/>/>Yes</label>
-		  	<label class="radio-inline"><input type="radio" name="taxFile" value="N" <cfset subformClass.showRadioButton('taxFile',subformData,'N')/>/>No</label>
-	  	</div>
+	<div class="form-group">
+		<label for ="taxFile">Did you and/or any member of your household file a Federal, State or City Income Tax return last year? <span style="color: red;">*</span></label>
+		<br/>
+		<label class="radio-inline"><input type="radio" name="taxFile" value="Y" <cfset subformClass.showRadioButton('taxFile',subformData,'Y')/> required />Yes</label>
+		<label class="radio-inline"><input type="radio" name="taxFile" value="N" <cfset subformClass.showRadioButton('taxFile',subformData,'N')/> required />No</label>
 	</div>
 
-	<div class="row">
-		<div class="col-sm-12 col-sm-offset-1">
-			<label>b. Were you listed as a dependent on a family member's Federal, State, or City Income tax return last year?</label>
-			<br/>
-			<label class="radio-inline"><input type="radio" name="dependant" value="Y" <cfset subformClass.showRadioButton('dependant',subformData,'Y')/>/>Yes</label>
-			<label class="radio-inline"><input type="radio" name="dependant" value="N" <cfset subformClass.showRadioButton('dependant',subformData,'N')/>/>No</label>
-		</div>
+	<div class="form-group">
+		<label for="dependant">Were you listed as a dependent on a family member's Federal, State, or City Income tax return last year? <span style="color: red;">*</span></label>
+		<br/>
+		<label class="radio-inline"><input type="radio" name="dependant" value="Y" <cfset subformClass.showRadioButton('dependant',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="dependant" value="N" <cfset subformClass.showRadioButton('dependant',subformData,'N')/>/>No</label>
 	</div>
 
 	<hr/>
 
-	<strong>24. Have you applied for or are you currently receiving any of the following? (Check ALL that apply)</strong>
+	<strong>Have you applied for or are you currently receiving any of the following? (Check ALL that apply)</strong>
 	<br/>
 	<br/>
 	<div class="row">

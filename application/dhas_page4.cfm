@@ -120,7 +120,7 @@
 
 	<div id="SSISSDIOption">
 		<div class="row">
-			<label class="col-sm-4">a. If yes, when did you apply for SSI/SSDI?</label>
+			<label class="col-sm-4">When did you apply for SSI/SSDI?</label>
 			<div class="col-sm-5">
 				<input type="date" class="form-control" name="ASSISSDIDate" value="<cfoutput>#subformData.ASSISSDIDate#</cfoutput>">
 			</div>
@@ -130,7 +130,7 @@
 		</div>
 
 		<div class="form-group">
-			<label>b. Have you received a response?</label>
+			<label>Have you received a response?</label>
 			<br/>
 			<label class="radio-inline"><input type="radio" name="RespASSISSI" value="Y" <cfset subformClass.showRadioButton('RespASSISSI',subformData,'Y')/>/>Yes</label>
 			<label class="radio-inline"><input type="radio" name="RespASSISSI" value="N" <cfset subformClass.showRadioButton('RespASSISSI',subformData,'N')/>/>No</label>
@@ -140,7 +140,7 @@
 	<hr/>
 
 	<div class="form-group">
-		<label>29. Are you applying or have you applied for insurance through the health Insurance Reform Act (Marketplace/Exchange)?</label>
+		<label>Are you applying or have you applied for insurance through the health Insurance Reform Act (Marketplace/Exchange)?</label>
 		<br/>
 		<label class="radio-inline"><input type="radio" name="AMarket" value="Y" <cfset subformClass.showRadioButton('AMarket',subformData,'Y')/>/>Yes</label>
 		<label class="radio-inline"><input type="radio" name="AMarket" value="N" <cfset subformClass.showRadioButton('AMarket',subformData,'N')/>/>No</label>
@@ -149,7 +149,7 @@
 
 	<div id="marketOption">
 		<div class="row">
-			<label class="col-sm-4">a. If yes, when did you apply?</label>
+			<label class="col-sm-4">When did you apply?</label>
 			<div class="col-sm-5">
 				<input type="date" class="form-control" name="AMarketDate" value="<cfoutput>#subformData.AMarketDate#</cfoutput>">
 			</div>
@@ -159,7 +159,7 @@
 		</div>
 
 		<div class="form-group">
-			<label>b. Have you received a response?</label>
+			<label>Have you received a response?</label>
 			<br/>
 			<label class="radio-inline"><input type="radio" name="RespAMarket" value="Y" <cfset subformClass.showRadioButton('RespAMarket',subformData,'Y')/>/>Yes</label>
 			<label class="radio-inline"><input type="radio" name="RespAMarket" value="N" <cfset subformClass.showRadioButton('RespAMarket',subformData,'N')/>/>No</label>
@@ -186,7 +186,7 @@
 
 	<div class="row">
 		<div class="col-sm-6">
-			<strong>30. Private Health Insurance</strong><br/><br/>
+			<strong>Private Health Insurance</strong><br/><br/>
 			Insurance Carrier:
 			<input type="text" class="form-control" name="InsCarrier" value="<cfoutput>#subformData.InsCarrier#</cfoutput>"/><br/>
 			Address:
@@ -203,7 +203,7 @@
 		</div>
 
 		<div class="col-sm-6">
-			<strong>31. Prescription Coverage</strong><br/><br/>
+			<strong>Prescription Coverage</strong><br/><br/>
 			Insurance Carrier:
 			<input type="text" class="form-control" name="PresCar" value="<cfoutput>#subformData.PresCar#</cfoutput>"/><br/>
 			Address:
@@ -263,12 +263,12 @@
 	<hr/>
 
 	<div class="form-group">
-		<strong>32. a. Are you eligible for Veterans Administration prescription drug benefits?</strong>
+		<strong>Are you eligible for Veterans Administration prescription drug benefits?</strong>
 		<br/>
 		<label class="radio-inline"><input type="radio" name="EligVetDrugBen" value="Y" <cfset subformClass.showRadioButton('EligVetDrugBen',subformData,'Y')/>/>Yes</label>
 		<label class="radio-inline"><input type="radio" name="EligVetDrugBen" value="N" <cfset subformClass.showRadioButton('EligVetDrugBen',subformData,'N')/>/>No</label>
 		<br/>
-		<strong>b. Are you currently receiving prescription drug benefits?</strong>
+		<strong>Are you currently receiving prescription drug benefits?</strong>
 		<br/>
 		<label class="radio-inline"><input type="radio" name="RecPresDrugBen" value="Y" <cfset subformClass.showRadioButton('RecPresDrugBen',subformData,'Y')/>/>Yes</label>
 		<label class="radio-inline"><input type="radio" name="RecPresDrugBen" value="N" <cfset subformClass.showRadioButton('RecPresDrugBen',subformData,'N')/>/>No</label>

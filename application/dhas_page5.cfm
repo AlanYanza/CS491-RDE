@@ -27,6 +27,23 @@
 			$("button[type=submit][name=previous]").click(function() {
 				$("form").find("input").removeAttr("required");
 			});
+
+			function contactCheck() {
+				if (typeof $("input[type=radio][name=perm]:checked").val() === "undefined") {
+					return;
+				}
+				if ($("input[type=radio][name=perm]:checked").val() == "Y") {
+					$("#contactOption").show("slow");
+					
+				}
+				else {
+					$("#contactOption").hide("slow");
+					$("#contactOption").find("input").removeAttr("required");
+				}
+			}
+
+			contactCheck();
+			$("input[type=radio][name=perm]").change(contactCheck);
 		});
 		$(document).keypress(
 			function(event){
@@ -74,7 +91,7 @@
 
 	<div class="row">
 		<div class="col-sm-3">
-			<label for="signature">33. Signature of Applicant</label>	
+			<label for="signature">Signature of Applicant <span style="color: red;">*</span></label>	
 			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#signatureModal">Click here to attach/edit your signature</button>
 			<input type="hidden" name="signature" id="signature" value=<cfoutput>#applicantSignature.signature#</cfoutput> >
 <!---			<input type="text" name="signature" id="signature" value=<cfoutput>#applicantSignature.signature#</cfoutput> >--->
@@ -91,7 +108,7 @@
 
 	<div class="row">
 		<div class="col-sm-3">
-			<label for="SpouseSig">34. Signature of Spouse/Partner</label>
+			<label for="SpouseSig">Signature of Spouse/Partner</label>
 			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#spouseSignatureModal">Click here to attach/edit your signature</button>	
 		</div>
 		<div class="col-sm-6" id="spouseSignaturePic">
@@ -105,52 +122,59 @@
 	<hr/>
 
 	<div class="form-group">
-		<strong>35. Contact Person</strong><br/>
-		<label>May the Department of Human Services and the Department of Health contact an alternate person?</label>
+		<strong>Contact Person</strong>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="perm" value="Y" <cfset subformClass.showRadioButton('perm',subformData,'Y')/>/>Yes</label>
+		<label>May the Department of Human Services and the Department of Health contact an alternate person? <span style="color: red;">*</span></label>
+		<br/>
+		<label class="radio-inline"><input type="radio" name="perm" value="Y" <cfset subformClass.showRadioButton('perm',subformData,'Y')/> required />Yes</label>
 		<label class="radio-inline"><input type="radio" name="perm" value="N" <cfset subformClass.showRadioButton('perm',subformData,'N')/>/>No</label>
-		<br/>
-		In the event that we need information regarding your participation in the program and you are unavailable, please indicate someone
-		we may contact on your behalf.<br/>
-		<label>Is this person aware of your HIV Status?</label>
-		<br/>
-		<label class="radio-inline"><input type="radio" name="HIVAware" value="Y" <cfset subformClass.showRadioButton('HIVAware',subformData,'Y')/>/>Yes</label>
-		<label class="radio-inline"><input type="radio" name="HIVAware" value="N" <cfset subformClass.showRadioButton('HIVAware',subformData,'N')/>/>No</label>
 	</div>
 
-	<div class="row">
-		<div class="col-sm-6"><div class="form-group">
-			<label for="CPName">Name of Contact Person</label>
-			<input type="text" class="form-control" name="CPName" value="<cfoutput>#subformData.CPName#</cfoutput>">
-		</div></div>
-		<div class="col-sm-6"><div class="form-group">
-			<label for="Relation">Relationship to Applicant</label>
-			<input type="text" class="form-control" name="Relation" value="<cfoutput>#subformData.Relation#</cfoutput>">
-		</div></div>
-	</div>
-	<strong>Street Address, City, State, Zip</strong>
-	<input type="text" class="form-control" name="CPAddr" value="<cfoutput>#subformData.CPAddr#</cfoutput>">
-	<div class="row">
-		<div class="col-sm-4"><div class="form-group">
-			<label for="CPWPhone">Work Number</label>
-			<input type="tel" class="form-control" name="CPWPhone" value="<cfoutput>#subformData.CPWPhone#</cfoutput>">
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-		  	<label for="CPHPhone">Home Number</label>
-		  	<input type="tel" class="form-control" name="CPHPhone" value="<cfoutput>#subformData.CPHPhone#</cfoutput>">
-		</div></div>
-		<div class="col-sm-4"><div class="form-group">
-		  	<label for="CPCPhone">Cell Number</label>
-		  	<input type="tel" class="form-control" name="CPCPhone" value="<cfoutput>#subformData.CPCPhone#</cfoutput>">
-		</div></div>
+	<div id="contactOption">
+		<div class="form-group">
+			In the event that we need information regarding your participation in the program and you are unavailable, please indicate someone
+			we may contact on your behalf.<br/>
+			<label>Is this person aware of your HIV Status?</label>
+			<br/>
+			<label class="radio-inline"><input type="radio" name="HIVAware" value="Y" <cfset subformClass.showRadioButton('HIVAware',subformData,'Y')/>/>Yes</label>
+			<label class="radio-inline"><input type="radio" name="HIVAware" value="N" <cfset subformClass.showRadioButton('HIVAware',subformData,'N')/>/>No</label>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-6"><div class="form-group">
+				<label for="CPName">Name of Contact Person</label>
+				<input type="text" class="form-control" name="CPName" value="<cfoutput>#subformData.CPName#</cfoutput>">
+			</div></div>
+			<div class="col-sm-6"><div class="form-group">
+				<label for="Relation">Relationship to Applicant</label>
+				<input type="text" class="form-control" name="Relation" value="<cfoutput>#subformData.Relation#</cfoutput>">
+			</div></div>
+		</div>
+		<strong>Street Address, City, State, Zip</strong>
+		<input type="text" class="form-control" name="CPAddr" value="<cfoutput>#subformData.CPAddr#</cfoutput>">
+		<div class="row">
+			<div class="col-sm-4"><div class="form-group">
+				<label for="CPWPhone">Work Number</label>
+				<input type="tel" class="form-control" name="CPWPhone" value="<cfoutput>#subformData.CPWPhone#</cfoutput>">
+			</div></div>
+			<div class="col-sm-4"><div class="form-group">
+			  	<label for="CPHPhone">Home Number</label>
+			  	<input type="tel" class="form-control" name="CPHPhone" value="<cfoutput>#subformData.CPHPhone#</cfoutput>">
+			</div></div>
+			<div class="col-sm-4"><div class="form-group">
+			  	<label for="CPCPhone">Cell Number</label>
+			  	<input type="tel" class="form-control" name="CPCPhone" value="<cfoutput>#subformData.CPCPhone#</cfoutput>">
+			</div></div>
+		</div>
 	</div>
 
 	<hr/>
 
-	<strong>36. Preparer: </strong><br/>
-	Anyone other than the applicant who prepared the form must provide his/her name and telephone number, in case questions should
-	arise concerning the application.
+	<strong>Preparer: </strong>
+	<p>
+		Anyone other than the applicant who prepared the form must provide his/her name and telephone number, in case questions should
+		arise concerning the application.
+	</p>
 
 	<div class="row">
 		<div class="col-sm-6">
@@ -165,7 +189,7 @@
 
 	<hr/>
 
-	<strong>37. Case Manager Information</strong><br/>
+	<strong>Case Manager Information</strong><br/>
 	<div class="row">
 		<div class="col-sm-6"><div class="form-group">
 			<label for="CMName">Name of Case Manager:</label>

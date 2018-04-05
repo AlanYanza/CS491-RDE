@@ -225,7 +225,7 @@
 				<option value="NJ" <cfset subformClass.showSelectionField('state',subformData,'NJ')/>>NJ - New Jersey</option>
 				<option value="NM" <cfset subformClass.showSelectionField('state',subformData,'NM')/>>NM - New Mexico</option>
 				<option value="NY" <cfset subformClass.showSelectionField('state',subformData,'NY')/>>NY - New York</option>
-				<option value="NC" <cfset subformClass.showSelectionField('state',subformData,'NJ')/>>NC - North Carolina</option>
+				<option value="NC" <cfset subformClass.showSelectionField('state',subformData,'NC')/>>NC - North Carolina</option>
 				<option value="ND" <cfset subformClass.showSelectionField('state',subformData,'ND')/>>ND - North Dakota</option>
 				<option value="OH" <cfset subformClass.showSelectionField('state',subformData,'OH')/>>OH - Ohio</option>
 				<option value="OK" <cfset subformClass.showSelectionField('state',subformData,'OK')/>>OK - Oklahoma</option>
@@ -459,7 +459,7 @@
 
 	<hr/>
 	
-	<strong>Race</strong>
+	<strong>Race </strong> <span style="color: red;">*</span>
 	<br/>
 	<div>
 		<label class="checkbox-inline"><input type="checkbox" name="RWhite" value="Y" <cfset subformClass.showCheckbox('RWhite',subformData)/>/>White</label>
