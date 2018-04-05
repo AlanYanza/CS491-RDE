@@ -5,5 +5,5 @@ export class Msg {
 	MESSAGE: string;
 	SUBJECT: string;
 	DATESENT: string;
-	READSTATUS: boolean;
+	READSTATUS: string;
 }

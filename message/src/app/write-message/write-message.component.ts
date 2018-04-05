@@ -22,7 +22,12 @@ export class WriteMessageComponent implements OnInit {
   sendMessage() {
   	console.log(this.msg);
   	this.messageService.sendMessages(this.msg)
-  		.subscribe(console.log);
+  		.subscribe({
+        error(msg) { console.log('Error sending message:', msg)}
+      })
+
+    this.msg = {};
+    
   }
 
 }
