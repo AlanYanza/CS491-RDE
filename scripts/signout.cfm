@@ -1,3 +1,6 @@
+<!--- If user is not sign in, do not let them access --->
+<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
+<cfset SessionClass.checkIfLoggedIn()>
 <cfif IsDefined('session.userID')>
 	<cfset StructDelete(#session#,'userID')/>
 </cfif>

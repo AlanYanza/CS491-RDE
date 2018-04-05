@@ -1,3 +1,7 @@
+<!--- If user are already sign in, do not let them access --->
+<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
+<cfset SessionClass.ifAlreadySignIn()>
+
 <cfparam name = "form.email" type = "email" default="">
 <cfparam name = "form.password" type = "string" default ="">
 <cfparam name = "form.firstName" type = "string" default = "">

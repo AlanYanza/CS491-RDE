@@ -18,7 +18,8 @@
 			Message.dateSent 
 			FROM Inbox 
 			INNER JOIN Message ON Inbox.msgID=Message.msgID
-			WHERE Inbox.userID = <cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" >
+			WHERE Inbox.userID = <cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" > 
+			ORDER BY Message.dateSent DESC
 		</cfquery>
 		<!-- Return ResultSet as JSON -->
 		<cfreturn serializeJSON(MailResult, 'struct') /> 

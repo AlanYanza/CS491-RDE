@@ -6,7 +6,8 @@ hint="retrieves the number of unread emails for a user (for nav-bar purposes) an
 	<!-- Query for number of messages with readStatus='N' -->
 	<cfquery result="queryStat">
 		SELECT msgID FROM Inbox WHERE
-		userID=<cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" > 
+		userID=<cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" >  AND
+		readStatus='N'
 	</cfquery>
 	<cfset var numUnreadMsg=queryStat.recordCount>
 	<!-- output the number of unread message-->
