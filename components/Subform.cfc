@@ -1,23 +1,40 @@
 <cfcomponent output="false" name="Subform" displayName="Subform" extends="Form">
-	<cfset Variables.tableName='' />
-	<cfset Variables.fieldNames= []/>
-	<cfset Variables.fieldValues= {}/>
-	<cfset Variables.checkFieldNames=[]/>
-	<cfset Variables.dataID=0/>
+	<cfset Variables.tableName='' >
+	<cfset Variables.fieldNames= []>
+	<cfset Variables.fieldValues= {}>
+	<cfset Variables.checkFieldNames=[]>
+	<cfset Variables.dataID=0>
+	<cfset Variables.appID=0>
 	
 	<!-- Constructor -->
 	<cffunction name="init" displayname="subform constructor" hint="constructor for the subform CFC" >
 		<cfargument name="stateInput" type="string" />
 		<cfargument name="userIDInput" type="string" />
 		<cfargument name="tableNameInput" type="string" >
-		<cfargument name="fieldNamesInput" type="array" required="false">
+		<cfargument name="appIDInput" type="numeric" required="false">
 		<cfset super.init(stateInput,userIDInput)/>
-		<cfset tableName=tableNameInput/>
-		<cfif IsDefined('arguments.fieldNamesInput')>
-			<cfset setFields(arguments.fieldNamesInput)/>
+		<cfif isDefined('arguments.appIDInput')>
+			<cfset appID=appIDInput >
+		<cfelse>
+			<cfset appID=session.appID>
 		</cfif>
-		<cfset dataID=getDataID()/>
+		<cfset tableName=tableNameInput >
+		<cfset dataID=getDataID() >
 		<cfreturn this>
+	</cffunction>
+	
+	<!-- Retrieved a Application's dataID(helper method) -->
+	<cffunction name="getDataID" returntype="numeric" displayname="retrieveApplicationDataID" hint="retrieves the dataID associated with an Application" >
+		<cfquery name="dataIDResult" result="queryStats">
+			SELECT dataID FROM UserFormData WHERE 
+			appID=<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer" >
+		</cfquery>
+		<cfif queryStats.recordCount neq 1>
+			<cfset Var dataID=0 />
+		<cfelse>
+			<cfset Var dataID=#dataIDResult.dataID# />
+		</cfif>
+		<cfreturn dataID>
 	</cffunction>
 	
 	<!-- Setter for fields(if not provided) -->

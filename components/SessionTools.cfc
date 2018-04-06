@@ -21,9 +21,34 @@
 		</cfif>
 	</cffunction>
 	
-	<cffunction name="ifAlreadySignIn" displayname="IfAlreadySignInDirectHome" 
-	hint="If User is signed in, do not let them into sign-in or registration page" >
+	<cffunction name="ifAlreadySignIn" hint="If User is signed in, do not let them into sign-in or registration page" >
 		<cfif IsDefined("session.userID")>
+			<cflocation url="/CS491-RDE/home.cfm" >
+		</cfif>
+	</cffunction>
+	
+	<cffunction name="ClearSessionAppID" hint="If leaving Application edit, clear the Session AppID variable" >
+		<cfif isDefined('session.appID')>
+			<cfset StructDelete(#session#,'appID')/>
+		</cfif>
+	</cffunction>
+	
+	<cffunction name="NoAppIDRedirect" hint="If user has no Session AppID variable redirect back to user home page " >
+		<cfif NOT isDefined('session.appID')>
+			<cflocation url="/CS491-RDE/home.cfm" >
+		</cfif>
+	</cffunction>
+	
+	<cffunction name="ValidateAppID" 
+	hint="Validates appID given in url for current user ownership otherwise redirects to user homepage" >
+		<cfquery name="ValidateAppIDResult" result="queryStats">
+			SELECT userID FROM UserApplication WHERE
+			appID=<cfqueryparam value="#session.appID#" cfsqltype="cf_sql_integer" >
+		</cfquery>
+		<cfif queryStats.recordCount neq 1>
+			<cflocation url="/CS491-RDE/home.cfm" >
+		</cfif>
+		<cfif ValidateAppIDResult.userID neq session.userID>
 			<cflocation url="/CS491-RDE/home.cfm" >
 		</cfif>
 	</cffunction>

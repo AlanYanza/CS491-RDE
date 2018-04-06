@@ -1,6 +1,15 @@
+<!-- Session Page Protection -->
 <cfset SessionClass=createObject('component','components.SessionTools')/>
 <cfset SessionClass.checkIfLoggedIn()/>
 <cfset SessionClass.checkIfuser()/>
+<!-- If appID is not sent via url passing, redirects back to user home page -->
+<cfif isDefined('url.appID')>
+	<cfset session.appID=url.appID>
+</cfif>
+<!-- More Session Page Protection -->
+<cfset SessionClass.NoAppIDRedirect()>
+<cfset SessionClass.validateAppID()>
+<!-- Generate Document Information for User -->
 <cfset UserObj=createObject('component','components.User').init(session.userID)/>
 <cfset DocumentTracker=UserObj.getDocuments()/>
 

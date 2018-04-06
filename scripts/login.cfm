@@ -1,5 +1,6 @@
 <!--- If user are already sign in, do not let them access --->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
+<cfset SessionClass.ClearSessionAppID() > <!-- If appID session variable set, clear it -->
 <cfset SessionClass.ifAlreadySignIn()>
 
 <!-- If user exist, create an UserObj -->

@@ -1,5 +1,5 @@
 <!-- Retrieve Number of unread Messages -->
-<cffunction name="getUnreadEmails" displayname="getNumberOfUnreadEmail" 
+<!---<cffunction name="getUnreadEmails" displayname="getNumberOfUnreadEmail" 
 hint="retrieves the number of unread emails for a user (for nav-bar purposes) and its not rest enabled">
 	<!-- retrieve current User's userID' -->
 	<cfset var userID = #Application.userID# >
@@ -20,7 +20,7 @@ hint="retrieves the number of unread emails for a user (for nav-bar purposes) an
 			<li><a href="/CS491-RDE/message.cfm">Messages</a></li>
 		</cfoutput>
 	</cfif>
-</cffunction>
+</cffunction>--->
 
 <!--header.cfm-->
 <nav class="navbar navbar-inverse">
@@ -37,7 +37,8 @@ hint="retrieves the number of unread emails for a user (for nav-bar purposes) an
 				<li><a href="/CS491-RDE/home.cfm">Home</a></li>
 				<cfif IsDefined('session.firstName')>
 				  	<cfoutput>
-				  		<cfset getUnreadEmails()>
+				  		<!---<cfset getUnreadEmails()>--->
+				  		<li><a href="/CS491-RDE/message.cfm">Messages <span class="badge">1</span></a></li>
 					</cfoutput>
 				</cfif>
 			</ul>		

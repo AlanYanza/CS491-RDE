@@ -1,9 +1,12 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
 <cfset FormClass=createObject('component','CS491-RDE.components.Form').init('NJ',session.userID)/>
+<!--- If a new Application create a new Application(inside DB)--->
+<cfif isDefined('url.new')>
+	<cfset FormClass.createApplication()/>
+</cfif>
 <!-- Check ApplicationStatus and redirect to homePage is needed -->
 <cfset FormClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
-<cfset FormClass.createApplication()/>
 
 <!DOCTYPE html>
 <html lang="en">

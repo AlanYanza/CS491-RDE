@@ -130,7 +130,8 @@
 			<cfset InsertNJDocuments()/> 
 		</cfif>
 		<!--- Change status of Application to Review--->
-		<cfset subformObj.updateApplicationStatus("R")/>
+<!---		<cfset subformObj.updateApplicationStatus("R")>--->
+			<cfset subformObj.submitApplication()>
   		<cflocation url="/CS491-RDE/home.cfm?submitApplication">
 	</cfif>
 </cfif>

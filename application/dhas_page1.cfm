@@ -1,9 +1,17 @@
-<!-- Check to see if user is logged  in -->
+<!-- Session Page Protection -->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
-<cfset SessionClass.checkIfLoggedIn()/>
-<cfset SessionClass.checkIfuser()/>
+<cfset SessionClass.checkIfLoggedIn()>
+<cfset SessionClass.checkIfuser()>
+<!-- If appID is not sent via url passing, redirects back to user home page -->
+<cfif isDefined('url.appID')>
+	<cfset session.appID=url.appID>
+</cfif>
+<!-- More Session Page Protection -->
+<cfset SessionClass.NoAppIDRedirect()>
+<cfset SessionClass.validateAppID()>
 <cfset tableName='NJSection1'/>
-<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName)/>
+<!-- create a session variable for appID -->
+<cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName,session.appID)/>
 <cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
 <!-- Application Page preprocessing -->
 <cfset subformClass.createSubformData()/>

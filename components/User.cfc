@@ -8,22 +8,11 @@
 		<cfreturn this>
 	</cffunction>
 	
-	<!-- get Application able to edit -->
-	<cffunction name="getEditableApplication" hint="Retrieves all Application editable by user(status of 'P' or 'N')" 
-	returntype="Query" >
-		<cfquery name="applicationResult">
-			SELECT formTypeID,status FROM UserApplication WHERE
-			userID=<cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" > AND
-			status='P' OR status='N'
-		</cfquery>
-		<cfreturn applicationResult>
-	</cffunction>
-	
 	<!-- get Application all Applications -->
 	<cffunction name="getAllApplication" hint="Retrieves all Application editable by user(status of 'P' or 'N')" 
 	returntype="Query" >
 		<cfquery name="applicationResult">
-			SELECT formTypeID,status FROM UserApplication WHERE
+			SELECT appID,formTypeID,status,dateSubmited FROM UserApplication WHERE
 			userID=<cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" >
 		</cfquery>
 		<cfreturn applicationResult>
@@ -78,37 +67,24 @@
 	</cffunction>
 	
 	<!-- Get State from formTypeID--->
-	<cffunction name="getState" displayname="getStateFromFormTypeID" hint="retrieves the state using formTypeID" >
+	<cffunction name="getFormInfo" displayname="getStateFromFormTypeID" hint="retrieves the state using formTypeID"
+	  returntype="Query" >
 		<cfargument name="formtypeIDInput" type="numeric" hint="formTypeID retrieve from UserApplication Queries" >
-		<cfquery name="stateResult" result="queryStats">
-			SELECT state FROM Forms WHERE
+		<cfquery name="formResult" result="queryStats">
+			SELECT state,AppDescription FROM Forms WHERE
 			formTypeID=<cfqueryparam value="#arguments.formtypeIDInput#" cfsqltype="cf_sql_integer" >
 		</cfquery>
-		<!-- if no state found -->
-		<cfif queryStats.recordCount eq 0>
-			<cfset Var state=''/>
-		<cfelse>
-			<cfset Var state=stateResult.state/>
-		</cfif>
-		<cfreturn state>
+		<cfreturn formResult>
 	</cffunction>
 		
 	<!-- Get Document and Results ---> 
 	<cffunction name="getDocuments">
-	<cfquery  name="DocumentResult" result="queryStats">
-		SELECT appID 
-		FROM UserApplication
-		WHERE userID = <cfqueryparam value="#userID#">
-	</cfquery>
-	
-	<cfset var appID = DocumentResult.appID />
-	
-	<cfquery name="DocumentName" result="queryStats">
-		SELECT document,isRequired, received, DateReceived
-		FROM AppDocument
-		WHERE appID = <cfqueryparam value="#appID#">
-	</cfquery>
-	<cfreturn DocumentName />
+		<cfquery name="DocumentName" result="queryStats">
+			SELECT document,isRequired, received, DateReceived
+			FROM AppDocument
+			WHERE appID = <cfqueryparam value="#session.appID#">
+		</cfquery>
+		<cfreturn DocumentName />
 	</cffunction>
 	
 	
