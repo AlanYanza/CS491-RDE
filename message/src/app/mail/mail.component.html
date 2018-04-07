@@ -13,7 +13,7 @@
 				</li>
 			</ul>
 			<ul class="mail">
-				<li *ngFor="let msg of mail" [class.read]="msg.READSTATUS === 'F'" [class.selected]="msg === selectedMsg" [routerLink] = "['/message', msg.MSGID]" (click)="onSelect(msg)"> 
+				<li *ngFor="let msg of (mail | async)" [class.read]="msg.READSTATUS === 'F'" [class.selected]="msg === selectedMsg" [routerLink] = "['/message', msg.MSGID]" (click)="onSelect(msg)"> 
 					<div><span class="subject">{{msg.SUBJECT}}</span><span class="date">{{msg.DATESENT}}</span></div>
 					<div class="sender">{{msg.SENDER}}</div>
 				</li>

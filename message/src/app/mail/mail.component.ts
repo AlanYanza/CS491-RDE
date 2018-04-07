@@ -13,7 +13,7 @@ import { MessageResolverService } from '../message-resolver.service';
   styleUrls: ['./mail.component.css']
 })
 export class MailComponent implements OnInit {
-	mail : Msg[];
+	mail = this.mailService.getMessages();
 	title = "Inbox";
 
 	selectedMsg: Msg; 
@@ -21,7 +21,7 @@ export class MailComponent implements OnInit {
   constructor(private mailService : MailService) { }
 
   ngOnInit() {
-  	this.getMessages();
+  	// this.getMessages();
   	// this.test();
   }
 
@@ -30,10 +30,10 @@ export class MailComponent implements OnInit {
   // 		.subscribe(console.log);
   // }
 
-  getMessages(): void {
-  	this.mailService.getMessages()
-  		.subscribe(mail => this.mail = mail);
-  }
+  // getMessages(): void {
+  // 	this.mailService.getMessages()
+  // 		.subscribe(mail => this.mail = mail);
+  // }
 
   onSelect(msg: Msg): void {
   	this.selectedMsg = msg;
