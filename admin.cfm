@@ -1,6 +1,9 @@
+<!-- Session Page Protection -->
 <cfset SessionClass=createObject('component','components.SessionTools')/>
 <cfset SessionClass.checkIfLoggedIn()/>
 <cfset SessionClass.checkIfadmin()/>
+<cfset SessionClass.ClearSessionAppID() > <!-- If appID session variable set, clear it -->
+<!-- gather required page data -->
 
 <!DOCTYPE html>
 <html lang="en">

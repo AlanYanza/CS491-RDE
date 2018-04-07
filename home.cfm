@@ -1,7 +1,9 @@
+<!-- Session Page Protection -->
 <cfset SessionClass=createObject('component','components.SessionTools') >
 <cfset SessionClass.checkIfLoggedIn() >
 <cfset SessionClass.checkIfuser() >
 <cfset SessionClass.ClearSessionAppID() > <!-- If appID session variable set, clear it -->
+<!-- gather required page data -->
 <cfset UserObj=createObject('component','components.User').init(session.userID)/>
 <cfset allApplications=UserObj.getAllApplication()/>
 <cfset directLink=UserObj.getDirectLink('NJ')/>
