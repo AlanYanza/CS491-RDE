@@ -74,7 +74,7 @@
 	<hr/>
 
 	<div class="form-group">
-		<label>Are you medically UNABLE to work? <span style="color: red;">*</span></label>
+		<label>Are you medically <span style="text-decoration: underline;">UNABLE</span> to work? <span style="color: red;">*</span></label>
 		<br/>
 		<label class="radio-inline"><input type="radio" name="unableWork" value="Y" <cfset subformClass.showRadioButton('unableWork',subformData,'Y')/> required />Yes</label>
 		<label class="radio-inline"><input type="radio" name="unableWork" value="N" <cfset subformClass.showRadioButton('unableWork',subformData,'N')/>/>No</label>

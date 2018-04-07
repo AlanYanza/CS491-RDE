@@ -245,7 +245,7 @@ module.exports = ".labeled {\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpaddi
 /***/ "./src/app/mail-content/mail-content.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"nav nav-tabs nav-mail\">\n\t<li class=\"nav-item\">\n\t\t<a class=\"nav-link\">X</a>\n\t</li>\n\t<li class=\"nav-item\">\n\t\t<a class=\"nav-link disabled\">{{ title | uppercase }}</a>\n\t</li>\n\t<li class=\"nav-item pull-right\">\n\t\t<a class=\"nav-link\" [routerLink] = \"['/']\">Write</a>\n\t</li>\n\n</ul>\n<div *ngIf=\"(msg | async)\">\n\t<div class=\"labeled\"><label for=\"subject\" class=\"col-sm-1\">Subject:</label> {{ (msg | async).SUBJECT  }}</div>\n\t<div class=\"labeled\"><label for=\"from\" class=\"col-sm-1\">From:</label> {{ (msg | async).SENDER }}</div>\n\t<div class=\"labeled\"><label for=\"sendTo\" class=\"col-sm-1\">To:</label> {{ (msg | async).RECEIPIENT }}</div>\n\t<div class=\"message\">{{ (msg | async).MESSAGE }}</div>\n</div>\n"
+module.exports = "<ul class=\"nav nav-tabs nav-mail\">\n\t<li class=\"nav-item\">\n\t\t<a class=\"nav-link\">X</a>\n\t</li>\n\t<li class=\"nav-item\">\n\t\t<a class=\"nav-link disabled\">{{ title | uppercase }}</a>\n\t</li>\n\t<li class=\"nav-item pull-right\">\n\t\t<a class=\"nav-link\" [routerLink] = \"['/']\">Write</a>\n\t</li>\n\n</ul>\n<div *ngIf=\"(msg | async)\">\n\t<div class=\"labeled\"><label for=\"subject\" class=\"col-sm-1\">Subject:</label> {{ (msg | async).SUBJECT  }}</div>\n\t<div class=\"labeled\"><label for=\"from\" class=\"col-sm-1\">From:</label> {{ (msg | async).SENDER }}</div>\n\t<div class=\"labeled\"><label for=\"sendTo\" class=\"col-sm-1\">To:</label> {{ (msg | async).RECIPIENT }}</div>\n\t<div class=\"message\">{{ (msg | async).MESSAGE }}</div>\n</div>\n"
 
 /***/ }),
 
@@ -510,15 +510,15 @@ var _a;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MAIL; });
 var MAIL = [
-    { MSGID: 1, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
-    { MSGID: 2, SENDER: "Taylor", SUBJECT: "test", RECEIPIENT: "Admin", MESSAGE: "Bye", DATESENT: "1/2/11", READSTATUS: 'N' },
-    { MSGID: 3, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Alan Yanza", MESSAGE: "This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.", DATESENT: "1/1/11", READSTATUS: 'Y' },
-    { MSGID: 4, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
-    { MSGID: 5, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
-    { MSGID: 6, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
-    { MSGID: 7, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
-    { MSGID: 8, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
-    { MSGID: 9, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' }
+    { MSGID: 1, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
+    { MSGID: 2, SENDER: "Taylor", SUBJECT: "test", RECIPIENT: "Admin", MESSAGE: "Bye", DATESENT: "1/2/11", READSTATUS: 'N' },
+    { MSGID: 3, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Alan Yanza", MESSAGE: "This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.", DATESENT: "1/1/11", READSTATUS: 'Y' },
+    { MSGID: 4, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
+    { MSGID: 5, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
+    { MSGID: 6, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
+    { MSGID: 7, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
+    { MSGID: 8, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
+    { MSGID: 9, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' }
 ];
 //# sourceMappingURL=mock-mail.js.map
 

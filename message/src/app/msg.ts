@@ -1,7 +1,7 @@
 export class Msg { 
 	MSGID: number;
 	SENDER: string;
-	RECEIPIENT: string;
+	RECIPIENT: string;
 	MESSAGE: string;
 	SUBJECT: string;
 	DATESENT: string;
