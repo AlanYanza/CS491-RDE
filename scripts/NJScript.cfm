@@ -1,15 +1,22 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<cfset SessionClass.NoAppIDRedirect()>
+<cfset SessionClass.validateAppID()>
 <cfset formObj=createObject('component','CS491-RDE.components.Form').init('NJ',session.userID)>
-<cfset formObj.noAccessRedirect('/CS491-RDE/home.cfm')>
 <!--- Determine which page form came from --->
 <cfset formSource=FORM.formPage/>
 <cfset tableName=FORM.tableName/>
 <cfset subformObj=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName)/>
 <cfset appExist=subformObj.checkIfAppExist()/>
+<cfset reviewMode=false>
+
+<!--- If Application is under Review Mode (accessLevel admin, or user review status) do not update subtables --->
+<cfif subformObj.isUserReview() eq 1 OR session.accessLevel eq 'admin'>
+	<cfset reviewMode=true>
+</cfif>
 
 <!--- Form Page 1 processing --->
-<cfif formSource eq 'page1'>
+<cfif formSource eq 'page1' AND reviewMode eq 0>
 	<!--- Determined HICP Status--->
 	<cfif StructKeyExists(form,'HICP')>  
    		<cfset HICPStatus= "Y" />  
@@ -36,7 +43,7 @@
 </cfif>
 
 <!--- Form Page 2 processing --->
-<cfif formSource eq 'page2'>
+<cfif formSource eq 'page2' AND reviewMode eq 0>
 	<!--- Set fields of the sub-form --->
 	<cfset fields=['EmplyStatus','unableWork','unable12LMonth','unable12MMonth','taxFile','dependant','TANF','SAIF','SSI','GA','SNAP','HPersonNum','salary','disBen','genAssist','unemploy',
 	'socialSecurity','pension','allimony','OtherIncome','totalHIncome'] />
@@ -48,7 +55,7 @@
 </cfif>
 
 <!--- Form Page 3A processing --->
-<cfif formSource eq 'page3A'>
+<cfif formSource eq 'page3A' AND reviewMode eq 0>
 	<!--- Set fields of the sub-form --->
 	<cfset fields=['insured','Medium','EmpUnName','EmpUnAddr','EmpUnContact','EmpUnPhone','COBRAStart','COBRAEnd','NxtPremDue','Other','PresCov','PresCovCap','PresCovCapAmt','PresCovMail',
 	'AMedicaid','AMedicaidDate','RespMedicaid','AMedicare','AMedicareDate','RespMedicare','AMedicareD','ALIS'] />
@@ -64,7 +71,7 @@
 </cfif>
 
 <!--- Form Page 3B processing --->
-<cfif formSource eq 'page3B'>
+<cfif formSource eq 'page3B' AND reviewMode eq 0>
 	<!--- Set fields of the sub-form --->
 	<cfset fields=['ASSISSDIDate','RespASSISSI','AMarket','AMarketDate','RespAMarket','CovOtherTxt','relation','relOther','InsName','InsAddr','InsAddrCounty','InsSS','InsPhone','InsCarrier',
 	'InsCarAddr','InsCarPhone','InsCarPolicyNum','EmpUnName','EmpUnAddr','PresCar','PresCarAddr','PresCarPhone','PrescarID','PresCoPay','PresDeduct','EligVetDrugBen','RecPresDrugBen'] />
@@ -80,7 +87,7 @@
 </cfif>
 
 <!--- Form Page 4 processing ---> 
-<cfif formSource eq 'page4'>
+<cfif formSource eq 'page4' AND reviewMode eq 0>
 	<!--- Update User's signatures'--->
 	<cfset subformObj.updateSignature("signature","signatureDate")/>
 	<!--- Set fields of the sub-form --->
@@ -130,7 +137,6 @@
 			<cfset InsertNJDocuments()/> 
 		</cfif>
 		<!--- Change status of Application to Review--->
-<!---		<cfset subformObj.updateApplicationStatus("R")>--->
 			<cfset subformObj.submitApplication()>
   		<cflocation url="/CS491-RDE/home.cfm?submitApplication">
 	</cfif>

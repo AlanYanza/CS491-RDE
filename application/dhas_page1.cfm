@@ -14,7 +14,6 @@
 </cfif>
 <cfset tableName='NJSection1'/>
 <cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName,session.appID)/>
-<cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
 <!-- Application Page preprocessing -->
 <cfset subformClass.createSubformData()/>
 <cfset subformData=subformClass.retrieveDataForSubform()/>
@@ -24,7 +23,6 @@
 	<cfdump var="User is admin" >
 	<!-- put javascript here -->
 </cfif>
-
 
 <!DOCTYPE html>
 <html lang="en">
