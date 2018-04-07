@@ -9,16 +9,22 @@
 			
 	<!-- Retrieve email for given user -->
 	<cffunction name="GetEmail" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="GetEmail" >
-		<!---<cfheader name = "Access-Control-Allow-Origin" value="*">--->
-			
-		<!-- retrieve current User's userID' -->
-		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
-		<cfset userID = SessionClass.passUserID()>
-		<!---<cfset userID = Application.userID>--->
+		<cfheader name = "Access-Control-Allow-Origin" value="*">
 
-		<!-- Query DB for user's Message' -->
+		<!-- retrieve current User's userID' -->
+		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/> 
+		<cfset userID = SessionClass.passUserID()> 
+
+		<!-- This is used for Angular Testing purposes -->
+		<!--- <cfset userID = Application.userID> --->
+
+		<!-- Query DB for user's Message' 
 		<cfquery name="MailResult">
-			SELECT Inbox.msgID, Message.readStatus, Message.senderID, Message.subject, Message.message, Message.dateSent, sen.FirstName, sen.LastName, rec.FirstName, rec.LastName
+			SELECT 
+				Inbox.msgID, 
+				Message.readStatus, Message.subject, Message.message, Message.dateSent, 
+				concat(sen.FirstName, ' ', sen.LastName) AS sender,
+				concat(rec.FirstName, ' ', rec.LastName) AS recipient
 			FROM Inbox 
 			INNER JOIN Message ON Inbox.msgID = Message.msgID
 			INNER JOIN [User] AS rec ON Message.recipientID=rec.userID 
