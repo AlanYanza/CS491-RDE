@@ -11,7 +11,9 @@
 	<cffunction name="GetEmail" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="GetEmail" >
 		<!---<cfheader name = "Access-Control-Allow-Origin" value="*">--->
 		<!-- retrieve current User's userID' -->
-		<cfset userID = #Application.userID# >
+		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
+		<cfset userID = SessionClass.passUserID()>
+		<!---<cfset userID = Application.userID>--->
 		<!-- Query DB for user's Message' -->
 		<cfquery name="MailResult">
 			SELECT Inbox.msgID, Inbox.readStatus, Message.sender, Message.receipient, Message.subject, Message.message,
