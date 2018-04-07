@@ -12,6 +12,13 @@
 		<cfheader name = "Access-Control-Allow-Origin" value="*">
 
 		<!-- retrieve current User's userID' -->
+<<<<<<< HEAD
+		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
+		<cfset userID = SessionClass.passUserID()>
+		<!-- Query DB for user's Message' -->
+		<cfquery name="MailResult">
+			SELECT * FROM UserApplication
+=======
 		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/> 
 		<cfset userID = SessionClass.passUserID()> 
 
@@ -31,6 +38,7 @@
 			INNER JOIN [User] AS sen ON Message.senderID=sen.userID
 			WHERE Inbox.userID = <cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" > 
 			ORDER BY Message.dateSent DESC
+>>>>>>> 6d6eb8a11e8f126f9de3da62d7230a6bc7eaacce
 		</cfquery>
 		<!-- Return ResultSet as JSON -->
 		<cfreturn serializeJSON(MailResult, 'struct') /> 

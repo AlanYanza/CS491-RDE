@@ -1,15 +1,17 @@
 <!-- Session Page Protection -->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()>
-<cfset SessionClass.checkIfuser()>
 <!-- If appID is not sent via url passing, redirects back to user home page -->
 <cfif isDefined('url.appID')>
 	<!-- create a session variable for appID -->
 	<cfset session.appID=url.appID>
 </cfif>
-<!-- More Session Page Protection -->
-<cfset SessionClass.NoAppIDRedirect()>
-<cfset SessionClass.validateAppID()>
+<!-- If a user access level,More Session Page Protection -->
+<cfif session.accessLevel neq 'admin'>
+	<cfset SessionClass.checkIfuser()>
+	<cfset SessionClass.NoAppIDRedirect()>
+	<cfset SessionClass.validateAppID()>
+</cfif>
 <cfset tableName='NJSection1'/>
 <cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName,session.appID)/>
 <cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
@@ -18,6 +20,10 @@
 <cfset subformData=subformClass.retrieveDataForSubform()/>
 <cfset HICPStatus=subformClass.retrieveHICPStatus()/>
 <!-- Determine Flag(reviewing or editing) -->
+<cfif session.accessLevel eq 'admin'>
+	<cfdump var="User is admin" >
+	<!-- put javascript here -->
+</cfif>
 
 
 <!DOCTYPE html>
