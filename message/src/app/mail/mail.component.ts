@@ -37,7 +37,7 @@ export class MailComponent implements OnInit {
 
   onSelect(msg: Msg): void {
   	this.selectedMsg = msg;
-  	msg.READSTATUS = 'Y';
+  	msg.READSTATUS = 'T';
   }
 
 }
