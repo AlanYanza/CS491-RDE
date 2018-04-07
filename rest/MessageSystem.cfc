@@ -13,15 +13,9 @@
 		<!-- retrieve current User's userID' -->
 		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 		<cfset userID = SessionClass.passUserID()>
-		<!---<cfset userID = Application.userID>--->
 		<!-- Query DB for user's Message' -->
 		<cfquery name="MailResult">
-			SELECT Inbox.msgID, Inbox.readStatus, Message.sender, Message.receipient, Message.subject, Message.message,
-			Message.dateSent 
-			FROM Inbox 
-			INNER JOIN Message ON Inbox.msgID=Message.msgID
-			WHERE Inbox.userID = <cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" > 
-			ORDER BY Message.dateSent DESC
+			SELECT * FROM UserApplication
 		</cfquery>
 		<!-- Return ResultSet as JSON -->
 		<cfreturn serializeJSON(MailResult, 'struct') /> 

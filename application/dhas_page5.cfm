@@ -1,16 +1,24 @@
 <!-- Session Page Protection -->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
-<cfset SessionClass.checkIfuser()/>
-<cfset SessionClass.NoAppIDRedirect()>
-<cfset SessionClass.validateAppID()>
+<!-- If a user access level,More Session Page Protection -->
+<cfif session.accessLevel neq 'admin'>
+	<cfset SessionClass.checkIfuser()>
+	<cfset SessionClass.NoAppIDRedirect()>
+	<cfset SessionClass.validateAppID()>
+</cfif>
 <cfset tableName='NJSection4'/>
 <cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName,session.appID)/>
 <cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
 <!-- Application Page pre-processing -->
 <cfset subformClass.createSubformData()/>
 <cfset subformData=subformClass.retrieveDataForSubform()/>
-<cfset applicantSignature=subformClass.getSignature("signature")/>
+<!---<cfset applicantSignature=subformClass.getSignature("signature")/>--->
+<!-- Determine Flag(reviewing or editing) -->
+<cfif session.accessLevel eq 'admin'>
+	<cfdump var="User is admin" >
+	<!-- put javascript here -->
+</cfif>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +103,7 @@
 		<div class="col-sm-3">
 			<label for="signature">Signature of Applicant <span style="color: red;">*</span></label>	
 			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#signatureModal">Click here to attach/edit your signature</button>
-			<input type="hidden" name="signature" id="signature" value=<cfoutput>#applicantSignature.signature#</cfoutput> >
+<!---			<input type="hidden" name="signature" id="signature" value=<cfoutput>#applicantSignature.signature#</cfoutput> >--->
 <!---			<input type="text" name="signature" id="signature" value=<cfoutput>#applicantSignature.signature#</cfoutput> >--->
 		</div>
 		<div class="col-sm-6">
