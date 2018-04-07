@@ -5,8 +5,10 @@
 <cfif isDefined('url.new')>
 	<cfset FormClass.createApplication()/>
 </cfif>
-<!-- Check ApplicationStatus and redirect to homePage is needed -->
-<cfset FormClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
+<!-- If not a new Application, Check ApplicationStatus and redirect to homePage is needed -->
+<cfif NOT isDefined('url.new')>
+	<cfset FormClass.noAccessRedirect('/CS491-RDE/home.cfm')>
+</cfif>
 
 <!DOCTYPE html>
 <html lang="en">

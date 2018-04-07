@@ -53,4 +53,8 @@
 		</cfif>
 	</cffunction>
 	
+	<cffunction name="passUserID" hint="passes the current user's userID to rest CFC'" >
+		<cfreturn session.userID>
+	</cffunction>
+	
 </cfcomponent>

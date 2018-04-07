@@ -4,19 +4,21 @@
 <cfset SessionClass.checkIfuser()>
 <!-- If appID is not sent via url passing, redirects back to user home page -->
 <cfif isDefined('url.appID')>
+	<!-- create a session variable for appID -->
 	<cfset session.appID=url.appID>
 </cfif>
 <!-- More Session Page Protection -->
 <cfset SessionClass.NoAppIDRedirect()>
 <cfset SessionClass.validateAppID()>
 <cfset tableName='NJSection1'/>
-<!-- create a session variable for appID -->
 <cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName,session.appID)/>
 <cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
 <!-- Application Page preprocessing -->
 <cfset subformClass.createSubformData()/>
 <cfset subformData=subformClass.retrieveDataForSubform()/>
 <cfset HICPStatus=subformClass.retrieveHICPStatus()/>
+<!-- Determine Flag(reviewing or editing) -->
+
 
 <!DOCTYPE html>
 <html lang="en">
