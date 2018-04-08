@@ -18,7 +18,7 @@
 
 		<!-- retrieve current User's userID' -->
 		<!---
-		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/> 
+		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 		<cfset userID = SessionClass.passUserID()> --->
 
 		<!-- Query DB for user's Message' -->

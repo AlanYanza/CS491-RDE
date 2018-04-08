@@ -90,8 +90,14 @@
 	<cffunction name="updateSignature" displayname="updateUserSignature" hint="sends user signature to database" >
 		<cfargument name="signatureField" hint="the name of the signature field" >
 		<cfargument name="dateField" hint="the name of the date field" >
+		<!-- Get string of signature from form and remove starting header -->
+		<cfset binaryStringRep=form[arguments.signatureField]>
+		<cfset binaryStringRep=REReplace(binaryStringRep,'data:image/png;base64,','')>
+		<!-- Convert the base64 string representation to a binary string -->
+		<cfset binaryString=BinaryDecode(binaryStringRep,"Base64")>
+		<!-- Insert the binary string into subTable -->
 		<cfquery>
-			UPDATE #tableName# SET #arguments.signatureField#='#form[arguments.signatureField]#' ,
+			UPDATE #tableName# SET #arguments.signatureField#= <cfqueryparam value="#binaryString#" cfsqltype="cf_sql_blob">,
 			#dateField#=getdate()  
 			WHERE dataID=<cfqueryparam value="#dataID#" cfsqltype="cf_sql_integer" >
 		</cfquery>

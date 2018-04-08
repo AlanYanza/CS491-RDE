@@ -4,14 +4,14 @@ Note:There is a separate SQL script to add each Form
      See documentation ERD diagrams for Database Design*/
 /********************************************************************/
 /*replace first line with USE[DatabaseName]*/
-USE [RDESystemsLocal];
+USE [RDESystems];
 PRINT 'Creating Base Tables for RDE Form Application....';
---Create User1 Table
+--Create User Table
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
               WHERE TABLE_NAME=N'User')
 BEGIN
 	CREATE TABLE [User] (
-		userID int PRIMARY KEY IDENTITY(1,1),
+		userID int PRIMARY KEY IDENTITY(11,1),
 		email varchar(150) NOT NULL,
 		FirstName varchar(150) NOT NULL,
 		LastName varchar(150) NOT NULL,
@@ -30,7 +30,8 @@ IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 BEGIN
 	CREATE TABLE [Forms] (
 		formTypeID int IDENTITY(1,1) PRIMARY KEY,
-		state varchar(2) NOT NULL
+		state varchar(2) NOT NULL,
+		AppDescription varchar(500) NOT NULL Default('')
 	);
 	PRINT 'Successfully created "Forms" Table';
 END
@@ -46,7 +47,8 @@ BEGIN
 		appID int IDENTITY(1,1) PRIMARY KEY,
 		formTypeID int NOT NULL FOREIGN KEY REFERENCES [Forms](formTypeID),
 		HICPApp char(1) NOT NULL CHECK (HICPApp IN('Y','N')),
-		dateEligDet date,
+		dateEligDet date DEFAULT(NULL),
+		dateSubmited date DEFAULT(NULL),
 		status char(1) NOT NULL DEFAULT('R') CHECK (status IN('R','A','D','N','P'))
 	);
 	PRINT 'Successfully created "UserApplication" Table';
@@ -60,11 +62,13 @@ IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 BEGIN
 	CREATE TABLE [Message] (
 		msgID int IDENTITY(1,1) PRIMARY KEY,
-		sender varchar(100) NOT NULL,
-		receipient varchar(255) NOT NULL,
+		senderID int NOT NULL,
+		recipientID int NOT NULL,
 		subject varchar(100) NOT NULL DEFAULT(''),
-		message varchar(1000) NOT NULL DEFAULT(''),
-		dateSent datetime NOT NULL DEFAULT(getutcdate())
+		message varchar(max) NOT NULL DEFAULT(''),
+		dateSent datetime DEFAULT(NULL),
+		dateRecv datetime DEFAULT(NULL), 
+		readStatus char(1) NOT NULL CHECK (readStatus IN('T','F'))
 	);
 	PRINT 'Successfully created "Message" Table';
 END
@@ -90,9 +94,9 @@ IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 BEGIN
 	CREATE TABLE [AppDocument] (
 		appID int NOT NULL FOREIGN KEY REFERENCES [UserApplication](appID),
-		document varchar(1000) NOT NULL,
-		isRequired char(1) NOT NULL CHECK (isRequired IN('Y','N')),
-		received char(1) NOT NULL CHECK (received IN('Y','N')),
+		document varchar(1000) NOT NULL DEFAULT(''),
+		isRequired char(1) NOT NULL CHECK (isRequired IN('Y','N')) DEFAULT('N'),
+		received char(1) NOT NULL CHECK (received IN('Y','N')) DEFAULT('N'),
 		dateReceived date
 	);
 	PRINT 'Successfully created "AppDocument" Table';
@@ -106,9 +110,7 @@ IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 BEGIN
 	CREATE TABLE [Inbox] (
 		userID int NOT NULL FOREIGN KEY REFERENCES [User](userID),
-		dateRevc datetime NOT NULL,
 		msgID int NOT NULL FOREIGN KEY REFERENCES [Message](msgID),
-		readStatus char(1) NOT NULL CHECK (readStatus IN('Y','N'))
 	);
 	PRINT 'Successfully created "Inbox" Table';
 END
@@ -160,6 +162,7 @@ IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
 BEGIN
 	CREATE TABLE [ApplicationLinks] (
 		state varchar(2) PRIMARY KEY,
+		formTypeID int NOT NULL FOREIGN KEY REFERENCES [Forms](formTypeID),
 		directLink varchar(200) 
 	);
 	PRINT 'Successfully created [ApplicationLinks] Table';

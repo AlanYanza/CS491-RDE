@@ -39,6 +39,15 @@
 		</cfquery>
 	</cffunction>
 	
+	<cffunction name="isUserReview" hint="Checks if an user if reviewing an Application"
+	returntype="boolean" >
+		<cfset var applicationStatus=CheckApplicationStatus()>
+		<cfif applicationStatus neq 'N' AND applicationStatus neq'P'>
+			<cfreturn true>
+		</cfif>
+		<cfreturn false>
+	</cffunction>
+	
 	<!-- update an existing application Status -->
 	<cffunction name="updateApplicationStatus" displayname="UpdateExistingApplicationTableEntry"
 	hint="update data about an existing UserApplication Table Entry">

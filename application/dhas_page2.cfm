@@ -1,15 +1,22 @@
 <!-- Session Page Protection -->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
-<cfset SessionClass.checkIfuser()/>
-<cfset SessionClass.NoAppIDRedirect()>
-<cfset SessionClass.validateAppID()>
+<!-- If a user access level,More Session Page Protection -->
+<cfif session.accessLevel neq 'admin'>
+	<cfset SessionClass.checkIfuser()>
+	<cfset SessionClass.NoAppIDRedirect()>
+	<cfset SessionClass.validateAppID()>
+</cfif>
 <cfset tableName='NJSection2'/>
 <cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName,session.appID)/>
-<cfset subformClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
 <!-- Application Page pre-processing -->
 <cfset subformClass.createSubformData()/>
 <cfset subformData=subformClass.retrieveDataForSubform()/>
+<!-- Determine Flag(reviewing or editing) -->
+<cfif session.accessLevel eq 'admin'>
+	<cfdump var="User is admin" >
+	<!-- put javascript here -->
+</cfif>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +73,7 @@
 	<hr/>
 
 	<div class="form-group">
-		<label>Are you medically UNABLE to work? <span style="color: red;">*</span></label>
+		<label>Are you medically <span style="text-decoration: underline;">UNABLE</span> to work? <span style="color: red;">*</span></label>
 		<br/>
 		<label class="radio-inline"><input type="radio" name="unableWork" value="Y" <cfset subformClass.showRadioButton('unableWork',subformData,'Y')/> required />Yes</label>
 		<label class="radio-inline"><input type="radio" name="unableWork" value="N" <cfset subformClass.showRadioButton('unableWork',subformData,'N')/>/>No</label>
@@ -75,7 +82,7 @@
 	<hr/>
 
 	<div class="form-group">
-		<label>Medically unable to work LESS than 12 months? <span style="color: red;">*</span></label>
+		<label>Medically unable to work <span style="text-decoration: underline;">LESS</span> than 12 months? <span style="color: red;">*</span></label>
 		<br/>
 		<label class="radio-inline"><input type="radio" name="unable12LMonth" value="Y" <cfset subformClass.showRadioButton('unable12LMonth',subformData,'Y')/> required />Yes</label>
 		<label class="radio-inline"><input type="radio" name="unable12LMonth" value="N" <cfset subformClass.showRadioButton('unable12LMonth',subformData,'N')/>/>No</label>
@@ -84,7 +91,7 @@
 	<hr/>
 
 	<div class="form-group">
-		<label>Medically unable to work MORE than 12 months? <span style="color: red;">*</span></label>
+		<label>Medically unable to work <span style="text-decoration: underline;">MORE</span> than 12 months? <span style="color: red;">*</span></label>
 		<br>
 			<label class="radio-inline"><input type="radio" name="unable12MMonth" value="Y" <cfset subformClass.showRadioButton('unable12MMonth',subformData,'Y')/> required />Yes</label>
 			<label class="radio-inline"><input type="radio" name="unable12MMonth" value="N" <cfset subformClass.showRadioButton('unable12MMonth',subformData,'N')/>/>No</label>
@@ -154,13 +161,13 @@
 		<label for ="taxFile">Did you and/or any member of your household file a Federal, State or City Income Tax return last year? <span style="color: red;">*</span></label>
 		<br/>
 		<label class="radio-inline"><input type="radio" name="taxFile" value="Y" <cfset subformClass.showRadioButton('taxFile',subformData,'Y')/> required />Yes</label>
-		<label class="radio-inline"><input type="radio" name="taxFile" value="N" <cfset subformClass.showRadioButton('taxFile',subformData,'N')/> required />No</label>
+		<label class="radio-inline"><input type="radio" name="taxFile" value="N" <cfset subformClass.showRadioButton('taxFile',subformData,'N')/>/>No</label>
 	</div>
 
 	<div class="form-group">
 		<label for="dependant">Were you listed as a dependent on a family member's Federal, State, or City Income tax return last year? <span style="color: red;">*</span></label>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="dependant" value="Y" <cfset subformClass.showRadioButton('dependant',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="dependant" value="Y" <cfset subformClass.showRadioButton('dependant',subformData,'Y')/> required />Yes</label>
 		<label class="radio-inline"><input type="radio" name="dependant" value="N" <cfset subformClass.showRadioButton('dependant',subformData,'N')/>/>No</label>
 	</div>
 
