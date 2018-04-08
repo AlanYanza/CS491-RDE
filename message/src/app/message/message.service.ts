@@ -14,7 +14,7 @@ export class MessageService {
   		.set("subject", msg.subject)
   		.set("recipient", msg.recipient)
   		.set("message", msg.message);  		
-  	return this.http.put(this.sendMessageAPIUrl, null, {
+  	return this.http.post(this.sendMessageAPIUrl, null, {
   		params: params
   	});
   }

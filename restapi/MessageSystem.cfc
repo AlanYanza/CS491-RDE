@@ -40,7 +40,8 @@
 	</cffunction>
 
 	<!-- Send email for given user -->
-	<cffunction name="sendEmail" access="remote" returntype="Any" return Format="json" httpmethod="PUT" restpath="sendEmail" produces="application/json">
+	<cffunction name="sendEmail" access="remote" returntype="Any" return Format="json" httpmethod="POST" restpath="sendEmail" produces="application/json">
+
 
 		<!-- retrieve current User's userID' -->
 		<!--- <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/> 
@@ -48,6 +49,7 @@
 
 		<!-- Angular testing -->
 		<cfheader name = "Access-Control-Allow-Origin" value="*"> 
+		<cfheader name = "Access-Control-Allow-Methods" value = "GET, POST, PUT, DELETE">
 		<cfset senderID = #Application.userID# /> 
 
 		<!-- Retrieve sender's identity from DB' -->
@@ -107,9 +109,8 @@
 
 	</cffunction>
 
-	<cffunction name="deleteMessage" access="remote" returntype="Any" return Format="json" httpmethod="DELETE" restpath="deleteEmail" >
-		<!--Angular testing -->
-		<cfheader name = "Access-Control-Allow-Methods" value = "GET, POST, PUT, DELETE, OPTIONS"> 		
+	<cffunction name="deleteMessage" access="remote" returntype="Any" return Format="json" httpmethod="GET" restpath="deleteEmail" >
+		<!--Angular testing -->	
 		<cfset senderID = #Application.userID# /> 
 
 		<cfset msgID = url.msgID />

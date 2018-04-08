@@ -15,7 +15,7 @@ import { map } from 'rxjs/operators/map';
 @Injectable()
 export class MailService implements Resolve<Msg> {
 
-	private baseURL = 'http://localhost:8500/rest/restTest/MessageSystem/';
+	private baseURL = 'rest/restTest/MessageSystem/';
 	private getMessageURL = this.baseURL + 'GetEmail';
 	private deleteMessageURL = this.baseURL + 'deleteEmail';
 
@@ -49,7 +49,7 @@ export class MailService implements Resolve<Msg> {
 		const params = new HttpParams()
 			.set("msgID", String(msg.MSGID));  
 
-		return this.http.delete<Msg>(this.deleteMessageURL)
+		return this.http.get<Msg>(this.deleteMessageURL, {params:params})
 			.pipe(
 				tap( res => console.log('Delete:', res))
 			);
