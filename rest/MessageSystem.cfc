@@ -1,4 +1,8 @@
-<cfcomponent rest="true" restpath="/MessageSystem" produces="application/json" >
+<cfcomponent rest="true" restpath="/MessageSystem">
+
+	<cfheader name = "Access-Control-Allow-Origin" value="*">
+	<cfheader name = "Access-Control-Allow-Methods" value = "GET, POST, PUT, DELETE">
+	<cfheader name="Access-Control-Allow-Headers" value="Content-Type" />
 
 	<!-- Used to test connection to rest CFC-->
 	<cffunction name="testMethod" access="remote" returntype="String" httpmethod="GET" restpath="test" >
@@ -8,17 +12,16 @@
 	</cffunction>
 			
 	<!-- Retrieve email for given user -->
-	<cffunction name="GetEmail" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="GetEmail" >
-		<cfheader name = "Access-Control-Allow-Origin" value="*">
+	<cffunction name="GetEmail" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="GetEmail" produces="application/json">
+		<!-- This is used for Angular Testing purposes -->
+		<cfset userID = Application.userID>
 
 		<!-- retrieve current User's userID' -->
+		<!---
 		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/> 
-		<cfset userID = SessionClass.passUserID()> 
+		<cfset userID = SessionClass.passUserID()> --->
 
-		<!-- This is used for Angular Testing purposes -->
-		<!--- <cfset userID = Application.userID> --->
-
-		<!-- Query DB for user's Message' 
+		<!-- Query DB for user's Message' -->
 		<cfquery name="MailResult">
 			SELECT 
 				Inbox.msgID, 
@@ -37,11 +40,16 @@
 	</cffunction>
 
 	<!-- Send email for given user -->
-	<cffunction name="sendEmail" access="remote" returntype="Any" httpmethod="PUT" restpath="sendEmail" >
-		<!---<cfheader name = "Access-Control-Allow-Origin" value="*"> --->
-		<!---<cfheader name = "Access-Control-Allow-Methods" value = "GET, POST, PUT, DELETE, OPTIONS">--->
+	<cffunction name="sendEmail" access="remote" returntype="Any" return Format="json" httpmethod="PUT" restpath="sendEmail" produces="application/json">
+
 		<!-- retrieve current User's userID' -->
-		<cfset senderID = #Application.userID# />
+		<!--- <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/> 
+		<cfset userID = SessionClass.passUserID()> --->
+
+		<!-- Angular testing -->
+		<cfheader name = "Access-Control-Allow-Origin" value="*"> 
+		<cfset senderID = #Application.userID# /> 
+
 		<!-- Retrieve sender's identity from DB' -->
 		<cfquery name="senderNameResult">
 			SELECT FirstName, LastName FROM "User"
@@ -66,8 +74,8 @@
 	 	<cfquery result="sendToMessageResult">
 			INSERT INTO Message (senderID, recipientID, subject, message, dateSent, dateRecv, readStatus)
 			VALUES ( 
-				<cfqueryPARAM value ="#senderID#" cfsqltype="CF_SQL_VARCHAR">,
-				<cfqueryPARAM value ="#recipientID#" cfsqltype="CF_SQL_VARCHAR">,
+				<cfqueryPARAM value ="#senderID#" cfsqltype="CF_SQL_INTEGER">,
+				<cfqueryPARAM value ="#recipientID#" cfsqltype="CF_SQL_INTEGER">,
 			 	<cfqueryPARAM value ="#subject#" cfsqltype="CF_SQL_VARCHAR">,
 			 	<cfqueryPARAM value ="#message#" cfsqltype="CF_SQL_VARCHAR">,
 			 	<cfqueryPARAM value ="#dateSent#" cfsqltype="CF_SQL_TIMESTAMP">,
@@ -88,12 +96,33 @@
 
 		<!-- Insert message into sender's sent box (Sent Table) --> 
 		<cfquery name="sendToSent">
-			INSERT INTO Sent (userID, msgID)
+			INSERT INTO [Sent] (userID, msgID)
 			VALUES (
 				<cfqueryPARAM value="#senderID#" cfsqltype="CF_SQL_INTEGER">,
-			 	<cfqueryPARAM value="#msgID#" cfsqltype="CF_SQL_INTEGER">,
+			 	<cfqueryPARAM value="#msgID#" cfsqltype="CF_SQL_INTEGER">
 			)
 		</cfquery>
+
+		<cfreturn serializeJSON("sendToSent", 'struct') /> 
+
+	</cffunction>
+
+	<cffunction name="deleteMessage" access="remote" returntype="Any" return Format="json" httpmethod="DELETE" restpath="deleteEmail" >
+		<!--Angular testing -->
+		<cfheader name = "Access-Control-Allow-Methods" value = "GET, POST, PUT, DELETE, OPTIONS"> 		
+		<cfset senderID = #Application.userID# /> 
+
+		<cfset msgID = url.msgID />
+
+		<!-- Insert message into sender's sent box (Sent Table) --> 
+		<cfquery name="deleteFromInbox">
+			DELETE FROM Inbox 
+			WHERE msgID = <cfqueryPARAM value="#msgID#" cfsqltype="CF_SQL_INTEGER">
+			AND userID = <cfqueryPARAM value="#senderID#" cfsqltype="CF_SQL_INTEGER">
+		</cfquery>
+
+		<cfreturn serializeJSON("deleteFromInbox", 'struct') /> 
+
 	</cffunction>
 
 </cfcomponent>
