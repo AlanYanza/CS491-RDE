@@ -82,7 +82,7 @@
 	<hr/>
 
 	<div class="form-group">
-		<label>Medically unable to work LESS than 12 months? <span style="color: red;">*</span></label>
+		<label>Medically unable to work <span style="text-decoration: underline;">LESS</span> than 12 months? <span style="color: red;">*</span></label>
 		<br/>
 		<label class="radio-inline"><input type="radio" name="unable12LMonth" value="Y" <cfset subformClass.showRadioButton('unable12LMonth',subformData,'Y')/> required />Yes</label>
 		<label class="radio-inline"><input type="radio" name="unable12LMonth" value="N" <cfset subformClass.showRadioButton('unable12LMonth',subformData,'N')/>/>No</label>
@@ -91,7 +91,7 @@
 	<hr/>
 
 	<div class="form-group">
-		<label>Medically unable to work MORE than 12 months? <span style="color: red;">*</span></label>
+		<label>Medically unable to work <span style="text-decoration: underline;">MORE</span> than 12 months? <span style="color: red;">*</span></label>
 		<br>
 			<label class="radio-inline"><input type="radio" name="unable12MMonth" value="Y" <cfset subformClass.showRadioButton('unable12MMonth',subformData,'Y')/> required />Yes</label>
 			<label class="radio-inline"><input type="radio" name="unable12MMonth" value="N" <cfset subformClass.showRadioButton('unable12MMonth',subformData,'N')/>/>No</label>
@@ -161,13 +161,13 @@
 		<label for ="taxFile">Did you and/or any member of your household file a Federal, State or City Income Tax return last year? <span style="color: red;">*</span></label>
 		<br/>
 		<label class="radio-inline"><input type="radio" name="taxFile" value="Y" <cfset subformClass.showRadioButton('taxFile',subformData,'Y')/> required />Yes</label>
-		<label class="radio-inline"><input type="radio" name="taxFile" value="N" <cfset subformClass.showRadioButton('taxFile',subformData,'N')/> required />No</label>
+		<label class="radio-inline"><input type="radio" name="taxFile" value="N" <cfset subformClass.showRadioButton('taxFile',subformData,'N')/>/>No</label>
 	</div>
 
 	<div class="form-group">
 		<label for="dependant">Were you listed as a dependent on a family member's Federal, State, or City Income tax return last year? <span style="color: red;">*</span></label>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="dependant" value="Y" <cfset subformClass.showRadioButton('dependant',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="dependant" value="Y" <cfset subformClass.showRadioButton('dependant',subformData,'Y')/> required />Yes</label>
 		<label class="radio-inline"><input type="radio" name="dependant" value="N" <cfset subformClass.showRadioButton('dependant',subformData,'N')/>/>No</label>
 	</div>
 
