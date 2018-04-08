@@ -80,15 +80,6 @@ ELSE
 	PRINT '"Message" does not exist in database';
 -----------------------------------------------------------------------------------
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
-              WHERE TABLE_NAME=N'Forms')
-BEGIN
-	DROP TABLE Forms;
-	PRINT 'DROPPED "Forms" Table';
-END
-ELSE
-	PRINT '"Forms" does not exist in database';
------------------------------------------------------------------------------------
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
               WHERE TABLE_NAME=N'User')
 BEGIN
 	DROP TABLE [User];
@@ -105,5 +96,14 @@ BEGIN
 END
 ELSE
 	PRINT '"ApplicationLinks" does not exist in database';
+-----------------------------------------------------------------------------------
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES
+              WHERE TABLE_NAME=N'Forms')
+BEGIN
+	DROP TABLE Forms;
+	PRINT 'DROPPED "Forms" Table';
+END
+ELSE
+	PRINT '"Forms" does not exist in database';
 -----------------------------------------------------------------------------------
 PRINT 'Successfully Removed Base Tables from Database';

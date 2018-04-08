@@ -98,6 +98,7 @@ save.addEventListener("click", function (event) {
     var dataURL = signaturePad.toDataURL();
 	document.getElementById("signaturePic").innerHTML = "<img src='" + dataURL + "' class='img-responsive'  max-width='100%'>";
 	document.getElementById("signature").getAttributeNode("value").value = dataURL;
+	//document.getElementById("signature").value = dataURL; //use for textarea
   var date = new Date();
   document.getElementById("signatureDate").getAttributeNode("value").value = date.toISOString().slice(0, 10); ;
   console.log(date.toISOString().slice(0, 10));
