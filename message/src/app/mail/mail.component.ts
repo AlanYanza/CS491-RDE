@@ -5,7 +5,6 @@ import { MAIL } from '../mock-mail';
 import { MailService } from '../mail.service';
 
 import { ActivatedRouteSnapshot } from '@angular/router';
-import { MessageResolverService } from '../message-resolver.service';
 
 @Component({
   selector: 'app-mail',

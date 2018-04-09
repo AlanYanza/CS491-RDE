@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { MailService } from './mail.service';
 import { MessageService } from './message/message.service';
-import { MessageResolverService } from './message-resolver.service';
 
 import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
@@ -30,7 +29,6 @@ import { APP_BASE_HREF } from '@angular/common';
   ],
   providers: [
     MailService,
-    MessageResolverService,
     MessageService,
     {provide: APP_BASE_HREF, useValue: '/CS491-RDE/message.cfm'}
     ],
