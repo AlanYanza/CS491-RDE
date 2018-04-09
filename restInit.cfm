@@ -1,3 +1,4 @@
+<!--- Run this code first for angular development --->
 <!--- code starts --->
 <cftry>
 <cfset restInitApplication("#expandpath("./restapi")#","restapi")>
