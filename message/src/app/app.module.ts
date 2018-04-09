@@ -6,14 +6,13 @@ import { AppComponent } from './app.component';
 import { MailComponent } from './mail/mail.component';
 import { MailContentComponent } from './mail-content/mail-content.component';
 import { WriteMessageComponent } from './write-message/write-message.component';
-import { HomeComponent } from './home/home.component'; 
 import { AppRoutingModule } from './app-routing.module';
 
 import { MailService } from './mail.service';
+import { MessageService } from './message/message.service';
 import { MessageResolverService } from './message-resolver.service';
 
 import { HttpClientModule } from '@angular/common/http';
-import { MessageService } from './message/message.service';
 import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
@@ -21,8 +20,7 @@ import { APP_BASE_HREF } from '@angular/common';
     AppComponent,
     MailComponent,
     MailContentComponent,
-    WriteMessageComponent,
-    HomeComponent
+    WriteMessageComponent
   ],
   imports: [
     BrowserModule,
