@@ -1,9 +1,5 @@
 <cfcomponent rest="true" restpath="/MessageSystem">
 
-	<cfheader name = "Access-Control-Allow-Origin" value="*">
-	<cfheader name = "Access-Control-Allow-Methods" value = "GET, POST, PUT, DELETE">
-	<cfheader name="Access-Control-Allow-Headers" value="Content-Type" />
-
 	<!-- Used to test connection to rest CFC-->
 	<cffunction name="testMethod" access="remote" returntype="String" httpmethod="GET" restpath="test" >
 		<cfdump var="#Application.userID#" >
@@ -13,13 +9,10 @@
 			
 	<!-- Retrieve email for given user -->
 	<cffunction name="GetEmail" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="GetEmail" produces="application/json">
-		<!-- This is used for Angular Testing purposes -->
-		<cfset userID = Application.userID>
 
 		<!-- retrieve current User's userID' -->
-		<!---
 		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
-		<cfset userID = SessionClass.passUserID()> --->
+		<cfset userID = SessionClass.passUserID()> 
 
 		<!-- Query DB for user's Message' -->
 		<cfquery name="MailResult">
@@ -42,15 +35,9 @@
 	<!-- Send email for given user -->
 	<cffunction name="sendEmail" access="remote" returntype="Any" return Format="json" httpmethod="POST" restpath="sendEmail" produces="application/json">
 
-
 		<!-- retrieve current User's userID' -->
-		<!--- <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/> 
-		<cfset userID = SessionClass.passUserID()> --->
-
-		<!-- Angular testing -->
-		<cfheader name = "Access-Control-Allow-Origin" value="*"> 
-		<cfheader name = "Access-Control-Allow-Methods" value = "GET, POST, PUT, DELETE">
-		<cfset senderID = #Application.userID# /> 
+		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/> 
+		<cfset senderID = SessionClass.passUserID()>
 
 		<!-- Retrieve sender's identity from DB' -->
 		<cfquery name="senderNameResult">
@@ -110,8 +97,10 @@
 	</cffunction>
 
 	<cffunction name="deleteMessage" access="remote" returntype="Any" return Format="json" httpmethod="GET" restpath="deleteEmail" >
-		<!--Angular testing -->	
-		<cfset senderID = #Application.userID# /> 
+
+		<!-- retrieve current User's userID' -->
+		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
+		<cfset senderID = SessionClass.passUserID()> 
 
 		<cfset msgID = url.msgID />
 

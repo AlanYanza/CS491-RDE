@@ -15,7 +15,7 @@ import { map } from 'rxjs/operators/map';
 @Injectable()
 export class MailService implements Resolve<Msg> {
 
-	private baseURL = 'rest/restTest/MessageSystem/';
+	private baseURL = '/rest/restapi/MessageSystem/';
 	private getMessageURL = this.baseURL + 'GetEmail';
 	private deleteMessageURL = this.baseURL + 'deleteEmail';
 
