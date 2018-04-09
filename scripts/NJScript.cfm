@@ -74,8 +74,8 @@
 <cfif formSource eq 'page3B' AND reviewMode eq 0>
 	<!--- Set fields of the sub-form --->
 	<cfset fields=['ASSISSDIDate','RespASSISSI','AMarket','AMarketDate','RespAMarket','CovOtherTxt','relation','relOther','InsName','InsAddr','InsAddrCounty','InsSS','InsPhone','InsCarrier',
-	'InsCarAddr','InsCarPhone','InsCarPolicyNum','EmpUnName','EmpUnAddr','PresCar','PresCarAddr','PresCarPhone','PrescarID','PresCoPay','PresDeduct','EligVetDrugBen','RecPresDrugBen'] />
-	<cfset checkFields=['NoASSISSDI','UASSISSDI','YesSSI','YesSSDI','UASSISSDIDate','UMarketDate','CovMed','CovPres','CovOther']/>
+	'InsCarAddr','InsCarPhone','InsCarPolicyNum','EmpUnName','EmpUnAddr','PresCar','PresCarAddr','PresCarPhone','PrescarID','PresCoPay','PresDeduct','EligVetDrugBen','RecPresDrugBen','SSISSDIStatus'] />
+	<cfset checkFields=['UASSISSDIDate','UMarketDate','CovMed','CovPres','CovOther']/>
 	<cfset subformObj.setFields(fields)/>
 	<cfset subformObj.setCheckFields(checkFields)/>
 	<!--- extract user inputs from subform --->
@@ -108,36 +108,44 @@
 	<cfif IsDefined("FORM.previous")>
 		<cflocation url="/CS491-RDE/application/dhas_instructions_page3.cfm">
 	<cfelseif IsDefined("FORM.next")>
-  		<cflocation url="/CS491-RDE/application/dhas_page2.cfm">
+			<cfset urlDirectLocation="/CS491-RDE/application/dhas_page2.cfm?appID=" & session.appID>
+			<cflocation url=#urlDirectLocation#>
 	</cfif>
 <cfelseif formSource eq 'page2'>
 	<cfif IsDefined("FORM.previous")>
-		<cflocation url="/CS491-RDE/application/dhas_page1.cfm">
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page1.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	<cfelseif IsDefined("FORM.next")>
-  		<cflocation url="/CS491-RDE/application/dhas_page3.cfm">
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page3.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	</cfif>
 <cfelseif formSource eq 'page3A'>
 	<cfif IsDefined("FORM.previous")>
-		<cflocation url="/CS491-RDE/application/dhas_page2.cfm">
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page2.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	<cfelseif IsDefined("FORM.next")>
-  		<cflocation url="/CS491-RDE/application/dhas_page4.cfm">
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page4.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	</cfif>
 <cfelseif formSource eq 'page3B'>
 	<cfif IsDefined("FORM.previous")>
-		<cflocation url="/CS491-RDE/application/dhas_page3.cfm">
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page3.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	<cfelseif IsDefined("FORM.next")>
-  		<cflocation url="/CS491-RDE/application/dhas_page5.cfm">
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page5.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	</cfif>
 <cfelseif formSource eq 'page4'>
 	<cfif IsDefined("FORM.previous")>
-		<cflocation url="/CS491-RDE/application/dhas_page4.cfm">
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page4.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	<cfelseif IsDefined("FORM.next")>
 		<!--- Insert Documents into AppDocument Table--->
 		<cfif subformObj.CheckApplicationStatus() eq 'P' >
 			<cfset InsertNJDocuments()/> 
 		</cfif>
 		<!--- Change status of Application to Review--->
-			<cfset subformObj.submitApplication()>
+		<cfset subformObj.submitApplication()>
   		<cflocation url="/CS491-RDE/home.cfm?submitApplication">
 	</cfif>
 </cfif>

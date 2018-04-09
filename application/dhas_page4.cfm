@@ -1,10 +1,9 @@
 <!-- Session Page Protection -->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
-<!-- Determine Flag(reviewing or editing) -->
-<cfif session.accessLevel eq 'admin'>
-	<cfdump var="User is admin" >
-	<!-- put javascript here -->
+<cfif isDefined('url.appID')>
+	<!-- create a session variable for appID -->
+	<cfset session.appID=url.appID>
 </cfif>
 <!-- If a user access level,More Session Page Protection -->
 <cfif session.accessLevel neq 'admin'>
@@ -20,6 +19,10 @@
 <!-- Determine Flag(reviewing or editing) -->
 <cfif session.accessLevel eq 'admin'>
 	<cfdump var="User is admin" >
+	<!-- put javascript here -->
+</cfif>
+<cfif subformClass.isUserReview()>
+	<Cfdump var="Application is under Review">
 	<!-- put javascript here -->
 </cfif>
 
@@ -125,11 +128,11 @@
 	<input type="text" hidden="true" id="formPage" name="formPage" value="page3B">
 	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
 	<strong>Are you apply or having applied for Social Security Income(SSI) or Social Security Income(SSDI)?</strong>
-	<div>
-		<label class="checkbox-inline"><input type="checkbox" name="YesSSI" value="Y" <cfset subformClass.showCheckbox('YesSSI',subformData)/>/>Yes for SSI</label>
-		<label class="checkbox-inline"><input type="checkbox" name="YesSSDI" value="Y" <cfset subformClass.showCheckbox('YEsSSDI',subformData)/>/>Yes for SSDI</label>
-		<label class="checkbox-inline"><input type="checkbox" name="NoASSISSDI" value="Y" <cfset subformClass.showCheckbox('NoASSISSDI',subformData)/>/>No</label>
-		<label class="checkbox-inline"><input type="checkbox" name="UASSISSDI" value="Y" <cfset subformClass.showCheckbox('UASSISSDI',subformData)/>/>Don't know</label>
+	<div class="radio">
+		<label><input type="radio" name="SSISSDIStatus" value="YSSI" <cfset subformClass.showRadioButton('SSISSDIStatus',subformData,'YSSI')/> required />Yes for SSI</label>
+		<label><input type="radio" name="SSISSDIStatus" value="YSSDI"<cfset subformClass.showRadioButton('SSISSDIStatus',subformData,'YSSDI')/>/>Yes for SSDI</label>
+		<label><input type="radio" name="SSISSDIStatus" value="N"<cfset subformClass.showRadioButton('SSISSDIStatus',subformData,'N')/>/>No</label>
+		<label><input type="radio" name="SSISSDIStatus" value="U"<cfset subformClass.showRadioButton('SSISSDIStatus',subformData,'U')/>/>Don't know</label>
 	</div>
 
 	<div id="SSISSDIOption">

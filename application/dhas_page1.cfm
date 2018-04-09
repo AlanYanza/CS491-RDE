@@ -23,6 +23,10 @@
 	<cfdump var="User is admin" >
 	<!-- put javascript here -->
 </cfif>
+<cfif subformClass.isUserReview()>
+	<Cfdump var="Application is under Review">
+	<!-- put javascript here -->
+</cfif>
 
 <!DOCTYPE html>
 <html lang="en">

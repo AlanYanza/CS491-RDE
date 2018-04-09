@@ -1,6 +1,10 @@
 <!-- Session Page Protection -->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<cfif isDefined('url.appID')>
+	<!-- create a session variable for appID -->
+	<cfset session.appID=url.appID>
+</cfif>
 <!-- If a user access level,More Session Page Protection -->
 <cfif session.accessLevel neq 'admin'>
 	<cfset SessionClass.checkIfuser()>
@@ -16,6 +20,10 @@
 <!-- Determine Flag(reviewing or editing) -->
 <cfif session.accessLevel eq 'admin'>
 	<cfdump var="User is admin" >
+	<!-- put javascript here -->
+</cfif>
+<cfif subformClass.isUserReview()>
+	<Cfdump var="Application is under Review">
 	<!-- put javascript here -->
 </cfif>
 
@@ -103,8 +111,12 @@
 			<label for="signature">Signature of Applicant <span style="color: red;">*</span></label>	
 			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#signatureModal">Click here to attach/edit your signature</button>
 				<!-- Convert Base64 Binary to String Representation -->
-				<cfset binaryStringRep=BinaryEncode(applicantSignature.signature,"Base64")>
-				<cfset binaryStringRep='data:image/png;base64,' &  binaryStringRep >
+				<cfif isBinary(applicantSignature.signature)>
+					<cfset binaryStringRep=BinaryEncode(applicantSignature.signature,"Base64")>
+					<cfset binaryStringRep='data:image/png;base64,' &  binaryStringRep >
+				<cfelse>
+					<cfset BinaryStringRep="">
+				</cfif>
 				<input type="text" name="signature" id="signature" value=<cfoutput>#binaryStringRep#</cfoutput> >
 <!---			<textarea name="signature" id="signature"><cfoutput>#binaryStringRep#</cfoutput></textarea>--->
 		</div>

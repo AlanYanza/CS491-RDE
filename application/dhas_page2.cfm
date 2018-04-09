@@ -1,6 +1,10 @@
 <!-- Session Page Protection -->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<cfif isDefined('url.appID')>
+	<!-- create a session variable for appID -->
+	<cfset session.appID=url.appID>
+</cfif>
 <!-- If a user access level,More Session Page Protection -->
 <cfif session.accessLevel neq 'admin'>
 	<cfset SessionClass.checkIfuser()>
@@ -15,6 +19,10 @@
 <!-- Determine Flag(reviewing or editing) -->
 <cfif session.accessLevel eq 'admin'>
 	<cfdump var="User is admin" >
+	<!-- put javascript here -->
+</cfif>
+<cfif subformClass.isUserReview()>
+	<Cfdump var="Application is under Review">
 	<!-- put javascript here -->
 </cfif>
 

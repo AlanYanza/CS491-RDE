@@ -38,7 +38,6 @@ hint="retrieves the number of unread emails for a user (for nav-bar purposes) an
 				<cfif IsDefined('session.firstName')>
 				  	<cfoutput>
 						<cfset getUnreadEmails()>
-<!---				  		<li><a href="/CS491-RDE/message.cfm">Messages <span class="badge">1</span></a></li>--->
 					</cfoutput>
 				</cfif>
 			</ul>		
