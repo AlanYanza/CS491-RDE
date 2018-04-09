@@ -67,7 +67,7 @@ BEGIN
 		subject varchar(100) NOT NULL DEFAULT(''),
 		message varchar(max) NOT NULL DEFAULT(''),
 		dateSent datetime DEFAULT(NULL),
-		dateRecv datetime DEFAULT(NULL), 
+		dateRecv datetime DEFAULT(NULL),
 		readStatus char(1) NOT NULL CHECK (readStatus IN('T','F'))
 	);
 	PRINT 'Successfully created "Message" Table';
@@ -163,7 +163,7 @@ BEGIN
 	CREATE TABLE [ApplicationLinks] (
 		state varchar(2) PRIMARY KEY,
 		formTypeID int NOT NULL FOREIGN KEY REFERENCES [Forms](formTypeID),
-		directLink varchar(200) 
+		directLink varchar(200)
 	);
 	PRINT 'Successfully created [ApplicationLinks] Table';
 END
