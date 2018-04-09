@@ -6,9 +6,57 @@
 		<cfset string="testString">
 		<cfreturn string >
 	</cffunction>
+
+	<!-- Retrieve Sent mail for given user --> 
+	<cffunction name="getSent" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="getSent" produces="application/json">
+		<!-- retrieve current User's userID' -->
+		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
+		<cfset userID = SessionClass.passUserID()> 
+
+		<!-- Query DB for user's Message' -->
+		<cfquery name="SentMailResult">
+			SELECT 
+				Sent.msgID, 
+				Message.readStatus, Message.subject, Message.message, Message.dateSent, 
+				concat(sen.FirstName, ' ', sen.LastName) AS sender,
+				concat(rec.FirstName, ' ', rec.LastName) AS recipient
+			FROM Sent 
+			INNER JOIN Message ON Sent.msgID = Message.msgID
+			INNER JOIN [User] AS rec ON Message.recipientID=rec.userID 
+			INNER JOIN [User] AS sen ON Message.senderID=sen.userID
+			WHERE Inbox.userID = <cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" > 
+			ORDER BY Message.dateSent DESC
+		</cfquery>
+
+		<cfreturn serializeJSON(SentMailResult, 'struct') /> 
+	</cffunction>
+
+	<!-- Retrieve Trashed mail for given user --> 
+	<cffunction name="getTrash" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="getTrash" produces="application/json">
+		<!-- retrieve current User's userID' -->
+		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
+		<cfset userID = SessionClass.passUserID()> 
+
+		<!-- Query DB for user's Message' -->
+		<cfquery name="TrashMailResult">
+			SELECT 
+				Trash.msgID, 
+				Message.readStatus, Message.subject, Message.message, Message.dateSent, 
+				concat(sen.FirstName, ' ', sen.LastName) AS sender,
+				concat(rec.FirstName, ' ', rec.LastName) AS recipient
+			FROM Trash 
+			INNER JOIN Message ON Trash.msgID = Message.msgID
+			INNER JOIN [User] AS rec ON Message.recipientID=rec.userID 
+			INNER JOIN [User] AS sen ON Message.senderID=sen.userID
+			WHERE Inbox.userID = <cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" > 
+			ORDER BY Message.dateSent DESC
+		</cfquery>
+
+		<cfreturn serializeJSON(TrashMailResult, 'struct') /> 
+	</cffunction>
 			
-	<!-- Retrieve email for given user -->
-	<cffunction name="GetEmail" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="GetEmail" produces="application/json">
+	<!-- Retrieve Inbox for given user -->
+	<cffunction name="getInbox" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="getInbox" produces="application/json">
 
 		<!-- retrieve current User's userID' -->
 		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
@@ -104,9 +152,16 @@
 
 		<cfset msgID = url.msgID />
 
-		<!-- Insert message into sender's sent box (Sent Table) --> 
+		<!-- Delete message from sender's inbox (Sent Table) --> 
 		<cfquery name="deleteFromInbox">
 			DELETE FROM Inbox 
+			WHERE msgID = <cfqueryPARAM value="#msgID#" cfsqltype="CF_SQL_INTEGER">
+			AND userID = <cfqueryPARAM value="#senderID#" cfsqltype="CF_SQL_INTEGER">
+		</cfquery>
+
+		<!-- Insert message into sender's trash box (Sent Table) --> 
+		<cfquery name="deleteFromInbox">
+			INSERT INTO Trash
 			WHERE msgID = <cfqueryPARAM value="#msgID#" cfsqltype="CF_SQL_INTEGER">
 			AND userID = <cfqueryPARAM value="#senderID#" cfsqltype="CF_SQL_INTEGER">
 		</cfquery>

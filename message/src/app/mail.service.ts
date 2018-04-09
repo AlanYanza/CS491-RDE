@@ -16,7 +16,7 @@ import { map } from 'rxjs/operators/map';
 export class MailService implements Resolve<Msg> {
 
 	private baseURL = '/rest/restapi/MessageSystem/';
-	private getMessageURL = this.baseURL + 'GetEmail';
+	private getMessageURL = this.baseURL + 'getInbox';
 	private deleteMessageURL = this.baseURL + 'deleteEmail';
 
 

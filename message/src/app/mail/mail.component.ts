@@ -31,7 +31,7 @@ export class MailComponent implements OnInit {
   }
 
   deleteMessage(msg: Msg): void {
-    console.log(msg.MSGID);
+    this.mail = this.mail.filter( m => msg.MSGID !== m.MSGID );
     this.mailService.deleteMessage(msg).subscribe();
   }
 
