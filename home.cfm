@@ -62,50 +62,50 @@
         <div class="panel-heading">Existing Application</div>
 		<div class="panel-body table-responsive">
 	        <span class="help-block">Click the AppID to edit or view applications.</span>
-	        <center><table class="table table-hover">
+	        <table class="table table-hover">
 	        	<tr><th>AppID</th><th>State</th><th>Application Description</th>
 	        		<th>Date Submitted</th><th>Status</th><th>Document Status</th></tr>
-	        <!-- Interate though resultSet and display data-->
-			<cfloop query="allApplications">
-				<cfoutput><tr></cfoutput>
-				<!-- Determine State of Form-->
-				<cfset formInfo=UserObj.getFormInfo(#formTypeID#)/>
-				<!-- Determine the Status of Application -->
-				<cfif #status# eq 'P'>
-					<cfset outputStatus='Not Submitted'/>
-				<cfelseif #status# eq 'N'>
-					<cfset outputStatus='Requires Attention'/>
-				<cfelseif #status# eq 'R'>
-					<cfset outputStatus='Pending'/>
-				<cfelseif #status# eq 'A'>
-					<cfset outputStatus='Approved'/>
-				<cfelseif #status# eq 'D'>
-					<cfset outputStatus='Denied'/>
-				</cfif>
-				<!-- determine the direct Link based on state -->
-				<cfset outputLink=UserObj.getDirectLink(formInfo.state)/>
-				<!-- create html row for Application -->
-				<cfset userEditLink=#outputLink# & '?appID=' & #appID# > 
-				<cfoutput>
-					<tr>
-						<td>
-							<cfif #status# eq 'P' OR #status# eq 'N' >
-								<a href="#userEditLink#">#appID#</a>
-							<cfelse>
-								<a href="#userEditLink#">#appID#</a>
-							</cfif>
-						</td>
-						<td>#formInfo.state#</td>
-						<td>#formInfo.AppDescription#</td>
-						<td>#dateSubmited#</td>
-						<td>#outputStatus#</td>
-						<td><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>view</a></td>
-					</tr>
-				</cfoutput>
-			</cfloop>
-			</table></center>
+	        	<!-- Interate though resultSet and display data-->
+				<cfloop query="allApplications">
+					<cfoutput><tr></cfoutput>
+					<!-- Determine State of Form-->
+					<cfset formInfo=UserObj.getFormInfo(#formTypeID#)/>
+					<!-- Determine the Status of Application -->
+					<cfif #status# eq 'P'>
+						<cfset outputStatus='Not Submitted'/>
+					<cfelseif #status# eq 'N'>
+						<cfset outputStatus='Requires Attention'/>
+					<cfelseif #status# eq 'R'>
+						<cfset outputStatus='Pending'/>
+					<cfelseif #status# eq 'A'>
+						<cfset outputStatus='Approved'/>
+					<cfelseif #status# eq 'D'>
+						<cfset outputStatus='Denied'/>
+					</cfif>
+					<!-- determine the direct Link based on state -->
+					<cfset outputLink=UserObj.getDirectLink(formInfo.state)/>
+					<!-- create html row for Application -->
+					<cfset userEditLink=#outputLink# & '?appID=' & #appID# > 
+					<cfoutput>
+						<tr>
+							<td>
+								<cfif #status# eq 'P' OR #status# eq 'N' >
+									<a href="#userEditLink#">#appID#</a>
+								<cfelse>
+									<a href="#userEditLink#">#appID#</a>
+								</cfif>
+							</td>
+							<td>#formInfo.state#</td>
+							<td>#formInfo.AppDescription#</td>
+							<td>#dateSubmited#</td>
+							<td>#outputStatus#</td>
+							<td><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>view</a></td>
+						</tr>
+					</cfoutput>
+				</cfloop>
+			</table>
 		</div>
-    </div>    
+    </div>
 </div>
 </body>
 </html>
