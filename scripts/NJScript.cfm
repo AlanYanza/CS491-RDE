@@ -1,7 +1,9 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
-<cfset SessionClass.checkIfLoggedIn()/>
-<cfset SessionClass.NoAppIDRedirect()>
-<cfset SessionClass.validateAppID()>
+<cfif session.accessLevel neq 'admin'>
+	<cfset SessionClass.checkIfLoggedIn()/>
+	<cfset SessionClass.NoAppIDRedirect()>
+	<cfset SessionClass.validateAppID()>
+</cfif>
 <cfset formObj=createObject('component','CS491-RDE.components.Form').init('NJ',session.userID)>
 <!--- Determine which page form came from --->
 <cfset formSource=FORM.formPage/>
@@ -103,6 +105,9 @@
 <!--- If 'save progress' button hit submit form and redirect to homepage(do not change application status) --->
 <cfif IsDefined('Form.save')>
 	<cflocation url="/CS491-RDE/home.cfm?savedApplication">
+</cfif>
+<cfif IsDefined('Form.exit')>
+	<cflocation url="/CS491-RDE/home.cfm">
 </cfif>
 <cfif formSource eq 'page1'>
 	<cfif IsDefined("FORM.previous")>

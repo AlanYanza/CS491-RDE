@@ -29,7 +29,6 @@
 		$(document).ready(function(){
 			<!--- Determine Flag(reviewing or editing) --->
 			<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
-				<!--- <cfdump var="User is admin or Application is under Review"" > --->
 				<cfoutput>
 					$("##formData").find("*").attr("disabled", "true");
 					$("input[type=hidden][name=formPage]").removeAttr("disabled");
@@ -249,8 +248,14 @@
 	</div>
 	<div class="text-center">
 		<button type="submit" class="btn btn-default" name="previous" value="prevous">Previous</button>
-		<button type="submit" class="btn btn-default" name="save" value="save">Save Progress &#38; Exit</button>
-		<button type="submit" class="btn btn-default" name="next" value="next">Submit Application</button>
+		<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
+			<button type="submit" class="btn btn-default" name="exit" value="exit">Exit</button>
+		<cfelse>
+			<button type="submit" class="btn btn-default" name="save" value="save">Save Progress &#38; Exit</button>
+		</cfif>
+		<cfif ((session.accessLevel neq 'admin') AND (NOT subformClass.isUserReview()))>
+			<button type="submit" class="btn btn-default" name="next" value="next">Submit Application</button>
+		</cfif>
 	</div>
 	</form>
 
