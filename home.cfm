@@ -19,17 +19,8 @@
 		});
 	</script>
 	<style>
-		table {
-			font-family: arial, sans-serif;
-			font-size: 14px;
-			border-collapse: collapse;
-			width: 100%;
-		}
-
 		td, th {
-			border: 1px solid #dddddd;
 			text-align: center;
-			padding: 8px;
 		}
 
 		tr:nth-child(even) {
@@ -59,49 +50,54 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">Start New Application</div>
-            	<center><table>
-				<tr><th style="width: 50%;">Application Type</th></tr><td>
-                <cfoutput>NJ-Participation in (ADDP) / HICP</cfoutput></td>
-                <cfoutput><td><a href="application/dhas_instructions_page1.cfm?new">Start new application</a></td></cfoutput>
-			  </table></center> 
+		<div class="panel-body table-responsive"">
+		<center><table class="table table-hover">
+			<tr><th style="width: 50%;">Application Type</th></tr>
+			<td><cfoutput>NJ-Participation in (ADDP) / HICP</cfoutput></td>
+			<cfoutput><td><a href="application/dhas_instructions_page1.cfm?new">Start new application</a></td></cfoutput>
+			</table></center> 
+		</div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading">Existing Application<br>Click AppID for Required Document Status</div>
-        <center><table>
-        	<tr><th style="width: 15%;">AppID</th><th style="width: 5%;">State</th><th style="width: 40%;">Application Description</th>
-        		<th style="width: 10%;">Date Submitted</th><th style="width: 25%;">Status</th><th style="width: 5%;">Editable</th></tr>
-        <!-- Interate though resultSet and display data-->
-		<cfloop query="allApplications">
-			<cfoutput><tr></cfoutput>
-			<!-- Determine State of Form-->
-			<cfset formInfo=UserObj.getFormInfo(#formTypeID#)/>
-			<!-- Determine the Status of Application -->
-			<cfif #status# eq 'P'>
-				<cfset outputStatus='Not Submitted'/>
-			<cfelseif #status# eq 'N'>
-				<cfset outputStatus='Requires Attention'/>
-			<cfelseif #status# eq 'R'>
-				<cfset outputStatus='Pending'/>
-			<cfelseif #status# eq 'A'>
-				<cfset outputStatus='Approved'/>		
-			<cfelseif #status# eq 'D'>
-				<cfset outputStatus='Denied'/>	
-			</cfif>
-			<!-- determine the direct Link based on state -->
-			<cfset outputLink=UserObj.getDirectLink(formInfo.state)/>
-			<!-- create html row for Application -->
-			<cfset userEditLink=#outputLink# & '?appID=' & #appID# > 
-			<cfoutput><tr><td><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>#appID#</td><td>#formInfo.state#</td><td>#formInfo.AppDescription#</td>
-				<td>#dateSubmited#</td>
-				<td>#outputStatus#</td>
-				<cfif #status# eq 'P' OR #status# eq 'N' >
-					<td>Yes<br><a href="#userEditLink#">Edit</td></tr>
-				<cfelse>
-					<td>No<br><a href="">Review</td></tr>
+        <div class="panel-heading">Existing Application</div>
+		<div class="panel-body table-responsive"">
+	        <span class="help-block">Click the AppID for required document Status.</span>
+	        <center><table class="table table-hover">
+	        	<tr><th>AppID</th><th>State</th><th>Application Description</th>
+	        		<th>Date Submitted</th><th>Status</th><th>Editable</th></tr>
+	        <!-- Interate though resultSet and display data-->
+			<cfloop query="allApplications">
+				<cfoutput><tr></cfoutput>
+				<!-- Determine State of Form-->
+				<cfset formInfo=UserObj.getFormInfo(#formTypeID#)/>
+				<!-- Determine the Status of Application -->
+				<cfif #status# eq 'P'>
+					<cfset outputStatus='Not Submitted'/>
+				<cfelseif #status# eq 'N'>
+					<cfset outputStatus='Requires Attention'/>
+				<cfelseif #status# eq 'R'>
+					<cfset outputStatus='Pending'/>
+				<cfelseif #status# eq 'A'>
+					<cfset outputStatus='Approved'/>
+				<cfelseif #status# eq 'D'>
+					<cfset outputStatus='Denied'/>
 				</cfif>
-			</cfoutput>
-		</cfloop>
-		</table></center>
+				<!-- determine the direct Link based on state -->
+				<cfset outputLink=UserObj.getDirectLink(formInfo.state)/>
+				<!-- create html row for Application -->
+				<cfset userEditLink=#outputLink# & '?appID=' & #appID# > 
+				<cfoutput><tr><td><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>#appID#</a></td><td>#formInfo.state#</td><td>#formInfo.AppDescription#</td>
+					<td>#dateSubmited#</td>
+					<td>#outputStatus#</td>
+					<cfif #status# eq 'P' OR #status# eq 'N' >
+						<td><a href="#userEditLink#">Yes Edit</a></td></tr>
+					<cfelse>
+						<td><a href="">No Review</a></td></tr>
+					</cfif>
+				</cfoutput>
+			</cfloop>
+			</table></center>
+		</div>
     </div>    
 </div>
 </body>

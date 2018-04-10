@@ -18,15 +18,6 @@
 <cfset subformClass.createSubformData()/>
 <cfset subformData=subformClass.retrieveDataForSubform()/>
 <cfset HICPStatus=subformClass.retrieveHICPStatus()/>
-<!-- Determine Flag(reviewing or editing) -->
-<cfif session.accessLevel eq 'admin'>
-	<cfdump var="User is admin" >
-	<!-- put javascript here -->
-</cfif>
-<cfif subformClass.isUserReview()>
-	<Cfdump var="Application is under Review">
-	<!-- put javascript here -->
-</cfif>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +27,12 @@
 	<script>
 		"use strict";
 		$(document).ready(function(){
+			<!--- Determine Flag(reviewing or editing) --->
+			<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
+				<!--- <cfdump var="User is admin or Application is under Review"" > --->
+				<cfoutput>$("form").find("*").attr("disabled", "true");</cfoutput>
+			</cfif>
+			
 			$('[data-toggle="popover"]').popover();
 
 			$("#same").change(function(){

@@ -110,6 +110,7 @@
 		<div class="col-sm-3">
 			<label for="signature">Signature of Applicant <span style="color: red;">*</span></label>	
 			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#signatureModal">Click here to attach/edit your signature</button>
+			<button type="button" class="btn btn-default" onclick='console.log($("#signature").val().length)'></button>
 				<!-- Convert Base64 Binary to String Representation -->
 				<cfif isBinary(applicantSignature.signature)>
 					<cfset binaryStringRep=BinaryEncode(applicantSignature.signature,"Base64")>
@@ -117,7 +118,7 @@
 				<cfelse>
 					<cfset BinaryStringRep="">
 				</cfif>
-				<input type="text" name="signature" id="signature" value=<cfoutput>#binaryStringRep#</cfoutput> >
+				<input type="text" name="signature" id="signature" value="<cfoutput>#binaryStringRep#</cfoutput>" />
 <!---			<textarea name="signature" id="signature"><cfoutput>#binaryStringRep#</cfoutput></textarea>--->
 		</div>
 		<div class="col-sm-6">
@@ -166,28 +167,28 @@
 
 		<div class="row">
 			<div class="col-sm-6"><div class="form-group">
-				<label for="CPName">Name of Contact Person</label>
-				<input type="text" class="form-control" name="CPName" value="<cfoutput>#subformData.CPName#</cfoutput>">
+				<label for="CPName">Name of Contact Person <span style="color: red;">*</span></label>
+				<input type="text" class="form-control" name="CPName" value="<cfoutput>#subformData.CPName#</cfoutput>" required />
 			</div></div>
 			<div class="col-sm-6"><div class="form-group">
-				<label for="Relation">Relationship to Applicant</label>
-				<input type="text" class="form-control" name="Relation" value="<cfoutput>#subformData.Relation#</cfoutput>">
+				<label for="Relation">Relationship to Applicant <span style="color: red;">*</span></label>
+				<input type="text" class="form-control" name="Relation" value="<cfoutput>#subformData.Relation#</cfoutput>" required />
 			</div></div>
 		</div>
-		<strong>Street Address, City, State, Zip</strong>
-		<input type="text" class="form-control" name="CPAddr" value="<cfoutput>#subformData.CPAddr#</cfoutput>">
+		<strong>Street Address, City, State, Zip <span style="color: red;">*</span></strong>
+		<input type="text" class="form-control" name="CPAddr" value="<cfoutput>#subformData.CPAddr#</cfoutput>" required />
 		<div class="row">
 			<div class="col-sm-4"><div class="form-group">
 				<label for="CPWPhone">Work Number</label>
-				<input type="tel" class="form-control" name="CPWPhone" value="<cfoutput>#subformData.CPWPhone#</cfoutput>">
+				<input type="tel" class="form-control" name="CPWPhone" value="<cfoutput>#subformData.CPWPhone#</cfoutput>"/>
 			</div></div>
 			<div class="col-sm-4"><div class="form-group">
 			  	<label for="CPHPhone">Home Number</label>
-			  	<input type="tel" class="form-control" name="CPHPhone" value="<cfoutput>#subformData.CPHPhone#</cfoutput>">
+			  	<input type="tel" class="form-control" name="CPHPhone" value="<cfoutput>#subformData.CPHPhone#</cfoutput>"/>
 			</div></div>
 			<div class="col-sm-4"><div class="form-group">
 			  	<label for="CPCPhone">Cell Number</label>
-			  	<input type="tel" class="form-control" name="CPCPhone" value="<cfoutput>#subformData.CPCPhone#</cfoutput>">
+			  	<input type="tel" class="form-control" name="CPCPhone" value="<cfoutput>#subformData.CPCPhone#</cfoutput>"/>
 			</div></div>
 		</div>
 	</div>
@@ -245,9 +246,6 @@
 	<input type="email" class="form-control" name="email" value="<cfoutput>#subformData.email#</cfoutput>"><br/>
 	</div>
 
-	<!--<strong>FOR ADDP STAFF USE ONLY:</strong>
-	Date eligibility determined:
-	<input type="date" class="form-control" id="WP" name="WP">-->
 	<div class="text-center">
 		<button type="submit" class="btn btn-default" name="previous" value="prevous">Previous</button>
 		<button type="submit" class="btn btn-default" name="save" value="save">Save Progress &#38; Exit</button>

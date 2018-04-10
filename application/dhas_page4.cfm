@@ -16,15 +16,6 @@
 <!-- Application Page pre-processing -->
 <cfset subformClass.createSubformData()/>
 <cfset subformData=subformClass.retrieveDataForSubform()/>
-<!-- Determine Flag(reviewing or editing) -->
-<cfif session.accessLevel eq 'admin'>
-	<cfdump var="User is admin" >
-	<!-- put javascript here -->
-</cfif>
-<cfif subformClass.isUserReview()>
-	<Cfdump var="Application is under Review">
-	<!-- put javascript here -->
-</cfif>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,11 +25,17 @@
 	<script>
 	  	"use strict";
 		$(document).ready(function(){
+			<!--- Determine Flag(reviewing or editing) --->
+			<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
+				<!--- <cfdump var="User is admin or Application is under Review"" > --->
+				<cfoutput>$("form").find("*").attr("disabled", "true");</cfoutput>
+			</cfif>	
+
 			$('[data-toggle="popover"]').popover();
 
 			function SSISSDICheck() {
 				
-				if (($("input[type=radio][name=SSISSDI]:checked").val() == "N") || ($("input[type=radio][name=SSISSDI]:checked").val() == "U")) {
+				if (($("input[type=radio][name=SSISSDIStatus]:checked").val() == "N") || ($("input[type=radio][name=SSISSDIStatus]:checked").val() == "U")) {
 					$("#SSISSDIOption").hide("slow");
 					$("#SSISSDIOption").find("input").removeAttr("required");
 				}
@@ -68,12 +65,12 @@
 					$("#marketOption").find("input").removeAttr("required");
 				}
 				else {
-					$("#marketOption").show("slow");					
+					$("#marketOption").show("slow");
 				}
 			}
 
 			function marketDateCheck() {
-				if ($("input[type=checkbox][name=UMarketDate]").is(":checked")) {					
+				if ($("input[type=checkbox][name=UMarketDate]").is(":checked")) {
 					$("input[type=date][name=AMarketDate]").val("1111-11-11");
 					$("input[type=date][name=AMarketDate]").attr("readonly", "true");
 					$("input[type=date][name=AMarketDate]").removeAttr("required");
@@ -84,15 +81,49 @@
 				}
 			}
 
+			function covOtherCheck() {
+				if ($("input[type=checkbox][name=CovOther]").is(":checked")) {
+					$("input[type=text][name=CovOtherTxt]").attr("required");
+					$("input[type=text][name=CovOtherTxt]").show("slow");
+				}
+				else {
+					$("input[type=text][name=CovOtherTxt]").hide();
+					$("input[type=text][name=CovOtherTxt]").removeAttr("required", "true");
+				}
+			}
+
+			function relationCheck() {
+				$("input[type=text][name=relOther]").hide();
+				$("input[type=text][name=relOther]").removeAttr("required", "true");
+
+				if ($("input[type=radio][name=relation]:checked").val() == "S") {
+					$("#insuredOption").hide("slow");
+					$("#insuredOption").removeAttr("required", "true");
+				}
+
+				else if ($("input[type=radio][name=relation]:checked").val() == "O") {				
+					console.log($("input[type=radio][name=relation]:checked").val());
+					$("input[type=text][name=relOther]").attr("required");
+					$("input[type=text][name=relOther]").show("slow");
+					$("#insuredOption").show("slow");
+					$("#insuredOption").attr("required", "true");
+				}
+
+			}
+
 			SSISSDICheck();
 			SSISSDIDateCheck();
 			marketCheck();
 			marketDateCheck();
+			covOtherCheck();
+			relationCheck();
 
-			$("input[type=radio][name=SSISSDI]").change(SSISSDICheck);
+			$("input[type=radio][name=SSISSDIStatus]").change(SSISSDICheck);
 			$("input[type=checkbox][name=UASSISSDIDate]").click(SSISSDIDateCheck);
 			$("input[type=radio][name=AMarket]").change(marketCheck);
 			$("input[type=checkbox][name=UMarketDate]").click(marketDateCheck);
+			$("input[type=checkbox][name=CovOther]").click(covOtherCheck);
+			$("input[type=radio][name=relation]").change(relationCheck);
 
 			$("button[type=submit][name=save]").click(function() {
 				$("form").find("input").removeAttr("required");
@@ -127,7 +158,7 @@
 	<form  action="../scripts/NJScript.cfm" method="POST">
 	<input type="text" hidden="true" id="formPage" name="formPage" value="page3B">
 	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
-	<strong>Are you apply or having applied for Social Security Income(SSI) or Social Security Income(SSDI)?</strong>
+	<strong>Are you apply or having applied for Social Security Income(SSI) or Social Security Income(SSDI)? <span style="color: red;">*</span></strong>
 	<div class="radio">
 		<label><input type="radio" name="SSISSDIStatus" value="YSSI" <cfset subformClass.showRadioButton('SSISSDIStatus',subformData,'YSSI')/> required />Yes for SSI</label>
 		<label><input type="radio" name="SSISSDIStatus" value="YSSDI"<cfset subformClass.showRadioButton('SSISSDIStatus',subformData,'YSSDI')/>/>Yes for SSDI</label>
@@ -137,9 +168,9 @@
 
 	<div id="SSISSDIOption">
 		<div class="row">
-			<label class="col-sm-4">When did you apply for SSI/SSDI?</label>
+			<label class="col-sm-4">When did you apply for SSI/SSDI? <span style="color: red;">*</span></label>
 			<div class="col-sm-5">
-				<input type="date" class="form-control" name="ASSISSDIDate" value="<cfoutput>#subformData.ASSISSDIDate#</cfoutput>">
+				<input type="date" class="form-control" name="ASSISSDIDate" value="<cfoutput>#subformData.ASSISSDIDate#</cfoutput>" required />
 			</div>
 			<div class="checkbox col-sm-3">
 				<label><input type="checkbox" name="UASSISSDIDate" value="Y" <cfset subformClass.showCheckbox('UASSISSDIDate',subformData)/>/>Unsure</label>
@@ -147,9 +178,9 @@
 		</div>
 
 		<div class="form-group">
-			<label>Have you received a response?</label>
+			<label>Have you received a response? <span style="color: red;">*</span></label>
 			<br/>
-			<label class="radio-inline"><input type="radio" name="RespASSISSI" value="Y" <cfset subformClass.showRadioButton('RespASSISSI',subformData,'Y')/>/>Yes</label>
+			<label class="radio-inline"><input type="radio" name="RespASSISSI" value="Y" <cfset subformClass.showRadioButton('RespASSISSI',subformData,'Y')/>  required />Yes</label>
 			<label class="radio-inline"><input type="radio" name="RespASSISSI" value="N" <cfset subformClass.showRadioButton('RespASSISSI',subformData,'N')/>/>No</label>
 		</div>
 	</div>
@@ -157,18 +188,18 @@
 	<hr/>
 
 	<div class="form-group">
-		<label>Are you applying or have you applied for insurance through the health Insurance Reform Act (Marketplace/Exchange)?</label>
+		<label>Are you applying or have you applied for insurance through the health Insurance Reform Act (Marketplace/Exchange)? <span style="color: red;">*</span></label>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="AMarket" value="Y" <cfset subformClass.showRadioButton('AMarket',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="AMarket" value="Y" <cfset subformClass.showRadioButton('AMarket',subformData,'Y')/> required />Yes</label>
 		<label class="radio-inline"><input type="radio" name="AMarket" value="N" <cfset subformClass.showRadioButton('AMarket',subformData,'N')/>/>No</label>
 		<label class="radio-inline"><input type="radio" name="AMarket" value="U" <cfset subformClass.showRadioButton('AMarket',subformData,'U')/>/>Don't Know</label>
 	</div>
 
 	<div id="marketOption">
 		<div class="row">
-			<label class="col-sm-4">When did you apply?</label>
+			<label class="col-sm-4">When did you apply? <span style="color: red;">*</span></label>
 			<div class="col-sm-5">
-				<input type="date" class="form-control" name="AMarketDate" value="<cfoutput>#subformData.AMarketDate#</cfoutput>">
+				<input type="date" class="form-control" name="AMarketDate" value="<cfoutput>#subformData.AMarketDate#</cfoutput>" required />
 			</div>
 			<div class="checkbox col-sm-3">
 				<label><input type="checkbox" name="UMarketDate" value="Y" <cfset subformClass.showCheckbox('UMarketDate',subformData)/>/>Unsure</label>
@@ -176,9 +207,9 @@
 		</div>
 
 		<div class="form-group">
-			<label>Have you received a response?</label>
+			<label>Have you received a response? <span style="color: red;">*</span></label>
 			<br/>
-			<label class="radio-inline"><input type="radio" name="RespAMarket" value="Y" <cfset subformClass.showRadioButton('RespAMarket',subformData,'Y')/>/>Yes</label>
+			<label class="radio-inline"><input type="radio" name="RespAMarket" value="Y" <cfset subformClass.showRadioButton('RespAMarket',subformData,'Y')/> required />Yes</label>
 			<label class="radio-inline"><input type="radio" name="RespAMarket" value="N" <cfset subformClass.showRadioButton('RespAMarket',subformData,'N')/>/>No</label>
 		</div>
 	</div>
@@ -238,11 +269,11 @@
 
 	<hr/>
 
-	<strong>Identify your relationship to the insured: </strong>
+	<strong>Identify your relationship to the insured: <span style="color: red;">*</span></strong>
 	<br/>
 	<div class="form-group row">
 		<div class="col-sm-5">		
-			<label class="radio-inline"><input type="radio" name="relation" value="S" <cfset subformClass.showRadioButton('relation',subformData,'S')/>/>Self</label>
+			<label class="radio-inline"><input type="radio" name="relation" value="S" <cfset subformClass.showRadioButton('relation',subformData,'S')/> required />Self</label>
 			<label class="radio-inline"><input type="radio" name="relation" value="P" <cfset subformClass.showRadioButton('relation',subformData,'P')/>/>Spouse/Partner</label>
 			<label class="radio-inline"><input type="radio" name="relation" value="C" <cfset subformClass.showRadioButton('relation',subformData,'C')/>/>Child</label>
 			<label class="radio-inline"><input type="radio" name="relation" value="O" <cfset subformClass.showRadioButton('relation',subformData,'O')/>/>Other (Specify)</label>
@@ -252,42 +283,44 @@
 		</div>
 	</div>
 
-	<div class="form-group row">
-		<div class="col-sm-6">	
-			<label for="InsName">Name of Insured</label>
-			<input type="text" class="form-control" name="InsName" value="<cfoutput>#subformData.InsName#</cfoutput>"/>
+	<div id="insuredOption">
+		<div class="form-group row">
+			<div class="col-sm-6">	
+				<label for="InsName">Name of Insured</label>
+				<input type="text" class="form-control" name="InsName" value="<cfoutput>#subformData.InsName#</cfoutput>"/>
+			</div>
+			<div class="col-sm-6">
+				<label for="InsSS">Social Security Number:</label>
+				<input type="text" class="form-control" name="InsSS" value="<cfoutput>#subformData.InsSS#</cfoutput>"/>
+			</div>
 		</div>
-		<div class="col-sm-6">
-			<label for="InsSS">Social Security Number:</label>
-			<input type="text" class="form-control" name="InsSS" value="<cfoutput>#subformData.InsSS#</cfoutput>"/>
+		<div class="form-group">
+			<label for="InsAddr">Street Address, City, State, Zip:</label>
+			<input type="text" class="form-control" name="InsAddr" value="<cfoutput>#subformData.InsAddr#</cfoutput>"/>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-6">	
+				<label for="InsAddrCounty">County:</label>
+				<input type="text" class="form-control" name="InsAddrCounty" value="<cfoutput>#subformData.InsAddrCounty#</cfoutput>"/>
+			</div>
+			<div class="col-sm-6">
+				<label for="InsPhone">Telephone Number</label>
+				<input type="tel" class="form-control" name="InsPhone" value="<cfoutput>#subformData.InsPhone#</cfoutput>"/>
+			</div>
 		</div>
 	</div>
-	<div class="form-group">
-		<label for="InsAddr">Street Address, City, State, Zip:</label>
-		<input type="text" class="form-control" name="InsAddr" value="<cfoutput>#subformData.InsAddr#</cfoutput>"/>
-	</div>
-	<div class="form-group row">
-		<div class="col-sm-6">	
-			<label for="InsAddrCounty">County:</label>
-			<input type="text" class="form-control" name="InsAddrCounty" value="<cfoutput>#subformData.InsAddrCounty#</cfoutput>"/>
-		</div>
-		<div class="col-sm-6">
-			<label for="InsPhone">Telephone Number</label>
-			<input type="tel" class="form-control" name="InsPhone" value="<cfoutput>#subformData.InsPhone#</cfoutput>"/>
-		</div>
-	</div>	
 
 	<hr/>
 
 	<div class="form-group">
-		<strong>Are you eligible for Veterans Administration prescription drug benefits?</strong>
+		<strong>Are you eligible for Veterans Administration prescription drug benefits? <span style="color: red;">*</span></strong>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="EligVetDrugBen" value="Y" <cfset subformClass.showRadioButton('EligVetDrugBen',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="EligVetDrugBen" value="Y" <cfset subformClass.showRadioButton('EligVetDrugBen',subformData,'Y')/> required />Yes</label>
 		<label class="radio-inline"><input type="radio" name="EligVetDrugBen" value="N" <cfset subformClass.showRadioButton('EligVetDrugBen',subformData,'N')/>/>No</label>
 		<br/>
-		<strong>Are you currently receiving prescription drug benefits?</strong>
+		<strong>Are you currently receiving prescription drug benefits? <span style="color: red;">*</span></strong>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="RecPresDrugBen" value="Y" <cfset subformClass.showRadioButton('RecPresDrugBen',subformData,'Y')/>/>Yes</label>
+		<label class="radio-inline"><input type="radio" name="RecPresDrugBen" value="Y" <cfset subformClass.showRadioButton('RecPresDrugBen',subformData,'Y')/> required />Yes</label>
 		<label class="radio-inline"><input type="radio" name="RecPresDrugBen" value="N" <cfset subformClass.showRadioButton('RecPresDrugBen',subformData,'N')/>/>No</label>
 	</div>
 

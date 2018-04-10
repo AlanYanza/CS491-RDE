@@ -16,15 +16,6 @@
 <!-- Application Page pre-processing -->
 <cfset subformClass.createSubformData()/>
 <cfset subformData=subformClass.retrieveDataForSubform()/>
-<!-- Determine Flag(reviewing or editing) -->
-<cfif session.accessLevel eq 'admin'>
-	<cfdump var="User is admin" >
-	<!-- put javascript here -->
-</cfif>
-<cfif subformClass.isUserReview()>
-	<Cfdump var="Application is under Review">
-	<!-- put javascript here -->
-</cfif>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +25,12 @@
 	<script>
 		"use strict";
 		$(document).ready(function(){
+			<!--- Determine Flag(reviewing or editing) --->
+			<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
+				<!--- <cfdump var="User is admin or Application is under Review"" > --->
+				<cfoutput>$("form").find("*").attr("disabled", "true");</cfoutput>
+			</cfif>			
+
 			$('[data-toggle="popover"]').popover();
 
 			function insuredCheck() {
@@ -213,13 +210,13 @@
 			<br/>
 
 			<div class="form-group">
-				<label for="EmpUnName">Name:</label>
-				<input type="text" class="form-control" name="EmpUnName" value="<cfoutput>#subformData.EmpUnName#</cfoutput>"/>
+				<label for="EmpUnName">Name <span style="color: red;">*</span></label>
+				<input type="text" class="form-control" name="EmpUnName" value="<cfoutput>#subformData.EmpUnName#</cfoutput>" required/>
 			</div>
 
 			<div class="form-group">
-				<label for="EmpUnAddress">Address</label>
-				<input type="text" class="form-control" name="EmpUnAddr" value="<cfoutput>#subformData.EmpUnAddr#</cfoutput>"/>
+				<label for="EmpUnAddress">Address <span style="color: red;">*</span></label>
+				<input type="text" class="form-control" name="EmpUnAddr" value="<cfoutput>#subformData.EmpUnAddr#</cfoutput>" required/>
 			</div>
 
 			<div class="row">
@@ -326,16 +323,16 @@
 	<div class="form-group">
 		<label>Are you applying or have applied for Medicaid? <span style="color: red;">*</span></label>
 		<br/>
-		<label class="radio-inline"><input type="radio" name="AMedicaid" value="Y" <cfset subformClass.showRadioButton('AMedicaid',subformData,'Y')/> required />Yes</label>
+		<label class="radio-inline"><input type="radio" name="AMedicaid" value="Y" <cfset subformClass.showRadioButton('AMedicaid',subformData,'Y')/> required/>Yes</label>
 		<label class="radio-inline"><input type="radio" name="AMedicaid" value="N" <cfset subformClass.showRadioButton('AMedicaid',subformData,'N')/>/>No</label>
 		<label class="radio-inline"><input type="radio" name="AMedicaid" value="U" <cfset subformClass.showRadioButton('AMedicaid',subformData,'U')/>/>Don't Know</label>
 	</div>
 
 	<div id="AmedicaidOption">
 		<div class="row">
-			<label class="col-sm-4">When did you apply for Medicaid?</label>
+			<label class="col-sm-4">When did you apply for Medicaid? <span style="color: red;">*</span></label>
 			<div class="col-sm-5">
-				<input type="date" class="form-control" name="AMedicaidDate" value="<cfoutput>#subformData.AMedicaidDate#</cfoutput>"/>
+				<input type="date" class="form-control" name="AMedicaidDate" value="<cfoutput>#subformData.AMedicaidDate#</cfoutput>" required/>
 			</div>
 			<div class="checkbox col-sm-3">
 				<label><input type="checkbox" name="UMedicaidDate" value="Y" <cfset subformClass.showCheckbox('UMedicaidDate',subformData)/>/>Unsure</label>
@@ -343,9 +340,9 @@
 		</div>
 
 		<div class="form-group">
-			<label>Have you received a response?</label>
+			<label>Have you received a response? <span style="color: red;">*</span></label>
 			<br/>
-			<label class="radio-inline"><input type="radio" name="RespMedicaid" value="Y" <cfset subformClass.showRadioButton('RespMedicaid',subformData,'Y')/>/>Yes</label>
+			<label class="radio-inline"><input type="radio" name="RespMedicaid" value="Y" <cfset subformClass.showRadioButton('RespMedicaid',subformData,'Y')/> required/>Yes</label>
 			<label class="radio-inline"><input type="radio" name="RespMedicaid" value="N" <cfset subformClass.showRadioButton('RespMedicaid',subformData,'N')/>/>No</label>
 		</div>
 	</div>
