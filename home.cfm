@@ -60,11 +60,11 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">Existing Application</div>
-		<div class="panel-body table-responsive"">
-	        <span class="help-block">Click the AppID for required document Status.</span>
+		<div class="panel-body table-responsive">
+	        <span class="help-block">Click the AppID to edit or view applications.</span>
 	        <center><table class="table table-hover">
 	        	<tr><th>AppID</th><th>State</th><th>Application Description</th>
-	        		<th>Date Submitted</th><th>Status</th><th>Editable</th></tr>
+	        		<th>Date Submitted</th><th>Status</th><th>Document Status</th></tr>
 	        <!-- Interate though resultSet and display data-->
 			<cfloop query="allApplications">
 				<cfoutput><tr></cfoutput>
@@ -86,14 +86,21 @@
 				<cfset outputLink=UserObj.getDirectLink(formInfo.state)/>
 				<!-- create html row for Application -->
 				<cfset userEditLink=#outputLink# & '?appID=' & #appID# > 
-				<cfoutput><tr><td><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>#appID#</a></td><td>#formInfo.state#</td><td>#formInfo.AppDescription#</td>
-					<td>#dateSubmited#</td>
-					<td>#outputStatus#</td>
-					<cfif #status# eq 'P' OR #status# eq 'N' >
-						<td><a href="#userEditLink#">Yes Edit</a></td></tr>
-					<cfelse>
-						<td><a href="">No Review</a></td></tr>
-					</cfif>
+				<cfoutput>
+					<tr>
+						<td>
+							<cfif #status# eq 'P' OR #status# eq 'N' >
+								<a href="#userEditLink#">#appID#</a>
+							<cfelse>
+								<a href="#userEditLink#">#appID#</a>
+							</cfif>
+						</td>
+						<td>#formInfo.state#</td>
+						<td>#formInfo.AppDescription#</td>
+						<td>#dateSubmited#</td>
+						<td>#outputStatus#</td>
+						<td><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>view</a></td>
+					</tr>
 				</cfoutput>
 			</cfloop>
 			</table></center>
