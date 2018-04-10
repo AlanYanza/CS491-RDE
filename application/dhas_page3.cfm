@@ -28,7 +28,10 @@
 			<!--- Determine Flag(reviewing or editing) --->
 			<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
 				<!--- <cfdump var="User is admin or Application is under Review"" > --->
-				<cfoutput>$("##formData").find("*").attr("disabled", "true");</cfoutput>
+				<cfoutput>
+					$("##formData").find("*").attr("disabled", "true");
+					$("input[type=hidden][name=formPage]").removeAttr("disabled");
+				</cfoutput>
 			</cfif>			
 
 			$('[data-toggle="popover"]').popover();

@@ -33,6 +33,7 @@
 				<cfoutput>
 					$("##formData").find("*").attr("disabled", "true");
 					$("button[type=button][name=reveal]").removeAttr("disabled");
+					$("input[type=hidden][name=formPage]").removeAttr("disabled");
 				</cfoutput>
 			</cfif>
 			
@@ -208,7 +209,7 @@
 		<div class="col-sm-3"><div class="form-group"><label for="city">City <span style="color: red;">*</span></label>
 			<input type="text" class="form-control" id="city" name="city" value="<cfoutput>#subformData.city#</cfoutput>" required /></div></div>
 		<div class="col-sm-3"><label for="state">State <span style="color: red;">*</span></label>
-			<select class="form-control" id="state" name="state" required />
+			<select class="form-control" id="state" name="state" required>
 				<option value="X" <cfset subformClass.showSelectionField('state',subformData,'X')/>>Select one</option>
 				<option value="AL" <cfset subformClass.showSelectionField('state',subformData,'AL')/>>AL - Alabama</option>
 				<option value="AK" <cfset subformClass.showSelectionField('state',subformData,'AK')/>>AK - Alaska</option>
@@ -289,7 +290,7 @@
 		<div class="col-sm-3"><div class="form-group"><label for="MCity">City <span style="color: red;">*</span></label>
 			<input type="text" class="form-control" id="MCity" name="MCity" value="<cfoutput>#subformData.MCity#</cfoutput>" required /></div></div>
 		<div class="col-sm-3"><label for="MState">State <span style="color: red;">*</span></label>
-			<select class="form-control" id="MState" name="MState" required />
+			<select class="form-control" id="MState" name="MState" required>
 				<option value="X" <cfset subformClass.showSelectionField('MState',subformData,'X')/>>Select one</option>
 				<option value="AL" <cfset subformClass.showSelectionField('MState',subformData,'AL')/>>AL - Alabama</option>
 				<option value="AK" <cfset subformClass.showSelectionField('MState',subformData,'AK')/>>AK - Alaska</option>
@@ -443,12 +444,12 @@
 			<option value="W" <cfset subformClass.showSelectionField('RelStatus',subformData,'W')/>>Widowed</option>
 			<option value="SP" <cfset subformClass.showSelectionField('RelStatus',subformData,'SP')/>>*Separated</option>
 		</select>
-		<em>*(See instructions)</span></em>
+		<em>*(See instructions)</em>
 		<a href="javascript:void(0)" data-toggle="popover" data-trigger="focus" title="DOMESTIC STATUS:" data-html="true" data-content='
 			Check &#34separated&#34 if:<br/>
 			(1) You and your spouse/partner live apart AND if you do not have access to, or receive support from, your spouse&#39s/partner&#39s income;<br/>
 			(2) Your spouse/partner has been confined to a long-term care or psychiatric institution for at least 30 days prior to this application.<br/>
-			<strong>If you check &#34separated,&#34 please fill out and send in DHAS-40 Certification of Separation.</strong>''>
+			<strong>If you check &#34separated,&#34 please fill out and send in DHAS-40 Certification of Separation.</strong>'>
 			<span class="glyphicon glyphicon-info-sign"></span>
 		</a>
 	</div>
