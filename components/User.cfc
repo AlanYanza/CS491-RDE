@@ -71,8 +71,9 @@
 	  returntype="Query" >
 		<cfargument name="formtypeIDInput" type="numeric" hint="formTypeID retrieve from UserApplication Queries" >
 		<cfquery name="formResult" result="queryStats">
-			SELECT state,AppDescription FROM Forms WHERE
-			formTypeID=<cfqueryparam value="#arguments.formtypeIDInput#" cfsqltype="cf_sql_integer" >
+			SELECT state,AppDescription
+			FROM Forms
+			WHERE formTypeID=<cfqueryparam value="#arguments.formtypeIDInput#" cfsqltype="cf_sql_integer" >
 		</cfquery>
 		<cfreturn formResult>
 	</cffunction>

@@ -28,7 +28,7 @@
 			<!--- Determine Flag(reviewing or editing) --->
 			<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
 				<!--- <cfdump var="User is admin or Application is under Review"" > --->
-				<cfoutput>$("form").find("*").attr("disabled", "true");</cfoutput>
+				<cfoutput>$("##formData").find("*").attr("disabled", "true");</cfoutput>
 			</cfif>	
 
 			$('[data-toggle="popover"]').popover();
@@ -156,8 +156,9 @@
 	<div class="well text-center"><h4>Section 3 - INSURANCE STATUS, CONTINUED</h4></div>
 
 	<form  action="../scripts/NJScript.cfm" method="POST">
-	<input type="text" hidden="true" id="formPage" name="formPage" value="page3B">
-	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
+	<div id="formData">
+	<input type="text" hidden="true" id="formPage" name="formPage" value="page3B"/>
+	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
 	<strong>Are you apply or having applied for Social Security Income(SSI) or Social Security Income(SSDI)? <span style="color: red;">*</span></strong>
 	<div class="radio">
 		<label><input type="radio" name="SSISSDIStatus" value="YSSI" <cfset subformClass.showRadioButton('SSISSDIStatus',subformData,'YSSI')/> required />Yes for SSI</label>
@@ -323,7 +324,7 @@
 		<label class="radio-inline"><input type="radio" name="RecPresDrugBen" value="Y" <cfset subformClass.showRadioButton('RecPresDrugBen',subformData,'Y')/> required />Yes</label>
 		<label class="radio-inline"><input type="radio" name="RecPresDrugBen" value="N" <cfset subformClass.showRadioButton('RecPresDrugBen',subformData,'N')/>/>No</label>
 	</div>
-
+	</div>
 	<div class="text-center">
 		<button type="submit" class="btn btn-default" name="previous" value="prevous">Previous</button>
 		<button type="submit" class="btn btn-default" name="save" value="save">Save Progress &#38; Exit</button>

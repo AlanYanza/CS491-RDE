@@ -30,7 +30,10 @@
 			<!--- Determine Flag(reviewing or editing) --->
 			<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
 				<!--- <cfdump var="User is admin or Application is under Review"" > --->
-				<cfoutput>$("form").find("*").attr("disabled", "true");</cfoutput>
+				<cfoutput>
+					$("##formData").find("*").attr("disabled", "true");
+					$("button[type=button][name=reveal]").removeAttr("disabled");
+				</cfoutput>
 			</cfif>
 			
 			$('[data-toggle="popover"]').popover();
@@ -167,9 +170,9 @@
 		documents as they WILL NOT be returned.
 	</p>
 	<form action="../scripts/NJScript.cfm" method="POST">
-
-	<input type="text" hidden="true" id="formPage" name="formPage" value="page1">
-	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
+	<div id="formData">
+	<input type="text" hidden="true" id="formPage" name="formPage" value="page1"/>
+	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
 	<div class="text-center checkbox">
 			<input type="checkbox" name="HICP" value="HICP" <cfif HICPStatus eq 'Y'><cfoutput>checked</cfoutput></cfif>/> I am also applying for HICP
 		</div>
@@ -526,7 +529,7 @@
 		<label class="radio-inline"><input type="radio" name="preg" value="Y" <cfset subformClass.showRadioButton('preg',subformData,'Y')/> required /> Yes</label>
 		<label class="radio-inline"><input type="radio" name="preg" value="N" <cfset subformClass.showRadioButton('preg',subformData,'N')/>/> No</label>
 	</div>
-
+	</div>
 	<div class="text-center">
 		<button type="submit" class="btn btn-default" name="previous" value="prevous">Previous</button>
 		<button type="submit" class="btn btn-default" name="save" value="save">Save Progress &#38; Exit</button>

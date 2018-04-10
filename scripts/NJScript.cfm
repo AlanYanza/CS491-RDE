@@ -108,8 +108,8 @@
 	<cfif IsDefined("FORM.previous")>
 		<cflocation url="/CS491-RDE/application/dhas_instructions_page3.cfm">
 	<cfelseif IsDefined("FORM.next")>
-			<cfset urlDirectLocation="/CS491-RDE/application/dhas_page2.cfm?appID=" & session.appID>
-			<cflocation url=#urlDirectLocation#>
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page2.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	</cfif>
 <cfelseif formSource eq 'page2'>
 	<cfif IsDefined("FORM.previous")>

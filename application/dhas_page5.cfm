@@ -17,15 +17,6 @@
 <cfset subformClass.createSubformData()/>
 <cfset subformData=subformClass.retrieveDataForSubform()/>
 <cfset applicantSignature=subformClass.getSignature("signature")/>
-<!-- Determine Flag(reviewing or editing) -->
-<cfif session.accessLevel eq 'admin'>
-	<cfdump var="User is admin" >
-	<!-- put javascript here -->
-</cfif>
-<cfif subformClass.isUserReview()>
-	<Cfdump var="Application is under Review">
-	<!-- put javascript here -->
-</cfif>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +27,11 @@
  	<script>
  		"use strict";
 		$(document).ready(function(){
+			<!--- Determine Flag(reviewing or editing) --->
+			<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
+				<!--- <cfdump var="User is admin or Application is under Review"" > --->
+				<cfoutput>$("##formData").find("*").attr("disabled", "true");</cfoutput>
+			</cfif>	
 			$("#signaturePic").html("<img src='" + $("#signature").val() + "' class='img-responsive'  max-width='100%'>");
 			
 			$("button[type=submit][name=save]").click(function() {
@@ -103,8 +99,9 @@
 	<hr/>
 
 	<form action="../scripts/NJScript.cfm" method="POST">
-	<input type="text" hidden="true" id="formPage" name="formPage" value="page4">
-	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
+	<div id="formData">
+	<input type="text" hidden="true" id="formPage" name="formPage" value="page4"/>
+	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
 
 	<div class="row">
 		<div class="col-sm-3">
@@ -245,7 +242,7 @@
 	<label for="email">Case Manager's Email Address:</label>
 	<input type="email" class="form-control" name="email" value="<cfoutput>#subformData.email#</cfoutput>"><br/>
 	</div>
-
+	</div>
 	<div class="text-center">
 		<button type="submit" class="btn btn-default" name="previous" value="prevous">Previous</button>
 		<button type="submit" class="btn btn-default" name="save" value="save">Save Progress &#38; Exit</button>

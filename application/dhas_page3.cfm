@@ -28,7 +28,7 @@
 			<!--- Determine Flag(reviewing or editing) --->
 			<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
 				<!--- <cfdump var="User is admin or Application is under Review"" > --->
-				<cfoutput>$("form").find("*").attr("disabled", "true");</cfoutput>
+				<cfoutput>$("##formData").find("*").attr("disabled", "true");</cfoutput>
 			</cfif>			
 
 			$('[data-toggle="popover"]').popover();
@@ -184,7 +184,9 @@
 	<!--<strong>APPLICATION FOR PARTICIPATION IN THE AIDS DRUG DISTRIBUTION PROGRAM AND/OR HEALTH INSURANCE CONTINUATION PROGRAM (Continued)</strong>-->
 
 	<div class="well text-center"><h4>Section 3 - INSURANCE STATUS</h4></div>
+
 	<form action="../scripts/NJScript.cfm" method="POST">
+	<div id="formData">
 	<input type="text" hidden="true" id="formPage" name="formPage" value="page3A"/>
 	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
 	<div class="form-group">
@@ -391,7 +393,7 @@
 			<label class="radio-inline"><input type="radio" name="ALIS" value="U" <cfset subformClass.showRadioButton('ALIS',subformData,'U')/>/>Don't Know</label>
 		</div>
 	</div>
-
+	</div>
 	<div class="text-center">
 		<button type="submit" class="btn btn-default" name="previous" value="prevous">Previous</button>
 		<button type="submit" class="btn btn-default" name="save" value="save">Save Progress &#38; Exit</button>

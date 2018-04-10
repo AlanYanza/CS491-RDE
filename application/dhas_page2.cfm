@@ -28,7 +28,7 @@
 			<!--- Determine Flag(reviewing or editing) --->
 			<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
 				<!--- <cfdump var="User is admin or Application is under Review"" > --->
-				<cfoutput>$("form").find("*").attr("disabled", "true");</cfoutput>
+				<cfoutput>$("##formData").find("*").attr("disabled", "true");</cfoutput>
 			</cfif>
 			
 
@@ -63,8 +63,9 @@
 	<div class="well text-center"><h4>Section 2 - HOUSEHOLD INCOME</h4></div>
 
 	<form action="../scripts/NJScript.cfm" method="POST">
-	<input type="text" hidden="true" id="formPage" name="formPage" value="page2">
-	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
+	<div id="formData">
+	<input type="text" hidden="true" id="formPage" name="formPage" value="page2"/>
+	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
 
 	<div class="form-group">
 		<label for="EmplyStatus">What if your current employment status? <span style="color: red;">*</span></label>
@@ -207,7 +208,7 @@
 		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SNAP" value="A" <cfset subformClass.showRadioButton('SNAP',subformData,'A')/>/>Applied For</label></div>
 		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SNAP" value="R" <cfset subformClass.showRadioButton('SNAP',subformData,'R')/>/>Receiving</label></div>
 	</div>
-
+	</div>
 	<div class="text-center">
 		<button type="submit" class="btn btn-default" name="previous" value="prevous">Previous</button>
 		<button type="submit" class="btn btn-default" name="save" value="save">Save Progress &#38; Exit</button>
