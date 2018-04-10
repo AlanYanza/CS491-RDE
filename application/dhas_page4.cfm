@@ -29,8 +29,9 @@
 			<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
 				<!--- <cfdump var="User is admin or Application is under Review"" > --->
 				<cfoutput>
-					$("##formData").find("*").attr("disabled", "true");				
+					$("##formData").find("*").attr("disabled", "true");
 					$("input[type=hidden][name=formPage]").removeAttr("disabled");
+					$("input[type=hidden][name=tableName]").removeAttr("disabled");
 				</cfoutput>
 			</cfif>	
 
@@ -160,8 +161,8 @@
 
 	<form  action="../scripts/NJScript.cfm" method="POST">
 	<div id="formData">
-	<input type="text" hidden="true" id="formPage" name="formPage" value="page3B"/>
-	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
+	<input type="hidden" id="formPage" name="formPage" value="page3B"/>
+	<input type="hidden" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
 	<strong>Are you apply or having applied for Social Security Income(SSI) or Social Security Income(SSDI)? <span style="color: red;">*</span></strong>
 	<div class="radio">
 		<label><input type="radio" name="SSISSDIStatus" value="YSSI" <cfset subformClass.showRadioButton('SSISSDIStatus',subformData,'YSSI')/> required />Yes for SSI</label>

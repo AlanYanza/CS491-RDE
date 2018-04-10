@@ -31,8 +31,9 @@
 			<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
 				<!--- <cfdump var="User is admin or Application is under Review"" > --->
 				<cfoutput>
-					$("##formData").find("*").attr("disabled", "true");				
+					$("##formData").find("*").attr("disabled", "true");
 					$("input[type=hidden][name=formPage]").removeAttr("disabled");
+					$("input[type=hidden][name=tableName]").removeAttr("disabled");
 				</cfoutput>
 			</cfif>	
 			$("#signaturePic").html("<img src='" + $("#signature").val() + "' class='img-responsive'  max-width='100%'>");
@@ -103,8 +104,8 @@
 
 	<form action="../scripts/NJScript.cfm" method="POST">
 	<div id="formData">
-	<input type="text" hidden="true" id="formPage" name="formPage" value="page4"/>
-	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
+	<input type="hidden" id="formPage" name="formPage" value="page4"/>
+	<input type="hidden" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
 
 	<div class="row">
 		<div class="col-sm-3">

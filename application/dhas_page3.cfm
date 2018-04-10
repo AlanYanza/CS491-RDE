@@ -31,6 +31,7 @@
 				<cfoutput>
 					$("##formData").find("*").attr("disabled", "true");
 					$("input[type=hidden][name=formPage]").removeAttr("disabled");
+					$("input[type=hidden][name=tableName]").removeAttr("disabled");
 				</cfoutput>
 			</cfif>			
 
@@ -190,8 +191,8 @@
 
 	<form action="../scripts/NJScript.cfm" method="POST">
 	<div id="formData">
-	<input type="text" hidden="true" id="formPage" name="formPage" value="page3A"/>
-	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
+	<input type="hidden" id="formPage" name="formPage" value="page3A"/>
+	<input type="hidden" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
 	<div class="form-group">
 		<label>Do you currently have any type of health insurance? <span style="color: red;">*</span></label>
 		<br/>

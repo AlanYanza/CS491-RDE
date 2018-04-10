@@ -34,6 +34,7 @@
 					$("##formData").find("*").attr("disabled", "true");
 					$("button[type=button][name=reveal]").removeAttr("disabled");
 					$("input[type=hidden][name=formPage]").removeAttr("disabled");
+					$("input[type=hidden][name=tableName]").removeAttr("disabled");
 				</cfoutput>
 			</cfif>
 			
@@ -172,8 +173,8 @@
 	</p>
 	<form action="../scripts/NJScript.cfm" method="POST">
 	<div id="formData">
-	<input type="text" hidden="true" id="formPage" name="formPage" value="page1"/>
-	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
+	<input type="hidden" id="formPage" name="formPage" value="page1"/>
+	<input type="hidden" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
 	<div class="text-center checkbox">
 			<input type="checkbox" name="HICP" value="HICP" <cfif HICPStatus eq 'Y'><cfoutput>checked</cfoutput></cfif>/> I am also applying for HICP
 		</div>

@@ -31,6 +31,7 @@
 				<cfoutput>
 					$("##formData").find("*").attr("disabled", "true");
 					$("input[type=hidden][name=formPage]").removeAttr("disabled");
+					$("input[type=hidden][name=tableName]").removeAttr("disabled");
 				</cfoutput>
 			</cfif>
 			
@@ -67,8 +68,8 @@
 
 	<form action="../scripts/NJScript.cfm" method="POST">
 	<div id="formData">
-	<input type="text" hidden="true" id="formPage" name="formPage" value="page2"/>
-	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
+	<input type="hidden" id="formPage" name="formPage" value="page2"/>
+	<input type="hidden" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
 
 	<div class="form-group">
 		<label for="EmplyStatus">What if your current employment status? <span style="color: red;">*</span></label>
