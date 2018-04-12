@@ -147,8 +147,12 @@
 	<cfelseif IsDefined("FORM.next")>
 		<!--- Insert Documents into AppDocument Table--->
 		<cfif subformObj.CheckApplicationStatus() eq 'P' >
-			<cfset InsertNJDocuments()/> 
+			<cfset InsertNJDocuments()/>
 		</cfif>
+		<!--- Send an email to user confirming account registration --->
+		<cfset emailToolObj=createObject('component','CS491-RDE.components.emailTool')/>
+		<cfset emailAddress=emailToolObj.retrieveEmailAddress(session.userID)>
+		<cfset emailToolObj.sendSubmitApplicationEmail(emailAddress,'ADDP/HICP')>
 		<!--- Change status of Application to Review--->
 		<cfset subformObj.submitApplication()>
   		<cflocation url="/CS491-RDE/home.cfm?submitApplication">

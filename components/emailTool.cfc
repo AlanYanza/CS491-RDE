@@ -36,8 +36,21 @@
 		<cfset var toEmail=arguments.emailAddressInput>
 		<cfset var dateStarted=DateFormat(Now())>
 		<cfset var timeStart=TimeFormat(Now())>
-		<cfset subject="New Application Created">
+		<cfset subject=arguments.formTypeInput & " Application Created">
 		<cfset message="You have created a " & arguments.formTypeInput & " Application on " & dateStarted  & " at " & timeStart>
+		<cfset sendEmail(toEmail,subject,message)>
+	</cffunction>
+	
+	<cffunction name="sendSubmitApplicationEmail" hint="email sent to tell user that they have submitted an application" >
+		<cfargument name="emailAddressInput" hint="email address to send email to" >
+		<cfargument name="formTypeInput" hint="the name of the Application started" >
+		<cfset var toEmail=arguments.emailAddressInput>
+		<cfset var dateStarted=DateFormat(Now())>
+		<cfset var timeStart=TimeFormat(Now())>
+		<cfset subject=arguments.formTypeInput & " Application Submited">
+		<cfset message="You have Submitted a " & arguments.formTypeInput & " Application on " & dateStarted  & " at " & 
+		                timeStart & "<br>Your Application is now Under Review.You will be notified when the status " &
+		                "of your application has been determined<br>">
 		<cfset sendEmail(toEmail,subject,message)>
 	</cffunction>     
 	
