@@ -3,6 +3,11 @@
 <cfset FormClass=createObject('component','CS491-RDE.components.Form').init('NJ',session.userID)/>
 <!--- If a new Application create a new Application(inside DB)--->
 <cfif isDefined('url.new')>
+	<!-- Email user indicated a new Application has been started  -->
+	<cfset emailToolObj=createObject('component','CS491-RDE.components.emailTool')/>
+	<cfset emailAddress=emailToolObj.retrieveEmailAddress(session.userID)>
+	<cfset emailToolObj.sendNewApplicationEmail(emailAddress,'ADDP/HICP')>
+	<!-- Create an new Application in the Table -->
 	<cfset FormClass.createApplication()/>
 </cfif>
 <!-- If not a new Application, Check ApplicationStatus and redirect to homePage is needed -->

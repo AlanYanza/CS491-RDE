@@ -110,7 +110,7 @@
 		<div class="col-sm-3">
 			<label for="signature">Signature of Applicant <span style="color: red;">*</span></label>	
 			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#signatureModal">Click here to attach/edit your signature</button>
-			<button type="button" class="btn btn-default" onclick='console.log($("#signature").val().length)'></button>
+<!---			<button type="button" class="btn btn-default" onclick='console.log($("#signature").val().length)'></button>--->
 				<!-- Convert Base64 Binary to String Representation -->
 				<cfif isBinary(applicantSignature.signature)>
 					<cfset binaryStringRep=BinaryEncode(applicantSignature.signature,"Base64")>
@@ -118,8 +118,7 @@
 				<cfelse>
 					<cfset BinaryStringRep="">
 				</cfif>
-				<input type="text" name="signature" id="signature" value="<cfoutput>#binaryStringRep#</cfoutput>" />
-<!---			<textarea name="signature" id="signature"><cfoutput>#binaryStringRep#</cfoutput></textarea>--->
+				<input type="hidden" name="signature" id="signature" value="<cfoutput>#binaryStringRep#</cfoutput>" />
 		</div>
 		<div class="col-sm-6">
 			<div id="signaturePic">

@@ -17,6 +17,9 @@
 	    INSERT INTO [User](email,FirstName,LastName,password,accessLevel) VALUES('#form.email#','#form.firstName#','#form.lastName#', 
 	    HASHBYTES('sha2_512', '#form.password#'), 'user')
 	</cfquery>
+	<!-- Send an email to user confirming account registration -->
+	<cfset emailToolObj=createObject('component','CS491-RDE.components.emailTool')/>
+	<cfset emailToolObj.sendRegistrationEmail(form.email)>
 	<cflocation url="../index.cfm?registered">
 <cfelse>
 	<cflocation url="../register.cfm?Exist">
