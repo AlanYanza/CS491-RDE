@@ -2,14 +2,14 @@
 	<div class="row">
 		<div class="col-xs-3 container-fluid" id="sidebar">
 			<ul ng-init="selectedTab = 'inbox'" class="nav nav-tabs nav-mail">
-				<li ng-class="{'active':selectedTab ==='inbox'}" ng-click="selectedTab='inbox'" class="nav-item">
-					<a class="nav-link active" href="#">Inbox</a>
+				<li ng-class="{'active':selectedTab ==='inbox'}" (click)="getMessages()" class="nav-item">
+					<a class="nav-link active">Inbox</a>
 				</li>
-				<li ng-class="{'active':selectedTab ==='sent'}" ng-click="selectedTab='sent'" class="nav-item">
-					<a class="nav-link" href="#">Sent</a>
+				<li ng-class="{'active':selectedTab ==='sent'}" (click)="getSent()" class="nav-item">
+					<a class="nav-link">Sent</a>
 				</li>
-				<li ng-class="{'active':selectedTab ==='trash'}" ng-click="selectedTab='trash'" class="nav-item">
-					<a class="nav-link" href="#">Trash</a>
+				<li ng-class="{'active':selectedTab ==='trash'}" (click)="getTrash()" class="nav-item">
+					<a class="nav-link">Trash</a>
 				</li>
 			</ul>
 			<ul class="mail">

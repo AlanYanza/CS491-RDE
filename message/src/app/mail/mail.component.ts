@@ -24,6 +24,16 @@ export class MailComponent implements OnInit {
   	this.getMessages();
   }
 
+  getSent(): void {
+    this.mailService.getSent()
+      .subscribe(mail => this.mail = mail);
+  }
+
+  getTrash(): void {
+    this.mailService.getTrash()
+      .subscribe(mail => this.mail = mail);
+  }
+
   getMessages(): void {
   	this.mailService.getMessages()
   		.subscribe(mail => this.mail = mail);

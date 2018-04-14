@@ -25,7 +25,7 @@
 			INNER JOIN Message ON Sent.msgID = Message.msgID
 			INNER JOIN [User] AS rec ON Message.recipientID=rec.userID 
 			INNER JOIN [User] AS sen ON Message.senderID=sen.userID
-			WHERE Inbox.userID = <cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" > 
+			WHERE Sent.userID = <cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" > 
 			ORDER BY Message.dateSent DESC
 		</cfquery>
 
@@ -50,7 +50,7 @@
 			INNER JOIN Message ON Trash.msgID = Message.msgID
 			INNER JOIN [User] AS rec ON Message.recipientID=rec.userID 
 			INNER JOIN [User] AS sen ON Message.senderID=sen.userID
-			WHERE Inbox.userID = <cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" > 
+			WHERE Trash.userID = <cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" > 
 			ORDER BY Message.dateSent DESC
 		</cfquery>
 
@@ -164,10 +164,12 @@
 		</cfquery>
 
 		<!-- Insert message into sender's trash box (Sent Table) --> 
-		<cfquery name="deleteFromInbox">
-			INSERT INTO Trash
-			WHERE msgID = <cfqueryPARAM value="#msgID#" cfsqltype="CF_SQL_INTEGER">
-			AND userID = <cfqueryPARAM value="#senderID#" cfsqltype="CF_SQL_INTEGER">
+		<cfquery name="InsertIntoTrash">
+			INSERT INTO Trash (msgID, userID)
+			VALUES(
+				<cfqueryPARAM value="#msgID#" cfsqltype="CF_SQL_INTEGER">,
+				<cfqueryPARAM value="#senderID#" cfsqltype="CF_SQL_INTEGER">
+			)
 		</cfquery>
 
 		<cfreturn serializeJSON("deleteFromInbox", 'struct') /> 
