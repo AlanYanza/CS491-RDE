@@ -17,7 +17,8 @@
 		<cfquery name="SentMailResult">
 			SELECT 
 				Sent.msgID, 
-				Message.readStatus, Message.subject, Message.message, Message.dateSent, 
+				Message.readStatus, Message.subject, Message.message,
+				FORMAT(Message.dateSent, 'MM/dd/yy hh:mm tt') as dateSent, 
 				concat(sen.FirstName, ' ', sen.LastName) AS sender,
 				concat(rec.FirstName, ' ', rec.LastName) AS recipient
 			FROM Sent 
@@ -41,7 +42,8 @@
 		<cfquery name="TrashMailResult">
 			SELECT 
 				Trash.msgID, 
-				Message.readStatus, Message.subject, Message.message, Message.dateSent, 
+				Message.readStatus, Message.subject, Message.message, 
+				FORMAT(Message.dateSent, 'MM/dd/yy hh:mm tt') as dateSent, 			
 				concat(sen.FirstName, ' ', sen.LastName) AS sender,
 				concat(rec.FirstName, ' ', rec.LastName) AS recipient
 			FROM Trash 
@@ -66,7 +68,8 @@
 		<cfquery name="MailResult">
 			SELECT 
 				Inbox.msgID, 
-				Message.readStatus, Message.subject, Message.message, FORMAT(Message.dateSent, 'MM/dd/yy hh:mm tt') as dateSent, 
+				Message.readStatus, Message.subject, Message.message, 
+				FORMAT(Message.dateSent, 'MM/dd/yy hh:mm tt') as dateSent, 
 				concat(sen.FirstName, ' ', sen.LastName) AS sender,
 				concat(rec.FirstName, ' ', rec.LastName) AS recipient
 			FROM Inbox 
