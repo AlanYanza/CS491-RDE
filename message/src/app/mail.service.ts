@@ -2,15 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { tap } from 'rxjs/operators';
+import { tap, map, catchError  } from 'rxjs/operators';
 
 import { Msg } from './msg';
 // import { MAIL } from './mock-mail';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'; 
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-
-import { map } from 'rxjs/operators/map';
 
 @Injectable()
 export class MailService implements Resolve<Msg> {
@@ -19,17 +17,18 @@ export class MailService implements Resolve<Msg> {
 	private getMessageURL = this.baseURL + 'getInbox';
 	private deleteMessageURL = this.baseURL + 'deleteEmail';
 
-
 	constructor(
 		private http: HttpClient
 	) { }
 
 	resolve(routeSnapshot: ActivatedRouteSnapshot): Observable<Msg> {
 		return this.getMessages()
-			.pipe(
-				map((data: Msg[]) => {
-		  			return data.find(msg => msg.MSGID === +routeSnapshot.params.msgID);
-			})
+		.pipe(
+			map((data: Msg[]) => {
+	  			return data.find(msg => msg.MSGID === +routeSnapshot.params.msgID);
+			}),
+			catchError(this.handleError<any>('getMessage',[]))
+
 	  	);
 		// return MAIL.find(msg => msg.msgID === +routeSnapshot.params.msgID);
 	}
@@ -41,7 +40,8 @@ export class MailService implements Resolve<Msg> {
 	getMessages(): Observable<Msg[]> { 
 		return this.http.get<Msg[]>(this.getMessageURL)
 		.pipe(
-			tap( res => console.log('HTTP response:', res))
+			tap( res => console.log('HTTP response:', res)),
+			catchError(this.handleError<any>('getMessages',[]))
 		); 
 	}
 
@@ -50,9 +50,30 @@ export class MailService implements Resolve<Msg> {
 			.set("msgID", String(msg.MSGID));  
 
 		return this.http.get<Msg>(this.deleteMessageURL, {params:params})
-			.pipe(
-				tap( res => console.log('Delete:', res))
-			);
+		.pipe(
+			tap( res => console.log('Delete:', res)),
+			catchError(this.handleError<any>('deleteMessage',[]))
+		);
+	}
+
+	 /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+	private handleError<T> (operation = 'operation', result?: T) {
+
+		return (error: any): Observable<T> => {
+	 		// TODO: send the error to remote logging infrastructure
+			console.error(error); // log to console instead
+	 
+	 		// TODO: better job of transforming error for user consumption
+			// this.log(`${operation} failed: ${error.message}`);
+	 
+			// Let the app keep running by returning an empty result.
+			return of(result as T);
+		};
 	}
 
 }

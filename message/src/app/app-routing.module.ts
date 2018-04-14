@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { WriteMessageComponent } from './write-message/write-message.component';
 import { MailContentComponent } from './mail-content/mail-content.component';
 
-import { MessageResolverService } from './message-resolver.service'; 
 import { MailService } from './mail.service'; 
 
 
@@ -23,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})], //useHash =>//../#/message
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

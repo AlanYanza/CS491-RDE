@@ -58,7 +58,7 @@ var AppRoutingModule = (function () {
 }());
 AppRoutingModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgModule */])({
-        imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forRoot(routes)],
+        imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forRoot(routes, { useHash: true })],
         exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]]
     })
 ], AppRoutingModule);
@@ -124,21 +124,17 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mail_mail_component__ = __webpack_require__("./src/app/mail/mail.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mail_content_mail_content_component__ = __webpack_require__("./src/app/mail-content/mail-content.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__write_message_write_message_component__ = __webpack_require__("./src/app/write-message/write-message.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__home_home_component__ = __webpack_require__("./src/app/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_routing_module__ = __webpack_require__("./src/app/app-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__mail_service__ = __webpack_require__("./src/app/mail.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__message_resolver_service__ = __webpack_require__("./src/app/message-resolver.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/@angular/common/http.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__message_message_service__ = __webpack_require__("./src/app/message/message.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_common__ = __webpack_require__("./node_modules/@angular/common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_routing_module__ = __webpack_require__("./src/app/app-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mail_service__ = __webpack_require__("./src/app/mail.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__message_message_service__ = __webpack_require__("./src/app/message/message.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/@angular/common/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_common__ = __webpack_require__("./node_modules/@angular/common/@angular/common.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
-
 
 
 
@@ -162,76 +158,24 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_4__mail_mail_component__["a" /* MailComponent */],
             __WEBPACK_IMPORTED_MODULE_5__mail_content_mail_content_component__["a" /* MailContentComponent */],
-            __WEBPACK_IMPORTED_MODULE_6__write_message_write_message_component__["a" /* WriteMessageComponent */],
-            __WEBPACK_IMPORTED_MODULE_7__home_home_component__["a" /* HomeComponent */]
+            __WEBPACK_IMPORTED_MODULE_6__write_message_write_message_component__["a" /* WriteMessageComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
-            __WEBPACK_IMPORTED_MODULE_8__app_routing_module__["a" /* AppRoutingModule */],
-            __WEBPACK_IMPORTED_MODULE_11__angular_common_http__["b" /* HttpClientModule */]
+            __WEBPACK_IMPORTED_MODULE_7__app_routing_module__["a" /* AppRoutingModule */],
+            __WEBPACK_IMPORTED_MODULE_10__angular_common_http__["b" /* HttpClientModule */]
         ],
         providers: [
-            __WEBPACK_IMPORTED_MODULE_9__mail_service__["a" /* MailService */],
-            __WEBPACK_IMPORTED_MODULE_10__message_resolver_service__["a" /* MessageResolverService */],
-            __WEBPACK_IMPORTED_MODULE_12__message_message_service__["a" /* MessageService */],
-            { provide: __WEBPACK_IMPORTED_MODULE_13__angular_common__["a" /* APP_BASE_HREF */], useValue: '/CS491-RDE/message.cfm' }
+            __WEBPACK_IMPORTED_MODULE_8__mail_service__["a" /* MailService */],
+            __WEBPACK_IMPORTED_MODULE_9__message_message_service__["a" /* MessageService */],
+            { provide: __WEBPACK_IMPORTED_MODULE_11__angular_common__["a" /* APP_BASE_HREF */], useValue: '/' }
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
 
 //# sourceMappingURL=app.module.js.map
-
-/***/ }),
-
-/***/ "./src/app/home/home.component.css":
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/home/home.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n  home works!\n</p>\n"
-
-/***/ }),
-
-/***/ "./src/app/home/home.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomeComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var HomeComponent = (function () {
-    function HomeComponent() {
-    }
-    HomeComponent.prototype.ngOnInit = function () {
-    };
-    return HomeComponent;
-}());
-HomeComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
-        selector: 'app-home',
-        template: __webpack_require__("./src/app/home/home.component.html"),
-        styles: [__webpack_require__("./src/app/home/home.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], HomeComponent);
-
-//# sourceMappingURL=home.component.js.map
 
 /***/ }),
 
@@ -307,9 +251,9 @@ var _a, _b, _c;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_operators__ = __webpack_require__("./node_modules/rxjs/_esm5/operators.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/@angular/common/http.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operators_map__ = __webpack_require__("./node_modules/rxjs/_esm5/operators/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_observable_of__ = __webpack_require__("./node_modules/rxjs/_esm5/observable/of.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_operators__ = __webpack_require__("./node_modules/rxjs/_esm5/operators.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/@angular/common/http.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -321,8 +265,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import { MAIL } from './mock-mail';
 
+// import { MAIL } from './mock-mail';
 
 var MailService = (function () {
     function MailService(http) {
@@ -333,9 +277,9 @@ var MailService = (function () {
     }
     MailService.prototype.resolve = function (routeSnapshot) {
         return this.getMessages()
-            .pipe(Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_operators_map__["a" /* map */])(function (data) {
+            .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["b" /* map */])(function (data) {
             return data.find(function (msg) { return msg.MSGID === +routeSnapshot.params.msgID; });
-        }));
+        }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["a" /* catchError */])(this.handleError('getMessage', [])));
         // return MAIL.find(msg => msg.msgID === +routeSnapshot.params.msgID);
     };
     // getMessages(): Observable<Msg[]> { 
@@ -343,19 +287,36 @@ var MailService = (function () {
     // }	
     MailService.prototype.getMessages = function () {
         return this.http.get(this.getMessageURL)
-            .pipe(Object(__WEBPACK_IMPORTED_MODULE_1_rxjs_operators__["a" /* tap */])(function (res) { return console.log('HTTP response:', res); }));
+            .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["c" /* tap */])(function (res) { return console.log('HTTP response:', res); }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["a" /* catchError */])(this.handleError('getMessages', [])));
     };
     MailService.prototype.deleteMessage = function (msg) {
-        var params = new __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["c" /* HttpParams */]()
+        var params = new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]()
             .set("msgID", String(msg.MSGID));
         return this.http.get(this.deleteMessageURL, { params: params })
-            .pipe(Object(__WEBPACK_IMPORTED_MODULE_1_rxjs_operators__["a" /* tap */])(function (res) { return console.log('Delete:', res); }));
+            .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["c" /* tap */])(function (res) { return console.log('Delete:', res); }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["a" /* catchError */])(this.handleError('deleteMessage', [])));
+    };
+    /**
+  * Handle Http operation that failed.
+  * Let the app continue.
+  * @param operation - name of the operation that failed
+  * @param result - optional value to return as the observable result
+  */
+    MailService.prototype.handleError = function (operation, result) {
+        if (operation === void 0) { operation = 'operation'; }
+        return function (error) {
+            // TODO: send the error to remote logging infrastructure
+            console.error(error); // log to console instead
+            // TODO: better job of transforming error for user consumption
+            // this.log(`${operation} failed: ${error.message}`);
+            // Let the app keep running by returning an empty result.
+            return Object(__WEBPACK_IMPORTED_MODULE_1_rxjs_observable_of__["a" /* of */])(result);
+        };
     };
     return MailService;
 }());
 MailService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
 ], MailService);
 
 var _a;
@@ -373,7 +334,7 @@ module.exports = ".selected {\r\n\tbackground-color: #80b6fc !important;\r\n}\r\
 /***/ "./src/app/mail/mail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n\t<div class=\"row\">\n\t\t<div class=\"col-lg-3 container-fluid\" id=\"sidebar\">\n\t\t\t<ul ng-init=\"selectedTab = 'inbox'\" class=\"nav nav-tabs nav-mail\">\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='inbox'}\" ng-click=\"selectedTab='inbox'\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link active\" href=\"#\">Inbox</a>\n\t\t\t\t</li>\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='sent'}\" ng-click=\"selectedTab='sent'\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link\" href=\"#\">Sent</a>\n\t\t\t\t</li>\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='trash'}\" ng-click=\"selectedTab='trash'\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link\" href=\"#\">Trash</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<ul class=\"mail\">\n\t\t\t\t<li *ngFor=\"let msg of mail\" [class.read]=\"msg.READSTATUS === 'F'\" [class.selected]=\"msg === selectedMsg\" [routerLink] = \"['/message', msg.MSGID]\" (click)=\"onSelect(msg)\"> \n\t\t\t\t\t<div><span class=\"subject\">{{msg.SUBJECT}}</span><span class=\"date\">{{msg.DATESENT}}</span></div>\n\t\t\t\t\t<div class=\"sender\">{{msg.SENDER}}</div><button type=\"button\" class=\"btn btn-danger\" (click)=\"deleteMessage(msg)\">Delete</button>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\t\t<div class=\"col-lg-9 hidden-xs hidden-sm hidden-md\" id=\"content\">\n\t\t\t<router-outlet></router-outlet>\n\t\t</div>\n\t</div>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n\t<div class=\"row\">\n\t\t<div class=\"col-xs-3 container-fluid\" id=\"sidebar\">\n\t\t\t<ul ng-init=\"selectedTab = 'inbox'\" class=\"nav nav-tabs nav-mail\">\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='inbox'}\" ng-click=\"selectedTab='inbox'\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link active\" href=\"#\">Inbox</a>\n\t\t\t\t</li>\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='sent'}\" ng-click=\"selectedTab='sent'\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link\" href=\"#\">Sent</a>\n\t\t\t\t</li>\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='trash'}\" ng-click=\"selectedTab='trash'\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link\" href=\"#\">Trash</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<ul class=\"mail\">\n\t\t\t\t<li *ngFor=\"let msg of mail\" [class.read]=\"msg.READSTATUS === 'F'\" [class.selected]=\"msg === selectedMsg\" [routerLink] = \"['/message', msg.MSGID]\" (click)=\"onSelect(msg)\"> \n\t\t\t\t\t<div><span class=\"subject\">{{msg.SUBJECT}}</span><span class=\"date\">{{msg.DATESENT}}</span></div>\n\t\t\t\t\t<div class=\"sender\">{{msg.SENDER}}</div><button type=\"button\" class=\"btn btn-danger\" (click)=\"deleteMessage(msg)\">Delete</button>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\t\t<div class=\"col-xs-9\" id=\"content\">\n\t\t\t<router-outlet></router-outlet>\n\t\t</div>\n\t</div>\n</div>\n"
 
 /***/ }),
 
@@ -432,41 +393,6 @@ var _a;
 
 /***/ }),
 
-/***/ "./src/app/message-resolver.service.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessageResolverService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mock_mail__ = __webpack_require__("./src/app/mock-mail.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var MessageResolverService = (function () {
-    function MessageResolverService() {
-    }
-    MessageResolverService.prototype.resolve = function (routeSnapshot) {
-        return __WEBPACK_IMPORTED_MODULE_1__mock_mail__["a" /* MAIL */].find(function (msg) { return msg.MSGID === routeSnapshot.params.msgID; });
-    };
-    return MessageResolverService;
-}());
-MessageResolverService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
-    __metadata("design:paramtypes", [])
-], MessageResolverService);
-
-//# sourceMappingURL=message-resolver.service.js.map
-
-/***/ }),
-
 /***/ "./src/app/message/message.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -508,26 +434,6 @@ MessageService = __decorate([
 
 var _a;
 //# sourceMappingURL=message.service.js.map
-
-/***/ }),
-
-/***/ "./src/app/mock-mail.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MAIL; });
-var MAIL = [
-    { MSGID: 1, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
-    { MSGID: 2, SENDER: "Taylor", SUBJECT: "test", RECIPIENT: "Admin", MESSAGE: "Bye", DATESENT: "1/2/11", READSTATUS: 'N' },
-    { MSGID: 3, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Alan Yanza", MESSAGE: "This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.", DATESENT: "1/1/11", READSTATUS: 'Y' },
-    { MSGID: 4, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
-    { MSGID: 5, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
-    { MSGID: 6, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
-    { MSGID: 7, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
-    { MSGID: 8, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
-    { MSGID: 9, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' }
-];
-//# sourceMappingURL=mock-mail.js.map
 
 /***/ }),
 

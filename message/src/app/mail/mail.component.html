@@ -1,6 +1,6 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-lg-3 container-fluid" id="sidebar">
+		<div class="col-xs-3 container-fluid" id="sidebar">
 			<ul ng-init="selectedTab = 'inbox'" class="nav nav-tabs nav-mail">
 				<li ng-class="{'active':selectedTab ==='inbox'}" ng-click="selectedTab='inbox'" class="nav-item">
 					<a class="nav-link active" href="#">Inbox</a>
@@ -19,7 +19,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="col-lg-9 hidden-xs hidden-sm hidden-md" id="content">
+		<div class="col-xs-9" id="content">
 			<router-outlet></router-outlet>
 		</div>
 	</div>
