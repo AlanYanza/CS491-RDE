@@ -1,11 +1,14 @@
 <cfcomponent rest="true" restpath="/MessageSystem">
 
-	<!-- Used to test connection to rest CFC-->
-	<cffunction name="testMethod" access="remote" returntype="String" httpmethod="GET" restpath="test" >
-		<cfset string="testString">
-		<cfreturn string >
+	<!-- Retrive the user's access level --> 
+	<cffunction name="getAccessLevel" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="getAccessLevel" produces="application/json">
+		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
+		<cfset userLevel = SessionClass.passUserAccessLevel() /> 
+
+		<cfreturn serializeJSON(userLevel, 'struct')/>
 	</cffunction>
-	
+
+
 	<!-- Retrieve Sent mail for given user --> 
 	<cffunction name="getSent" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="getSent" produces="application/json">
 		<!-- retrieve current User's userID' -->

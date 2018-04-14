@@ -274,6 +274,9 @@ var MailService = (function () {
         this.baseURL = '/rest/restapi/MessageSystem/';
         this.getMessageURL = this.baseURL + 'getInbox';
         this.deleteMessageURL = this.baseURL + 'deleteEmail';
+        this.getSentURL = this.baseURL + 'getSent';
+        this.getTrashURL = this.baseURL + 'getTrash';
+        this.readMessageURL = this.baseURL + 'readMessage';
     }
     MailService.prototype.resolve = function (routeSnapshot) {
         return this.getMessages()
@@ -285,6 +288,17 @@ var MailService = (function () {
     // getMessages(): Observable<Msg[]> { 
     // 	return of(MAIL); 
     // }	
+    //Will return observable for messages in sent table 
+    MailService.prototype.getSent = function () {
+        return this.http.get(this.getSentURL)
+            .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["c" /* tap */])(function (res) { return console.log('Sent response:', res); }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["a" /* catchError */])(this.handleError('getSent', [])));
+    };
+    //Will return observable for messages in trash table 
+    MailService.prototype.getTrash = function () {
+        return this.http.get(this.getTrashURL)
+            .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["c" /* tap */])(function (res) { return console.log('Sent response:', res); }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["a" /* catchError */])(this.handleError('getSent', [])));
+    };
+    //Will return observable for messages in Inbox table 
     MailService.prototype.getMessages = function () {
         return this.http.get(this.getMessageURL)
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["c" /* tap */])(function (res) { return console.log('HTTP response:', res); }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["a" /* catchError */])(this.handleError('getMessages', [])));
@@ -294,6 +308,12 @@ var MailService = (function () {
             .set("msgID", String(msg.MSGID));
         return this.http.get(this.deleteMessageURL, { params: params })
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["c" /* tap */])(function (res) { return console.log('Delete:', res); }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["a" /* catchError */])(this.handleError('deleteMessage', [])));
+    };
+    MailService.prototype.readMessage = function (msg) {
+        var params = new __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpParams */]()
+            .set("msgID", String(msg.MSGID));
+        return this.http.put(this.readMessageURL, null, { params: params })
+            .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["c" /* tap */])(function (res) { return console.log('Read:', res); }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["a" /* catchError */])(this.handleError('readMessage', [])));
     };
     /**
   * Handle Http operation that failed.
@@ -327,14 +347,14 @@ var _a;
 /***/ "./src/app/mail/mail.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".selected {\r\n\tbackground-color: #80b6fc !important;\r\n}\r\n\r\n.read {\r\n\tfont-weight: bold !important;\r\n}\r\n\r\n#sidebar {\r\n\t/*border: 0.1px solid gray;*/\r\n\tmin-height: 100vh;\r\n\tpadding: 0.5px;\r\n\tpadding-top: 0;\r\n\tpadding-bottom: 0;\r\n}\r\n\r\n.title {\r\n\tbackground-color: #f0f0f0;\r\n\tborder-bottom: 1px solid #ddd;\r\n\r\n}\r\n\r\n.mail {\r\n\tlist-style-type: none;\r\n\tleft:0;\r\n\twidth:100%;\r\n\tpadding: 0;\r\n}\r\n\r\n.mail li {\r\n\t/*position: relative;*/\r\n\tleft: 0;\r\n\tbackground-color:white;\r\n\tborder: none;\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpadding: 10px;\r\n\tpadding-top: 15px;\r\n\tpadding-bottom: 15px;\r\n}\r\n\r\n.subject { \r\n\t\r\n}\r\n\r\n.date {\r\n\tfloat: right;\r\n\tcolor: gray;\r\n\tfont-size:;\r\n}\r\n\r\n/*.nav-mail {\r\n\tbackground-color: #f0f0f0;\r\n}*/\r\n\r\n#content {\r\n\tpadding: 1px;\r\n\tborder-left: 0.1px solid gray;\r\n\theight: 100vh;\r\n}\r\n\r\n.show {\r\n\tdisplay: block !important;\r\n}\r\n"
+module.exports = ".selected {\r\n\tbackground-color: #80b6fc !important;\r\n}\r\n\r\n.read {\r\n\tfont-weight: bold !important;\r\n}\r\n\r\n#sidebar {\r\n\t/*border: 0.1px solid gray;*/\r\n\tmin-height: 100vh;\r\n\tpadding: 0.5px;\r\n\tpadding-top: 0;\r\n\tpadding-bottom: 0;\r\n}\r\n\r\n.title {\r\n\tbackground-color: #f0f0f0;\r\n\tborder-bottom: 1px solid #ddd;\r\n\r\n}\r\n\r\n.mail {\r\n\tlist-style-type: none;\r\n\tleft:0;\r\n\twidth:100%;\r\n\tpadding: 0;\r\n}\r\n\r\n.mail li {\r\n\t/*position: relative;*/\r\n\tleft: 0;\r\n\tbackground-color:white;\r\n\tborder: none;\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpadding: 10px;\r\n\tpadding-top: 15px;\r\n\tpadding-bottom: 15px;\r\n}\r\n\r\n.subject { \r\n\t\r\n}\r\n\r\n.date {\r\n\tfloat: right;\r\n\tcolor: gray;\r\n\tfont-size:;\r\n}\r\n\r\n/*.nav-mail {\r\n\tbackground-color: #f0f0f0;\r\n}*/\r\n\r\n#content {\r\n\tpadding: 1px;\r\n\tborder-left: 0.1px solid gray;\r\n\theight: 100vh;\r\n}\r\n\r\n.show {\r\n\tdisplay: block !important;\r\n}\r\n\r\n#trashIcon { \r\n\tfloat: right;\r\n\r\n}"
 
 /***/ }),
 
 /***/ "./src/app/mail/mail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n\t<div class=\"row\">\n\t\t<div class=\"col-xs-3 container-fluid\" id=\"sidebar\">\n\t\t\t<ul ng-init=\"selectedTab = 'inbox'\" class=\"nav nav-tabs nav-mail\">\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='inbox'}\" ng-click=\"selectedTab='inbox'\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link active\" href=\"#\">Inbox</a>\n\t\t\t\t</li>\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='sent'}\" ng-click=\"selectedTab='sent'\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link\" href=\"#\">Sent</a>\n\t\t\t\t</li>\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='trash'}\" ng-click=\"selectedTab='trash'\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link\" href=\"#\">Trash</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<ul class=\"mail\">\n\t\t\t\t<li *ngFor=\"let msg of mail\" [class.read]=\"msg.READSTATUS === 'F'\" [class.selected]=\"msg === selectedMsg\" [routerLink] = \"['/message', msg.MSGID]\" (click)=\"onSelect(msg)\"> \n\t\t\t\t\t<div><span class=\"subject\">{{msg.SUBJECT}}</span><span class=\"date\">{{msg.DATESENT}}</span></div>\n\t\t\t\t\t<div class=\"sender\">{{msg.SENDER}}</div><button type=\"button\" class=\"btn btn-danger\" (click)=\"deleteMessage(msg)\">Delete</button>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\t\t<div class=\"col-xs-9\" id=\"content\">\n\t\t\t<router-outlet></router-outlet>\n\t\t</div>\n\t</div>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n\t<div class=\"row\">\n\t\t<div class=\"col-xs-3 container-fluid\" id=\"sidebar\">\n\t\t\t<ul ng-init=\"selectedTab = 'inbox'\" class=\"nav nav-tabs nav-mail\">\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='inbox'}\" (click)=\"getMessages()\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link active\">Inbox</a>\n\t\t\t\t</li>\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='sent'}\" (click)=\"getSent()\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link\">Sent</a>\n\t\t\t\t</li>\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='trash'}\" (click)=\"getTrash()\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link\">Trash</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<ul class=\"mail\">\n\t\t\t\t<li *ngFor=\"let msg of mail\" [class.read]=\"msg.READSTATUS === 'F'\" [class.selected]=\"msg === selectedMsg\" [routerLink] = \"['/message', msg.MSGID]\" (click)=\"onSelect(msg)\"> \n\t\t\t\t\t<div><span class=\"subject\">{{msg.SUBJECT}}</span><span class=\"date\">{{msg.DATESENT}}</span></div>\n\t\t\t\t\t<div><span class=\"sender\">{{msg.SENDER}}</span>\n\t\t\t\t\t\t<button id=\"trashIcon\" type=\"button\" class=\"btn btn-danger btn-sm\" (click)=\"deleteMessage(msg)\">Delete <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></button></div>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\t\t<div class=\"col-xs-9\" id=\"content\">\n\t\t\t<router-outlet></router-outlet>\n\t\t</div>\n\t</div>\n</div>\n"
 
 /***/ }),
 
@@ -364,6 +384,16 @@ var MailComponent = (function () {
     MailComponent.prototype.ngOnInit = function () {
         this.getMessages();
     };
+    MailComponent.prototype.getSent = function () {
+        var _this = this;
+        this.mailService.getSent()
+            .subscribe(function (mail) { return _this.mail = mail; });
+    };
+    MailComponent.prototype.getTrash = function () {
+        var _this = this;
+        this.mailService.getTrash()
+            .subscribe(function (mail) { return _this.mail = mail; });
+    };
     MailComponent.prototype.getMessages = function () {
         var _this = this;
         this.mailService.getMessages()
@@ -376,6 +406,7 @@ var MailComponent = (function () {
     MailComponent.prototype.onSelect = function (msg) {
         this.selectedMsg = msg;
         msg.READSTATUS = 'T';
+        this.mailService.readMessage(msg).subscribe();
     };
     return MailComponent;
 }());
