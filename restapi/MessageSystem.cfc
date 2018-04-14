@@ -144,9 +144,9 @@
 		<!-- send email to user informating them of unread emails -->
 		<cfset emailToolObj=createObject('component','CS491-RDE.components.emailTool')>
 		<cfset emailAddress=emailToolObj.retrieveEmailAddress(recipientID)>
-		<cfset subject="RDEApplication Unread messages">
-		<cfset message="You have received a new message in your RDEApplication Inbox<br>">
-		<cfset emailToolObj.sendEmail(emailAddress,subject,message)>
+		<cfset emailSubject="RDEApplication Unread messages">
+		<cfset emailMessage="You have received a new message in your RDEApplication Inbox<br>">
+		<cfset emailToolObj.sendEmail(emailAddress,emailSubject,emailMessage)>
 
 		<cfreturn serializeJSON("sendToSent", 'struct') /> 
 
