@@ -2,11 +2,10 @@
 
 	<!-- Used to test connection to rest CFC-->
 	<cffunction name="testMethod" access="remote" returntype="String" httpmethod="GET" restpath="test" >
-		<cfdump var="#Application.userID#" >
 		<cfset string="testString">
 		<cfreturn string >
 	</cffunction>
-
+	
 	<!-- Retrieve Sent mail for given user --> 
 	<cffunction name="getSent" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="getSent" produces="application/json">
 		<!-- retrieve current User's userID' -->
@@ -110,7 +109,6 @@
 			WHERE email=<cfqueryPARAM value="#recipientEmail#" cfsqltype="CF_SQL_VARCHAR">
 		</cfquery>
 		<cfset recipientID=recipientUserID.userID />
-
 		<!-- Insert message data into DB(message table) -->
 	 	<cfquery result="sendToMessageResult">
 			INSERT INTO Message (senderID, recipientID, subject, message, dateSent, dateRecv, readStatus)
@@ -143,6 +141,12 @@
 			 	<cfqueryPARAM value="#msgID#" cfsqltype="CF_SQL_INTEGER">
 			)
 		</cfquery>
+		<!-- send email to user informating them of unread emails -->
+		<cfset emailToolObj=createObject('component','CS491-RDE.components.emailTool')>
+		<cfset emailAddress=emailToolObj.retrieveEmailAddress(recipientID)>
+		<cfset subject="RDEApplication Unread messages">
+		<cfset message="You have received a new message in your RDEApplication Inbox<br>">
+		<cfset emailToolObj.sendEmail(emailAddress,subject,message)>
 
 		<cfreturn serializeJSON("sendToSent", 'struct') /> 
 
