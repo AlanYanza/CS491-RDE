@@ -2,20 +2,21 @@
 	<div class="row">
 		<div class="col-xs-3 container-fluid" id="sidebar">
 			<ul ng-init="selectedTab = 'inbox'" class="nav nav-tabs nav-mail">
-				<li ng-class="{'active':selectedTab ==='inbox'}" ng-click="selectedTab='inbox'" class="nav-item">
-					<a class="nav-link active" href="#">Inbox</a>
+				<li ng-class="{'active':selectedTab ==='inbox'}" (click)="getMessages()" class="nav-item">
+					<a class="nav-link active">Inbox</a>
 				</li>
-				<li ng-class="{'active':selectedTab ==='sent'}" ng-click="selectedTab='sent'" class="nav-item">
-					<a class="nav-link" href="#">Sent</a>
+				<li ng-class="{'active':selectedTab ==='sent'}" (click)="getSent()" class="nav-item">
+					<a class="nav-link">Sent</a>
 				</li>
-				<li ng-class="{'active':selectedTab ==='trash'}" ng-click="selectedTab='trash'" class="nav-item">
-					<a class="nav-link" href="#">Trash</a>
+				<li ng-class="{'active':selectedTab ==='trash'}" (click)="getTrash()" class="nav-item">
+					<a class="nav-link">Trash</a>
 				</li>
 			</ul>
 			<ul class="mail">
 				<li *ngFor="let msg of mail" [class.read]="msg.READSTATUS === 'F'" [class.selected]="msg === selectedMsg" [routerLink] = "['/message', msg.MSGID]" (click)="onSelect(msg)"> 
 					<div><span class="subject">{{msg.SUBJECT}}</span><span class="date">{{msg.DATESENT}}</span></div>
-					<div class="sender">{{msg.SENDER}}</div><button type="button" class="btn btn-danger" (click)="deleteMessage(msg)">Delete</button>
+					<div><span class="sender">{{msg.SENDER}}</span>
+						<button id="trashIcon" type="button" class="btn btn-danger btn-sm" (click)="deleteMessage(msg)">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></div>
 				</li>
 			</ul>
 		</div>

@@ -24,6 +24,16 @@ export class MailComponent implements OnInit {
   	this.getMessages();
   }
 
+  getSent(): void {
+    this.mailService.getSent()
+      .subscribe(mail => this.mail = mail);
+  }
+
+  getTrash(): void {
+    this.mailService.getTrash()
+      .subscribe(mail => this.mail = mail);
+  }
+
   getMessages(): void {
   	this.mailService.getMessages()
   		.subscribe(mail => this.mail = mail);
@@ -37,6 +47,7 @@ export class MailComponent implements OnInit {
   onSelect(msg: Msg): void {
   	this.selectedMsg = msg;
   	msg.READSTATUS = 'T';
+    this.mailService.readMessage(msg).subscribe();
   }
 
 }

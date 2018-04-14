@@ -16,6 +16,10 @@ export class MailService implements Resolve<Msg> {
 	private baseURL = '/rest/restapi/MessageSystem/';
 	private getMessageURL = this.baseURL + 'getInbox';
 	private deleteMessageURL = this.baseURL + 'deleteEmail';
+	private getSentURL = this.baseURL + 'getSent';
+	private getTrashURL = this.baseURL + 'getTrash';
+	private readMessageURL = this.baseURL + 'readMessage';
+
 
 	constructor(
 		private http: HttpClient
@@ -37,6 +41,25 @@ export class MailService implements Resolve<Msg> {
 	// 	return of(MAIL); 
 	// }	
 
+	//Will return observable for messages in sent table 
+	getSent(): Observable<Msg[]> {
+		return this.http.get<Msg[]>(this.getSentURL)
+		.pipe(
+			tap (res => console.log('Sent response:', res)), 
+			catchError(this.handleError<any>('getSent', []))
+		);
+	}
+
+	//Will return observable for messages in trash table 
+	getTrash(): Observable<Msg[]> {
+		return this.http.get<Msg[]>(this.getTrashURL)
+		.pipe(
+			tap (res => console.log('Sent response:', res)), 
+			catchError(this.handleError<any>('getSent', []))
+		);
+	}
+
+	//Will return observable for messages in Inbox table 
 	getMessages(): Observable<Msg[]> { 
 		return this.http.get<Msg[]>(this.getMessageURL)
 		.pipe(
@@ -54,6 +77,17 @@ export class MailService implements Resolve<Msg> {
 			tap( res => console.log('Delete:', res)),
 			catchError(this.handleError<any>('deleteMessage',[]))
 		);
+	}
+
+	readMessage(msg:Msg): Observable<Msg> {
+		const params = new HttpParams()
+			.set("msgID", String(msg.MSGID));  
+
+		return this.http.put<Msg>(this.readMessageURL, null, {params:params})
+		.pipe(
+			tap( res => console.log('Read:', res)),
+			catchError(this.handleError<any>('readMessage', []))
+			);
 	}
 
 	 /**
