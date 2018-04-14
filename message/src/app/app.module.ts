@@ -30,7 +30,7 @@ import { APP_BASE_HREF } from '@angular/common';
   providers: [
     MailService,
     MessageService,
-    {provide: APP_BASE_HREF, useValue: '/CS491-RDE/message.cfm'}
+    {provide: APP_BASE_HREF, useValue: '/'}
     ],
   bootstrap: [AppComponent]
 })
