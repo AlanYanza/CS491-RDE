@@ -18,11 +18,6 @@
 <cfset subformClass.createSubformData()/>
 <cfset subformData=subformClass.retrieveDataForSubform()/>
 <cfset HICPStatus=subformClass.retrieveHICPStatus()/>
-<!-- Determine Flag(reviewing or editing) -->
-<cfif session.accessLevel eq 'admin'>
-	<cfdump var="User is admin" >
-	<!-- put javascript here -->
-</cfif>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +27,16 @@
 	<script>
 		"use strict";
 		$(document).ready(function(){
+			<!--- Determine Flag(reviewing or editing) --->
+			<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
+				<cfoutput>
+					$("##formData").find("*").attr("disabled", "true");
+					$("button[type=button][name=reveal]").removeAttr("disabled");
+					$("input[type=hidden][name=formPage]").removeAttr("disabled");
+					$("input[type=hidden][name=tableName]").removeAttr("disabled");
+				</cfoutput>
+			</cfif>
+			
 			$('[data-toggle="popover"]').popover();
 
 			$("#same").change(function(){
@@ -166,9 +171,9 @@
 		documents as they WILL NOT be returned.
 	</p>
 	<form action="../scripts/NJScript.cfm" method="POST">
-
-	<input type="text" hidden="true" id="formPage" name="formPage" value="page1">
-	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
+	<div id="formData">
+	<input type="hidden" id="formPage" name="formPage" value="page1"/>
+	<input type="hidden" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
 	<div class="text-center checkbox">
 			<input type="checkbox" name="HICP" value="HICP" <cfif HICPStatus eq 'Y'><cfoutput>checked</cfoutput></cfif>/> I am also applying for HICP
 		</div>
@@ -204,7 +209,7 @@
 		<div class="col-sm-3"><div class="form-group"><label for="city">City <span style="color: red;">*</span></label>
 			<input type="text" class="form-control" id="city" name="city" value="<cfoutput>#subformData.city#</cfoutput>" required /></div></div>
 		<div class="col-sm-3"><label for="state">State <span style="color: red;">*</span></label>
-			<select class="form-control" id="state" name="state" required />
+			<select class="form-control" id="state" name="state" required>
 				<option value="X" <cfset subformClass.showSelectionField('state',subformData,'X')/>>Select one</option>
 				<option value="AL" <cfset subformClass.showSelectionField('state',subformData,'AL')/>>AL - Alabama</option>
 				<option value="AK" <cfset subformClass.showSelectionField('state',subformData,'AK')/>>AK - Alaska</option>
@@ -285,7 +290,7 @@
 		<div class="col-sm-3"><div class="form-group"><label for="MCity">City <span style="color: red;">*</span></label>
 			<input type="text" class="form-control" id="MCity" name="MCity" value="<cfoutput>#subformData.MCity#</cfoutput>" required /></div></div>
 		<div class="col-sm-3"><label for="MState">State <span style="color: red;">*</span></label>
-			<select class="form-control" id="MState" name="MState" required />
+			<select class="form-control" id="MState" name="MState" required>
 				<option value="X" <cfset subformClass.showSelectionField('MState',subformData,'X')/>>Select one</option>
 				<option value="AL" <cfset subformClass.showSelectionField('MState',subformData,'AL')/>>AL - Alabama</option>
 				<option value="AK" <cfset subformClass.showSelectionField('MState',subformData,'AK')/>>AK - Alaska</option>
@@ -439,12 +444,12 @@
 			<option value="W" <cfset subformClass.showSelectionField('RelStatus',subformData,'W')/>>Widowed</option>
 			<option value="SP" <cfset subformClass.showSelectionField('RelStatus',subformData,'SP')/>>*Separated</option>
 		</select>
-		<em>*(See instructions)</span></em>
+		<em>*(See instructions)</em>
 		<a href="javascript:void(0)" data-toggle="popover" data-trigger="focus" title="DOMESTIC STATUS:" data-html="true" data-content='
 			Check &#34separated&#34 if:<br/>
 			(1) You and your spouse/partner live apart AND if you do not have access to, or receive support from, your spouse&#39s/partner&#39s income;<br/>
 			(2) Your spouse/partner has been confined to a long-term care or psychiatric institution for at least 30 days prior to this application.<br/>
-			<strong>If you check &#34separated,&#34 please fill out and send in DHAS-40 Certification of Separation.</strong>''>
+			<strong>If you check &#34separated,&#34 please fill out and send in DHAS-40 Certification of Separation.</strong>'>
 			<span class="glyphicon glyphicon-info-sign"></span>
 		</a>
 	</div>
@@ -525,10 +530,14 @@
 		<label class="radio-inline"><input type="radio" name="preg" value="Y" <cfset subformClass.showRadioButton('preg',subformData,'Y')/> required /> Yes</label>
 		<label class="radio-inline"><input type="radio" name="preg" value="N" <cfset subformClass.showRadioButton('preg',subformData,'N')/>/> No</label>
 	</div>
-
+	</div>
 	<div class="text-center">
 		<button type="submit" class="btn btn-default" name="previous" value="prevous">Previous</button>
-		<button type="submit" class="btn btn-default" name="save" value="save">Save Progress &#38; Exit</button>
+		<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
+			<button type="submit" class="btn btn-default" name="exit" value="exit">Exit</button>
+		<cfelse>
+			<button type="submit" class="btn btn-default" name="save" value="save">Save Progress &#38; Exit</button>
+		</cfif>
 		<button type="submit" class="btn btn-default" name="next" value="next">Next</button>
 	</div>
 	</form>

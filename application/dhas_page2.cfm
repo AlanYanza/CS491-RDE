@@ -1,6 +1,10 @@
 <!-- Session Page Protection -->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<cfif isDefined('url.appID')>
+	<!-- create a session variable for appID -->
+	<cfset session.appID=url.appID>
+</cfif>
 <!-- If a user access level,More Session Page Protection -->
 <cfif session.accessLevel neq 'admin'>
 	<cfset SessionClass.checkIfuser()>
@@ -12,11 +16,6 @@
 <!-- Application Page pre-processing -->
 <cfset subformClass.createSubformData()/>
 <cfset subformData=subformClass.retrieveDataForSubform()/>
-<!-- Determine Flag(reviewing or editing) -->
-<cfif session.accessLevel eq 'admin'>
-	<cfdump var="User is admin" >
-	<!-- put javascript here -->
-</cfif>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +25,16 @@
   	<script>
   		"use strict";
   		$(document).ready(function(){
+			<!--- Determine Flag(reviewing or editing) --->
+			<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
+				<cfoutput>
+					$("##formData").find("*").attr("disabled", "true");
+					$("input[type=hidden][name=formPage]").removeAttr("disabled");
+					$("input[type=hidden][name=tableName]").removeAttr("disabled");
+				</cfoutput>
+			</cfif>
+			
+
 	  		$("button[type=submit][name=save]").click(function() {
 				$("form").find("input").removeAttr("required");
 			});
@@ -57,8 +66,9 @@
 	<div class="well text-center"><h4>Section 2 - HOUSEHOLD INCOME</h4></div>
 
 	<form action="../scripts/NJScript.cfm" method="POST">
-	<input type="text" hidden="true" id="formPage" name="formPage" value="page2">
-	<input type="text" hidden="true" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>">
+	<div id="formData">
+	<input type="hidden" id="formPage" name="formPage" value="page2"/>
+	<input type="hidden" id="tableName" name="tableName" value="<cfoutput>#tableName#</cfoutput>"/>
 
 	<div class="form-group">
 		<label for="EmplyStatus">What if your current employment status? <span style="color: red;">*</span></label>
@@ -201,10 +211,14 @@
 		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SNAP" value="A" <cfset subformClass.showRadioButton('SNAP',subformData,'A')/>/>Applied For</label></div>
 		<div class="col-sm-2"><label class="radio-inline"><input type="radio" name="SNAP" value="R" <cfset subformClass.showRadioButton('SNAP',subformData,'R')/>/>Receiving</label></div>
 	</div>
-
+	</div>
 	<div class="text-center">
 		<button type="submit" class="btn btn-default" name="previous" value="prevous">Previous</button>
-		<button type="submit" class="btn btn-default" name="save" value="save">Save Progress &#38; Exit</button>
+		<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
+			<button type="submit" class="btn btn-default" name="exit" value="exit">Exit</button>
+		<cfelse>
+			<button type="submit" class="btn btn-default" name="save" value="save">Save Progress &#38; Exit</button>
+		</cfif>
 		<button type="submit" class="btn btn-default" name="next" value="next">Next</button>
 	</div>
 	</form>

@@ -2,3 +2,4 @@ TestScript.cfm
 testForm.cfm
 testRest.cfm
 RestTestCFC.cfc
+TestMailer.cfm

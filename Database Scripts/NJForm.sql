@@ -188,10 +188,7 @@ BEGIN
 	BEGIN
 		CREATE TABLE [NJSection3B] (
 			dataID int NOT NULL FOREIGN KEY REFERENCES [UserFormData](dataID),
-			NoASSISSDI char(1) CHECK(NoASSISSDI IN('Y','N')) DEFAULT('N'),
-			UASSISSDI char(1) CHECK(UASSISSDI IN('Y','N')) DEFAULT('N'),
-			YesSSI char(1) CHECK(YesSSI IN('Y','N')) DEFAULT('N'),
-			YesSSDI char(1) CHECK(YesSSDI IN('Y','N')) DEFAULT('N'),
+			SSISSDIStatus varchar(5) CHECK(SSISSDIStatus IN('YSSI','YSSDI','N','U','X')) DEFAULT('X'),
 			ASSISSDIDate date DEFAULT NULL,
 			UASSISSDIDate char(1) CHECK(UASSISSDIDate IN('Y','N','X')) DEFAULT('X'),
 			RespASSISSI char(1) CHECK(RespASSISSI IN('Y','N','X')) DEFAULT('X'),
@@ -253,10 +250,10 @@ BEGIN
 				CPCPhone varchar(16) NOT NULL DEFAULT(''),
 				PName varchar(100) NOT NULL DEFAULT(''),
 				PPhone varchar(16) NOT NULL DEFAULT(''),
-				signature varchar(max) DEFAULT (''),
+				signature varbinary(max) DEFAULT (NULL),
 				signatureDate date DEFAULT GETDATE(),
 				spouseSig varbinary(max) DEFAULT (NULL),
-				spouseSigDate varbinary(max) DEFAULT (NULL)
+				spouseSigDate date DEFAULT GETDATE()
 			);
 			PRINT 'Successfully created "NJSection4" Table';
 		END

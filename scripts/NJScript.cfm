@@ -1,7 +1,9 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
-<cfset SessionClass.checkIfLoggedIn()/>
-<cfset SessionClass.NoAppIDRedirect()>
-<cfset SessionClass.validateAppID()>
+<cfif session.accessLevel neq 'admin'>
+	<cfset SessionClass.checkIfLoggedIn()/>
+	<cfset SessionClass.NoAppIDRedirect()>
+	<cfset SessionClass.validateAppID()>
+</cfif>
 <cfset formObj=createObject('component','CS491-RDE.components.Form').init('NJ',session.userID)>
 <!--- Determine which page form came from --->
 <cfset formSource=FORM.formPage/>
@@ -74,8 +76,8 @@
 <cfif formSource eq 'page3B' AND reviewMode eq 0>
 	<!--- Set fields of the sub-form --->
 	<cfset fields=['ASSISSDIDate','RespASSISSI','AMarket','AMarketDate','RespAMarket','CovOtherTxt','relation','relOther','InsName','InsAddr','InsAddrCounty','InsSS','InsPhone','InsCarrier',
-	'InsCarAddr','InsCarPhone','InsCarPolicyNum','EmpUnName','EmpUnAddr','PresCar','PresCarAddr','PresCarPhone','PrescarID','PresCoPay','PresDeduct','EligVetDrugBen','RecPresDrugBen'] />
-	<cfset checkFields=['NoASSISSDI','UASSISSDI','YesSSI','YesSSDI','UASSISSDIDate','UMarketDate','CovMed','CovPres','CovOther']/>
+	'InsCarAddr','InsCarPhone','InsCarPolicyNum','EmpUnName','EmpUnAddr','PresCar','PresCarAddr','PresCarPhone','PrescarID','PresCoPay','PresDeduct','EligVetDrugBen','RecPresDrugBen','SSISSDIStatus'] />
+	<cfset checkFields=['UASSISSDIDate','UMarketDate','CovMed','CovPres','CovOther']/>
 	<cfset subformObj.setFields(fields)/>
 	<cfset subformObj.setCheckFields(checkFields)/>
 	<!--- extract user inputs from subform --->
@@ -104,40 +106,55 @@
 <cfif IsDefined('Form.save')>
 	<cflocation url="/CS491-RDE/home.cfm?savedApplication">
 </cfif>
+<cfif IsDefined('Form.exit')>
+	<cflocation url="/CS491-RDE/home.cfm">
+</cfif>
 <cfif formSource eq 'page1'>
 	<cfif IsDefined("FORM.previous")>
 		<cflocation url="/CS491-RDE/application/dhas_instructions_page3.cfm">
 	<cfelseif IsDefined("FORM.next")>
-  		<cflocation url="/CS491-RDE/application/dhas_page2.cfm">
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page2.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	</cfif>
 <cfelseif formSource eq 'page2'>
 	<cfif IsDefined("FORM.previous")>
-		<cflocation url="/CS491-RDE/application/dhas_page1.cfm">
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page1.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	<cfelseif IsDefined("FORM.next")>
-  		<cflocation url="/CS491-RDE/application/dhas_page3.cfm">
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page3.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	</cfif>
 <cfelseif formSource eq 'page3A'>
 	<cfif IsDefined("FORM.previous")>
-		<cflocation url="/CS491-RDE/application/dhas_page2.cfm">
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page2.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	<cfelseif IsDefined("FORM.next")>
-  		<cflocation url="/CS491-RDE/application/dhas_page4.cfm">
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page4.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	</cfif>
 <cfelseif formSource eq 'page3B'>
 	<cfif IsDefined("FORM.previous")>
-		<cflocation url="/CS491-RDE/application/dhas_page3.cfm">
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page3.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	<cfelseif IsDefined("FORM.next")>
-  		<cflocation url="/CS491-RDE/application/dhas_page5.cfm">
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page5.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	</cfif>
 <cfelseif formSource eq 'page4'>
 	<cfif IsDefined("FORM.previous")>
-		<cflocation url="/CS491-RDE/application/dhas_page4.cfm">
+		<cfset urlDirectLocation="/CS491-RDE/application/dhas_page4.cfm?appID=" & session.appID>
+		<cflocation url=#urlDirectLocation#>
 	<cfelseif IsDefined("FORM.next")>
 		<!--- Insert Documents into AppDocument Table--->
 		<cfif subformObj.CheckApplicationStatus() eq 'P' >
-			<cfset InsertNJDocuments()/> 
+			<cfset InsertNJDocuments()/>
 		</cfif>
+		<!--- Send an email to user confirming account registration --->
+		<cfset emailToolObj=createObject('component','CS491-RDE.components.emailTool')/>
+		<cfset emailAddress=emailToolObj.retrieveEmailAddress(session.userID)>
+		<cfset emailToolObj.sendSubmitApplicationEmail(emailAddress,'ADDP/HICP')>
 		<!--- Change status of Application to Review--->
-			<cfset subformObj.submitApplication()>
+		<cfset subformObj.submitApplication()>
   		<cflocation url="/CS491-RDE/home.cfm?submitApplication">
 	</cfif>
 </cfif>
