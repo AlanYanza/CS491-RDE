@@ -101,7 +101,7 @@
 		<cfset subject = url.subject />
 		<cfset recipientEmail = url.recipient /> 
 		<cfset message = url.message />
-		<cfset dateSent = DateFormat(Now(), "mm/dd/yyy") />
+		<cfset dateSent = Now() />
 
 		<!-- Retrieve receipient's userID -->
 		<cfquery name="recipientUserID">
@@ -118,7 +118,7 @@
 			 	<cfqueryPARAM value ="#subject#" cfsqltype="CF_SQL_VARCHAR">,
 			 	<cfqueryPARAM value ="#message#" cfsqltype="CF_SQL_VARCHAR">,
 			 	<cfqueryPARAM value ="#dateSent#" cfsqltype="CF_SQL_TIMESTAMP">,
-			 	<cfqueryPARAM value ="#dateSent#" cfsqltype="CF_SQL_TIMESTAMP">,	 		
+			 	<cfqueryPARAM value ="#dateSent#" cfsqltype="CF_SQL_TIMESTAMP">,
 				<cfqueryPARAM value ='F' cfsqltype="CF_SQL_IDSTAMP"> 
 			 )
 		</cfquery> 
@@ -177,6 +177,21 @@
 		</cfquery>
 
 		<cfreturn serializeJSON("deleteFromInbox", 'struct') /> 
+
+	</cffunction>
+
+	<cffunction name="readMessage" access="remote" returntype="Any" return Format="json" httpmethod="PUT" restpath="readMessage" produces="application/json"> 
+		<!-- retrieve current User's userID' -->
+		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/> 
+		<cfset userID = SessionClass.passUserID() />
+
+		<cfset msgID = url.msgID />
+
+		<cfquery name="readMessageQuery">
+			UPDATE Message 
+			SET readStatus = <cfqueryPARAM value ='T' cfsqltype="CF_SQL_IDSTAMP" /> 
+			WHERE msgID = <cfqueryPARAM value = #msgID# cfsqltype="CF_SQL_INTEGER" />
+		</cfquery>
 
 	</cffunction>
 

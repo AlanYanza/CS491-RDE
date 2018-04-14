@@ -47,6 +47,7 @@ export class MailComponent implements OnInit {
   onSelect(msg: Msg): void {
   	this.selectedMsg = msg;
   	msg.READSTATUS = 'T';
+    this.mailService.readMessage(msg).subscribe();
   }
 
 }

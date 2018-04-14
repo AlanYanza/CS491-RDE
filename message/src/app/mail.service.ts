@@ -18,6 +18,8 @@ export class MailService implements Resolve<Msg> {
 	private deleteMessageURL = this.baseURL + 'deleteEmail';
 	private getSentURL = this.baseURL + 'getSent';
 	private getTrashURL = this.baseURL + 'getTrash';
+	private readMessageURL = this.baseURL + 'readMessage';
+
 
 	constructor(
 		private http: HttpClient
@@ -75,6 +77,17 @@ export class MailService implements Resolve<Msg> {
 			tap( res => console.log('Delete:', res)),
 			catchError(this.handleError<any>('deleteMessage',[]))
 		);
+	}
+
+	readMessage(msg:Msg): Observable<Msg> {
+		const params = new HttpParams()
+			.set("msgID", String(msg.MSGID));  
+
+		return this.http.put<Msg>(this.readMessageURL, null, {params:params})
+		.pipe(
+			tap( res => console.log('Read:', res)),
+			catchError(this.handleError<any>('readMessage', []))
+			);
 	}
 
 	 /**
