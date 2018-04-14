@@ -66,7 +66,7 @@
 		<cfquery name="MailResult">
 			SELECT 
 				Inbox.msgID, 
-				Message.readStatus, Message.subject, Message.message, Message.dateSent, 
+				Message.readStatus, Message.subject, Message.message, FORMAT(Message.dateSent, 'MM/dd/yy hh:mm tt') as dateSent, 
 				concat(sen.FirstName, ' ', sen.LastName) AS sender,
 				concat(rec.FirstName, ' ', rec.LastName) AS recipient
 			FROM Inbox 
@@ -76,6 +76,7 @@
 			WHERE Inbox.userID = <cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" > 
 			ORDER BY Message.dateSent DESC
 		</cfquery>
+
 		<!-- Return ResultSet as JSON -->
 		<cfreturn serializeJSON(MailResult, 'struct') /> 
 	</cffunction>
@@ -98,7 +99,7 @@
 		<cfset subject = url.subject />
 		<cfset recipientEmail = url.recipient /> 
 		<cfset message = url.message />
-		<cfset dateSent = ParseDateTime(Now()) />
+		<cfset dateSent = DateFormat(Now(), "mm/dd/yyy") />
 
 		<!-- Retrieve receipient's userID -->
 		<cfquery name="recipientUserID">
