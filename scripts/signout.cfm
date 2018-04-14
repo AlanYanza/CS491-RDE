@@ -1,3 +1,6 @@
+<!--- If user is not sign in, do not let them access --->
+<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
+<cfset SessionClass.checkIfLoggedIn()>
 <cfif IsDefined('session.userID')>
 	<cfset StructDelete(#session#,'userID')/>
 </cfif>
@@ -11,7 +14,10 @@
 	<cfset StructDelete(#session#,'lastName')/>
 </cfif>
 <cfif IsDefined('Application.userID')>
-	<cfset StructDelete(#session#,'userID')/>
+	<cfset StructDelete(#Application#,'userID')/>
+</cfif>
+<cfif IsDefined('session.appID')>
+	<cfset StructDelete(#session#,'appID')/>
 </cfif>
 
 <cflocation url="../index.cfm">

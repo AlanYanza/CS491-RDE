@@ -13,8 +13,9 @@ import { MessageResolverService } from '../message-resolver.service';
   styleUrls: ['./mail.component.css']
 })
 export class MailComponent implements OnInit {
-	mail : Msg[];
 	title = "Inbox";
+  
+  mail: Msg[];
 
 	selectedMsg: Msg; 
 
@@ -22,22 +23,21 @@ export class MailComponent implements OnInit {
 
   ngOnInit() {
   	this.getMessages();
-  	// this.test();
   }
-
-  // test(): void {
-  // 	this.mailService.test()
-  // 		.subscribe(console.log);
-  // }
 
   getMessages(): void {
   	this.mailService.getMessages()
   		.subscribe(mail => this.mail = mail);
   }
 
+  deleteMessage(msg: Msg): void {
+    this.mail = this.mail.filter( m => msg.MSGID !== m.MSGID );
+    this.mailService.deleteMessage(msg).subscribe();
+  }
+
   onSelect(msg: Msg): void {
   	this.selectedMsg = msg;
-  	// msg.READSTATUS = true;
+  	msg.READSTATUS = 'T';
   }
 
 }

@@ -77,7 +77,7 @@ module.exports = "/* Application-wide Styles */\r\nh1 {\r\n  color: #369;\r\n  f
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n\n<!-- <div style=\"text-align:center\">\n  <h1>\n    Welcome to {{title}}! \n  </h1>\n</div> -->\n<app-mail></app-mail>\n\n<!-- <script src=\"https://code.jquery.com/jquery-3.1.1.min.js\" integrity=\"sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=\" crossorigin=\"anonymous\"></script> -->\n<!-- <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\" integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\" crossorigin=\"anonymous\"></script> -->\n\n"
+module.exports = "<app-mail></app-mail>"
 
 /***/ }),
 
@@ -175,7 +175,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_9__mail_service__["a" /* MailService */],
             __WEBPACK_IMPORTED_MODULE_10__message_resolver_service__["a" /* MessageResolverService */],
             __WEBPACK_IMPORTED_MODULE_12__message_message_service__["a" /* MessageService */],
-            { provide: __WEBPACK_IMPORTED_MODULE_13__angular_common__["a" /* APP_BASE_HREF */], useValue: '/CS491-RDE/' }
+            { provide: __WEBPACK_IMPORTED_MODULE_13__angular_common__["a" /* APP_BASE_HREF */], useValue: '/CS491-RDE/message.cfm' }
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
     })
@@ -245,7 +245,7 @@ module.exports = ".labeled {\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpaddi
 /***/ "./src/app/mail-content/mail-content.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"nav nav-tabs nav-mail\">\n\t<li class=\"nav-item\">\n\t\t<a class=\"nav-link\">X</a>\n\t</li>\n\t<li class=\"nav-item\">\n\t\t<a class=\"nav-link disabled\">{{ title | uppercase }}</a>\n\t</li>\n\t<li class=\"nav-item pull-right\">\n\t\t<a class=\"nav-link\" [routerLink] = \"['/']\">Write</a>\n\t</li>\n\n</ul>\n<div *ngIf=\"(msg | async)\">\n\t<div class=\"labeled\"><label for=\"subject\" class=\"col-sm-1\">Subject:</label> {{ (msg | async).SUBJECT  }}</div>\n\t<div class=\"labeled\"><label for=\"from\" class=\"col-sm-1\">From:</label> {{ (msg | async).SENDER }}</div>\n\t<div class=\"labeled\"><label for=\"sendTo\" class=\"col-sm-1\">To:</label> {{ (msg | async).RECEIPIENT }}</div>\n\t<div class=\"message\">{{ (msg | async).MESSAGE }}</div>\n</div>\n"
+module.exports = "<ul class=\"nav nav-tabs nav-mail\">\n\t<li class=\"nav-item\">\n\t\t<a class=\"nav-link\">X</a>\n\t</li>\n\t<li class=\"nav-item\">\n\t\t<a class=\"nav-link disabled\">{{ title | uppercase }}</a>\n\t</li>\n\t<li class=\"nav-item pull-right\">\n\t\t<a class=\"nav-link\" [routerLink] = \"['/']\">Write</a>\n\t</li>\n\n</ul>\n<div *ngIf=\"(msg | async)\">\n\t<div class=\"labeled\"><label for=\"subject\" class=\"col-sm-1\">Subject:</label> {{ (msg | async).SUBJECT  }}</div>\n\t<div class=\"labeled\"><label for=\"from\" class=\"col-sm-1\">From:</label> {{ (msg | async).SENDER }}</div>\n\t<div class=\"labeled\"><label for=\"sendTo\" class=\"col-sm-1\">To:</label> {{ (msg | async).RECIPIENT }}</div>\n\t<div class=\"message\">{{ (msg | async).MESSAGE }}</div>\n</div>\n"
 
 /***/ }),
 
@@ -321,12 +321,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+// import { MAIL } from './mock-mail';
 
 
 var MailService = (function () {
     function MailService(http) {
         this.http = http;
-        this.messageURL = 'http://localhost:8500/CS491-RDE/rest/message.cfm';
+        this.baseURL = '/rest/restapi/MessageSystem/';
+        this.getMessageURL = this.baseURL + 'getInbox';
+        this.deleteMessageURL = this.baseURL + 'deleteEmail';
     }
     MailService.prototype.resolve = function (routeSnapshot) {
         return this.getMessages()
@@ -339,8 +342,14 @@ var MailService = (function () {
     // 	return of(MAIL); 
     // }	
     MailService.prototype.getMessages = function () {
-        return this.http.get(this.messageURL)
+        return this.http.get(this.getMessageURL)
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_1_rxjs_operators__["a" /* tap */])(function (res) { return console.log('HTTP response:', res); }));
+    };
+    MailService.prototype.deleteMessage = function (msg) {
+        var params = new __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["c" /* HttpParams */]()
+            .set("msgID", String(msg.MSGID));
+        return this.http.get(this.deleteMessageURL, { params: params })
+            .pipe(Object(__WEBPACK_IMPORTED_MODULE_1_rxjs_operators__["a" /* tap */])(function (res) { return console.log('Delete:', res); }));
     };
     return MailService;
 }());
@@ -364,7 +373,7 @@ module.exports = ".selected {\r\n\tbackground-color: #80b6fc !important;\r\n}\r\
 /***/ "./src/app/mail/mail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n\t<div class=\"row\">\n\t\t<div class=\"col-lg-3 container-fluid\" id=\"sidebar\">\n\t\t\t<ul ng-init=\"selectedTab = 'inbox'\" class=\"nav nav-tabs nav-mail\">\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='inbox'}\" ng-click=\"selectedTab='inbox'\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link active\" href=\"#\">Inbox</a>\n\t\t\t\t</li>\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='sent'}\" ng-click=\"selectedTab='sent'\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link\" href=\"#\">Sent</a>\n\t\t\t\t</li>\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='trash'}\" ng-click=\"selectedTab='trash'\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link\" href=\"#\">Trash</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<ul class=\"mail\">\n\t\t\t\t<li *ngFor=\"let msg of mail\" [class.selected]=\"msg === selectedMsg\" [routerLink] = \"['/message', msg.MSGID]\" (click)=\"onSelect(msg)\"> \n\t\t\t\t\t<div><span class=\"subject\">{{msg.SUBJECT}}</span><span class=\"date\">{{msg.DATESENT}}</span></div>\n\t\t\t\t\t<div class=\"sender\">{{msg.SENDER}}</div>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\t\t<div class=\"col-lg-9 hidden-xs hidden-sm hidden-md\" id=\"content\">\n\t\t\t<router-outlet></router-outlet>\n\t\t</div>\n\t</div>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n\t<div class=\"row\">\n\t\t<div class=\"col-lg-3 container-fluid\" id=\"sidebar\">\n\t\t\t<ul ng-init=\"selectedTab = 'inbox'\" class=\"nav nav-tabs nav-mail\">\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='inbox'}\" ng-click=\"selectedTab='inbox'\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link active\" href=\"#\">Inbox</a>\n\t\t\t\t</li>\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='sent'}\" ng-click=\"selectedTab='sent'\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link\" href=\"#\">Sent</a>\n\t\t\t\t</li>\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='trash'}\" ng-click=\"selectedTab='trash'\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link\" href=\"#\">Trash</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<ul class=\"mail\">\n\t\t\t\t<li *ngFor=\"let msg of mail\" [class.read]=\"msg.READSTATUS === 'F'\" [class.selected]=\"msg === selectedMsg\" [routerLink] = \"['/message', msg.MSGID]\" (click)=\"onSelect(msg)\"> \n\t\t\t\t\t<div><span class=\"subject\">{{msg.SUBJECT}}</span><span class=\"date\">{{msg.DATESENT}}</span></div>\n\t\t\t\t\t<div class=\"sender\">{{msg.SENDER}}</div><button type=\"button\" class=\"btn btn-danger\" (click)=\"deleteMessage(msg)\">Delete</button>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\t\t<div class=\"col-lg-9 hidden-xs hidden-sm hidden-md\" id=\"content\">\n\t\t\t<router-outlet></router-outlet>\n\t\t</div>\n\t</div>\n</div>\n"
 
 /***/ }),
 
@@ -393,20 +402,19 @@ var MailComponent = (function () {
     }
     MailComponent.prototype.ngOnInit = function () {
         this.getMessages();
-        // this.test();
     };
-    // test(): void {
-    // 	this.mailService.test()
-    // 		.subscribe(console.log);
-    // }
     MailComponent.prototype.getMessages = function () {
         var _this = this;
         this.mailService.getMessages()
             .subscribe(function (mail) { return _this.mail = mail; });
     };
+    MailComponent.prototype.deleteMessage = function (msg) {
+        this.mail = this.mail.filter(function (m) { return msg.MSGID !== m.MSGID; });
+        this.mailService.deleteMessage(msg).subscribe();
+    };
     MailComponent.prototype.onSelect = function (msg) {
         this.selectedMsg = msg;
-        // msg.READSTATUS = true;
+        msg.READSTATUS = 'T';
     };
     return MailComponent;
 }());
@@ -480,14 +488,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var MessageService = (function () {
     function MessageService(http) {
         this.http = http;
-        this.sendMessageAPIUrl = "http://localhost:8500/CS491-RDE/rest/message.cfm";
+        this.sendMessageAPIUrl = "/rest/restapi/MessageSystem/sendEmail";
     }
     MessageService.prototype.sendMessages = function (msg) {
         var params = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpParams */]()
-            .set("subject", msg.SUBJECT)
-            .set("recipient", msg.RECEIPIENT)
-            .set("message", msg.MESSAGE);
-        ;
+            .set("subject", msg.subject)
+            .set("recipient", msg.recipient)
+            .set("message", msg.message);
         return this.http.post(this.sendMessageAPIUrl, null, {
             params: params
         });
@@ -510,15 +517,15 @@ var _a;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MAIL; });
 var MAIL = [
-    { MSGID: 1, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: false },
-    { MSGID: 2, SENDER: "Taylor", SUBJECT: "test", RECEIPIENT: "Admin", MESSAGE: "Bye", DATESENT: "1/2/11", READSTATUS: false },
-    { MSGID: 3, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Alan Yanza", MESSAGE: "This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.", DATESENT: "1/1/11", READSTATUS: true },
-    { MSGID: 4, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: true },
-    { MSGID: 5, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: true },
-    { MSGID: 6, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: true },
-    { MSGID: 7, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: true },
-    { MSGID: 8, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: true },
-    { MSGID: 9, SENDER: "Admin", SUBJECT: "test", RECEIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: true }
+    { MSGID: 1, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
+    { MSGID: 2, SENDER: "Taylor", SUBJECT: "test", RECIPIENT: "Admin", MESSAGE: "Bye", DATESENT: "1/2/11", READSTATUS: 'N' },
+    { MSGID: 3, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Alan Yanza", MESSAGE: "This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.", DATESENT: "1/1/11", READSTATUS: 'Y' },
+    { MSGID: 4, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
+    { MSGID: 5, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
+    { MSGID: 6, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
+    { MSGID: 7, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
+    { MSGID: 8, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' },
+    { MSGID: 9, SENDER: "Admin", SUBJECT: "test", RECIPIENT: "Taylor Tu", MESSAGE: "Hello", DATESENT: "1/1/11", READSTATUS: 'N' }
 ];
 //# sourceMappingURL=mock-mail.js.map
 
@@ -527,7 +534,7 @@ var MAIL = [
 /***/ "./src/app/write-message/write-message.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".email-form {\r\n\tdisplay: -webkit-box;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: flex;\r\n\t-webkit-box-orient: vertical;\r\n\t-webkit-box-direction: normal;\r\n\t    -ms-flex-flow: column;\r\n\t        flex-flow: column;\r\n\theight: 100%;\r\n}\r\n\r\n.email-form .message.textarea {\r\n\tpadding: 15px;\r\n\t-webkit-box-flex: 1;\r\n\t    -ms-flex: 1 1 auto;\r\n\t        flex: 1 1 auto;\r\n}\r\n\r\n.email-form .labeled {\r\n\t-webkit-box-flex: 0;\r\n\t    -ms-flex: 0 1 auto;\r\n\t        flex: 0 1 auto;\r\n}\r\n\r\n.labeled {\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpadding: 15px;\r\n}\r\n\r\n.input { \r\n\tborder: none;\r\n }\r\n\r\n\r\n"
+module.exports = ".email-form {\r\n\tdisplay: -webkit-box;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: flex;\r\n\t-webkit-box-orient: vertical;\r\n\t-webkit-box-direction: normal;\r\n\t    -ms-flex-flow: column;\r\n\t        flex-flow: column;\r\n\theight: 100%;\r\n}\r\n\r\n.email-form .message.textarea {\r\n\tpadding: 15px;\r\n\t-webkit-box-flex: 1;\r\n\t    -ms-flex: 1 1 auto;\r\n\t        flex: 1 1 auto;\r\n}\r\n\r\n.email-form .labeled {\r\n\t-webkit-box-flex: 0;\r\n\t    -ms-flex: 0 1 auto;\r\n\t        flex: 0 1 auto;\r\n}\r\n\r\n.labeled {\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpadding: 15px;\r\n}\r\n\r\n.input { \r\n\tborder: none;\r\n }\r\n\r\n.nav-link {\r\n \tcursor: pointer;\r\n }\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -567,7 +574,10 @@ var WriteMessageComponent = (function () {
     WriteMessageComponent.prototype.sendMessage = function () {
         console.log(this.msg);
         this.messageService.sendMessages(this.msg)
-            .subscribe(console.log);
+            .subscribe({
+            error: function (msg) { console.log('Error sending message:', msg); }
+        });
+        this.msg = {};
     };
     return WriteMessageComponent;
 }());

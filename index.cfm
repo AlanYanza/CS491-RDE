@@ -1,5 +1,6 @@
 <!-- If user is already signed in, prevent them entering -->
 <cfset SessionClass=createObject('component','components.SessionTools')/>
+<cfset SessionClass.ClearSessionAppID() > <!-- If appID session variable set, clear it -->
 <cfset SessionClass.ifAlreadySignIn()/>
 
 <!DOCTYPE html>

@@ -1,16 +1,44 @@
 <!-- If user is already signed in, prevent them entering -->
 <cfset SessionClass=createObject('component','components.SessionTools')/>
+<cfset SessionClass.ClearSessionAppID() > <!-- If appID session variable set, clear it -->
 <cfset SessionClass.ifAlreadySignIn()/>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>Register</title>
-  	<cfinclude template="head.cfm"/>
+	<cfinclude template="head.cfm"/>
+	<script>
+		"use strict";
+		$(document).ready(function(){
+			var password = document.getElementById("password")
+			var confirm_password = document.getElementById("confirm_password");
+
+			function validatePassword() {
+				if(password.value != confirm_password.value) {
+					confirm_password.setCustomValidity("Passwords Don't Match");
+				}
+				else {
+					confirm_password.setCustomValidity('');
+				}
+			}
+
+			password.onchange = validatePassword;
+			confirm_password.onkeyup = validatePassword;
+		});
+	</script>
 </head>
 <body>
 <cfinclude template="navbar.cfm">
 <div class="container">
+	<cfif IsDefined('url.Exist')>
+		<cfoutput>
+			<div class="alert alert-warning">
+				<a href="##" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				Email Already Registered.
+			</div>
+		</cfoutput>
+	</cfif>
 	<div class="page-header">
 		<h1>Register</h1>
 	</div>

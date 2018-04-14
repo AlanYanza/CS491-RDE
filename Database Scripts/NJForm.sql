@@ -6,7 +6,7 @@ Tables:NJSection1
 	   NJSection3B*/
 /********************************************************************/
 /*replace first line with USE[DatabaseName]*/
-USE [RDESystemsLocal];
+USE [RDESystems];
 --Check if Base Tables created using RDEDatabase.sql if not Do not attempt to create NJForm Tables
 IF (NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'Forms') AND
 	NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'UserFormData') AND
@@ -15,19 +15,19 @@ IF (NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=N'Forms'
 ELSE
 BEGIN
 	PRINT 'Adding NJ Form Tables to Database....';
-	--Insert form into ApplicationLinks Table
-	IF (NOT EXISTS(SELECT * FROM ApplicationLinks WHERE state='NJ'))
-		INSERT INTO ApplicationLinks VALUES('NJ','/CS491-RDE/application/dhas_page1.cfm');
-
 	--Insert NJ Form into Forms Table
-	IF (NOT EXISTS(SELECT state FROM Forms WHERE state='NJ'))
+	IF (NOT EXISTS(SELECT state FROM Forms WHERE state='NJ' AND AppDescription='ADDP/HICP'))
 	BEGIN
-		INSERT INTO Forms (state) VALUES('NJ')
+		INSERT INTO Forms(state,AppDescription) VALUES('NJ','ADDP/HICP');
 	END
 
 	--Retrieve FormTypeID of Form
 	DECLARE @NJFORMID int;
-	SET @NJFORMID = (SELECT formTypeID FROM FORMS where state='NJ');
+	SET @NJFORMID = (SELECT formTypeID FROM FORMS WHERE state='NJ' AND AppDescription='NJ-ADDP/HICP' );
+
+	--Insert form into ApplicationLinks Table
+	IF (NOT EXISTS(SELECT * FROM ApplicationLinks WHERE state='NJ' AND formTypeID=@NJFORMID))
+		INSERT INTO ApplicationLinks VALUES('NJ',1,'/CS491-RDE/application/dhas_page1.cfm');
 
 	--Insert Form Tables into FormTables
 	IF (NOT EXISTS(SELECT * FROM FormTables WHERE formTypeID=@NJFORMID AND tableName='NJSection1'))
@@ -188,10 +188,7 @@ BEGIN
 	BEGIN
 		CREATE TABLE [NJSection3B] (
 			dataID int NOT NULL FOREIGN KEY REFERENCES [UserFormData](dataID),
-			NoASSISSDI char(1) CHECK(NoASSISSDI IN('Y','N')) DEFAULT('N'),
-			UASSISSDI char(1) CHECK(UASSISSDI IN('Y','N')) DEFAULT('N'),
-			YesSSI char(1) CHECK(YesSSI IN('Y','N')) DEFAULT('N'),
-			YesSSDI char(1) CHECK(YesSSDI IN('Y','N')) DEFAULT('N'),
+			SSISSDIStatus varchar(5) CHECK(SSISSDIStatus IN('YSSI','YSSDI','N','U','X')) DEFAULT('X'),
 			ASSISSDIDate date DEFAULT NULL,
 			UASSISSDIDate char(1) CHECK(UASSISSDIDate IN('Y','N','X')) DEFAULT('X'),
 			RespASSISSI char(1) CHECK(RespASSISSI IN('Y','N','X')) DEFAULT('X'),
@@ -253,9 +250,9 @@ BEGIN
 				CPCPhone varchar(16) NOT NULL DEFAULT(''),
 				PName varchar(100) NOT NULL DEFAULT(''),
 				PPhone varchar(16) NOT NULL DEFAULT(''),
-				signature image DEFAULT NULL,
+				signature varbinary(max) DEFAULT (NULL),
 				signatureDate date DEFAULT GETDATE(),
-				spouseSig image DEFAULT NULL,
+				spouseSig varbinary(max) DEFAULT (NULL),
 				spouseSigDate date DEFAULT GETDATE()
 			);
 			PRINT 'Successfully created "NJSection4" Table';

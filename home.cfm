@@ -1,8 +1,10 @@
-<cfset SessionClass=createObject('component','components.SessionTools')/>
-<cfset SessionClass.checkIfLoggedIn()/>
-<cfset SessionClass.checkIfuser()/>
+<!-- Session Page Protection -->
+<cfset SessionClass=createObject('component','components.SessionTools') >
+<cfset SessionClass.checkIfLoggedIn() >
+<cfset SessionClass.checkIfuser() >
+<cfset SessionClass.ClearSessionAppID() > <!-- If appID session variable set, clear it -->
+<!-- gather required page data -->
 <cfset UserObj=createObject('component','components.User').init(session.userID)/>
-<cfset editableApplications=UserObj.getEditableApplication()/>
 <cfset allApplications=UserObj.getAllApplication()/>
 <cfset directLink=UserObj.getDirectLink('NJ')/>
 
@@ -17,17 +19,8 @@
 		});
 	</script>
 	<style>
-		table {
-			font-family: arial, sans-serif;
-			font-size: 14px;
-			border-collapse: collapse;
-			width: 100%;
-		}
-
 		td, th {
-			border: 1px solid #dddddd;
 			text-align: center;
-			padding: 8px;
 		}
 
 		tr:nth-child(even) {
@@ -57,69 +50,62 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">Start New Application</div>
-            	<center><table>
-				<tr><th style="width: 50%;">Application Type</th><th>Status</th></tr><td>
-                <cfoutput>NJ-Participation in (ADDP) / HICP</cfoutput></td>
-                <cfset NJAppExist=UserObj.stateAppExist('NJ')/>
-                <cfif NJAppExist eq 0>
-                	<cfoutput><td><a href="application/dhas_instructions_page1.cfm">start New Application</a></td></cfoutput>
-                <cfelse>
-                	<cfoutput><td>Application already exist</td></cfoutput>
-               </cfif>
-			  </table></center> 
+		<div class="panel-body table-responsive"">
+		<center><table class="table table-hover">
+			<tr><th style="width: 50%;">Application Type</th></tr>
+			<td><cfoutput>NJ-Participation in (ADDP) / HICP</cfoutput></td>
+			<cfoutput><td><a href="application/dhas_instructions_page1.cfm?new">Start new application</a></td></cfoutput>
+			</table></center> 
+		</div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading">Edit Existing Application</div>
-        <center><table>
-        	<tr><th style="width: 50%;">State</th><th>Status</th></tr>
-        <!-- Interate though resultSet and display data-->
-		<cfloop query="editableApplications">
-			<cfoutput><tr></cfoutput>
-			<!-- Determine State of Form-->
-			<cfset outputState=UserObj.getState(#formTypeID#)/>
-			<!-- Determine the Status of Application -->
-			<cfif #status# eq 'P'>
-				<cfset outputStatus='Application Not Submitted'/>
-			<cfelse>
-				<cfset outputStatus='Application Requires Attention'/>
-			</cfif>
-			<!-- determine the direct Link based on state -->
-			<cfset outputLink=UserObj.getDirectLink(outputState)/>
-			<!-- create html row for Application -->
-			<cfoutput><tr><td>#outputState#</td><td>#outputStatus#</td>
-				<td><a href="#outputLink#">edit Application</td></tr>
-				</cfoutput>
-		</cfloop>
-		</table></center>
+        <div class="panel-heading">Existing Application</div>
+		<div class="panel-body table-responsive">
+	        <span class="help-block">Click the AppID to edit or view applications.</span>
+	        <table class="table table-hover">
+	        	<tr><th>AppID</th><th>State</th><th>Application Description</th>
+	        		<th>Date Submitted</th><th>Status</th><th>Document Status</th></tr>
+	        	<!-- Interate though resultSet and display data-->
+				<cfloop query="allApplications">
+					<cfoutput><tr></cfoutput>
+					<!-- Determine State of Form-->
+					<cfset formInfo=UserObj.getFormInfo(#formTypeID#)/>
+					<!-- Determine the Status of Application -->
+					<cfif #status# eq 'P'>
+						<cfset outputStatus='Not Submitted'/>
+					<cfelseif #status# eq 'N'>
+						<cfset outputStatus='Requires Attention'/>
+					<cfelseif #status# eq 'R'>
+						<cfset outputStatus='Pending'/>
+					<cfelseif #status# eq 'A'>
+						<cfset outputStatus='Approved'/>
+					<cfelseif #status# eq 'D'>
+						<cfset outputStatus='Denied'/>
+					</cfif>
+					<!-- determine the direct Link based on state -->
+					<cfset outputLink=UserObj.getDirectLink(formInfo.state)/>
+					<!-- create html row for Application -->
+					<cfset userEditLink=#outputLink# & '?appID=' & #appID# > 
+					<cfoutput>
+						<tr>
+							<td>
+								<cfif #status# eq 'P' OR #status# eq 'N' >
+									<a href="#userEditLink#">#appID#</a>
+								<cfelse>
+									<a href="#userEditLink#">#appID#</a>
+								</cfif>
+							</td>
+							<td>#formInfo.state#</td>
+							<td>#formInfo.AppDescription#</td>
+							<td>#dateSubmited#</td>
+							<td>#outputStatus#</td>
+							<td><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>view</a></td>
+						</tr>
+					</cfoutput>
+				</cfloop>
+			</table>
+		</div>
     </div>
-    
-    <div class="panel panel-default">
-        <div class="panel-heading">Application Status</div>
-        <center><table>
-        	<tr><th style="width: 50%;">State</th><th>Status</th></tr>
-        <!-- Interate though resultSet and display data-->
-		<cfloop query="allApplications">
-			<!-- Determine State of Form-->
-			<cfset outputState=UserObj.getState(#formTypeID#)/>
-			<!-- Determine the Status of Application -->
-			<cfif #status# eq 'P'>
-				<cfset outputStatus='Application Not Submitted'/>
-			<cfelseif #status# eq 'N'>
-				<cfset outputStatus='Application Requires Attention'/>
-			<cfelseif #status# eq 'R'>
-				<cfset outputStatus='Pending'/>
-			<cfelseif #status# eq 'A'>
-				<cfset outputStatus='Application Approved'/>		
-			<cfelseif #status# eq 'D'>
-				<cfset outputStatus='Application Denied'/>		
-			</cfif>
-			<!-- create html row for Application-->
-			<cfoutput><tr><td><a href="/CS491-RDE/DocumentStatus.cfm" data-toggle="tooltip" title="Click Here to See Submitted Documents">#outputState#</a></td><td>#outputStatus#</td></tr></cfoutput>
-		</cfloop>
-		</table></center>
-    </div>
-   
-    
 </div>
 </body>
 </html>

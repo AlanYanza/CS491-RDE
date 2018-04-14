@@ -1,23 +1,40 @@
 <cfcomponent output="false" name="Subform" displayName="Subform" extends="Form">
-	<cfset Variables.tableName='' />
-	<cfset Variables.fieldNames= []/>
-	<cfset Variables.fieldValues= {}/>
-	<cfset Variables.checkFieldNames=[]/>
-	<cfset Variables.dataID=0/>
+	<cfset Variables.tableName='' >
+	<cfset Variables.fieldNames= []>
+	<cfset Variables.fieldValues= {}>
+	<cfset Variables.checkFieldNames=[]>
+	<cfset Variables.dataID=0>
+	<cfset Variables.appID=0>
 	
 	<!-- Constructor -->
 	<cffunction name="init" displayname="subform constructor" hint="constructor for the subform CFC" >
 		<cfargument name="stateInput" type="string" />
 		<cfargument name="userIDInput" type="string" />
 		<cfargument name="tableNameInput" type="string" >
-		<cfargument name="fieldNamesInput" type="array" required="false">
+		<cfargument name="appIDInput" type="numeric" required="false">
 		<cfset super.init(stateInput,userIDInput)/>
-		<cfset tableName=tableNameInput/>
-		<cfif IsDefined('arguments.fieldNamesInput')>
-			<cfset setFields(arguments.fieldNamesInput)/>
+		<cfif isDefined('arguments.appIDInput')>
+			<cfset appID=appIDInput >
+		<cfelse>
+			<cfset appID=session.appID>
 		</cfif>
-		<cfset dataID=getDataID()/>
+		<cfset tableName=tableNameInput >
+		<cfset dataID=getDataID() >
 		<cfreturn this>
+	</cffunction>
+	
+	<!-- Retrieved a Application's dataID(helper method) -->
+	<cffunction name="getDataID" returntype="numeric" displayname="retrieveApplicationDataID" hint="retrieves the dataID associated with an Application" >
+		<cfquery name="dataIDResult" result="queryStats">
+			SELECT dataID FROM UserFormData WHERE 
+			appID=<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer" >
+		</cfquery>
+		<cfif queryStats.recordCount neq 1>
+			<cfset Var dataID=0 />
+		<cfelse>
+			<cfset Var dataID=#dataIDResult.dataID# />
+		</cfif>
+		<cfreturn dataID>
 	</cffunction>
 	
 	<!-- Setter for fields(if not provided) -->
@@ -73,8 +90,14 @@
 	<cffunction name="updateSignature" displayname="updateUserSignature" hint="sends user signature to database" >
 		<cfargument name="signatureField" hint="the name of the signature field" >
 		<cfargument name="dateField" hint="the name of the date field" >
+		<!-- Get string of signature from form and remove starting header -->
+		<cfset binaryStringRep=form[arguments.signatureField]>
+		<cfset binaryStringRep=REReplace(binaryStringRep,'data:image/png;base64,','')>
+		<!-- Convert the base64 string representation to a binary string -->
+		<cfset binaryString=BinaryDecode(binaryStringRep,"Base64")>
+		<!-- Insert the binary string into subTable -->
 		<cfquery>
-			UPDATE #tableName# SET #arguments.signatureField#='#form[arguments.signatureField]#' ,
+			UPDATE #tableName# SET #arguments.signatureField#= <cfqueryparam value="#binaryString#" cfsqltype="cf_sql_blob">,
 			#dateField#=getdate()  
 			WHERE dataID=<cfqueryparam value="#dataID#" cfsqltype="cf_sql_integer" >
 		</cfquery>
