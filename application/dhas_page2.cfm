@@ -150,37 +150,37 @@
 		  	<label class="control-label col-sm-4" for="disBen">Disability Benefit:</label>
 		  	<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-				<input type="number" class="form-control" name="disBen" maxlength="6" value="<cfoutput>#subformData.disBen#</cfoutput>" required />
+				<input type="number" class="form-control" name="disBen" min="0" step="0.01" maxlength="6" value="<cfoutput>#subformData.disBen#</cfoutput>" required />
 		  	</div>
 		  	<label class="control-label col-sm-4" for="genAssist">General Assistance:</label>
 		  	<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-				<input type="number" class="form-control" name="genAssist" maxlength="6" value="<cfoutput>#subformData.genAssist#</cfoutput>" required />
+				<input type="number" class="form-control" name="genAssist" min="0" step="0.01" maxlength="6" value="<cfoutput>#subformData.genAssist#</cfoutput>" required />
 		  	</div>
 		  	<label class="control-label col-sm-4" for="unemploy">Unemployment:</label>
 		  	<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-				<input type="number" class="form-control" name="unemploy" maxlength="6" value="<cfoutput>#subformData.unemploy#</cfoutput>" required />
+				<input type="number" class="form-control" name="unemploy" min="0" step="0.01" maxlength="6" value="<cfoutput>#subformData.unemploy#</cfoutput>" required />
 		  	</div>
 		  	<label class="control-label col-sm-4" for="socialSecurity">Social Security:</label>
 		  	<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-				<input type="number" class="form-control" name="socialSecurity" maxlength="6" value="<cfoutput>#subformData.socialSecurity#</cfoutput>" required />
+				<input type="number" class="form-control" name="socialSecurity" min="0" step="0.01" maxlength="6" value="<cfoutput>#subformData.socialSecurity#</cfoutput>" required />
 		  	</div>
 		  	<label class="control-label col-sm-4" for="pension">Pension/Retirement:</label>
 		  	<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-				<input type="number" class="form-control" name="pension" maxlength="6" value="<cfoutput>#subformData.pension#</cfoutput>" required />
+				<input type="number" class="form-control" name="pension" min="0" step="0.01" maxlength="6" value="<cfoutput>#subformData.pension#</cfoutput>" required />
 		  	</div>
 		  	<label class="control-label col-sm-4" for="allimony">Alimony/Palimony:</label>
 		  	<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-				<input type="number" class="form-control" name="allimony" maxlength="6" value="<cfoutput>#subformData.allimony#</cfoutput>" required />
+				<input type="number" class="form-control" name="allimony" min="0" step="0.01" maxlength="6" value="<cfoutput>#subformData.allimony#</cfoutput>" required />
 		  	</div>
 		  	<label class="control-label col-sm-4" for="OtherIncome">Other:</label>
 		  	<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-		    	<input type="number" class="form-control" name="OtherIncome" maxlength="6" value="<cfoutput>#subformData.OtherIncome#</cfoutput>" required />
+		    	<input type="number" class="form-control" name="OtherIncome" min="0" step="0.01" maxlength="6" value="<cfoutput>#subformData.OtherIncome#</cfoutput>" required />
 		  	</div>
 		</div>
 			<label class="control-label col-sm-4" for="totalHIncome">Total Annual Household Income:</label>
