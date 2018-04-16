@@ -445,8 +445,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var MessageService = (function () {
     function MessageService(http) {
         this.http = http;
-        this.sendMessageAPIUrl = "/rest/restapi/MessageSystem/sendEmail";
+        this.baseURL = "/rest/restapi/MessageSystem/";
+        this.sendMessageAPIUrl = this.baseURL + "sendEmail";
+        this.getAccessLevelURL = this.baseURL + "getAccessLevel";
     }
+    MessageService.prototype.accessLevel = function () {
+        return this.http.get(this.getAccessLevelURL);
+    };
     MessageService.prototype.sendMessages = function (msg) {
         var params = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpParams */]()
             .set("subject", msg.subject)
@@ -454,7 +459,8 @@ var MessageService = (function () {
             .set("message", msg.message);
         return this.http.post(this.sendMessageAPIUrl, null, {
             params: params
-        });
+        })
+            .pipe();
     };
     return MessageService;
 }());
