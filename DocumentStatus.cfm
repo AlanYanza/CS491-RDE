@@ -41,9 +41,17 @@
 </head>
 <body>
 <cfinclude template="navbar.cfm">
+<cfif  isAdmin eq 1>
+	<cfif isDefined('url.update') eq 1>
+		<div class="alert alert-success">
+			<a href="##" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			Changes Made Successfully
+		</div>
+	</cfif>
+</cfif>
 <!-- if admin make page a form -->
 <cfif isAdmin eq 1>
-	<cfoutput><form action=""></cfoutput>
+	<cfoutput><form action="scripts/DocStatusMgmt.cfm" method="POST"></cfoutput>
 </cfif>
 <div class="container">
     <div class="panel panel-default">
@@ -77,7 +85,7 @@
 					<cfset dateReceived = DocumentTracker.dateReceived/>
 					<!-- Determine the Status of Application -->					
 					<cfoutput>
-						<tr><td>#documentName#<input type="hidden" name="documentName#iterator#" id="documentName#iterator#" value="#documentName#>" </td>
+						<tr><td>#documentName#<input type="hidden" name="documentName#iterator#" id="documentName#iterator#" value="#documentName#" </td>
 						<!-- If admin make these dropdown menu -->
 						<cfif isAdmin eq 1>
 							<cfoutput >

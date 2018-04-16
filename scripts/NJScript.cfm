@@ -1,6 +1,6 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
+<cfset SessionClass.checkIfLoggedIn()/>
 <cfif session.accessLevel neq 'admin'>
-	<cfset SessionClass.checkIfLoggedIn()/>
 	<cfset SessionClass.NoAppIDRedirect()>
 	<cfset SessionClass.validateAppID()>
 </cfif>
