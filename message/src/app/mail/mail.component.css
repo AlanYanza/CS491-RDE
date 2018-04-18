@@ -66,3 +66,16 @@
 	float: right;
 
 }
+
+.nav {
+	background-color: #136AA9; 
+}
+
+.nav-link {
+	cursor: pointer;
+	color: white;
+}
+
+.nav-link:hover {
+	background-color: #083759;
+}

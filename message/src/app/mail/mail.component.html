@@ -1,17 +1,22 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-3 container-fluid" id="sidebar">
-			<ul ng-init="selectedTab = 'inbox'" class="nav nav-tabs nav-mail">
-				<li ng-class="{'active':selectedTab ==='inbox'}" (click)="getMessages()" class="nav-item">
+			<ul class="nav nav-tabs" ng-init="selectedTab = 'inbox'">
+				<li role="navigation" [class.active]="selectedTab ==='inbox'" (click)="getMessages()"><a class="nav-link">Inbox</a></li>
+				<li role="navigation" [class.active]="selectedTab ==='sent'" (click)="getSent()"><a class="nav-link">Sent</a></li>
+				<li role="navigation" [class.active]="selectedTab ==='trash'" (click)="getTrash()"><a class="nav-link">Trash</a></li>
+			</ul>
+			<!-- <ul ng-init="selectedTab = 'inbox'" class="nav nav-tabs nav-justified">
+				<li role="presentation" ng-class="{'active':selectedTab ==='inbox'}" (click)="getMessages()">
 					<a class="nav-link active">Inbox</a>
 				</li>
-				<li ng-class="{'active':selectedTab ==='sent'}" (click)="getSent()" class="nav-item">
+				<li role="presentation" ng-class="{'active':selectedTab ==='sent'}" (click)="getSent()" class="nav-item">
 					<a class="nav-link">Sent</a>
 				</li>
-				<li ng-class="{'active':selectedTab ==='trash'}" (click)="getTrash()" class="nav-item">
+				<li role="presentation" ng-class="{'active':selectedTab ==='trash'}" (click)="getTrash()" class="nav-item">
 					<a class="nav-link">Trash</a>
 				</li>
-			</ul>
+			</ul> -->
 			<ul class="mail">
 				<li *ngFor="let msg of mail" [class.read]="msg.READSTATUS === 'F'" [class.selected]="msg === selectedMsg" [routerLink] = "['/message', msg.MSGID]" (click)="onSelect(msg)"> 
 					<div><span class="subject">{{msg.SUBJECT}}</span><span class="date">{{msg.DATESENT}}</span></div>

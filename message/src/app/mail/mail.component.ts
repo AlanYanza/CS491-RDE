@@ -17,6 +17,7 @@ export class MailComponent implements OnInit {
   mail: Msg[];
 
 	selectedMsg: Msg; 
+  selectedTab: string;
 
   constructor(private mailService : MailService) { }
 
@@ -27,16 +28,20 @@ export class MailComponent implements OnInit {
   getSent(): void {
     this.mailService.getSent()
       .subscribe(mail => this.mail = mail);
+    this.selectedTab = 'sent';
   }
 
   getTrash(): void {
     this.mailService.getTrash()
       .subscribe(mail => this.mail = mail);
+    this.selectedTab = 'trash';
   }
 
   getMessages(): void {
   	this.mailService.getMessages()
   		.subscribe(mail => this.mail = mail);
+
+    this.selectedTab = 'inbox';
   }
 
   deleteMessage(msg: Msg): void {
