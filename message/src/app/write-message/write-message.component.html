@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs nav-mail">
+<ul class="nav nav-tabs">
 	<li class="nav-item">
 		<a class="nav-link">X</a>
 	</li>
@@ -12,17 +12,26 @@
 </ul>
 <div class="email-form form-group col-*-col*">
 	<div class="labeled">
-		<label for="subject" class="col-sm-1 col-form-label">Subject:</label> 
-		<input type="text" class="input" [(ngModel)]="msg.subject" placeholder="Write subject here">
+		<label class="col-form-label col-md-1">Subject:</label>
+		<div class="col-md-11">
+			<input type="text" class="form-control" [(ngModel)]="msg.subject" placeholder="Write subject here" aria-label="Write subject here" aria-describedby="basic-addon1">
+		</div>
 	</div>
-<!-- 	<div class="labeled">
-		<label for="staticFrom" class="col-sm-1 col-form-label">From:</label> 
-		<input type="text" readonly class="form-control-plaintext" id="staticFrom" value="{user.email}">
-	</div> -->
+
 	<div class="labeled">
-		<label for="sendTo" class="col-sm-1 col-form-label">To:</label> 
-		<input  class="input" [(ngModel)]="msg.recipient" placeholder="Write recipient here">
+		<label for="To" class="col-form-label col-xs-1">To:</label>
+
+		<div *ngIf="accessLevel === 'admin'" class="col-xs-11">
+			<select class="selectpicker" data-live-search="true" title="Select a recipient" data-size="5" [(ngModel)]="msg.recipient">
+		 		<option *ngFor="let user of users">{{user.EMAIL}}</option>
+			</select>
+		</div>
+
+		<div *ngIf="accessLevel === 'user'" class="col-xs-11">
+			<input type="text" readonly class="form-control" placeholder="Admin" aria-label="Admin" value="bg1@company.com" [(ngModel)]="msg.recipient">
+		</div>
 	</div>
+
 	<div class="message">
 		<textarea class="input form-control" [(ngModel)]="msg.message" placeholder="Write message here"></textarea>
 	</div>

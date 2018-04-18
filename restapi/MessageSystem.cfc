@@ -144,12 +144,13 @@
 			 	<cfqueryPARAM value="#msgID#" cfsqltype="CF_SQL_INTEGER">
 			)
 		</cfquery>
+
 		<!-- send email to user informating them of unread emails -->
-		<cfset emailToolObj=createObject('component','CS491-RDE.components.emailTool')>
+		<!--- <cfset emailToolObj=createObject('component','CS491-RDE.components.emailTool')>
 		<cfset emailAddress=emailToolObj.retrieveEmailAddress(recipientID)>
 		<cfset emailSubject="RDEApplication Unread messages">
 		<cfset emailMessage="You have received a new message in your RDEApplication Inbox<br>">
-		<cfset emailToolObj.sendEmail(emailAddress,emailSubject,emailMessage)>
+		<cfset emailToolObj.sendEmail(emailAddress,emailSubject,emailMessage)>  --->
 
 		<cfreturn serializeJSON("sendToSent", 'struct') /> 
 
@@ -183,7 +184,7 @@
 
 	</cffunction>
 
-	<cffunction name="readMessage" access="remote" returntype="Any" return Format="json" httpmethod="PUT" restpath="readMessage" produces="application/json"> 
+	<cffunction name="readMessage" access="remote" returntype="Any" returnFormat="json" httpmethod="PUT" restpath="readMessage" produces="application/json"> 
 		<!-- retrieve current User's userID' -->
 		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/> 
 		<cfset userID = SessionClass.passUserID() />
@@ -197,5 +198,19 @@
 		</cfquery>
 
 	</cffunction>
+
+	<cffunction name="getRecipientList" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="getRecipientList" produces="application/json">
+		<!-- Retrieves the user's access level. This is so an error will be thrown if a user isn't logged in -->
+		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
+		<cfset userLevel = SessionClass.passUserAccessLevel() /> 
+
+		<cfquery name="recipientListQuery">
+			SELECT FirstName, LastName, email
+			FROM "User"
+		</cfquery>
+
+		<cfreturn serializeJSON(recipientListQuery, 'struct') />
+	</cffunction>
+
 
 </cfcomponent>

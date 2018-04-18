@@ -56,5 +56,9 @@
 	<cffunction name="passUserID" hint="passes the current user's userID to rest CFC'" >
 		<cfreturn session.userID>
 	</cffunction>
+
+	<cffunction name="passUserAccessLevel" hint="passes the current user's access level to rest CFC'" > 
+		<cfreturn session.accessLevel />
+	</cffunction>
 	
 </cfcomponent>
