@@ -46,6 +46,15 @@
 				Application Progress saved.
 			</div>
 		</cfoutput>
+	<!-- If appID doesn't belong to current user -->
+	</cfif>
+		<cfif IsDefined('url.no')>
+		<cfoutput>
+			<div class="alert alert-danger">
+				<a href="##" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				Indicated Application doesn't exist for current User
+			</div>
+		</cfoutput>
 	</cfif>
 
     <div class="panel panel-default">

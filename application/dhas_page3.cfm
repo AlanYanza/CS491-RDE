@@ -36,20 +36,6 @@
 
 			$('[data-toggle="popover"]').popover();
 
-			function insuredCheck() {
-				if (typeof $("input[type=radio][name=insured]:checked").val() === "undefined") {
-					return;
-				}
-				if ($("input[type=radio][name=insured]:checked").val() == "Y") {
-					$("#insuredOption").show("slow");
-					
-				}
-				else {
-					$("#insuredOption").hide("slow");
-					$("#insuredOption").find("input").removeAttr("required");
-				}
-			}
-
 			function mediumCheck() {
 				if (typeof $("input[type=radio][name=Medium]:checked").val() === "undefined") {
 					return;
@@ -61,20 +47,6 @@
 				else {
 					$("#mediumOption").hide("slow");
 					$("#mediumOption").find("input").removeAttr("required");
-				}
-			}
-
-			function presCovCheck() {
-				if (typeof $("input[type=radio][name=presCov]:checked").val() === "undefined") {
-					return;
-				}
-				if ($("input[type=radio][name=presCov]:checked").val() != "Y") {
-					$("#presCovOption").hide("slow");
-					$("#presCovOption").find("input").removeAttr("required");
-								
-				}
-				else {
-					$("#presCovOption").show("slow");
 				}
 			}
 
@@ -90,19 +62,6 @@
 				}
 			}
 
-			function medicaidApplyCheck() {
-				if (typeof $("input[type=radio][name=AMedicaid]:checked").val() === "undefined") {
-					return;
-				}
-				if ($("input[type=radio][name=AMedicaid]:checked").val() != "Y") {
-					$("#AmedicaidOption").hide("slow");
-					$("#AmedicaidOption").find("input").removeAttr("required");
-				}
-				else {
-					$("#AmedicaidOption").show("slow");
-				}
-			}
-
 			function medicareDateCheck() {
 				if ($("input[type=checkbox][name=UMedicareDate]").is(":checked")) {
 					$("input[type=date][name=AMedicareDate]").val("1111-11-11");
@@ -115,48 +74,60 @@
 				}
 			}
 
-			function medicareApplyCheck() {
-				if (typeof $("input[type=radio][name=AMedicare]:checked").val() === "undefined") {
+			function radioCheck(e) {
+				console.log("invoked");
+				console.log($(e.data.radio + ":checked").val());
+				console.log(e.data.value);
+				//console.log(radio+" "+value+" "+location);
+				$(e.data.location).hide();
+				if (typeof $(e.data.radio + ":checked").val() === "undefined") {
 					return;
 				}
-				if ($("input[type=radio][name=AMedicare]:checked").val() != "Y") {
-					$("#AmedicareOption").hide();
-					$("#AmedicareOption").find("input").removeAttr("required");
+				if ($(e.data.radio + ":checked").val() != e.data.value) {
+					$(e.data.location).hide();
+					$(e.data.location).find("input").removeAttr("required");
 				}
 				else {
-					$("#AmedicareOption").show();
-				}
-			}
-			function medicareDCheck() {
-				if (typeof $("input[type=radio][name=AMedicareD]:checked").val() === "undefined") {
-					return;
-				}
-				if ($("input[type=radio][name=AMedicareD]:checked").val() != "Y") {
-					$("#AmedicareDOption").hide();
-					$("#AmedicareDOption").find("input").removeAttr("required");
-				}
-				else {
-					$("#AmedicareDOption").show();
+					$(e.data.location).show();
 				}
 			}
 
-			insuredCheck();
-			mediumCheck();
-			presCovCheck();
-			medicaidApplyCheck();
-			medicaidDateCheck();
-			medicareApplyCheck();
-			medicareDateCheck();
-			medicareDCheck();
+			function initRadioCheck(radio, value, location) {
+				if (typeof $(radio + ":checked").val() === "undefined") {
+					return;
+				}
+				if ($(radio + ":checked").val() == value) {
+					$(location).show("slow");
+					
+				}
+				else {
+					$(location).hide("slow");
+					$(location).find(":required").removeAttr("required");
+					$(location).find(":checked").prop("checked", false );
+					$(location).find("input[type=text]").val("");
+					$(location).find("input[type=number]").val(0);
+					$(location).find("input[type=date]").val("1111-11-11");
+				}
+			}
 
-			$("input[type=radio][name=insured]").change(insuredCheck);
 			$("input[type=radio][name=Medium]").change(mediumCheck);
-			$("input[type=radio][name=presCov]").change(presCovCheck);
-			$("input[type=radio][name=AMedicaid]").change(medicaidApplyCheck);
 			$("input[type=checkbox][name=UMedicaidDate]").click(medicaidDateCheck);
-			$("input[type=radio][name=AMedicare]").change(medicareApplyCheck);
 			$("input[type=checkbox][name=UMedicareDate]").click(medicareDateCheck);
-			$("input[type=radio][name=AMedicareD]").change(medicareDCheck);
+
+			initRadioCheck("input[type=radio][name=insured]", "Y", "#insuredOption");
+			mediumCheck();
+			initRadioCheck("input[type=radio][name=presCov]", "Y", "#presCovOption");
+			initRadioCheck("input[type=radio][name=AMedicaid]", "Y", "#AmedicaidOption");			
+			medicaidDateCheck();
+			initRadioCheck("input[type=radio][name=AMedicare]", "Y", "#AmedicareOption");
+			medicareDateCheck();
+			initRadioCheck("input[type=radio][name=AMedicareD]", "Y", "#AmedicareDOption");
+
+			$("input[type=radio][name=insured]").change({radio: "input[type=radio][name=insured]", value: "Y", location: "#insuredOption"}, radioCheck);
+			$("input[type=radio][name=presCov]").change({radio: "input[type=radio][name=presCov]", value: "Y", location: "#presCovOption"}, radioCheck);
+			$("input[type=radio][name=AMedicaid]").change({radio: "input[type=radio][name=AMedicaid]", value: "Y", location: "#AmedicaidOption"}, radioCheck);
+			$("input[type=radio][name=AMedicare]").change({radio: "input[type=radio][name=AMedicare]", value: "Y", location: "#AmedicareOption"}, radioCheck);
+			$("input[type=radio][name=AMedicareD]").change({radio: "input[type=radio][name=AMedicareD]", value: "Y", location: "#AmedicareDOption"}, radioCheck);
 
 			$("button[type=submit][name=save]").click(function() {
 				$("form").find("input").removeAttr("required");

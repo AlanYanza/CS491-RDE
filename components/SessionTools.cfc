@@ -46,10 +46,10 @@
 			appID=<cfqueryparam value="#session.appID#" cfsqltype="cf_sql_integer" >
 		</cfquery>
 		<cfif queryStats.recordCount neq 1>
-			<cflocation url="/CS491-RDE/home.cfm" >
+			<cflocation url="/CS491-RDE/home.cfm?no" >
 		</cfif>
 		<cfif ValidateAppIDResult.userID neq session.userID>
-			<cflocation url="/CS491-RDE/home.cfm" >
+			<cflocation url="/CS491-RDE/home.cfm?no" >
 		</cfif>
 	</cffunction>
 	

@@ -1,8 +1,6 @@
 <!-- Retrieve Number of unread Messages -->
 <cffunction name="getUnreadEmails" displayname="getNumberOfUnreadEmail" 
 hint="retrieves the number of unread emails for a user (for nav-bar purposes) and its not rest enabled">
-	<!-- retrieve current User's userID' -->
-	<cfset var userID = #Application.userID# >
 	<!-- Query for number of messages with readStatus='N' -->
 	<cfquery result="queryStat">
 		SELECT Inbox.msgID FROM Inbox INNER JOIN Message ON Inbox.msgID=Message.msgID WHERE 

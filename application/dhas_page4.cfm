@@ -137,7 +137,7 @@
 		});
 		$(document).keypress(
 			function(event){
-				if (event.which == '13') {
+				if (event.which == '13' && ($(event.target)[0]!=$("textarea")[0])) {
 					event.preventDefault();
 				}
 			}
