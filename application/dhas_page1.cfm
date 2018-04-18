@@ -94,6 +94,7 @@
 			function EHispCheck() {
 				if (typeof $("input[type=radio][name=EHisp]:checked").val() === "undefined") {
 					$("#EHispOption").hide("slow");
+					$("#EHispOption").find("input[type=checkbox]").prop("checked", false );
 					return;
 				}
 
@@ -102,6 +103,7 @@
 				}					
 				else {
 					$("#EHispOption").hide("slow");
+					$("#EHispOption").find("input[type=checkbox]").prop("checked", false );
 				}
 			}
 
@@ -111,11 +113,12 @@
 				}
 				if ($("input[type=radio][name=genderBirth]:checked").val().toLowerCase() == "m") {
 					$("#preg").hide("slow");
-					$("#preg").children().removeAttr("required");
+					$("#preg").find("input").removeAttr("required");
+					$("#preg").find("input[type=radio]").prop("checked", false );
 				}
 				else {
 					$("#preg").show("slow");
-					$("#preg").children().attr("required", "true");
+					$("#preg").find("input").attr("required", "true");
 				}
 			}
 
@@ -136,15 +139,6 @@
 			$("input[type=radio][name=EHisp]").change(EHispCheck);
 			$("input[type=radio][name=genderBirth]").change(pregnant);
 
-			/*
-			$("button[type=button][name=next]").click(function() {
-				if(($("select[name=state]").val() == "X") || ($("select[name=MState]").val() == "X")) {
-					document.getElementById("state").validity;
-					console.log($("form").serialize());
-				}				
-				//$('form').submit();
-			});
-			*/
 		});
 		$(document).keypress(function(event){
 				if (event.which == '13') {

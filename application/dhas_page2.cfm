@@ -49,16 +49,14 @@
 
 			function calTotal() {
 				var totalIncome = 0;
-				console.log("Started");
 				var income = $("#income").find("input[type=number]").serializeArray();
 				$.each(income, (function(i, j){
 					totalIncome += Number(j.value);
 				}));
-				$("input[type=number][name=totalHIncome]").val(totalIncome);
+				$("input[type=number][name=totalHIncome]").val(totalIncome.toFixed(2));
 			}
 
-			$("button[type=button][name=test]").click(calTotal);
-			$("#income input[type=number]").keyup(calTotal);
+			$("#income input[type=number]").keyup(calTotal());
 
 	  		$("button[type=submit][name=save]").click(dataCorrection);
 			$("button[type=submit][name=previous]").click(dataCorrection);
@@ -86,7 +84,6 @@
 	<!--<strong>APPLICATION FOR PARTICIPATION IN THE AIDS DRUG DISTRIBUTION PROGRAM AND/OR HEALTH INSURANCE CONTINUATION PROGRAM (Continued)</strong>-->
 
 	<div class="well text-center"><h4>Section 2 - HOUSEHOLD INCOME</h4></div>
-	<button type="button" class="btn btn-default" name="test" >Test</button>
 	<form action="../scripts/NJScript.cfm" method="POST">
 	<div id="formData">
 	<input type="hidden" id="formPage" name="formPage" value="page2"/>
@@ -145,48 +142,48 @@
 		  	<label class="control-label col-sm-4" for="salary">Salary/Wages:</label>
 		  	<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-				<input type="number" class="form-control" name="salary" min="0" step="0.01" maxlength="6" value="<cfoutput>#subformData.salary#</cfoutput>" required />
+				<input type="number" class="form-control" name="salary" min="0" step="0.01" max="1000000" value="<cfoutput>#subformData.salary#</cfoutput>" required />
 		  	</div>
 		  	<label class="control-label col-sm-4" for="disBen">Disability Benefit:</label>
 		  	<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-				<input type="number" class="form-control" name="disBen" min="0" step="0.01" maxlength="6" value="<cfoutput>#subformData.disBen#</cfoutput>" required />
+				<input type="number" class="form-control" name="disBen" min="0" step="0.01" max="1000000" value="<cfoutput>#subformData.disBen#</cfoutput>" required />
 		  	</div>
 		  	<label class="control-label col-sm-4" for="genAssist">General Assistance:</label>
 		  	<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-				<input type="number" class="form-control" name="genAssist" min="0" step="0.01" maxlength="6" value="<cfoutput>#subformData.genAssist#</cfoutput>" required />
+				<input type="number" class="form-control" name="genAssist" min="0" step="0.01" max="1000000" value="<cfoutput>#subformData.genAssist#</cfoutput>" required />
 		  	</div>
 		  	<label class="control-label col-sm-4" for="unemploy">Unemployment:</label>
 		  	<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-				<input type="number" class="form-control" name="unemploy" min="0" step="0.01" maxlength="6" value="<cfoutput>#subformData.unemploy#</cfoutput>" required />
+				<input type="number" class="form-control" name="unemploy" min="0" step="0.01" max="1000000" value="<cfoutput>#subformData.unemploy#</cfoutput>" required />
 		  	</div>
 		  	<label class="control-label col-sm-4" for="socialSecurity">Social Security:</label>
 		  	<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-				<input type="number" class="form-control" name="socialSecurity" min="0" step="0.01" maxlength="6" value="<cfoutput>#subformData.socialSecurity#</cfoutput>" required />
+				<input type="number" class="form-control" name="socialSecurity" min="0" step="0.01" max="1000000" value="<cfoutput>#subformData.socialSecurity#</cfoutput>" required />
 		  	</div>
 		  	<label class="control-label col-sm-4" for="pension">Pension/Retirement:</label>
 		  	<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-				<input type="number" class="form-control" name="pension" min="0" step="0.01" maxlength="6" value="<cfoutput>#subformData.pension#</cfoutput>" required />
+				<input type="number" class="form-control" name="pension" min="0" step="0.01" max="1000000" value="<cfoutput>#subformData.pension#</cfoutput>" required />
 		  	</div>
 		  	<label class="control-label col-sm-4" for="allimony">Alimony/Palimony:</label>
 		  	<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-				<input type="number" class="form-control" name="allimony" min="0" step="0.01" maxlength="6" value="<cfoutput>#subformData.allimony#</cfoutput>" required />
+				<input type="number" class="form-control" name="allimony" min="0" step="0.01" max="1000000" value="<cfoutput>#subformData.allimony#</cfoutput>" required />
 		  	</div>
 		  	<label class="control-label col-sm-4" for="OtherIncome">Other:</label>
 		  	<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-		    	<input type="number" class="form-control" name="OtherIncome" min="0" step="0.01" maxlength="6" value="<cfoutput>#subformData.OtherIncome#</cfoutput>" required />
+		    	<input type="number" class="form-control" name="OtherIncome" min="0" step="0.01" max="1000000" value="<cfoutput>#subformData.OtherIncome#</cfoutput>" required />
 		  	</div>
 		</div>
 			<label class="control-label col-sm-4" for="totalHIncome">Total Annual Household Income:</label>
 			<div class="col-sm-8 input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-				<input type="number" class="form-control" name="totalHIncome" maxlength="10" value="<cfoutput>#subformData.totalHIncome#</cfoutput>" readonly required />
+				<input type="number" class="form-control" name="totalHIncome" min="0" step="0.01" max="1000000" value="<cfoutput>#subformData.totalHIncome#</cfoutput>" readonly required />
 			</div>
 	</div>
 
