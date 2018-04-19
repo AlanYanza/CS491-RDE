@@ -26,7 +26,8 @@ webpackEmptyAsyncContext.id = "./src/$$_gendir lazy recursive";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__write_message_write_message_component__ = __webpack_require__("./src/app/write-message/write-message.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mail_content_mail_content_component__ = __webpack_require__("./src/app/mail-content/mail-content.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mail_service__ = __webpack_require__("./src/app/mail.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__status_page_status_page_component__ = __webpack_require__("./src/app/status-page/status-page.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mail_service__ = __webpack_require__("./src/app/mail.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,16 +39,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var routes = [
     {
         path: '',
+        component: __WEBPACK_IMPORTED_MODULE_4__status_page_status_page_component__["a" /* StatusPageComponent */]
+    },
+    {
+        path: 'write',
         component: __WEBPACK_IMPORTED_MODULE_2__write_message_write_message_component__["a" /* WriteMessageComponent */]
     },
     {
         path: 'message/:msgID',
         component: __WEBPACK_IMPORTED_MODULE_3__mail_content_mail_content_component__["a" /* MailContentComponent */],
         resolve: {
-            message: __WEBPACK_IMPORTED_MODULE_4__mail_service__["a" /* MailService */]
+            message: __WEBPACK_IMPORTED_MODULE_5__mail_service__["a" /* MailService */]
         }
     }
 ];
@@ -129,12 +135,14 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__message_message_service__ = __webpack_require__("./src/app/message/message.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/@angular/common/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_common__ = __webpack_require__("./node_modules/@angular/common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__status_page_status_page_component__ = __webpack_require__("./src/app/status-page/status-page.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -158,7 +166,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_4__mail_mail_component__["a" /* MailComponent */],
             __WEBPACK_IMPORTED_MODULE_5__mail_content_mail_content_component__["a" /* MailContentComponent */],
-            __WEBPACK_IMPORTED_MODULE_6__write_message_write_message_component__["a" /* WriteMessageComponent */]
+            __WEBPACK_IMPORTED_MODULE_6__write_message_write_message_component__["a" /* WriteMessageComponent */],
+            __WEBPACK_IMPORTED_MODULE_12__status_page_status_page_component__["a" /* StatusPageComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -182,14 +191,14 @@ AppModule = __decorate([
 /***/ "./src/app/mail-content/mail-content.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".labeled {\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpadding: 15px;\r\n}\r\n\r\n.message {\r\n\tpadding: 30px;\r\n}\r\n"
+module.exports = ".labeled {\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpadding: 15px;\r\n}\r\n\r\n.message {\r\n\tpadding: 30px;\r\n}\r\n\r\n.nav-style {\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n}\r\n\r\nli.disabled > a:hover {\r\n\tcursor: default;\r\n}\r\n"
 
 /***/ }),
 
 /***/ "./src/app/mail-content/mail-content.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"nav nav-tabs nav-mail\">\n\t<li class=\"nav-item\">\n\t\t<a class=\"nav-link\">X</a>\n\t</li>\n\t<li class=\"nav-item\">\n\t\t<a class=\"nav-link disabled\">{{ title | uppercase }}</a>\n\t</li>\n\t<li class=\"nav-item pull-right\">\n\t\t<a class=\"nav-link\" [routerLink] = \"['/']\">Write</a>\n\t</li>\n\n</ul>\n<div *ngIf=\"(msg | async)\">\n\t<div class=\"labeled\"><label for=\"subject\" class=\"col-sm-1\">Subject:</label> {{ (msg | async).SUBJECT  }}</div>\n\t<div class=\"labeled\"><label for=\"from\" class=\"col-sm-1\">From:</label> {{ (msg | async).SENDER }}</div>\n\t<div class=\"labeled\"><label for=\"sendTo\" class=\"col-sm-1\">To:</label> {{ (msg | async).RECIPIENT }}</div>\n\t<div class=\"message\">{{ (msg | async).MESSAGE }}</div>\n</div>\n"
+module.exports = "<ul class=\"nav nav-pills nav-style\">\n\t<li role=\"navigation\">\n\t\t<a [routerLink] = \"['/']\">X</a>\n\t</li>\n\t<li class=\"disabled\" role=\"presentation\">\n\t\t<a>{{ title | uppercase }}</a>\n\t</li>\n\t<li class=\"active pull-right\" role=\"navigation\">\n\t\t<a [routerLink] = \"['/write']\">Write</a>\n\t</li>\n</ul>\n<div *ngIf=\"(msg | async)\">\n\t<div class=\"labeled\"><label for=\"subject\">Subject:</label> {{ (msg | async).SUBJECT  }}</div>\n\t<div class=\"labeled\"><label for=\"from\">From:</label> {{ (msg | async).SENDER }}</div>\n\t<div class=\"labeled\"><label for=\"sendTo\">To:</label> {{ (msg | async).RECIPIENT }}</div>\n\t<div class=\"message\">{{ (msg | async).MESSAGE }}</div>\n</div>\n"
 
 /***/ }),
 
@@ -347,14 +356,14 @@ var _a;
 /***/ "./src/app/mail/mail.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".selected {\r\n\tbackground-color: #80b6fc !important;\r\n}\r\n\r\n.read {\r\n\tfont-weight: bold !important;\r\n}\r\n\r\n#sidebar {\r\n\t/*border: 0.1px solid gray;*/\r\n\tmin-height: 100vh;\r\n\tpadding: 0.5px;\r\n\tpadding-top: 0;\r\n\tpadding-bottom: 0;\r\n}\r\n\r\n.title {\r\n\tbackground-color: #f0f0f0;\r\n\tborder-bottom: 1px solid #ddd;\r\n\r\n}\r\n\r\n.mail {\r\n\tlist-style-type: none;\r\n\tleft:0;\r\n\twidth:100%;\r\n\tpadding: 0;\r\n}\r\n\r\n.mail li {\r\n\t/*position: relative;*/\r\n\tleft: 0;\r\n\tbackground-color:white;\r\n\tborder: none;\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpadding: 10px;\r\n\tpadding-top: 15px;\r\n\tpadding-bottom: 15px;\r\n}\r\n\r\n.subject { \r\n\t\r\n}\r\n\r\n.date {\r\n\tfloat: right;\r\n\tcolor: gray;\r\n\tfont-size:;\r\n}\r\n\r\n/*.nav-mail {\r\n\tbackground-color: #f0f0f0;\r\n}*/\r\n\r\n#content {\r\n\tpadding: 1px;\r\n\tborder-left: 0.1px solid gray;\r\n\theight: 100vh;\r\n}\r\n\r\n.show {\r\n\tdisplay: block !important;\r\n}\r\n\r\n#trashIcon { \r\n\tfloat: right;\r\n\r\n}"
+module.exports = ".selected {\r\n\tbackground-color: #80b6fc !important;\r\n}\r\n\r\n.read {\r\n\tfont-weight: bold !important;\r\n}\r\n\r\n#sidebar {\r\n\t/*border: 0.1px solid gray;*/\r\n\tmin-height: 100vh;\r\n\tpadding: 0.5px;\r\n\tpadding-top: 0;\r\n\tpadding-bottom: 0;\r\n}\r\n\r\n.title {\r\n\tbackground-color: #f0f0f0;\r\n\tborder-bottom: 1px solid #ddd;\r\n\r\n}\r\n\r\n.mail {\r\n\tlist-style-type: none;\r\n\tleft:0;\r\n\twidth:100%;\r\n\tpadding: 0;\r\n}\r\n\r\n.mail li {\r\n\t/*position: relative;*/\r\n\tleft: 0;\r\n\tbackground-color:white;\r\n\tborder: none;\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpadding: 10px;\r\n\tpadding-top: 15px;\r\n\tpadding-bottom: 15px;\r\n}\r\n\r\n.subject { \r\n\t\r\n}\r\n\r\n.date {\r\n\tfloat: right;\r\n\tcolor: gray;\r\n\tfont-size:;\r\n}\r\n\r\n/*.nav-mail {\r\n\tbackground-color: #f0f0f0;\r\n}*/\r\n\r\n#content {\r\n\tpadding: 1px;\r\n\tborder-left: 0.1px solid gray;\r\n\theight: 100vh;\r\n}\r\n\r\n.show {\r\n\tdisplay: block !important;\r\n}\r\n\r\n#trashIcon { \r\n\tfloat: right;\r\n\r\n}\r\n\r\n.nav {\r\n\tbackground-color: #136AA9; \r\n}\r\n\r\n.nav-link {\r\n\tcursor: pointer;\r\n\tcolor: white;\r\n}\r\n\r\n.nav-link:hover {\r\n\tbackground-color: #083759;\r\n}"
 
 /***/ }),
 
 /***/ "./src/app/mail/mail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n\t<div class=\"row\">\n\t\t<div class=\"col-xs-3 container-fluid\" id=\"sidebar\">\n\t\t\t<ul ng-init=\"selectedTab = 'inbox'\" class=\"nav nav-tabs nav-mail\">\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='inbox'}\" (click)=\"getMessages()\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link active\">Inbox</a>\n\t\t\t\t</li>\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='sent'}\" (click)=\"getSent()\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link\">Sent</a>\n\t\t\t\t</li>\n\t\t\t\t<li ng-class=\"{'active':selectedTab ==='trash'}\" (click)=\"getTrash()\" class=\"nav-item\">\n\t\t\t\t\t<a class=\"nav-link\">Trash</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<ul class=\"mail\">\n\t\t\t\t<li *ngFor=\"let msg of mail\" [class.read]=\"msg.READSTATUS === 'F'\" [class.selected]=\"msg === selectedMsg\" [routerLink] = \"['/message', msg.MSGID]\" (click)=\"onSelect(msg)\"> \n\t\t\t\t\t<div><span class=\"subject\">{{msg.SUBJECT}}</span><span class=\"date\">{{msg.DATESENT}}</span></div>\n\t\t\t\t\t<div><span class=\"sender\">{{msg.SENDER}}</span>\n\t\t\t\t\t\t<button id=\"trashIcon\" type=\"button\" class=\"btn btn-danger btn-sm\" (click)=\"deleteMessage(msg)\">Delete <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></button></div>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\t\t<div class=\"col-xs-9\" id=\"content\">\n\t\t\t<router-outlet></router-outlet>\n\t\t</div>\n\t</div>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n\t<div class=\"row\">\n\t\t<div class=\"col-xs-3 container-fluid\" id=\"sidebar\">\n\t\t\t<!-- <nav class=\"navbar navbar-default\">\n\t\t\t\t<div class=\"navbar-header\">\n\t\t\t      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#mail-tabs\" aria-expanded=\"false\">\n\t\t\t        <span class=\"sr-only\">Toggle navigation</span>\n\t\t\t        <span class=\"icon-bar\"></span>\n\t\t\t        <span class=\"icon-bar\"></span>\n\t\t\t        <span class=\"icon-bar\"></span>\n\t\t\t      </button>\n\t\t\t    </div>\n\t\t\t\t<div class=\"navbar-collapse collapse\" id=\"mail-tabs\"> -->\n\t\t\t\t\t<ul class=\"nav nav-tabs\" ng-init=\"selectedTab = 'inbox'\">\n\t\t\t\t\t\t<li role=\"navigation\" [class.active]=\"selectedTab ==='inbox'\" (click)=\"getMessages()\"><a class=\"nav-link\">Inbox</a></li>\n\t\t\t\t\t\t<li role=\"navigation\" [class.active]=\"selectedTab ==='sent'\" (click)=\"getSent()\"><a class=\"nav-link\">Sent</a></li>\n\t\t\t\t\t\t<li role=\"navigation\" [class.active]=\"selectedTab ==='trash'\" (click)=\"getTrash()\"><a class=\"nav-link\">Trash</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t<!-- </div>\n\t\t\t</nav> -->\n\t\t\t<ul class=\"mail\">\n\t\t\t\t<li *ngFor=\"let msg of mail\" [class.read]=\"msg.READSTATUS === 'F'\" [class.selected]=\"msg === selectedMsg\" [routerLink] = \"['/message', msg.MSGID]\" (click)=\"onSelect(msg)\"> \n\t\t\t\t\t<div><span class=\"subject\">{{msg.SUBJECT}}</span><span class=\"date\">{{msg.DATESENT}}</span></div>\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<span class=\"sender\">{{msg.SENDER}}</span>\n\t\t\t\t\t\t<button *ngIf=\"selectedTab === 'inbox'\" id=\"trashIcon\" type=\"button\" class=\"btn btn-info btn-sm\" (click)=\"deleteMessage(msg)\">Delete <span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></button>\n\t\t\t\t\t</div>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\t\t<div class=\"col-xs-9\" id=\"content\">\n\t\t\t<router-outlet></router-outlet>\n\t\t</div>\n\t</div>\n</div>\n"
 
 /***/ }),
 
@@ -388,16 +397,19 @@ var MailComponent = (function () {
         var _this = this;
         this.mailService.getSent()
             .subscribe(function (mail) { return _this.mail = mail; });
+        this.selectedTab = 'sent';
     };
     MailComponent.prototype.getTrash = function () {
         var _this = this;
         this.mailService.getTrash()
             .subscribe(function (mail) { return _this.mail = mail; });
+        this.selectedTab = 'trash';
     };
     MailComponent.prototype.getMessages = function () {
         var _this = this;
         this.mailService.getMessages()
             .subscribe(function (mail) { return _this.mail = mail; });
+        this.selectedTab = 'inbox';
     };
     MailComponent.prototype.deleteMessage = function (msg) {
         this.mail = this.mail.filter(function (m) { return msg.MSGID !== m.MSGID; });
@@ -431,6 +443,8 @@ var _a;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessageService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/@angular/common/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_operators__ = __webpack_require__("./node_modules/rxjs/_esm5/operators.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_of__ = __webpack_require__("./node_modules/rxjs/_esm5/observable/of.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -442,15 +456,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
 var MessageService = (function () {
     function MessageService(http) {
         this.http = http;
         this.baseURL = "/rest/restapi/MessageSystem/";
         this.sendMessageAPIUrl = this.baseURL + "sendEmail";
         this.getAccessLevelURL = this.baseURL + "getAccessLevel";
+        this.getRecipientListURL = this.baseURL + "getRecipientList";
     }
-    MessageService.prototype.accessLevel = function () {
-        return this.http.get(this.getAccessLevelURL);
+    /*GET recipient list whose name contains search term */
+    MessageService.prototype.searchUsers = function (term) {
+        if (!term.trim()) {
+            //if no search term return an empty array of users 
+            return Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_of__["a" /* of */])([]);
+        }
+        return this.http.get(this.getRecipientListURL + "?name=${term}").pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["c" /* tap */])(function (_) { return console.log("found user matching \"" + term + "\""); }));
+    };
+    MessageService.prototype.getRecipientList = function () {
+        return this.http.get(this.getRecipientListURL).pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["c" /* tap */])(function (res) { return console.log(res); }));
+    };
+    MessageService.prototype.getAccessLevel = function () {
+        return this.http.get(this.getAccessLevelURL)
+            .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["c" /* tap */])(function (res) { return console.log(res); }));
     };
     MessageService.prototype.sendMessages = function (msg) {
         var params = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpParams */]()
@@ -474,17 +503,68 @@ var _a;
 
 /***/ }),
 
+/***/ "./src/app/status-page/status-page.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ".panel-style {\r\n\tmargin-top: 15px;\r\n}\r\n\r\n.nav-style {\r\n\tbackground-color: #136AA9; \r\n}\r\n\r\n.nav-style .active a {\r\n\tbackground: none;\r\n\tcolor: white;\r\n}\r\n\r\n.nav-style .active a:hover {\r\n    background-color: #083759;\r\n}"
+
+/***/ }),
+
+/***/ "./src/app/status-page/status-page.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<!-- <ul class=\"nav nav-pills\">\n\t<p class=\"navbar-text\">{{ title | uppercase }}</p>\n\t<li role=\"navigation\" class=\"pull-right\">\n\t\t<a class=\"active\" [routerLink] = \"['/write']\">Write</a>\n\t</li>\n</ul> -->\n\n<ul class=\"nav nav-pills nav-style\">\n\t<!-- <p>{{ title | uppercase }}</p> -->\n\t<li role=\"navigation\" class=\"active pull-right\">\n\t\t<a [routerLink] = \"['/write']\">Write</a>\n\t</li>\n</ul>\n\n<div class=\"container-fluid\">\n\t<div class=\"col-xs-offset-1 col-xs-10\">\n\t\t<div class=\"panel panel-success panel-style\">\n\t\t\t<div class=\"panel-heading\">\n\t\t\t\tYour message was sent successfully!\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"panel panel-danger panel-style\">\n\t\t\t<div class=\"panel-heading\">\n\t\t\t\tYour message failed to send. Please try again later. \n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"panel panel-info panel-style\">\n\t\t\t<div class=\"panel-heading\">\n\t\t\t\tWelcome to your ADAP messaging system!\n\t\t\t</div>\n\t\t\t<div class=\"panel-body\">\n\t\t\t\tClick on one of your messages in your inbox to view its contents. \n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/status-page/status-page.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StatusPageComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var StatusPageComponent = (function () {
+    function StatusPageComponent() {
+        this.title = 'Welcome';
+    }
+    StatusPageComponent.prototype.ngOnInit = function () {
+    };
+    return StatusPageComponent;
+}());
+StatusPageComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-status-page',
+        template: __webpack_require__("./src/app/status-page/status-page.component.html"),
+        styles: [__webpack_require__("./src/app/status-page/status-page.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], StatusPageComponent);
+
+//# sourceMappingURL=status-page.component.js.map
+
+/***/ }),
+
 /***/ "./src/app/write-message/write-message.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".email-form {\r\n\tdisplay: -webkit-box;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: flex;\r\n\t-webkit-box-orient: vertical;\r\n\t-webkit-box-direction: normal;\r\n\t    -ms-flex-flow: column;\r\n\t        flex-flow: column;\r\n\theight: 100%;\r\n}\r\n\r\n.email-form .message.textarea {\r\n\tpadding: 15px;\r\n\t-webkit-box-flex: 1;\r\n\t    -ms-flex: 1 1 auto;\r\n\t        flex: 1 1 auto;\r\n}\r\n\r\n.email-form .labeled {\r\n\t-webkit-box-flex: 0;\r\n\t    -ms-flex: 0 1 auto;\r\n\t        flex: 0 1 auto;\r\n}\r\n\r\n.labeled {\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpadding: 15px;\r\n}\r\n\r\n.input { \r\n\tborder: none;\r\n }\r\n\r\n.nav-link {\r\n \tcursor: pointer;\r\n }\r\n\r\n\r\n"
+module.exports = ".email-form {\r\n\tdisplay: -webkit-box;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: flex;\r\n\t-webkit-box-orient: vertical;\r\n\t-webkit-box-direction: normal;\r\n\t    -ms-flex-flow: column;\r\n\t        flex-flow: column;\r\n\theight: 100%;\r\n}\r\n.email-form .message.textarea {\r\n\tpadding: 15px;\r\n\t-webkit-box-flex: 1;\r\n\t    -ms-flex: 1 1 auto;\r\n\t        flex: 1 1 auto;\r\n}\r\n.email-form .labeled {\r\n\t-webkit-box-flex: 0;\r\n\t    -ms-flex: 0 1 auto;\r\n\t        flex: 0 1 auto;\r\n}\r\n.labeled {\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpadding: 15px;\r\n}\r\n.input { \r\n\tborder: none;\r\n}\r\n.nav-style {\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n}\r\n.nav-style li.disabled > a:hover {\r\n\tcursor: default;\r\n}\r\n.nav-style .active a {\r\n\tbackground-color: #5cb85c;\r\n\tborder-color: #4cae4c;\r\n}\r\n.nav-style .active > a:focus,\r\n.nav-style .active > a:hover {\r\n\tcursor: pointer;\r\n\tbackground-color: #449d44;\r\n\tborder-color: #398439;\r\n}\r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
 /***/ "./src/app/write-message/write-message.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"nav nav-tabs nav-mail\">\n\t<li class=\"nav-item\">\n\t\t<a class=\"nav-link\">X</a>\n\t</li>\n\t<li class=\"nav-item\">\n\t\t<a class=\"nav-link disabled\">NEW MESSAGE</a>\n\t</li>\n\t<li class=\"nav-item pull-right\">\n\t\t<a class=\"nav-link\" (click)=\"sendMessage()\">Send</a>\n\t</li>\n\n</ul>\n<div class=\"email-form form-group col-*-col*\">\n\t<div class=\"labeled\">\n\t\t<label for=\"subject\" class=\"col-sm-1 col-form-label\">Subject:</label> \n\t\t<input type=\"text\" class=\"input\" [(ngModel)]=\"msg.subject\" placeholder=\"Write subject here\">\n\t</div>\n<!-- \t<div class=\"labeled\">\n\t\t<label for=\"staticFrom\" class=\"col-sm-1 col-form-label\">From:</label> \n\t\t<input type=\"text\" readonly class=\"form-control-plaintext\" id=\"staticFrom\" value=\"{user.email}\">\n\t</div> -->\n\t<div class=\"labeled\">\n\t\t<label for=\"sendTo\" class=\"col-sm-1 col-form-label\">To:</label> \n\t\t<input  class=\"input\" [(ngModel)]=\"msg.recipient\" placeholder=\"Write recipient here\">\n\t</div>\n\t<div class=\"message\">\n\t\t<textarea class=\"input form-control\" [(ngModel)]=\"msg.message\" placeholder=\"Write message here\"></textarea>\n\t</div>\n</div>"
+module.exports = "<ul class=\"nav nav-pills nav-style\">\n\t<li role=\"navigation\">\n\t\t<a [routerLink] = \"['/']\">X</a>\n\t</li>\n\t<li class=\"disabled\" role=\"presentation\">\n\t\t<a>{{ title | uppercase }}</a>\n\t</li>\n\t<li class=\"active pull-right\" role=\"navigation\">\n\t\t<a (click)=\"sendMessage()\">Send</a>\n\t</li>\n</ul>\n<div class=\"email-form form-group col-*-col*\">\n\t<div class=\"labeled\">\n\t\t<label class=\"col-form-label col-md-1\">Subject:</label>\n\t\t<div class=\"col-md-11\">\n\t\t\t<input type=\"text\" class=\"form-control\" [(ngModel)]=\"msg.subject\" placeholder=\"Write subject here\" aria-label=\"Write subject here\" aria-describedby=\"basic-addon1\">\n\t\t</div>\n\t</div>\n\n\t<div class=\"labeled\">\n\t\t<label for=\"To\" class=\"col-form-label col-xs-1\">To:</label>\n\n\t\t<div *ngIf=\"accessLevel === 'admin'\" class=\"col-xs-11\">\n\t\t\t<select class=\"selectpicker\" data-live-search=\"true\" title=\"Select a recipient\" data-size=\"5\" [(ngModel)]=\"msg.recipient\">\n\t\t \t\t<option *ngFor=\"let user of users\">{{user.EMAIL}}</option>\n\t\t\t</select>\n\t\t</div>\n\n\t\t<div *ngIf=\"accessLevel === 'user'\" class=\"col-xs-11\">\n\t\t\t<input type=\"text\" readonly class=\"form-control\" placeholder=\"Admin\" aria-label=\"Admin\" value=\"bg1@company.com\" [(ngModel)]=\"msg.recipient\">\n\t\t</div>\n\t</div>\n\n\t<div class=\"message\">\n\t\t<textarea class=\"input form-control\" [(ngModel)]=\"msg.message\" placeholder=\"Write message here\"></textarea>\n\t</div>\n</div>"
 
 /***/ }),
 
@@ -509,13 +589,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var WriteMessageComponent = (function () {
     function WriteMessageComponent(messageService) {
         this.messageService = messageService;
-        this.title = "New Message";
+        this.accessLevel = "";
+        this.title = 'New Message';
         this.msg = {};
     }
     WriteMessageComponent.prototype.ngOnInit = function () {
+        this.getAccessLevel();
+        this.getRecipientList();
+    };
+    WriteMessageComponent.prototype.getAccessLevel = function () {
+        var _this = this;
+        this.messageService.getAccessLevel()
+            .subscribe(function (level) { return _this.accessLevel = level; });
+    };
+    WriteMessageComponent.prototype.getRecipientList = function () {
+        var _this = this;
+        this.messageService.getRecipientList()
+            .subscribe(function (list) { return _this.users = list; });
     };
     WriteMessageComponent.prototype.sendMessage = function () {
-        console.log(this.msg);
+        // Only allow sending to admin for user
+        if (this.accessLevel === "user") {
+            this.msg.recipient = "bg1@company.com";
+        }
         this.messageService.sendMessages(this.msg)
             .subscribe({
             error: function (msg) { console.log('Error sending message:', msg); }
