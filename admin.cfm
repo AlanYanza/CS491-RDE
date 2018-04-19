@@ -5,7 +5,7 @@
 <cfset SessionClass.ClearSessionAppID() > <!-- If appID session variable set, clear it -->
 <!-- gather required page data -->
 <cfset AdminPull=createObject('component','components.Admin')/>
-<cfset allApplications=AdminPull.GetAllApplication()/>
+<cfset allApplications=AdminPull.GetAllApplications()/>
 <cfdump var="Test"/>
 <cfdump var="#allApplications#"/>
 	

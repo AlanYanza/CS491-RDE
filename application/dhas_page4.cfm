@@ -137,7 +137,11 @@
 		});
 		$(document).keypress(
 			function(event){
-				if (event.which == '13') {
+				<!---  && ($(event.target)[0]!=$("textarea")[0]) allows return in address textareas --->
+				if (event.which == '13'  && (
+					$(event.target)[0]!=$("textarea")[0]) || $(event.target)[0]!=$("textarea")[1] ||
+					$(event.target)[0]!=$("textarea")[2]))) 
+					{
 					event.preventDefault();
 				}
 			}
