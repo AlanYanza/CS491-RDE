@@ -10,8 +10,8 @@
 	</li>
 </ul>
 <div *ngIf="(msg | async)">
-	<div class="labeled"><label for="subject" class="col-sm-1">Subject:</label> {{ (msg | async).SUBJECT  }}</div>
-	<div class="labeled"><label for="from" class="col-sm-1">From:</label> {{ (msg | async).SENDER }}</div>
-	<div class="labeled"><label for="sendTo" class="col-sm-1">To:</label> {{ (msg | async).RECIPIENT }}</div>
+	<div class="labeled"><label for="subject">Subject:</label> {{ (msg | async).SUBJECT  }}</div>
+	<div class="labeled"><label for="from">From:</label> {{ (msg | async).SENDER }}</div>
+	<div class="labeled"><label for="sendTo">To:</label> {{ (msg | async).RECIPIENT }}</div>
 	<div class="message">{{ (msg | async).MESSAGE }}</div>
 </div>
