@@ -49,13 +49,20 @@
 		</div>
 	</cfif>
 </cfif>
-<!-- if admin make page a form -->
-<cfif isAdmin eq 1>
-	<cfoutput><form action="scripts/DocStatusMgmt.cfm" method="POST"></cfoutput>
-</cfif>
 <div class="container">
     <div class="panel panel-default">
-        <div class="panel-heading">Application Status</div>
+        <div class="panel-heading">Application Status</div><br>
+        <cfif isAdmin eq 1>
+			<cfoutput>
+				<div class="text-center">
+					<button class="btn btn-success" onclick="window.open('/CS491-RDE/application/dhas_page1.cfm?appID=#session.appID#', '_blank', 'location=yes,height=800,width=800,scrollbars=yes,status=yes');">View Application</button>
+				</div>
+			</cfoutput>
+		</cfif>
+		<!-- if admin make page a form -->
+		<cfif isAdmin eq 1>
+			<cfoutput><form action="scripts/DocStatusMgmt.cfm" method="POST"></cfoutput>
+		</cfif>
 		<div class="panel-body table-responsive">
 	        <table class="table table-hover">
 	        	<tr class="text-center">

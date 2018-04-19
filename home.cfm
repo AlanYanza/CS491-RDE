@@ -63,7 +63,10 @@
 		<center><table class="table table-hover">
 			<tr><th style="width: 50%;">Application Type</th></tr>
 			<td><cfoutput>NJ-Participation in (ADDP) / HICP</cfoutput></td>
-			<cfoutput><td><a href="application/dhas_instructions_page1.cfm?new">Start new application</a></td></cfoutput>
+			<cfoutput >
+				<td><button class="btn btn-warning"
+				onclick="window.location.href='application/dhas_instructions_page1.cfm?new'">Start new application</button></td>
+			</cfoutput>
 			</table></center> 
 		</div>
     </div>
@@ -73,7 +76,7 @@
 	        <span class="help-block">Click the AppID to edit or view applications.</span>
 	        <table class="table table-hover">
 	        	<tr><th>AppID</th><th>State</th><th>Application Description</th>
-	        		<th>Date Submitted</th><th>Status</th><th>Document Status</th></tr>
+	        		<th>Date Submitted</th><th>Status</th><th></th><th></th></tr>
 	        	<!-- Interate though resultSet and display data-->
 				<cfloop query="allApplications">
 					<cfoutput><tr></cfoutput>
@@ -96,19 +99,20 @@
 					<!-- create html row for Application -->
 					<cfset userEditLink=#outputLink# & '?appID=' & #appID# > 
 					<cfoutput>
-						<tr>
-							<td>
-								<cfif #status# eq 'P' OR #status# eq 'N' >
-									<a href="#userEditLink#">#appID#</a>
-								<cfelse>
-									<a href="#userEditLink#">#appID#</a>
-								</cfif>
-							</td>
+						<tr><td>#appID#</td>
 							<td>#formInfo.state#</td>
 							<td>#formInfo.AppDescription#</td>
 							<td>#dateSubmited#</td>
 							<td>#outputStatus#</td>
-							<td><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>view</a></td>
+							<td>
+								<button class="btn btn-info" onclick="window.location.href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'">View Documents</button>
+							<td>
+								<cfif #status# eq 'P' OR #status# eq 'N' >
+									<button class="btn btn-success" onclick="window.location.href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'">Edit Application</button>
+								<cfelse>
+									<button class="btn btn-success" onclick="window.location.href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'">Review Application</button>
+								</cfif>
+							</td>
 						</tr>
 					</cfoutput>
 				</cfloop>
