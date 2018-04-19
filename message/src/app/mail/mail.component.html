@@ -26,12 +26,11 @@
 						<button *ngIf="selectedTab === 'inbox'" id="trashIcon" type="button" class="btn btn-info btn-sm" (click)="deleteMessage(msg)">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 					</div>
 				</li>
-				<div class="container pagination-styles" id="pagination">
-					<pagination-controls (pageChange)="p = $event" autoHide="true"></pagination-controls>
-				</div>
 			</ul>
+			<div class="container pagination-styles" id="pagination">
+				<pagination-controls (pageChange)="p = $event" autoHide="true"></pagination-controls>
+			</div>
 		</div>
-
 		<div class="col-xs-9" id="content">
 			<router-outlet></router-outlet>
 		</div>

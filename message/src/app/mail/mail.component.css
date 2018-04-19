@@ -8,7 +8,7 @@
 
 #sidebar {
 	/*border: 0.1px solid gray;*/
-	min-height: 100vh;
+	min-height: 100%;
 	padding:0;
 }
 
@@ -54,7 +54,7 @@
 	padding: 0;
 	padding-left: 1px;
 	border-left: 0.1px solid gray;
-	height: 100vh;
+	height: 100%;
 }
 
 .show {
