@@ -1,0 +1,36 @@
+<!-- <ul class="nav nav-pills">
+	<p class="navbar-text">{{ title | uppercase }}</p>
+	<li role="navigation" class="pull-right">
+		<a class="active" [routerLink] = "['/write']">Write</a>
+	</li>
+</ul> -->
+
+<ul class="nav nav-pills nav-style">
+	<!-- <p>{{ title | uppercase }}</p> -->
+	<li role="navigation" class="active pull-right">
+		<a [routerLink] = "['/write']">Write</a>
+	</li>
+</ul>
+
+<div class="container-fluid">
+	<div class="col-xs-offset-1 col-xs-10">
+		<div class="panel panel-success panel-style">
+			<div class="panel-heading">
+				Your message was sent successfully!
+			</div>
+		</div>
+		<div class="panel panel-danger panel-style">
+			<div class="panel-heading">
+				Your message failed to send. Please try again later. 
+			</div>
+		</div>
+		<div class="panel panel-info panel-style">
+			<div class="panel-heading">
+				Welcome to your ADAP messaging system!
+			</div>
+			<div class="panel-body">
+				Click on one of your messages in your inbox to view its contents. 
+			</div>
+		</div>
+	</div>
+</div>

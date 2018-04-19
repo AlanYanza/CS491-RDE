@@ -1,0 +1,14 @@
+.panel-style {
+	margin-top: 15px;
+}
+
+.nav-style {
+	background-color: #136AA9; 
+}
+.nav-style .active a {
+	background: none;
+	color: white;
+}
+.nav-style .active a:hover {
+    background-color: #083759;
+}
