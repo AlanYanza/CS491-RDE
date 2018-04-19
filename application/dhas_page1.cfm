@@ -76,6 +76,7 @@
 			function asianCheck() {
 				if ($("input[type=checkbox][name=RAsian]").is(":checked")) {
 					$("#RasianOption").show("slow");
+					$("#RasianOption").find("input[type=checkbox]").prop("checked", false );
 				}
 				else {
 					$("#RasianOption").hide("slow");
@@ -85,6 +86,7 @@
 			function RNatHaCheck() {
 				if ($("input[type=checkbox][name=RNatHa]").is(":checked")) {
 					$("#RNatHaOption").show("slow");
+					$("#RNatHaOption").find("input[type=checkbox]").prop("checked", false );
 				}
 				else {
 					$("#RNatHaOption").hide("slow");
@@ -400,7 +402,7 @@
 	<label for="SSNum">What is your Social Security Number (if you have one)?</label>
 	<div class="form-group row">
 		<div class="col-sm-2">			
-			<input type="password" class="form-control" id="SSNum" name="SSNum"  maxlength="11" value="<cfoutput>#subformData.SSNum#</cfoutput>" />
+			<input type="password" class="form-control" id="SSNum" name="SSNum"  maxlength="11" placeholder="xxx-xx-xxxx" value="<cfoutput>#subformData.SSNum#</cfoutput>" />
 		</div>
 		<div class="col-sm-10">
 			<button type="button" class="btn btn-default" name="reveal">View SSN</button>

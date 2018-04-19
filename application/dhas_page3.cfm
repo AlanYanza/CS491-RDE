@@ -75,17 +75,17 @@
 			}
 
 			function radioCheck(e) {
-				console.log("invoked");
-				console.log($(e.data.radio + ":checked").val());
-				console.log(e.data.value);
-				//console.log(radio+" "+value+" "+location);
-				$(e.data.location).hide();
+				//$(e.data.location).hide();
 				if (typeof $(e.data.radio + ":checked").val() === "undefined") {
 					return;
 				}
 				if ($(e.data.radio + ":checked").val() != e.data.value) {
 					$(e.data.location).hide();
-					$(e.data.location).find("input").removeAttr("required");
+					$(e.data.location).find("input").removeAttr("required");					
+					$(e.data.location).find(":checked").prop("checked", false );
+					$(e.data.location).find("input[type=text]").val("");
+					$(e.data.location).find("input[type=number]").val(0);
+					$(e.data.location).find("input[type=date]").val("1111-11-11");
 				}
 				else {
 					$(e.data.location).show();
@@ -96,17 +96,13 @@
 				if (typeof $(radio + ":checked").val() === "undefined") {
 					return;
 				}
-				if ($(radio + ":checked").val() == value) {
-					$(location).show("slow");
-					
-				}
-				else {
+				if ($(radio + ":checked").val() != value) {
 					$(location).hide("slow");
 					$(location).find(":required").removeAttr("required");
-					$(location).find(":checked").prop("checked", false );
-					$(location).find("input[type=text]").val("");
-					$(location).find("input[type=number]").val(0);
-					$(location).find("input[type=date]").val("1111-11-11");
+					
+				}
+				else {					
+					$(location).show("slow");
 				}
 			}
 
