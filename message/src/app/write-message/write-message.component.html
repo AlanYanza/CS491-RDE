@@ -6,7 +6,7 @@
 		<a>{{ title | uppercase }}</a>
 	</li>
 	<li class="active pull-right" role="navigation">
-		<a (click)="sendMessage()">Send</a>
+		<a (click)="sendMessage()" [routerLink] = "['/']">Send</a>
 	</li>
 </ul>
 <div class="email-form form-group col-*-col*">
