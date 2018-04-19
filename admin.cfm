@@ -6,9 +6,10 @@
 <!-- gather required page data -->
 <cfset AdminPull=createObject('component','components.Admin')/>
 <cfset allApplications=AdminPull.GetAllApplications()/>
-<cfdump var="Test"/>
+<cfset FormName=AdminPull.getNameInfo()/>
 <cfdump var="#allApplications#"/>
-	
+<cfdump var="#FormName#"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,65 +28,38 @@
 		<center><h1>Admin Portal</h1></center>
 	</div>
 <br><br>
+<cfloop query="allApplications">
+<cfoutput>
+<div class='panel panel-default'>
 
-    <div class="panel panel-default">
-      <div class="panel-heading">Application ID - Name</div>
-		<div class="panel-body">
-		<div class="row">
-		<div class="col-sm-3"><center><b>Form Name</b></center></div>
-		<div class="col-sm-3"><center><b>Date Submitted</b></center></div>
-		<div class="col-sm-3"><center><b>View Application</b></center></div>
-		<div class="col-sm-3"><center><b>Approve | Edit | Deny</b></center></div>
-		<br><br>
-		<div id="demo1" class="collapse">
-		This is the drop down! YAY!<br>
-		This is the drop down! YAY!<br>
-		This is the drop down! YAY!This is the drop down! YAY!<br>
-		This is the drop down! YAY!<br>
-		This is the drop down! YAY!<br>
-		This is the drop down! YAY!<br>
-		This is the drop down! YAY!<br>
-		This is the drop down! YAY!<br>
-		This is the drop down! YAY!<br>
-		This is the drop down! YAY!<br>
-		This is the drop down! YAY!This is the drop down! YAY!<br>
-		This is the drop down! YAY!<br>
-		</div>
-		<center><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo1">Show More</button></center>
-		</div>
-      </div>
-	</div> 
-  <div class="panel panel-default">
-      <div class="panel-heading">Application ID - Name</div>
-		<div class="panel-body">
-		<div class="row">
-		<div class="col-sm-3"><center><b>Form Name</b></center></div>
-		<div class="col-sm-3"><center><b>Date Submitted</b></center></div>
-		<div class="col-sm-3"><center><b>View Application</b></center></div>
-		<div class="col-sm-3"><center><b>Approve | Edit | Deny</b></center></div>
-		<br><br>
-		<div id="demo2" class="collapse">
-		This is the drop down! YAY!
-		</div>
-		<center><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2">Show More</button></center>
-		</div>
-      </div>
-	</div> 
-    <div class="panel panel-default">
-      <div class="panel-heading">Application ID - Name</div>
-		<div class="panel-body">
-		<div class="row">
-		<div class="col-sm-3"><center><b>Form Name</b></center></div>
-		<div class="col-sm-3"><center><b>Date Submitted</b></center></div>
-		<div class="col-sm-3"><center><b>View Application</b></center></div>
-		<div class="col-sm-3"><center><b>Approve | Edit | Deny</b></center></div>
-		<br><br>
-		<div id="demo3" class="collapse">
-		This is the drop down! YAY!
-		</div>
-		<center><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo3">Show More</button></center>
-		</div>
-      </div>
-	</div> 
-<body>
+<div class='panel-heading'>App ID - #APPID#</div>
+<div class='panel-body'>
+<div class='row'>
+<cfloop query="FormName">
+<cfif #allApplications.userID# eq #FormName.userID#>
+<div class='col-sm-3'><center><b>#FormName.FirstName# #FormName.LastName#</b></center></div>
+</cfif>
+</cfloop>
+<cfif #DATESUBMITED# eq "">
+<div class='col-sm-3'><center><b>IN PROGRESS</b></center></div>
+<cfelse>
+<div class='col-sm-3'><center><b>#DATESUBMITED#</b></center></div>
+</cfif>
+<div class='col-sm-3'><center><b><a href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'>View Application</a></b></center></div>
+<div class='col-sm-3'><center><b><a href="www.google.com">Approve</a> | <a href="www.google.com">Edit</a> | <a href="www.google.com">Deny</a></b></center></div>
+<br><br>
+<div class='panel-body'><b><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>Document Tracker Status</a></b</div>
+<!--<div id='demo1' class='collapse'>
+This is the drop down! YAY!<br>-->
+</div>
+</cfoutput>
+<!--<center><button type='button' class='btn btn-info' data-toggle='collapse' data-target='#demo1'>Show More</button></center>
+</div>-->
+</div>
+</div>
+</cfloop>
+</div>
+
+
+</body>
 <html/>
