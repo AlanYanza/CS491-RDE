@@ -1,7 +1,6 @@
 .email-form {
 	display: flex;
 	flex-flow: column;
-	height: 100%;
 }
 .email-form .message.textarea {
 	padding: 15px;
