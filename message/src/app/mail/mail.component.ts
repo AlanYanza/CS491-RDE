@@ -18,6 +18,7 @@ export class MailComponent implements OnInit {
 
 	selectedMsg: Msg; 
   selectedTab: string;
+  p: number = 1;
 
   constructor(private mailService : MailService) { }
 
