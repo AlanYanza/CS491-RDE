@@ -19,7 +19,7 @@ export class WriteMessageComponent implements OnInit {
   
   accessLevel = "";
 
-  title = "New Message";
+  title = 'New Message';
 
   msg: any = {};
 

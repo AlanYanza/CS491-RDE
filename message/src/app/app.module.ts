@@ -13,13 +13,15 @@ import { MessageService } from './message/message.service';
 
 import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
+import { StatusPageComponent } from './status-page/status-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MailComponent,
     MailContentComponent,
-    WriteMessageComponent
+    WriteMessageComponent,
+    StatusPageComponent
   ],
   imports: [
     BrowserModule,

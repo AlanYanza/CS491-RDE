@@ -6,3 +6,10 @@
 .message {
 	padding: 30px;
 }
+
+.nav-style {
+	border-bottom: 0.1px solid #f0f0f0;
+}
+li.disabled > a:hover {
+	cursor: default;
+}

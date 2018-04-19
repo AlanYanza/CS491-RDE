@@ -1,14 +1,13 @@
-<ul class="nav nav-tabs">
-	<li class="nav-item">
-		<a class="nav-link">X</a>
+<ul class="nav nav-pills nav-style">
+	<li role="navigation">
+		<a [routerLink] = "['/']">X</a>
 	</li>
-	<li class="nav-item">
-		<a class="nav-link disabled">NEW MESSAGE</a>
+	<li class="disabled" role="presentation">
+		<a>{{ title | uppercase }}</a>
 	</li>
-	<li class="nav-item pull-right">
-		<a class="nav-link" (click)="sendMessage()">Send</a>
+	<li class="active pull-right" role="navigation">
+		<a (click)="sendMessage()">Send</a>
 	</li>
-
 </ul>
 <div class="email-form form-group col-*-col*">
 	<div class="labeled">
