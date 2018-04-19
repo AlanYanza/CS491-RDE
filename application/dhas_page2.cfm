@@ -52,11 +52,12 @@
 				var income = $("#income").find("input[type=number]").serializeArray();
 				$.each(income, (function(i, j){
 					totalIncome += Number(j.value);
+					console.log(totalIncome.toFixed(2));
 				}));
 				$("input[type=number][name=totalHIncome]").val(totalIncome.toFixed(2));
 			}
 
-			$("#income input[type=number]").keyup(calTotal());
+			$("#income input[type=number]").keyup(calTotal);
 
 	  		$("button[type=submit][name=save]").click(dataCorrection);
 			$("button[type=submit][name=previous]").click(dataCorrection);
