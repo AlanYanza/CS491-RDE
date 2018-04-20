@@ -7,8 +7,8 @@
 <cfset AdminPull=createObject('component','components.Admin')/>
 <cfset allApplications=AdminPull.GetAllApplications()/>
 <cfset FormName=AdminPull.getNameInfo()/>
-<!--- <cfdump var="#allApplications#"/>
-<cfdump var="#FormName#"/> --->
+<!---<cfdump var="#allApplications#"/> --->
+<!---<cfdump var="#FormName#"/> --->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,43 +27,105 @@
 	<div class="page-header">
 		<div class="text-center"><h1>Admin Portal</h1></div>
 	</div>
-	<ul class="nav nav-tabs nav-justified ">
+	<ul class="nav nav-tabs nav-justified">
 		<li class="active"><a data-toggle="tab" href="#submitted">Home</a></li>
 		<li><a data-toggle="tab" href="#inProcess">In Progess</a></li>
 		<li><a data-toggle="tab" href="#returned">Returned</a></li>
 	</ul>
-	<cfloop query="allApplications">
-		<cfoutput>
-			<div class='panel panel-default'>
-				<div class='panel-heading'>App ID - #APPID#</div>
-				<div class='panel-body'>
-					<div class='row'>
-						<cfloop query="FormName">
-						<cfif #allApplications.userID# eq #FormName.userID#>
-							<div class='col-sm-3'><center><b>#FormName.FirstName# #FormName.LastName#</b></center></div>
-						</cfif>
-						</cfloop>
-						<cfif #DATESUBMITED# eq "">
-							<div class='col-sm-3'><center><b>IN PROGRESS</b></center></div>
-							<cfelse>
-							<div class='col-sm-3'><center><b>#DATESUBMITED#</b></center></div>
-						</cfif>
-						<div class='col-sm-3'><center><b><a href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'>View Application</a></b></center></div>
-						<div class='col-sm-3'>
-							<button type="button" class="btn btn-success">Approve</button>
-							<button type="button" class="btn btn-default">Return</button>
-							<button type="button" class="btn btn-danger">Deny</a>
+	<div class="tab-content">  
+		<div id="submitted" class="tab-pane fade in active">
+		<cfloop query="allApplications">
+			<cfif #STATUS# eq "R">
+				<cfoutput>					
+					<div class='panel panel-default'>
+						<div class='panel-heading'>App ID - #APPID# | #FName# #LNAME#</div>
+						<div class='panel-body'>
+							<div class='row text-center'>
+								<div class='col-sm-3'>#FName# #LNAME#</div>
+								<cfif #DATESUBMITED# eq "">
+									<div class='col-sm-3'><b>IN PROGRESS</b></div>
+									<cfelse>
+									<div class='col-sm-3'><b>#DATESUBMITED#</b></div>
+								</cfif>
+								<div class='col-sm-3'><center><b><a href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'>View Application</a></b></center></div>
+								<div class='col-sm-3 btn-group'>
+									<button type="button" class="btn btn-success">Approve</button>
+									<button type="button" class="btn btn-warning">Return</button>
+									<button type="button" class="btn btn-danger">Deny</button>
+								</div>
+								<div class='panel-body'><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>Document Tracker Status</a></div>
+								<!--<div id='demo1' class='collapse'>
+								This is the drop down! YAY!<br>-->
+							</div>
 						</div>
-						<div class='panel-body'><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>Document Tracker Status</a></div>
-						<!--<div id='demo1' class='collapse'>
-						This is the drop down! YAY!<br>-->
 					</div>
-				</div>
-		</cfoutput>
-		<!--<center><button type='button' class='btn btn-info' data-toggle='collapse' data-target='#demo1'>Show More</button></center>
-		</div>-->
+				</cfoutput>
+			</cfif>
+		</cfloop>
 		</div>
-	</cfloop>
+
+		<div id="inProcess" class="tab-pane">
+		<cfloop query="allApplications">
+			<cfif #STATUS# eq "P">
+				<cfoutput>					
+					<div class='panel panel-default'>
+						<div class='panel-heading'>App ID - #APPID# | #FName# #LNAME#</div>
+						<div class='panel-body'>
+							<div class='row text-center'>
+								<div class='col-sm-3'>#FName# #LNAME#</div>
+								<cfif #DATESUBMITED# eq "">
+									<div class='col-sm-3'><b>IN PROGRESS</b></div>
+									<cfelse>
+									<div class='col-sm-3'><b>#DATESUBMITED#</b></div>
+								</cfif>
+								<div class='col-sm-3'><center><b><a href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'>View Application</a></b></center></div>
+								<div class='col-sm-3 btn-group'>
+									<button type="button" class="btn btn-success">Approve</button>
+									<button type="button" class="btn btn-warning">Return</button>
+									<button type="button" class="btn btn-danger">Deny</button>
+								</div>
+								<div class='panel-body'><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>Document Tracker Status</a></div>
+								<!--<div id='demo1' class='collapse'>
+								This is the drop down! YAY!<br>-->
+							</div>
+						</div>
+					</div>
+				</cfoutput>
+			</cfif>
+		</cfloop>
+		</div>
+
+		<div id="returned" class="tab-pane fade in active">
+		<cfloop query="allApplications">
+			<cfif #STATUS# eq "D">
+				<cfoutput>					
+					<div class='panel panel-default'>
+						<div class='panel-heading'>App ID - #APPID# | #FName# #LNAME#</div>
+						<div class='panel-body'>
+							<div class='row text-center'>
+								<div class='col-sm-3'>#FName# #LNAME#</div>
+								<cfif #DATESUBMITED# eq "">
+									<div class='col-sm-3'><b>IN PROGRESS</b></div>
+									<cfelse>
+									<div class='col-sm-3'><b>#DATESUBMITED#</b></div>
+								</cfif>
+								<div class='col-sm-3'><center><b><a href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'>View Application</a></b></center></div>
+								<div class='col-sm-3 btn-group'>
+									<button type="button" class="btn btn-success">Approve</button>
+									<button type="button" class="btn btn-warning">Return</button>
+									<button type="button" class="btn btn-danger">Deny</button>
+								</div>
+								<div class='panel-body'><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>Document Tracker Status</a></div>
+								<!--<div id='demo1' class='collapse'>
+								This is the drop down! YAY!<br>-->
+							</div>
+						</div>
+					</div>
+				</cfoutput>
+			</cfif>
+		</cfloop>
+		</div>
+	</div>
 </div>
 </body>
 <html/>
