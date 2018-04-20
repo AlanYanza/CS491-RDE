@@ -14,6 +14,7 @@
 		<cfquery name="applicationResult">
 			SELECT appID,formTypeID,status,dateSubmited FROM UserApplication WHERE
 			userID=<cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" >
+			ORDER BY appID DESC
 		</cfquery>
 		<cfreturn applicationResult>
 	</cffunction>

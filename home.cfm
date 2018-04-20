@@ -22,10 +22,7 @@
 		td, th {
 			text-align: center;
 		}
-
-		tr:nth-child(even) {
-		   
-		}
+		tr:nth-child(even) {}
 	</style> 
 </head>
 <body>
@@ -105,12 +102,12 @@
 							<td>#dateSubmited#</td>
 							<td>#outputStatus#</td>
 							<td>
-								<button class="btn btn-info" onclick="window.location.href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'">View Documents</button>
+								<a class="btn btn-info" href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'">View Documents</a>
 							<td>
 								<cfif #status# eq 'P' OR #status# eq 'N' >
-									<button class="btn btn-success" onclick="window.location.href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'">Edit Application</button>
+									<a class="btn btn-success" href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'">Edit Application</a>
 								<cfelse>
-									<button class="btn btn-success" onclick="window.location.href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'">Review Application</button>
+									<a class="btn btn-success" href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'">Review Application</a>
 								</cfif>
 							</td>
 						</tr>
