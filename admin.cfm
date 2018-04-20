@@ -27,7 +27,7 @@
 	<div class="page-header">
 		<div class="text-center"><h1>Admin Portal</h1></div>
 	</div>
-	<ul class="nav nav-tabs">
+	<ul class="nav nav-tabs nav-justified ">
 		<li class="active"><a data-toggle="tab" href="#submitted">Home</a></li>
 		<li><a data-toggle="tab" href="#inProcess">In Progess</a></li>
 		<li><a data-toggle="tab" href="#returned">Returned</a></li>
@@ -35,7 +35,7 @@
 	<cfloop query="allApplications">
 		<cfoutput>
 			<div class='panel panel-default'>
-				<div class='panel-heading'>App ID - #APPID# | #FormName.FirstName# #FormName.LastName#</div>
+				<div class='panel-heading'>App ID - #APPID#</div>
 				<div class='panel-body'>
 					<div class='row'>
 						<cfloop query="FormName">
@@ -49,9 +49,12 @@
 							<div class='col-sm-3'><center><b>#DATESUBMITED#</b></center></div>
 						</cfif>
 						<div class='col-sm-3'><center><b><a href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'>View Application</a></b></center></div>
-						<div class='col-sm-3'><center><b><a href="##">Approve</a> | <a href="##">Edit</a> | <a href="##">Deny</a></b></center></div>
-						<br><br>
-						<div class='panel-body'><b><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>Document Tracker Status</a></b></div>
+						<div class='col-sm-3'>
+							<button type="button" class="btn btn-success">Approve</button>
+							<button type="button" class="btn btn-default">Return</button>
+							<button type="button" class="btn btn-danger">Deny</a>
+						</div>
+						<div class='panel-body'><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>Document Tracker Status</a></div>
 						<!--<div id='demo1' class='collapse'>
 						This is the drop down! YAY!<br>-->
 					</div>
