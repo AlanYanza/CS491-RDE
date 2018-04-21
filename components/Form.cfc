@@ -15,7 +15,7 @@
 	
 	<!-- add a new Application to Database -->
 	<cffunction name="createApplication" displayname="createNewApplicationTableEntry" 
-	hint="create an new entry in the UserApplication Table">
+	hint="create an new entry in the UserApplication Table" returntype="Numeric" >
 		<!-- Insert Application Into Database -->
 		<cfQuery>
 			INSERT INTO UserApplication (userID,formTypeID,HICPApp,status) VALUES(
@@ -37,6 +37,13 @@
 				<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer">
 			)			
 		</cfquery>
+		<!-- Get the most recent AppID (the appID of the application inserted) -->
+		<cfquery name="createAppIDResult" result="queryStat">
+			SELECT Max(appID) as createAppID FROM UserApplication WHERE
+			userID=<cfqueryparam value="#session.userID#" cfsqltype="cf_sql_integer" >
+		</cfquery>
+		<cfset returnedAppID=createAppIDResult.createAppID>
+		<cfreturn returnedAppID>
 	</cffunction>
 	
 	<cffunction name="isUserReview" hint="Checks if an user if reviewing an Application"
