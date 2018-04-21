@@ -2,9 +2,13 @@
 	display: flex;
 	flex-flow: column;
 }
-.email-form .message.textarea {
-	padding: 15px;
+.email-form .message {
 	flex: 1 1 auto;
+}
+.email-form .message > textarea {
+	margin: 15px;
+	resize: none;
+	height: 100%;
 }
 .email-form .labeled {
 	flex: 0 1 auto;
@@ -20,13 +24,16 @@
 }
 
 .nav-style {
-	border-bottom: 0.1px solid #f0f0f0;
+	border-bottom: 1px solid #f0f0f0;
 }
 .nav-style li.disabled > a:hover {
 	cursor: default;
 }
 
 .nav-style .active a {
+	padding: 5px 10px;
+    margin-top: 4px;
+    margin-right: 4px;
 	background-color: #5cb85c;
 	border-color: #4cae4c;
 }

@@ -8,7 +8,12 @@
 }
 
 .nav-style {
-	border-bottom: 0.1px solid #f0f0f0;
+	border-bottom: 1px solid #f0f0f0;
+}
+.nav-style .active a {
+	padding: 5px 10px;
+    margin-top: 4px;
+    margin-right: 4px;
 }
 li.disabled > a:hover {
 	cursor: default;

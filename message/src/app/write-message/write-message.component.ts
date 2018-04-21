@@ -15,12 +15,9 @@ declare var $: any;
 })
 export class WriteMessageComponent implements OnInit {
 
-  users: User[];
-  
-  accessLevel = "";
-
   title = 'New Message';
-
+  users: User[];
+  accessLevel = "";
   msg: any = {};
 
   constructor(private messageService: MessageService) { }

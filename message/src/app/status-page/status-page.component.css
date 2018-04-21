@@ -4,11 +4,22 @@
 
 .nav-style {
 	background-color: #136AA9; 
+	border-bottom: 1px solid gray;
 }
 .nav-style .active a {
+	padding: 5px 10px;
+    margin-top: 4px;
+    margin-right: 4px;
 	background: none;
 	color: white;
 }
 .nav-style .active a:hover {
     background-color: #083759;
+}
+
+li.disabled > a {
+	color: white;
+}
+li.disabled > a:hover {
+	cursor: default;
 }
