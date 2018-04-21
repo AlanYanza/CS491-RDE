@@ -57,14 +57,13 @@
     <div class="panel panel-default">
         <div class="panel-heading">Start New Application</div>
 		<div class="panel-body table-responsive"">
-		<center><table class="table table-hover">
+		<table class="table table-hover text-center">
 			<tr><th style="width: 50%;">Application Type</th></tr>
 			<td><cfoutput>NJ-Participation in (ADDP) / HICP</cfoutput></td>
 			<cfoutput >
-				<td><button class="btn btn-warning"
-				onclick="window.location.href='application/dhas_instructions_page1.cfm?new'">Start new application</button></td>
+				<td><a class="btn btn-primary" href='application/dhas_instructions_page1.cfm?new'>Start new application</a></td>
 			</cfoutput>
-			</table></center> 
+			</table>
 		</div>
     </div>
     <div class="panel panel-default">

@@ -3,8 +3,28 @@
 	<!-- User Application view -->
 	<cffunction name="GetAllApplications" returntype = "Query">
 		<cfquery name="Results1">
-			SELECT appID, userID, dateSubmited, formTypeID
+			SELECT 
+				UserApplication.appID,
+				userID,
+				FName,
+				LName,
+				dateSubmited,
+				formTypeID,
+				[status]
 			FROM UserApplication
+			join (
+				select
+					appID,
+					dataID
+				FROM UserFormData
+				) as formData on UserApplication.appID = formData.appID
+			left outer join (
+				select
+					dataID,
+					FName,
+					LName
+				FROM NJSection1
+				) as fullName on formData.dataID = fullName.dataID
 			ORDER BY appID DESC
 		</cfquery>
 		<cfreturn Results1>

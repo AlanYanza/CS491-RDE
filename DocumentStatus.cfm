@@ -24,17 +24,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Application</title>
+    <title>Document Status</title>
     <cfinclude template="head.cfm"/>
-    <script>
-        function myFunction() {
-            document.getElementById("demo").innerHTML = "<form action=''><input type='file' name='pic' accept='image/*'></form>";
-
-        }
-        function Gone() {
-            document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
-        }
-	</script>
 	<style>
 		tr:nth-child(even) {}
 	</style> 
@@ -55,7 +46,7 @@
         <cfif isAdmin eq 1>
 			<cfoutput>
 				<div class="text-center">
-					<button class="btn btn-success" onclick="window.open('/CS491-RDE/application/dhas_page1.cfm?appID=#session.appID#', '_blank', 'location=yes,height=800,width=800,scrollbars=yes,status=yes');">View Application</button>
+					<a class="btn btn-default" href='/CS491-RDE/application/dhas_page1.cfm?appID=#session.appID#' target="_blank">View Application</a>
 				</div>
 			</cfoutput>
 		</cfif>
@@ -127,7 +118,7 @@
 				</cfloop>
 			</table>
 			<cfif isAdmin eq 1>
-				<input type="hidden" name="numDocuments" id="numDocuments" value="<cfoutput>#iterator#</cfoutput>">
+				<input type="hidden" name="numDocuments" id="numDocuments" value="<cfoutput>#iterator#</cfoutput>"/>
 			</cfif>
 		</div>
 		<!-- if admin make page a form -->
