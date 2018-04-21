@@ -1,17 +1,28 @@
-.email-form {
+.container-div {
+	height: 100%;
 	display: flex;
-	flex-flow: column;
+	flex-direction: column;
+}
+
+.email-form {
+	flex: 1 0 auto;
+	display: flex;
+	flex-direction: column;
+
 }
 .email-form .message {
-	flex: 1 1 auto;
+	flex: 1 0 auto;
+	display: flex;
+	flex-direction: column;
+	margin: 15px;
 }
 .email-form .message > textarea {
-	margin: 15px;
+	flex: 1 0 auto;
 	resize: none;
-	height: 100%;
+	box-sizing: border-box;
 }
 .email-form .labeled {
-	flex: 0 1 auto;
+	flex: 0 0 auto;
 }
 
 .labeled {
@@ -43,6 +54,7 @@
 	background-color: #449d44;
 	border-color: #398439;
 }
+
 
 
 
