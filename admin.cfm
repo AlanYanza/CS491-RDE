@@ -6,7 +6,7 @@
 <!-- gather required page data -->
 <cfset AdminPull=createObject('component','components.Admin')/>
 <cfset allApplications=AdminPull.GetAllApplications()/>
-<cfset FormName=AdminPull.getNameInfo()/>
+
 <!---<cfdump var="#allApplications#"/> --->
 <!---<cfdump var="#FormName#"/> --->
 
@@ -17,13 +17,28 @@
     <cfinclude template="head.cfm"/>
     <script>
 	$(document).ready(function(){
-	    $('[data-toggle="tooltip"]').tooltip();   
+	    $('[data-toggle="tooltip"]').tooltip();
+		$("#myInput1").on("keyup", function() {
+				console.log("hi");
+			var value = $(this).val().toLowerCase();
+			$("#inProcess div.panel").filter(function() {
+			  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
 	});
 	</script>
 </head>
 <body>
 <cfinclude template="navbar.cfm"/>
 <div class="container" style="margin-top:20px">
+	<cfif IsDefined('url.ApproveChange')>
+		<cfoutput>
+			<div class="alert alert-success">
+			<a href="##" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Success! </strong>Application Status Changed to Approved
+			</div>
+		</cfoutput> 
+	</cfif>
 	<div class="page-header">
 		<div class="text-center"><h1>Admin Portal</h1></div>
 	</div>
@@ -31,15 +46,19 @@
 		<li class="active"><a data-toggle="tab" href="#submitted">Home</a></li>
 		<li><a data-toggle="tab" href="#inProcess">In Progess</a></li>
 		<li><a data-toggle="tab" href="#returned">Returned</a></li>
+		<li><a data-toggle="tab" href="#approved">Approved</a></li>
 	</ul>
 	<br/>
 	<div class="tab-content">  
 		<div id="submitted" class="tab-pane fade in active">
+		<input class="form-control" id="myInput" type="text" placeholder="Search.."></br>
 		<cfloop query="allApplications">
 			<cfif #STATUS# eq "R">
-				<cfoutput>					
+				<cfoutput>	
+					<form action = './scripts/AdminS.cfm' method="POST">
 					<div class='panel panel-default'>
 						<div class='panel-heading'>App ID - #APPID# | #FName# #LNAME#</div>
+						<input type="hidden" name = "appID" value="<cfoutput>#APPID#</cfoutput>">
 						<div class='panel-body'>
 							<div class='row text-center'>
 								<div class='col-sm-3'>#FName# #LNAME#</div>
@@ -49,24 +68,26 @@
 									<div class='col-sm-3'><strong>#DATESUBMITED#</strong></div>
 								</cfif>
 								<div class='col-sm-3'><strong><a href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'>View Application</a></strong></div>
-									<button type="button" class="btn btn-default"><span class="text-success">Approve</span></button>
-									<button type="button" class="btn btn-default"><span class="text-info">Return</span></button>
-									<button type="button" class="btn btn-default"><span class="text-danger">Deny</span></button>
-								<div class='panel-body'><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>Document Tracker Status</a></div>
+									<button name="button" type="submit" class="btn btn-default" value="Approve"><span class="text-success">Approve</span></button>
+									<button name="button" type="submit" class="btn btn-default" value="Return"><span class="text-info">Return</span></button>
+									<button name="button" type="submit" class="btn btn-default" value="Deny"><span class="text-danger">Deny</span></button>
 							</div>
 						</div>
+						<div class='panel-footer'><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>Document Tracker Status</a></div>
 					</div>
+					</form>
 				</cfoutput>
 			</cfif>
 		</cfloop>
 		</div>
-
-		<div id="inProcess" class="tab-pane fade">
+		
+		<div id="approved" class="tab-pane fade">
+		<input class="form-control" id="myInput" type="text" placeholder="Search.."></br>
 		<cfloop query="allApplications">
-			<cfif #STATUS# eq "P">
+			<cfif #STATUS# eq "A">
 				<cfoutput>					
 					<div class='panel panel-default'>
-						<div class='panel-heading'>App ID - #APPID# | #FName# #LNAME#</div>
+						<div class='panel-heading'>App ID - #APPID#</div>
 						<div class='panel-body'>
 							<div class='row'>
 								<div class='col-sm-3'>#FName# #LNAME#</div>
@@ -85,11 +106,45 @@
 		</cfloop>
 		</div>
 
-		<div id="returned" class="tab-pane fade">
+		<div id="inProcess" class="tab-pane fade">
+		<input class="form-control" id="myInput1" type="text" placeholder="Search.."></br>
 		<cfloop query="allApplications">
-			<cfif #STATUS# eq "D">
+			<cfif #STATUS# eq "P">
 				<cfoutput>					
 					<div class='panel panel-default'>
+						<div class='panel-heading'>App ID - #APPID#</div>
+						<div class='panel-body'>
+							<div class='row'>
+								<cfif #FName# eq "">
+								<div class='col-sm-3'>No Name Inputed</div>
+								<cfelse>
+								<div class='col-sm-3'>#FName# #LNAME#</div>
+								</cfif>
+								<cfif #DATESUBMITED# eq "">
+									<div class='col-sm-3'><strong>IN PROGRESS</strong></div>
+									<cfelse>
+									<div class='col-sm-3'><strong>#DATESUBMITED#</strong></div>
+								</cfif>
+								<div class='col-sm-3'><strong><a href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'>View Application</a></strong></div>
+							</div>							
+						</div>
+						<div class='panel-footer'><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>Document Tracker Status</a></div>
+					</div>
+				</cfoutput>
+			</cfif>
+		</cfloop>
+		</div>
+
+		<div id="returned" class="tab-pane fade">
+		<input class="form-control" id="myInput" type="text" placeholder="Search.."></br>
+		<cfloop query="allApplications">
+			<cfif #STATUS# eq "N" || #STATUS# eq "D">
+				<cfoutput>	
+					<cfif #STATUS# eq "D">
+						<div class='panel panel-danger'>
+						<cfelse>
+						<div class='panel panel-default'>
+					</cfif>
 						<div class='panel-heading'>App ID - #APPID# #FName# #LNAME#</div>
 						<div class='panel-body'>
 							<div class='row text-center'>
@@ -100,12 +155,10 @@
 									<div class='col-sm-3'><strong>#DATESUBMITED#</strong></div>
 								</cfif>
 								<div class='col-sm-3'><strong><a href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'>View Application</a></strong></div>
-									<button type="button" class="btn btn-default"><span class="text-success">Approve</span></button>
-									<button type="button" class="btn btn-default"><span class="text-info">Return</span></button>
-									<button type="button" class="btn btn-default"><span class="text-danger">Deny</span></button>
-								<div class='panel-body'><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>Document Tracker Status</a></div>
+									<button name="button" type="submit" class="btn btn-default" value="Return"><span class="text-info">Return</span></button>
 							</div>
 						</div>
+						<div class='panel-footer'><a href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>Document Tracker Status</a></div>
 					</div>
 				</cfoutput>
 			</cfif>

@@ -29,12 +29,29 @@
 		</cfquery>
 		<cfreturn Results1>
 	</cffunction>
-	<cffunction name="getNameInfo" returntype = "Query">
-		<cfquery name="formResult">
-			SELECT accessLevel, firstName, lastName, userID
-			FROM [User]
+	<cffunction name="Approve">
+		<cfargument name="appIDInput">
+		<cfargument name="Status">
+		<cfquery name="ApproveChange">
+			UPDATE UserApplication
+			SET status = <cfqueryparam value="#arguments.Status#" cfsqltype="cf_sql_varchar"/>
+			WHERE appID = <cfqueryparam value="#arguments.appIDInput#" cfsqltype="cf_sql_integar"/>			
 		</cfquery>
-		<cfreturn formResult>
 	</cffunction>
-	
+	<cffunction name="Returned">
+		<cfargument name="appIDInput">
+		<cfquery name="ReturnChange">
+			UPDATE UserApplication
+			SET status = 'N'
+			WHERE appID = <cfqueryparam value="#arguments.appIDInput#" cfsqltype="cf_sql_integar"/>			
+		</cfquery>
+	</cffunction>
+	<cffunction name="Deny">
+		<cfargument name="appIDInput">
+		<cfquery name="DenyChange">
+			UPDATE UserApplication
+			SET status = 'D'
+			WHERE appID = <cfqueryparam value="#arguments.appIDInput#" cfsqltype="cf_sql_integar"/>			
+		</cfquery>
+	</cffunction>
 </cfcomponent>
