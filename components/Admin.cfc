@@ -25,7 +25,7 @@
 					LName
 				FROM NJSection1
 				) as fullName on formData.dataID = fullName.dataID
-			ORDER BY appID DESC
+			ORDER BY dateSubmited ASC, UserApplication.appID DESC
 		</cfquery>
 		<cfreturn Results1>
 	</cffunction>
