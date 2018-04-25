@@ -32,7 +32,7 @@
 		<cfoutput>
 			<div class="alert alert-success">
 				<a href="##" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				<strong>Success! </strong>Application is under Review
+				<strong>Success! </strong>Application is under Review.
 			</div>
 		</cfoutput>
 	</cfif>
@@ -49,7 +49,7 @@
 		<cfoutput>
 			<div class="alert alert-danger">
 				<a href="##" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				Indicated Application doesn't exist for current User
+				Indicated Application doesn't exist for current User.
 			</div>
 		</cfoutput>
 	</cfif>
