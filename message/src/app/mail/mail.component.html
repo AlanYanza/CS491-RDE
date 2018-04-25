@@ -12,21 +12,24 @@
 			    </div>
 				<div class="navbar-collapse collapse" id="mail-tabs"> -->
 					<ul class="nav nav-tabs" ng-init="selectedTab = 'inbox'">
-						<li role="navigation" [class.active]="selectedTab ==='inbox'" (click)="getMessages()"><a class="nav-link">Inbox</a></li>
+						<li role="navigation" [class.active]="selectedTab ==='inbox'" (click)="getMessages()"><a class="nav-link">Inbox <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></a></li>
 						<li role="navigation" [class.active]="selectedTab ==='sent'" (click)="getSent()"><a class="nav-link">Sent</a></li>
 						<li role="navigation" [class.active]="selectedTab ==='trash'" (click)="getTrash()"><a class="nav-link">Trash</a></li>
 					</ul>
 				<!-- </div>
 			</nav> -->
-			<ul class="mail">
-				<li *ngFor="let msg of mail | paginate: {itemsPerPage: 10, currentPage: p }; let i = index" [class.read]="msg.READSTATUS === 'F'" [class.selected]="msg === selectedMsg" [routerLink] = "['/message', msg.MSGID]" (click)="onSelect(msg)"> 
-					<div><span class="subject">{{msg.SUBJECT}}</span><span class="date">{{msg.DATESENT}}</span></div>
-					<div>
-						<span class="sender">{{msg.SENDER}}</span>
-						<button *ngIf="selectedTab === 'inbox'" id="trashIcon" type="button" class="btn btn-danger btn-xs" (click)="deleteMessage(msg)">Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-					</div>
-				</li>
-			</ul>
+
+			<div class="mail-scroll">
+				<ul class="mail">
+					<li *ngFor="let msg of mail | paginate: {itemsPerPage: 10, currentPage: p }; let i = index" [class.read]="msg.READSTATUS === 'F'" [class.selected]="msg === selectedMsg" [routerLink] = "['/message', msg.MSGID]" (click)="onSelect(msg)"> 
+						<div><span class="subject">{{msg.SUBJECT}}</span><span class="date">{{msg.DATESENT}}</span></div>
+						<div>
+							<span class="sender">{{msg.SENDER}}</span>
+							<button *ngIf="selectedTab === 'inbox'" id="trashIcon" type="button" class="btn btn-danger btn-sm" (click)="deleteMessage(msg)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+						</div>
+					</li>
+				</ul>
+			</div>
 			<div class="container pagination-styles" id="pagination">
 				<pagination-controls (pageChange)="p = $event" autoHide="true"></pagination-controls>
 			</div>
