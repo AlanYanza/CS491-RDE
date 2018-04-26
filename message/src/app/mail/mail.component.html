@@ -21,8 +21,15 @@
 
 			<div class="mail-scroll">
 				<ul class="mail">
-					<li *ngFor="let msg of mail | paginate: {itemsPerPage: 10, currentPage: p }; let i = index" [class.read]="msg.READSTATUS === 'F'" [class.selected]="msg === selectedMsg" [routerLink] = "['/message', msg.MSGID]" (click)="onSelect(msg)"> 
-						<div><span class="subject">{{msg.SUBJECT}}</span><span class="date">{{msg.DATESENT}}</span></div>
+					<li *ngFor="let msg of mail | paginate: {itemsPerPage: 10, currentPage: page }; let i = index" 
+					[class.read]="msg.READSTATUS === 'F'" 
+					[class.selected]="msg === selectedMsg" 
+					[routerLink] = "['/message', msg.MSGID]" 
+					(click)="onSelect(msg)"> 
+						<div>
+							<span class="subject">{{msg.SUBJECT}}</span>
+							<span class="date">{{msg.DATESENT}}</span>
+						</div>
 						<div>
 							<span class="sender">{{msg.SENDER}}</span>
 							<button *ngIf="selectedTab === 'inbox'" id="trashIcon" type="button" class="btn btn-danger btn-sm" (click)="deleteMessage(msg)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
@@ -31,7 +38,12 @@
 				</ul>
 			</div>
 			<div class="container pagination-styles" id="pagination">
-				<pagination-controls (pageChange)="p = $event" autoHide="true"></pagination-controls>
+				<pagination-controls 
+					(pageChange)="page = $event" 
+					previousLabel="" 
+					nextLabel="" 
+					autoHide="true">						
+				</pagination-controls>
 			</div>
 		</div>
 		<div class="col-xs-9" id="content">

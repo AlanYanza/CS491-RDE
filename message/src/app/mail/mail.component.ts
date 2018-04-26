@@ -7,53 +7,55 @@ import { MailService } from '../mail.service';
 import { ActivatedRouteSnapshot } from '@angular/router';
 
 @Component({
-  selector: 'app-mail',
-  templateUrl: './mail.component.html',
-  styleUrls: ['./mail.component.css']
+	selector: 'app-mail',
+	templateUrl: './mail.component.html',
+	styleUrls: ['./mail.component.css']
 })
 export class MailComponent implements OnInit {
 	title = "Inbox";
-  
-  mail: Msg[];
+	
+	mail: Msg[];
 
 	selectedMsg: Msg; 
-  selectedTab: string;
-  p: number = 1;
+	selectedTab: string;
+	page: number = 1;
 
-  constructor(private mailService : MailService) { }
+	constructor(private mailService : MailService) { }
 
-  ngOnInit() {
-  	this.getMessages();
-  }
+	ngOnInit() {
+		this.getMessages();
+	}
 
-  getSent(): void {
-    this.mailService.getSent()
-      .subscribe(mail => this.mail = mail);
-    this.selectedTab = 'sent';
-  }
+	getSent(): void {
+		this.mailService.getSent()
+			.subscribe(mail => this.mail = mail);
+		this.selectedTab = 'sent';
+	}
 
-  getTrash(): void {
-    this.mailService.getTrash()
-      .subscribe(mail => this.mail = mail);
-    this.selectedTab = 'trash';
-  }
+	getTrash(): void {
+		this.mailService.getTrash()
+			.subscribe(mail => this.mail = mail);
+		this.selectedTab = 'trash';
+	}
 
-  getMessages(): void {
-  	this.mailService.getMessages()
-  		.subscribe(mail => this.mail = mail);
+	getMessages(): void {
+		this.mailService.getMessages()
+			.subscribe(mail => this.mail = mail);
 
-    this.selectedTab = 'inbox';
-  }
+		this.selectedTab = 'inbox';
+	}
 
-  deleteMessage(msg: Msg): void {
-    this.mail = this.mail.filter( m => msg.MSGID !== m.MSGID );
-    this.mailService.deleteMessage(msg).subscribe();
-  }
+	deleteMessage(msg: Msg): void {
+		this.mail = this.mail.filter( m => msg.MSGID !== m.MSGID );
+		this.mailService.deleteMessage(msg).subscribe();
+	}
 
-  onSelect(msg: Msg): void {
-  	this.selectedMsg = msg;
-  	msg.READSTATUS = 'T';
-    this.mailService.readMessage(msg).subscribe();
-  }
+	onSelect(msg: Msg): void {
+		this.selectedMsg = msg;
+		if (this.selectedTab === 'inbox') {
+			msg.READSTATUS = 'T';
+		}
+		this.mailService.readMessage(msg).subscribe();
+	}
 
 }
