@@ -5,9 +5,6 @@ import { MessageService } from '../message/message.service';
 
 import { User } from '../user'
 
-declare var jquery: any;
-declare var $: any;
-
 @Component({
 	selector: 'app-write-message',
 	templateUrl: './write-message.component.html',
@@ -46,24 +43,16 @@ export class WriteMessageComponent implements OnInit {
 			this.msg.recipient="bg1@company.com";
 		} 
 
-		// this.messageService.sendMessages(this.msg)
-		// 	.subscribe({
-	 //      error(msg) { console.log('Error sending message:', msg)}
-	 //    });
-
 		this.messageService.sendMessages(this.msg)
-			.subscribe(resp => {
-			// display its headers
-			const keys = resp.headers.keys();
-			console.log(keys.map(key =>
-				`${key}: ${resp.headers.get(key)}`));
-
-			// access the body directly, which is typed as `Config`.
-			console.log({ ... resp.body });
-		});
-
-		this.msg = {};
-		
+			.subscribe(
+ 				data => { 
+ 					this.messageService.success("Your message was sent successfully!");
+					this.msg = {};
+ 				},
+ 				err => { 
+ 					this.messageService.fail("Your message failed to send. Please try again later.")
+ 					console.log(err)
+ 				}
+		  	);		
 	}
-
 }

@@ -16,7 +16,7 @@ import { map } from 'rxjs/operators/map';
 export class MailContentComponent implements OnInit {
   title = "Message";
 
-  msg = this.route.data.pipe(
+  msg$ = this.route.data.pipe(
 	map((data: any): Msg => {
 		return data.message;
 	})
