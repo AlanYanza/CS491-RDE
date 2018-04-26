@@ -8,11 +8,20 @@
 	<cfset emailAddress=emailToolObj.retrieveEmailAddress(session.userID)>
 	<cfset emailToolObj.sendNewApplicationEmail(emailAddress,'ADDP/HICP')>
 	<!-- Create an new Application in the Table -->
-	<cfset FormClass.createApplication()/>
+	<cfset newAppID=FormClass.createApplication()/>
+	<cfset session.appID=newAppID>
 </cfif>
-<!-- If not a new Application, Check ApplicationStatus and redirect to homePage is needed -->
-<cfif NOT isDefined('url.new')>
-	<cfset FormClass.noAccessRedirect('/CS491-RDE/home.cfm')>
+<!--- If not a new Application --->
+<!--- If appID is not sent via url passing, redirects back to user home page --->
+<cfif isDefined('url.appID')>
+	<!-- create a session variable for appID -->
+	<cfset session.appID=url.appID>
+</cfif>
+<!-- If a user access level,More Session Page Protection -->
+<cfif session.accessLevel neq 'admin'>
+	<cfset SessionClass.checkIfuser()>
+	<cfset SessionClass.NoAppIDRedirect()>
+	<cfset SessionClass.validateAppID()>
 </cfif>
 
 <!DOCTYPE html>
@@ -128,7 +137,10 @@
 		</ul>
 		Report these in Item Number 22 in the “Other” category
 		<ul class="pager">
-			<li class="next"><a href="./dhas_instructions_page2.cfm">Next</a></li>
+			<cfset urlDirect="./dhas_page1.cfm?appID=" & session.appID>
+			<li class="nextTest"><a href="<cfoutput>#urlDirect#</cfoutput>">Go to Application</a></li>
+			<cfset urlDirect="./dhas_instructions_page2.cfm?appID=" & session.appID>
+			<li class="nextTest"><a href="<cfoutput>#urlDirect#</cfoutput>">Next</a></li>
 		</ul>
 	</div>
 </div>

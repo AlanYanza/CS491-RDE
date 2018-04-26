@@ -528,7 +528,7 @@
 	</div>
 	</div>
 	<div class="text-center">
-		<button type="submit" class="btn btn-default" name="previous" value="prevous">Previous</button>
+		<button type="submit" class="btn btn-default" name="previous" value="prevous">Go to Instructions</button>
 		<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
 			<button type="submit" class="btn btn-default" name="exit" value="exit">Exit</button>
 		<cfelse>

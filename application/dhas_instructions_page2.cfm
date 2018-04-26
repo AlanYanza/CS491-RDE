@@ -1,8 +1,17 @@
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
 <cfset FormClass=createObject('component','CS491-RDE.components.Form').init('NJ',session.userID)/>
-<!-- Check ApplicationStatus and redirect to homePage is needed -->
-<cfset FormClass.noAccessRedirect('/CS491-RDE/home.cfm')/>
+<!--- If appID is not sent via url passing, redirects back to user home page --->
+<cfif isDefined('url.appID')>
+	<!-- create a session variable for appID -->
+	<cfset session.appID=url.appID>
+</cfif>
+<!-- If a user access level,More Session Page Protection -->
+<cfif session.accessLevel neq 'admin'>
+	<cfset SessionClass.checkIfuser()>
+	<cfset SessionClass.NoAppIDRedirect()>
+	<cfset SessionClass.validateAppID()>
+</cfif>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -74,8 +83,12 @@
 	</p>
 
 	<ul class="pager">
-		<li class="previous"><a href="./dhas_instructions_page1.cfm">Previous</a></li>
-		<li class="next"><a href="./dhas_instructions_page3.cfm">Next</a></li>
+		<cfset urlDirect="./dhas_instructions_page1.cfm?appID=" & session.appID>
+		<li class="previous"><a href="<cfoutput>#urlDirect#</cfoutput>">Previous</a></li>
+		<cfset urlDirect="./dhas_instructions_page3.cfm?appID=" & session.appID>
+		<li class="next"><a href="<cfoutput>#urlDirect#</cfoutput>">Next</a></li>
+		<cfset urlDirect="./dhas_page1.cfm?appID=" & session.appID>
+		<li class="nextTest"><a href="<cfoutput>#urlDirect#</cfoutput>">Go to Application</a></li>
 	</ul>
 </div>
 </body>

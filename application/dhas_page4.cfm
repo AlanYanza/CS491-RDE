@@ -24,6 +24,7 @@
 	<cfinclude template="../head.cfm"/>
 	<script>
 	  	"use strict";
+  		
 		$(document).ready(function(){
 			<!--- Determine Flag(reviewing or editing) --->
 			<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
@@ -94,7 +95,7 @@
 					$("input[type=text][name=CovOtherTxt]").removeAttr("required", "true");
 				}
 			}
-
+			
 			function relationCheck() {
 				$("input[type=text][name=relOther]").hide();
 				$("input[type=text][name=relOther]").removeAttr("required", "true");
@@ -134,18 +135,28 @@
 			$("button[type=submit][name=previous]").click(function() {
 				$("form").find("input").removeAttr("required");
 			});
-		});
-		$(document).keypress(
-			function(event){
-				<!---  && ($(event.target)[0]!=$("textarea")[0]) allows return in address textareas --->
-				if (event.which == '13'  && (
-					$(event.target)[0]!=$("textarea")[0]) || $(event.target)[0]!=$("textarea")[1] ||
-					$(event.target)[0]!=$("textarea")[2]))) 
-					{
-					event.preventDefault();
+			
+			function insideTextArea(){
+	  			if ($(event.target)[0]==$("textarea")[0] || $(event.target)[0]==$("textarea")[1] || $(event.target)[0]==$("textarea")[2]){
+					return true;
+				}
+				else 
+				{
+					return false;
 				}
 			}
-		);
+			
+			$(document).keypress(
+				function(event){
+					//&& ($(event.target)[0]!=$("textarea")[0]) allows return in address textareas
+					if (event.which == '13'  && insideTextArea()==false) 
+						{
+							event.preventDefault();
+						}
+					}
+			);
+			});
+		
 	</script>
 </head>
 <body>
@@ -246,7 +257,7 @@
 			Insurance Carrier:
 			<input type="text" class="form-control" name="InsCarrier" value="<cfoutput>#subformData.InsCarrier#</cfoutput>"/><br/>
 			Address:
-			<textarea type="text" class="form-control" name="InsCarAddr"><cfoutput>#subformData.InsCarAddr#</cfoutput></textarea><br/>
+			<textarea type="text" class="form-control" name="InsCarAddr" id="InsCarAddr"><cfoutput>#subformData.InsCarAddr#</cfoutput></textarea><br/>
 			Telephone Number:
 			<input type="text" class="form-control" name="InsCarPhone" value="<cfoutput>#subformData.InsCarPhone#</cfoutput>" /><br/>
 			Policy Number:
@@ -255,7 +266,7 @@
 			Employer/Union Name:
 			<input type="text" class="form-control" name="EmpUnName" value="<cfoutput>#subformData.EmpUnName#</cfoutput>"/><br/>
 			Address:
-			<textarea type="text" class="form-control" name="EmpUnAddr"><cfoutput>#subformData.EmpUnAddr#</cfoutput></textarea><br/>
+			<textarea type="text" class="form-control" name="EmpUnAddr" id="EmpUnAddr"><cfoutput>#subformData.EmpUnAddr#</cfoutput></textarea><br/>
 		</div>
 
 		<div class="col-sm-6">
@@ -263,7 +274,7 @@
 			Insurance Carrier:
 			<input type="text" class="form-control" name="PresCar" value="<cfoutput>#subformData.PresCar#</cfoutput>"/><br/>
 			Address:
-			<textarea type="text" class="form-control" name="PresCarAddr"><cfoutput>#subformData.PresCarAddr#</cfoutput></textarea><br/>
+			<textarea type="text" class="form-control" name="PresCarAddr" id="PresCarAddr"><cfoutput>#subformData.PresCarAddr#</cfoutput></textarea><br/>
 			Telephone Number:
 			<input type="text" class="form-control" name="PresCarPhone" value="<cfoutput>#subformData.PresCarPhone#</cfoutput>"/><br/>
 			ID Number:
