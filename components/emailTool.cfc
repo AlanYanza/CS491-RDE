@@ -52,6 +52,18 @@
 		                timeStart & "<br>Your Application is now Under Review.You will be notified when the status " &
 		                "of your application has been determined<br>">
 		<cfset sendEmail(toEmail,subject,message)>
-	</cffunction>     
+	</cffunction> 
+	
+	<cffunction name="sendStatusChangeEmail" hint="emails user when a status change occurs on their account" >
+		<cfargument name="emailAddressInput" hint="email address to send email to" >
+		<cfargument name="formTypeInput" hint="the name of the Application started" >
+		<cfargument name="newStatus" hint="the new status after the Application status change" >
+		<cfset var toEmail=arguments.emailAddressInput>
+		<cfset var dateStarted=DateFormat(Now())>
+		<cfset var timeStart=TimeFormat(Now())>
+		<cfset subject=arguments.formTypeInput & " Application status changed: " & arguments.newStatus>
+		<cfset message="Your " & arguments.formTypeInput & " has been changed to the following Status: " & arguments.newStatus>
+		<cfset sendEmail(toEmail,subject,message)>
+	</cffunction>      
 	
 </cfcomponent>
