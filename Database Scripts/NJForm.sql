@@ -23,7 +23,7 @@ BEGIN
 
 	--Retrieve FormTypeID of Form
 	DECLARE @NJFORMID int;
-	SET @NJFORMID = (SELECT formTypeID FROM FORMS WHERE state='NJ' AND AppDescription='NJ-ADDP/HICP' );
+	SET @NJFORMID = (SELECT formTypeID FROM FORMS WHERE state='NJ' AND AppDescription='ADDP/HICP' );
 
 	--Insert form into ApplicationLinks Table
 	IF (NOT EXISTS(SELECT * FROM ApplicationLinks WHERE state='NJ' AND formTypeID=@NJFORMID))
@@ -250,9 +250,11 @@ BEGIN
 				CPCPhone varchar(16) NOT NULL DEFAULT(''),
 				PName varchar(100) NOT NULL DEFAULT(''),
 				PPhone varchar(16) NOT NULL DEFAULT(''),
-				signature varbinary(max) DEFAULT (NULL),
+				--signature varbinary(max) DEFAULT (NULL),
+				signature varchar(max) DEFAULT (NULL),
 				signatureDate date DEFAULT GETDATE(),
-				spouseSig varbinary(max) DEFAULT (NULL),
+				--spouseSig varbinary(max) DEFAULT (NULL),
+				spouseSig varchar(max) DEFAULT (NULL),
 				spouseSigDate date DEFAULT GETDATE()
 			);
 			PRINT 'Successfully created "NJSection4" Table';
