@@ -1,6 +1,6 @@
 <cfcomponent rest="true" restpath="/MessageSystem">
 
-	<!-- Retrive the user's access level --> 
+	<!-- Retrieve the user's access level --> 
 	<cffunction name="getAccessLevel" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="getAccessLevel" produces="application/json">
 		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 		<cfset userLevel = SessionClass.passUserAccessLevel() /> 
@@ -151,8 +151,9 @@
 		<cfset emailSubject="RDEApplication Unread messages">
 		<cfset emailMessage="You have received a new message in your RDEApplication Inbox<br>">
 		<cfset emailToolObj.sendEmail(emailAddress,emailSubject,emailMessage)>  --->
-
-		<cfreturn serializeJSON("sendToSent", 'struct') /> 
+		
+		<cfset successMsg={"response": "sent"} />
+		<cfreturn serializeJSON(successMsg) /> 
 
 	</cffunction>
 
