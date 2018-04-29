@@ -1,14 +1,12 @@
-<!-- Session Page Protection -->
+<!--- If user isn't signed in, redirect them back to login page' --->
 <cfset SessionClass=createObject('component','components.SessionTools')/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<!--- If user doesn't have admin access level redirect them back user home page' --->
 <cfset SessionClass.checkIfadmin()/>
 <cfset SessionClass.ClearSessionAppID() > <!-- If appID session variable set, clear it -->
-<!-- gather required page data -->
+<!--- gather required page data --->
 <cfset AdminPull=createObject('component','components.Admin')/>
 <cfset allApplications=AdminPull.GetAllApplications()/>
-
-<!---<cfdump var="#allApplications#"/> --->
-<!---<cfdump var="#FormName#"/> --->
 
 <!DOCTYPE html>
 <html lang="en">
