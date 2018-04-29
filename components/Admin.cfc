@@ -4,7 +4,7 @@
 	<cffunction name="GetAllApplications" returntype = "Query">
 		<cfquery name="Results1">
 			SELECT 
-				UserApplication.appID,
+				UserApplication.appID AS appID,
 				userID,
 				FName,
 				LName,

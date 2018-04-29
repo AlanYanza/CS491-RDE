@@ -93,8 +93,6 @@
 		<!-- Get string of signature from form and remove starting header -->
 		<cfset binaryStringRep=form[arguments.signatureField]>
 		<cfset binaryStringRep=REReplace(binaryStringRep,'data:image/png;base64,','')>
-		<!-- Convert the base64 string representation to a binary string -->
-		<!---<cfset binaryString=BinaryDecode(binaryStringRep,"Base64")>--->
 		<!-- Insert the binary string into subTable -->
 		<cfquery>
 			UPDATE #tableName# SET #arguments.signatureField#= <cfqueryparam value="#binaryStringRep#" cfsqltype="cf_sql_longvarchar">,

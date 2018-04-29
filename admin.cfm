@@ -64,10 +64,10 @@
 		<div class="text-center"><h1>Admin Portal</h1></div>
 	</div>
 	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" href="#submitted">Home</a></li>
-		<li><a data-toggle="tab" href="#inProcess">In Progess</a></li>
+		<li class="active"><a data-toggle="tab" href="#submitted">Submitted</a></li>
 		<li><a data-toggle="tab" href="#returned">Returned</a></li>
 		<li><a data-toggle="tab" href="#approved">Approved</a></li>
+		<li><a data-toggle="tab" href="#inProcess">In Progess</a></li>
 	</ul>
 	<br/>
 	<div class="tab-content">  
@@ -78,7 +78,8 @@
 				<cfoutput>	
 					<form action = './scripts/AdminS.cfm' method="POST">
 					<div class='panel panel-default'>
-						<div class='panel-heading'>App ID - #APPID#</div>
+						<cfset email=AdminPull.getEmailFromAppID(allApplications.appID)>
+						<div class='panel-heading'>App ID - #appID# - #email#</div>
 						<input type="hidden" name = "appID" value="<cfoutput>#APPID#</cfoutput>">
 						<div class='panel-body'>
 							<div class='row text-center'>
@@ -116,7 +117,8 @@
 			<cfif #STATUS# eq "P">
 				<cfoutput>
 					<div class='panel panel-default'>
-						<div class='panel-heading'>App ID - #APPID#</div>
+						<cfset email=AdminPull.getEmailFromAppID(allApplications.appID)>
+						<div class='panel-heading'>App ID - #appID# - #email#</div>
 						<div class='panel-body'>
 							<div class='row text-center'>
 								<div class='col-sm-4'><h4>Patient Name</h4></div>
@@ -125,7 +127,7 @@
 							</div>
 							<div class='row text-center'>
 								<cfif #FName# eq "" || #LNAME# eq "">
-								<div class='col-sm-4'>No Name Inputed</div>
+								<div class='col-sm-4'>No Name Provided</div>
 								<cfelse>
 								<div class='col-sm-4'>#FName# #LNAME#</div>
 								</cfif>
@@ -155,7 +157,8 @@
 						<cfelse>
 						<div class='panel panel-default'>
 					</cfif>
-						<div class='panel-heading'>App ID - #APPID#</div>
+						<cfset email=AdminPull.getEmailFromAppID(allApplications.appID)>
+						<div class='panel-heading'>App ID - #appID# - #email#</div>
 						<input type="hidden" name="appID" value="<cfoutput>#APPID#</cfoutput>">
 						<div class='panel-body'>
 							<div class='row text-center'>
@@ -191,7 +194,8 @@
 			<cfif #STATUS# eq "A">
 				<cfoutput>					
 					<div class='panel panel-default'>
-						<div class='panel-heading'>App ID - #APPID#</div>
+						<cfset email=AdminPull.getEmailFromAppID(allApplications.appID)>
+						<div class='panel-heading'>App ID - #appID# - #email#</div>
 						<div class='panel-body'>
 							<div class='row text-center'>
 								<div class='col-sm-4'><h4>Patient Name</h4></div>
@@ -200,7 +204,7 @@
 							</div>
 							<div class='row text-center'>
 								<cfif #FName# eq "">
-								<div class='col-sm-4'>No Name Inputed</div>
+								<div class='col-sm-4'>No Name Provided</div>
 								<cfelse>
 								<div class='col-sm-4'>#FName# #LNAME#</div>
 								</cfif>
