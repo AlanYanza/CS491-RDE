@@ -25,7 +25,6 @@
 			});
 		});
 
-	    $('[data-toggle="tooltip"]').tooltip();
 		$("#myInput2").on("keyup", function() {
 			var value = $(this).val().toLowerCase();
 			$("#approved div.panel").filter(function() {
@@ -33,7 +32,6 @@
 			});
 		});
 
-	    $('[data-toggle="tooltip"]').tooltip();
 		$("#myInput3").on("keyup", function() {
 			var value = $(this).val().toLowerCase();
 			$("#inProcess div.panel").filter(function() {
@@ -41,7 +39,6 @@
 			});
 		});
 
-	    $('[data-toggle="tooltip"]').tooltip();
 		$("#myInput4").on("keyup", function() {
 			var value = $(this).val().toLowerCase();
 			$("#returned div.panel").filter(function() {
@@ -197,23 +194,22 @@
 						<div class='panel-heading'>App ID - #APPID#</div>
 						<div class='panel-body'>
 							<div class='row text-center'>
-								<div class='col-sm-3'><h4>Patient Name</h4></div>
-								<div class='col-sm-3'><h4>Submitted Date</h4></div>
-								<div class='col-sm-3'></div>
-								<div class='col-sm-3'><h4>Action</h4></div>
+								<div class='col-sm-4'><h4>Patient Name</h4></div>
+								<div class='col-sm-4'><h4>Submitted Date</h4></div>
+								<div class='col-sm-4'></div>
 							</div>
 							<div class='row text-center'>
 								<cfif #FName# eq "">
-								<div class='col-sm-3'>No Name Inputed</div>
+								<div class='col-sm-4'>No Name Inputed</div>
 								<cfelse>
-								<div class='col-sm-3'>#FName# #LNAME#</div>
+								<div class='col-sm-4'>#FName# #LNAME#</div>
 								</cfif>
 								<cfif #DATESUBMITED# eq "">
-									<div class='col-sm-3'>IN PROGRESS</div>
+									<div class='col-sm-4'>IN PROGRESS</div>
 									<cfelse>
-									<div class='col-sm-3'>#DATESUBMITED#</div>
+									<div class='col-sm-4'>#DATESUBMITED#</div>
 								</cfif>
-								<div class='col-sm-3'><a class="btn btn-info" href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'>View Application</a></div>
+								<div class='col-sm-4'><a class="btn btn-info" href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'>View Application</a></div>
 							</div>							
 						</div>
 						<div class='panel-footer'><a class="btn btn-info" href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>Document Tracker Status</a></div>
