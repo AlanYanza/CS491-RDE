@@ -13,6 +13,7 @@ import { Alert } from '../alert';
 export class StatusPageComponent implements OnInit {
 	title = 'Welcome';
 
+	// Contains the type of alert and whether or not to show
 	alertMessage$: Observable<Alert> = this.messageService.getAlert();
 
 	constructor(private messageService: MessageService) {}
