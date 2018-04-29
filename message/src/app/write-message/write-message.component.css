@@ -30,6 +30,10 @@
 	padding: 15px;
 }
 
+.labeled .col-form-label {
+	line-height: 270%;
+}
+
 .input { 
 	border: none;
 }
