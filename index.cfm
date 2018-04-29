@@ -1,6 +1,6 @@
-<!-- If user is already signed in, prevent them entering -->
+<!--- If user is already signed in, prevent them entering --->
 <cfset SessionClass=createObject('component','components.SessionTools')/>
-<cfset SessionClass.ClearSessionAppID() > <!-- If appID session variable set, clear it -->
+<cfset SessionClass.ClearSessionAppID() > <!--- If appID session variable set, clear it --->
 <cfset SessionClass.ifAlreadySignIn()/>
 
 <!DOCTYPE html>
@@ -12,6 +12,7 @@
 <body>
 <cfinclude template="navbar.cfm">
 <div class="container">
+	<!--- If user registered successfully, alert user --->
 	<cfif IsDefined('url.registered')>
 		<cfoutput>
 			<div class="alert alert-success">
@@ -20,6 +21,7 @@
 			</div>
 		</cfoutput>
 	</cfif>
+	<!--- If user provided wrong login, alert user --->
 	<cfif IsDefined('url.wrongLogin')>
 		<cfoutput>
 			<div class="alert alert-warning">
@@ -32,7 +34,7 @@
 		<h1>Login</h1>
 	</div>
 	<div class="row">
-		<!-- Login Section-->
+		<!--- Login Section--->
 		<div class="col-sm-6">
 			
 			<p>Not a member? <a href="register.cfm">Register here</a></p>

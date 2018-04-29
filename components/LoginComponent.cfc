@@ -5,6 +5,7 @@
 	<cfset Variables.lastName=''/>
 	<cfset Variables.accessLevel=''/>
 	
+	<!--- Constructor --->
 	<cffunction name="init" displayname="LoginComponentConstructor" hint="constructor for the LoginComponent CFC" >
 		<cfargument name="emailInput" type="string" displayname="email" hint="email address inputed by the user in the form" />
 		<cfset email=emailInput/>
@@ -19,7 +20,7 @@
 		<cfreturn this>
 	</cffunction>
 		
-	<!-- Query's for User's login data' -->
+	<!--- Query's for User's login data' --->
 	<cffunction name="getUserLogin" displayname="GetUserLoginInformation'" hint="Used to query for user's login data" 
 	returntype="Query" >
 		<cfquery name="userData" result="queryResult">
@@ -29,7 +30,7 @@
 		<cfreturn userData>
 	</cffunction>
 	
-	<!-- validate User password -->
+	<!--- validate User password --->
 	<cffunction name="validateInputPassword" displayname="Validate User Input Password" hint="This is used to validate the user's input password" 
 	returntype="Numeric" >
 		<cfargument name="inputPass" displayname="UserInputPassword" hint="the password the user put into login form" >
@@ -45,7 +46,7 @@
 		</cfif>
 	</cffunction>
 	
-	<!-- Check if the user exists on on the database -->
+	<!--- Check if the user exists on on the database --->
 	<cffunction name="checkIfUserExist" displayname="CheckIfUserExist" hint="CHeck to see if User is in the database(return 1 if exist)" 
 	returntype="Numeric">
 		<cfargument name="email" displayname="userEmailAddress" hint="input for email address inputed by user in login form'" >
@@ -60,7 +61,7 @@
 		</cfif>	
 	</cffunction>
 	
-	<!-- Set User Session Variables --->
+	<!--- Set User Session Variables ---->
 	<cffunction name="setSessionVariables" displayname="set User Session Variables" hint="Set the Users session variables if user exist" >
 		<cfset session.userID=userID/>
 		<cfset session.accessLevel=accessLevel/>

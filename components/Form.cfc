@@ -3,7 +3,7 @@
 	<cfset Variables.formTypeID=0 />
 	<cfset Variables.userID=0 />
 	
-	<!-- Constructor -->
+	<!---- Constructor ---->
 	<cffunction name="init" displayname="Form constructor" hint="Form CFC constructor" >
 		<cfargument name="stateInput" type="string" >
 		<cfargument name="userIDInput" type="string" >
@@ -13,10 +13,10 @@
 		<cfreturn this>
 	</cffunction>
 	
-	<!-- add a new Application to Database -->
+	<!--- add a new Application to Database --->
 	<cffunction name="createApplication" displayname="createNewApplicationTableEntry" 
 	hint="create an new entry in the UserApplication Table" returntype="Numeric" >
-		<!-- Insert Application Into Database -->
+		<!--- Insert Application Into Database --->
 		<cfQuery>
 			INSERT INTO UserApplication (userID,formTypeID,HICPApp,status) VALUES(
 				<cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" >,
@@ -25,19 +25,19 @@
 				<cfqueryparam value="P" cfsqltype="cf_sql_varchar" >
 			)
 		</cfquery>
-		<!-- query DB for appID of newly inserted Application-->
+		<!--- query DB for appID of newly inserted Application--->
 		<cfQuery name="appIDResult" result="queryStat">
 			SELECT MAX(appID) As LastAppID FROM UserApplication WHERE
 			userID=<cfqueryparam value="#userID#" cfsqltype="cf_sql_integer" >   
 		</cfquery>
 		<cfset var appID=appIDResult.LastAppID >
-		<!-- Insert Application Into UserForm Data to create a dataID -->
+		<!--- Insert Application Into UserForm Data to create a dataID --->
 		<cfquery >
 			INSERT INTO UserFormData (appID) VALUES(
 				<cfqueryparam value="#appID#" cfsqltype="cf_sql_integer">
 			)			
 		</cfquery>
-		<!-- Get the most recent AppID (the appID of the application inserted) -->
+		<!--- Get the most recent AppID (the appID of the application inserted) --->
 		<cfquery name="createAppIDResult" result="queryStat">
 			SELECT Max(appID) as createAppID FROM UserApplication WHERE
 			userID=<cfqueryparam value="#session.userID#" cfsqltype="cf_sql_integer" >
@@ -55,7 +55,7 @@
 		<cfreturn false>
 	</cffunction>
 	
-	<!-- update an existing application Status -->
+	<!--- update an existing application Status --->
 	<cffunction name="updateApplicationStatus" displayname="UpdateExistingApplicationTableEntry"
 	hint="update data about an existing UserApplication Table Entry">
 		<cfargument name="statusInput" type="string" required="false" >
@@ -66,19 +66,19 @@
 		</cfquery>
 	</cffunction>
 	
-	<!-- submit an Application -->
+	<!--- submit an Application --->
 	<cffunction name="submitApplication" displayname="submitApplication" 
 	hint="Submit an Application into the DB" >
-		<!-- set Application Status to 'R' -->
+		<!--- set Application Status to 'R' --->
 		<cfset updateApplicationStatus('R')>
-		<!-- Update DateSubmited to current date -->
+		<!--- Update DateSubmited to current date --->
 		<cfquery >
 			Update UserApplication SET dateSubmited=getDate() WHERE 
 			appID=<cfqueryparam value="#session.appID#" cfsqltype="cf_sql_integer" >
 		</cfquery>
 	</cffunction>
 	
-	<!-- update an existing application HICP Status -->
+	<!--- update an existing application HICP Status --->
 	<cffunction name="updateHICPStatus" displayname="updateHICPStatus" hint="updates HICP Status for an application">
 		<cfargument name="HICPStatusInput" type="string" >
 		<cfset HICP=HICPStatusInput />
@@ -88,7 +88,7 @@
 		</cfquery>
 	</cffunction>
 	
-	<!-- retreive HICP status -->
+	<!--- retreive HICP status --->
 	<cffunction name="retrieveHICPStatus" displayname="retrieveHICPStatus" hint="get the current HICP status" 
 	returntype="String" >
 		<cfquery name="HICPStatusResult" result="queryStats">
@@ -99,7 +99,7 @@
 		<cfreturn HICPStatus />
 	</cffunction>
 	
-	<!-- CheckApplicationStatus -->
+	<!--- CheckApplicationStatus --->
 	<cffunction name="CheckApplicationStatus" displayname="CheckApplicationStatus" hint="checks the current Application status" 
 	returntype="String"  >
 		<cfset Var appExist=checkIfAppExist()/>
@@ -115,7 +115,7 @@
 		<cfreturn status>
 	</cffunction>
 	
-	<!-- check if Application exist -->
+	<!--- check if Application exist --->
 	<cffunction name="checkIfAppExist" returntype="boolean" displayname="checkIfAppExist" hint="Checks to see if user has an application" >
 		<cfif session.appID eq 0>
 			<cfreturn false>
@@ -124,7 +124,7 @@
 		</cfif>
 	</cffunction>
 		
-	<!-- Retrieve a Form's AppID, returns 0 if none found -->
+	<!--- Retrieve a Form's AppID, returns 0 if none found --->
 	<cffunction name="getAppID" displayname="getUserApplicationID" hint="get the Application associted for the User" 
 	returntype="Numeric"  >
 		<cfquery name="AppIDResult" result="queryStats">
@@ -140,7 +140,7 @@
 		<cfreturn AppID>
 	</cffunction>
 	
-	<!-- Retrieve a Form's FormID-->
+	<!--- Retrieve a Form's FormID--->
 	<cffunction name="getFormID"  displayname="getFormIDForAState" hint="retrieves the formID for a specified State" 
 	returntype="Numeric" >
 		<cfquery name="FormIDResult" result="queryStats">
@@ -151,7 +151,7 @@
 		<cfreturn formTypeID>
 	</cffunction>
 	
-	<!-- redirect if no permission to edit Application -->
+	<!--- redirect if no permission to edit Application --->
 	<cffunction name="noAccessRedirect" displayname="ifNoAccessToApplicationRedirect"
 	hint="If user doesn't have access to edit form, redirect to specific location">
 		<cfargument name="destinationInput" type="string" >
@@ -162,7 +162,7 @@
 		</cfif>
 	</cffunction>
 	
-	<!-- Insert Required Document into Documents Table -->
+	<!--- Insert Required Document into Documents Table --->
 	<cffunction name="insertDocument" displayname="insertDocumentForApplication" 
 	hint="add a entry into the Application Documents Table for a specified Document" >
 		<cfargument name="documentlabelInput" hint="label on website for document to be inserted" type="string" >

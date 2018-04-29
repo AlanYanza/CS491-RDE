@@ -1,6 +1,6 @@
-<!-- If user is already signed in, prevent them entering -->
+<!--- If user is already signed in, prevent them entering --->
 <cfset SessionClass=createObject('component','components.SessionTools')/>
-<cfset SessionClass.ClearSessionAppID() > <!-- If appID session variable set, clear it -->
+<cfset SessionClass.ClearSessionAppID() > <!--- If appID session variable set, clear it --->
 <cfset SessionClass.ifAlreadySignIn()/>
 
 <!DOCTYPE html>
@@ -31,6 +31,7 @@
 <body>
 <cfinclude template="navbar.cfm">
 <div class="container">
+	<!--- If user already existed, alert user --->
 	<cfif IsDefined('url.Exist')>
 		<cfoutput>
 			<div class="alert alert-warning">

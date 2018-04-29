@@ -1,6 +1,6 @@
 <cfcomponent >
 	
-	<!-- retrieve the email address of a given userID -->
+	<!--- retrieve the email address of a given userID --->
 	<cffunction name="retrieveEmailAddress" hint="retrieve the email address for a specified user" >
 		<cfargument name="userIDInput" hint="indicated userID for which email address is needed" type="numeric" >
 		<cfquery name="emailResult" result="queryStat" >
@@ -10,6 +10,7 @@
 		<cfreturn email>
 	</cffunction>
 	
+	<!--- send an email notification to a given email address --->
 	<cffunction name="sendEmail" hint="sends an email" >
 		<cfargument name="emailAddressInput" hint="destination email address" type="string" >
 		<cfargument name="subjectInput" hint="Subject of message to be sent" type="string" >
@@ -22,6 +23,7 @@
 		</cfmail>
 	</cffunction>
 	
+	<!--- send a notification email when successful registration --->
 	<cffunction name="sendRegistrationEmail" hint="email send to indicated user's email after registration of an account" >
 		<cfargument name="emailAddressInput" hint="email address to send email to" >
 		<cfset var toEmail=arguments.emailAddressInput>
@@ -30,6 +32,7 @@
 		<cfset sendEmail(toEmail,subject,message)>
 	</cffunction>
 	
+	<!--- send a notification when a new application is created --->
 	<cffunction name="sendNewApplicationEmail" hint="email sent to tell user that they created a new Application" >
 		<cfargument name="emailAddressInput" hint="email address to send email to" >
 		<cfargument name="formTypeInput" hint="the name of the Application started" >
@@ -41,6 +44,7 @@
 		<cfset sendEmail(toEmail,subject,message)>
 	</cffunction>
 	
+	<!--- send a notification when a application is submitted  --->
 	<cffunction name="sendSubmitApplicationEmail" hint="email sent to tell user that they have submitted an application" >
 		<cfargument name="emailAddressInput" hint="email address to send email to" >
 		<cfargument name="formTypeInput" hint="the name of the Application started" >
@@ -54,6 +58,7 @@
 		<cfset sendEmail(toEmail,subject,message)>
 	</cffunction> 
 	
+	<!--- send a notification when user's application status changes  --->
 	<cffunction name="sendStatusChangeEmail" hint="emails user when a status change occurs on their account" >
 		<cfargument name="emailAddressInput" hint="email address to send email to" >
 		<cfargument name="formTypeInput" hint="the name of the Application started" >

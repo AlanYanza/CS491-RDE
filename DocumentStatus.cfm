@@ -1,23 +1,23 @@
-<!-- Session Page Protection -->
+<!--- Session Page Protection --->
 <cfset SessionClass=createObject('component','components.SessionTools')/>
 <cfset SessionClass.checkIfLoggedIn()/>
-<!-- If appID is not sent via url passing, redirects back to user home page -->
+<!--- If appID is not sent via url passing, redirects back to user home page --->
 <cfif isDefined('url.appID')>
 	<cfset session.appID=url.appID>
 </cfif>
-<!-- If a user access level,More Session Page Protection -->
+<!--- If a user access level,More Session Page Protection --->
 <cfif session.accessLevel neq 'admin'>
 	<cfset SessionClass.checkIfuser()>
 	<cfset SessionClass.NoAppIDRedirect()>
 	<cfset SessionClass.validateAppID()>
 </cfif>
-<!-- if admin set flag  --->
+<!--- if admin set flag  ---->
 <cfif session.accessLevel eq 'admin'>
 	<cfset isAdmin=true>
 <cfelse>
 	<cfset isAdmin=false>
 </cfif>
-<!-- Generate Document Information for User -->
+<!--- Generate Document Information for User --->
 <cfset UserObj=createObject('component','components.User').init(session.userID)/>
 <cfset DocumentTracker=UserObj.getDocuments()/>
 
@@ -50,7 +50,7 @@
 				</div>
 			</cfoutput>
 		</cfif>
-		<!-- if admin make page a form -->
+		<!--- if admin, make page a form --->
 		<cfif isAdmin eq 1>
 			<cfoutput><form action="scripts/DocStatusMgmt.cfm" method="POST"></cfoutput>
 		</cfif>
@@ -62,11 +62,11 @@
 	        		<th class="text-center">Received</th>
 	        		<th class="text-center">Date Received</th>
 	        	</tr>
-		        <!-- Interate though resultSet and display data-->
+		        <!--- Interate though resultSet and display data--->
 		        <cfset iterator=0>
 				<cfloop query="DocumentTracker">
 					<cfset iterator=iterator+1>
-					<!-- Determine State of Form-->
+					<!--- Determine State of Form--->
 					<cfset documentName = DocumentTracker.document/>
 					<cfset documentRequired = DocumentTracker.isRequired/>
 					<cfif #documentRequired# eq 'Y'>
@@ -81,10 +81,10 @@
 						<cfset documentReceived = 'No'/>	
 					</cfif>
 					<cfset dateReceived = DocumentTracker.dateReceived/>
-					<!-- Determine the Status of Application -->					
+					<!--- Determine the Status of Application --->					
 					<cfoutput>
 						<tr><td>#documentName#<input type="hidden" name="documentName#iterator#" id="documentName#iterator#" value="#documentName#" </td>
-						<!-- If admin make these dropdown menu -->
+						<!--- If admin, make these dropdown menu --->
 						<cfif isAdmin eq 1>
 							<cfoutput >
 								<td><select name="documentRequired#iterator#" id="documentRequired#iterator#" class="form-control">
@@ -95,7 +95,7 @@
 						<cfelse>
 							<cfoutput><td class="text-center">#documentRequired#</td></cfoutput>
 						</cfif>
-						<!-- If admin make these dropdown menu -->
+						<!--- If admin, make these dropdown menu --->
 						<cfif isAdmin eq 1>
 							<cfoutput >
 								<td><select name="documentReceived#iterator#" id="documentReceived#iterator#" class="form-control">
@@ -121,12 +121,12 @@
 				<input type="hidden" name="numDocuments" id="numDocuments" value="<cfoutput>#iterator#</cfoutput>"/>
 			</cfif>
 		</div>
-		<!-- if admin make page a form -->
+		<!--- if admin, make page a form --->
 		<cfif isAdmin eq 1>
 			<cfoutput><div class="text-center"><button type="submit" class="btn btn-primary" value="SubmitAdminChanges">Submit Changes</button></div><br></cfoutput>
 		</cfif>
     </div>
-	<!-- if admin make page a form -->
+	<!--- if admin, make page a form --->
 	<cfif isAdmin eq 1>
 		<cfoutput></form></cfoutput>
 	</cfif>

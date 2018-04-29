@@ -1,6 +1,7 @@
+<!--- If user isn't logged in, redirect them back to login page --->
 <cfset SessionClass=createObject('component','components.SessionTools')/>
 <cfset SessionClass.checkIfLoggedIn()/>
-<cfset SessionClass.ClearSessionAppID() > <!-- If appID session variable set, clear it -->
+<cfset SessionClass.ClearSessionAppID() > <!--- If appID session variable set, clear it --->
 <html !DOCTYPE>
 <head>
 	<title>Message Center</title>
