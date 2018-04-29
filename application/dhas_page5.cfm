@@ -37,16 +37,16 @@
 				</cfoutput>
 			</cfif>
 
-			var tempCanvas = document.getElementById("getDisplayImage");
-			var tempObject = new SignaturePad(tempCanvas, {backgroundColor: 'rgb(255, 255, 255)'});
-			var newHeight = $("#getDisplayImage").width() * .5257;
-			$("#getDisplayImage").css("height", newHeight.toString() + "px");
-			resizeCanvas(tempObject, tempCanvas);
-			tempObject.fromData(JSON.parse($("#signature").val()));
-			$("#signaturePic").html("<img src='" + tempObject.toDataURL() + "' class='img-responsive'  max-width='100%'>");
-			$("#temp").remove();
-
-
+			if ($("#signature").val() != "") {
+				var tempCanvas = document.getElementById("getDisplayImage");
+				var tempObject = new SignaturePad(tempCanvas, {backgroundColor: 'rgb(255, 255, 255)'});
+				var newHeight = $("#getDisplayImage").width() * .5257;
+				$("#getDisplayImage").css("height", newHeight.toString() + "px");
+				resizeCanvas(tempObject, tempCanvas);
+				tempObject.fromData(JSON.parse($("#signature").val()));
+				$("#signaturePic").html("<img src='" + tempObject.toDataURL() + "' class='img-responsive'  max-width='100%'>");
+				$("#temp").remove();
+			}
 			
 			$("button[type=submit][name=save]").click(function() {
 				$("form").find("input").removeAttr("required");
@@ -67,7 +67,6 @@
 					$("#contactOption").find("input").removeAttr("required");
 				}
 			}
-			console.log(JSON.parse($("#signature").val()));
 
 			contactCheck();
 			$("input[type=radio][name=perm]").change(contactCheck);
@@ -76,7 +75,9 @@
 				var newHeight = $("#signature-pad-body").width() * .5257;
 				$("#signature-pad-body").css("height", newHeight.toString() + "px");
 				resizeCanvas(signaturePad, canvas);
-            	signaturePad.fromData(JSON.parse($("#signature").val()));
+				if ($("#signature").val() != "") {
+            		signaturePad.fromData(JSON.parse($("#signature").val()));
+            	}
         	});			
 		});
 		$(document).keypress(
