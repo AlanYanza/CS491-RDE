@@ -27,7 +27,7 @@
 			<label for="To" class="col-form-label col-xs-1">To:</label>
 
 			<div *ngIf="accessLevel === 'admin'" class="col-xs-11"> 
-				<ng-select [(ngModel)]="msg.recipient">
+				<ng-select required [(ngModel)]="msg.recipient">
 					<ng-option *ngFor="let user of users" [value]="user.EMAIL">{{user.FIRSTNAME}} {{user.LASTNAME}}, {{user.EMAIL}}</ng-option> 
 				</ng-select>
 			</div>
