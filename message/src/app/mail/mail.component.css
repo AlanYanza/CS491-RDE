@@ -45,6 +45,9 @@
 #trashIcon { 
 	float: right;
 }
+.date {
+	float: right;
+}
 
 .show {
 	display: block !important;
