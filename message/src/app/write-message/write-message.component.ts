@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ViewChild, ElementRef, Component, OnInit } from '@angular/core';
 import { Msg } from '../msg';
 
 import { MessageService } from '../message/message.service';
 
-import { User } from '../user'
+import { User } from '../user';
+
+declare var jquery: any;
 
 @Component({
 	selector: 'app-write-message',
@@ -21,9 +23,7 @@ export class WriteMessageComponent implements OnInit {
 
 	ngOnInit() {
 		this.getAccessLevel();
-		if (this.accessLevel === "admin"){
-			this.getRecipientList();
-		}
+		this.getRecipientList();
 	}
 
 	getAccessLevel() {

@@ -21,10 +21,15 @@
 		<div class="labeled">
 			<label for="To" class="col-form-label col-xs-1">To:</label>
 
-			<div *ngIf="accessLevel === 'admin'" class="col-xs-11">
-				<select class="selectpicker" data-live-search="true" title="Select a recipient" data-size="5" [(ngModel)]="msg.recipient">
-			 		<option *ngFor="let user of users">{{user.EMAIL}}</option>
-				</select>
+			<div *ngIf="accessLevel === 'admin'" class="form-control btn-group col-xs-11">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					{{msg.recipient || 'Recipient'}}<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li *ngFor="let user of users">
+						<a (click)="msg.recipient = user.EMAIL">{{user.EMAIL}}</a>
+					</li>
+				</ul>
 			</div>
 
 			<div *ngIf="accessLevel === 'user'" class="col-xs-11">
