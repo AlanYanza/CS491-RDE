@@ -1,9 +1,10 @@
 <!--- If user is not logged  in, redirect them to log in page --->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<!--- If no appID exist in session, redirect to respective main page' --->
+<cfset SessionClass.NoAppIDRedirect()>
 <!--- If not an admin, check to see if appID set belong to user --->
 <cfif session.accessLevel neq 'admin'>
-	<cfset SessionClass.NoAppIDRedirect()>
 	<cfset SessionClass.validateAppID()>
 </cfif>
 
