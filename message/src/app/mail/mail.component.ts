@@ -48,7 +48,7 @@ export class MailComponent implements OnInit {
 		this.selectedTab = 'inbox';
 	}
 
-	// Remove message from mailbox automatically and update server 
+	// Remove message from mailbox automatically and update server
 	deleteMessage(msg: Msg): void {
 		this.mail = this.mail.filter( m => msg.MSGID !== m.MSGID );
 		this.mailService.deleteMessage(msg).subscribe();

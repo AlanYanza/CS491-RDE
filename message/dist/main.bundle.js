@@ -237,7 +237,7 @@ var MailContentComponent = /** @class */ (function () {
         this.route = route;
         this.mailService = mailService;
         this.location = location;
-        this.title = "Message";
+        this.title = 'Message';
         this.msg$ = this.route.data.pipe(Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators_map__["a" /* map */])(function (data) {
             return data.message;
         }));
@@ -382,8 +382,7 @@ module.exports = "<div class=\"container-fluid\">\n\t<div class=\"row\">\n\t\t<d
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mock_mail__ = __webpack_require__("./src/app/mock-mail.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mail_service__ = __webpack_require__("./src/app/mail.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mail_service__ = __webpack_require__("./src/app/mail.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -395,40 +394,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 var MailComponent = /** @class */ (function () {
     function MailComponent(mailService) {
         this.mailService = mailService;
         this.title = 'Inbox';
-        // mail: Msg[];
-        this.mail = __WEBPACK_IMPORTED_MODULE_1__mock_mail__["a" /* MAIL */];
         this.page = 1;
     }
     MailComponent.prototype.ngOnInit = function () {
-        // this.getMessages();
+        this.getMessages();
     };
+    // Retrieves messages from sent box
     MailComponent.prototype.getSent = function () {
         var _this = this;
         this.mailService.getSent()
             .subscribe(function (mail) { return _this.mail = mail; });
         this.selectedTab = 'sent';
     };
+    // Retrieves messages in Trash
     MailComponent.prototype.getTrash = function () {
         var _this = this;
         this.mailService.getTrash()
             .subscribe(function (mail) { return _this.mail = mail; });
         this.selectedTab = 'trash';
     };
+    // Retrieves messages from Inbox
     MailComponent.prototype.getMessages = function () {
         var _this = this;
         this.mailService.getMessages()
             .subscribe(function (mail) { return _this.mail = mail; });
         this.selectedTab = 'inbox';
     };
+    // Remove message from mailbox automatically and update server 
     MailComponent.prototype.deleteMessage = function (msg) {
         this.mail = this.mail.filter(function (m) { return msg.MSGID !== m.MSGID; });
         this.mailService.deleteMessage(msg).subscribe();
     };
+    // Called when message is selected in mailbox
     MailComponent.prototype.onSelect = function (msg) {
         this.selectedMsg = msg;
         if (this.selectedTab === 'inbox') {
@@ -442,7 +443,7 @@ var MailComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/mail/mail.component.html"),
             styles: [__webpack_require__("./src/app/mail/mail.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__mail_service__["a" /* MailService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__mail_service__["a" /* MailService */]])
     ], MailComponent);
     return MailComponent;
 }());
@@ -549,75 +550,6 @@ var MessageService = /** @class */ (function () {
     return MessageService;
 }());
 
-
-
-/***/ }),
-
-/***/ "./src/app/mock-mail.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MAIL; });
-var MAIL = [
-    { MSGID: 1, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 2, SENDER: 'Taylor', SUBJECT: 'test', RECIPIENT: 'Admin', MESSAGE: 'Bye', DATESENT: '1/2/11', READSTATUS: 'N' },
-    // tslint:disable-next-line:max-line-length
-    { MSGID: 3, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Alan Yanza', MESSAGE: 'This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.This is a really long message.', DATESENT: '1/1/11', READSTATUS: 'Y' },
-    { MSGID: 4, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 5, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 6, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 7, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 8, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 9, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 9, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 10, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 11, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 12, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 4, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 5, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 6, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 7, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 8, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 9, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 9, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 10, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 11, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 12, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 4, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 5, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 6, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 7, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 8, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 9, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 9, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 10, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 11, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 12, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 10, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 11, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 12, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 4, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 5, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 6, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 7, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 8, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 9, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 9, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 10, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 11, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 10, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 11, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 12, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 4, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 5, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 6, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 7, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 8, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 9, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 9, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 10, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' },
-    { MSGID: 11, SENDER: 'Admin', SUBJECT: 'test', RECIPIENT: 'Taylor Tu', MESSAGE: 'Hello', DATESENT: '1/1/11', READSTATUS: 'N' }
-];
 
 
 /***/ }),
