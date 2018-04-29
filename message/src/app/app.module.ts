@@ -15,28 +15,31 @@ import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { StatusPageComponent } from './status-page/status-page.component';
 
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
+
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MailComponent,
-    MailContentComponent,
-    WriteMessageComponent,
-    StatusPageComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    NgxPaginationModule
-  ],
-  providers: [
-    MailService,
-    MessageService,
-    {provide: APP_BASE_HREF, useValue: '/'}
-    ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		MailComponent,
+		MailContentComponent,
+		WriteMessageComponent,
+		StatusPageComponent
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		AppRoutingModule,
+		HttpClientModule,
+		NgxPaginationModule,
+		NgSelectModule
+	],
+	providers: [
+		MailService,
+		MessageService,
+		{provide: APP_BASE_HREF, useValue: '/'}
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

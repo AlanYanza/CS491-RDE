@@ -1,6 +1,6 @@
 <cfcomponent rest="true" restpath="/MessageSystem">
 
-	<!-- Retrive the user's access level --> 
+	<!--- Retrieve the user's access level ---> 
 	<cffunction name="getAccessLevel" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="getAccessLevel" produces="application/json">
 		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 		<cfset userLevel = SessionClass.passUserAccessLevel() /> 
@@ -9,13 +9,13 @@
 	</cffunction>
 
 
-	<!-- Retrieve Sent mail for given user --> 
+	<!--- Retrieve Sent mail for given user ---> 
 	<cffunction name="getSent" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="getSent" produces="application/json">
 		<!-- retrieve current User's userID' -->
 		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 		<cfset userID = SessionClass.passUserID()> 
 
-		<!-- Query DB for user's Message' -->
+		<!--- Query DB for user's Message' --->
 		<cfquery name="SentMailResult">
 			SELECT 
 				Sent.msgID, 
@@ -34,13 +34,13 @@
 		<cfreturn serializeJSON(SentMailResult, 'struct') /> 
 	</cffunction>
 
-	<!-- Retrieve Trashed mail for given user --> 
+	<!--- Retrieve Trashed mail for given user ---> 
 	<cffunction name="getTrash" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="getTrash" produces="application/json">
 		<!-- retrieve current User's userID' -->
 		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 		<cfset userID = SessionClass.passUserID()> 
 
-		<!-- Query DB for user's Message' -->
+		<!--- Query DB for user's Message' --->
 		<cfquery name="TrashMailResult">
 			SELECT 
 				Trash.msgID, 
@@ -59,14 +59,14 @@
 		<cfreturn serializeJSON(TrashMailResult, 'struct') /> 
 	</cffunction>
 			
-	<!-- Retrieve Inbox for given user -->
+	<!--- Retrieve Inbox for given user --->
 	<cffunction name="getInbox" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="getInbox" produces="application/json">
 
-		<!-- retrieve current User's userID' -->
+		<!--- retrieve current User's userID' --->
 		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 		<cfset userID = SessionClass.passUserID()> 
 
-		<!-- Query DB for user's Message' -->
+		<!--- Query DB for user's Message' --->
 		<cfquery name="MailResult">
 			SELECT 
 				Inbox.msgID, 
@@ -82,37 +82,37 @@
 			ORDER BY Message.dateSent DESC
 		</cfquery>
 
-		<!-- Return ResultSet as JSON -->
+		<!--- Return ResultSet as JSON --->
 		<cfreturn serializeJSON(MailResult, 'struct') /> 
 	</cffunction>
 
-	<!-- Send email for given user -->
+	<!--- Send email for given user --->
 	<cffunction name="sendEmail" access="remote" returntype="Any" return Format="json" httpmethod="POST" restpath="sendEmail" produces="application/json">
 
-		<!-- retrieve current User's userID' -->
+		<!--- retrieve current User's userID' --->
 		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/> 
 		<cfset senderID = SessionClass.passUserID()>
 
-		<!-- Retrieve sender's identity from DB' -->
+		<!--- Retrieve sender's identity from DB' --->
 		<cfquery name="senderNameResult">
 			SELECT FirstName, LastName FROM "User"
 			WHERE userID=<cfqueryPARAM value="#senderID#" cfsqltype="CF_SQL_INTEGER">
 		</cfquery>
 		<cfset senderName= senderNameResult.FirstName&" "&senderNameResult.LastName />
 		
-		<!-- Retrieve fields sent from Angular -->
+		<!--- Retrieve fields sent from Angular --->
 		<cfset subject = url.subject />
 		<cfset recipientEmail = url.recipient /> 
 		<cfset message = url.message />
 		<cfset dateSent = Now() />
 
-		<!-- Retrieve receipient's userID -->
+		<!--- Retrieve receipient's userID --->
 		<cfquery name="recipientUserID">
 			SELECT userID FROM "User"
 			WHERE email=<cfqueryPARAM value="#recipientEmail#" cfsqltype="CF_SQL_VARCHAR">
 		</cfquery>
 		<cfset recipientID=recipientUserID.userID />
-		<!-- Insert message data into DB(message table) -->
+		<!--- Insert message data into DB(message table) --->
 	 	<cfquery result="sendToMessageResult">
 			INSERT INTO Message (senderID, recipientID, subject, message, dateSent, dateRecv, readStatus)
 			VALUES ( 
@@ -127,7 +127,7 @@
 		</cfquery> 
 		<cfset msgID = sendToMessageResult.generatedkey />
 
-		<!-- Insert message into recipient inbox (Inbox Table) -->
+		<!--- Insert message into recipient inbox (Inbox Table) --->
 		<cfquery name="sendToInbox">
 			INSERT INTO Inbox (userID, msgID)
 			VALUES (
@@ -136,7 +136,7 @@
 			)
 		</cfquery>
 
-		<!-- Insert message into sender's sent box (Sent Table) --> 
+		<!--- Insert message into sender's sent box (Sent Table) ---> 
 		<cfquery name="sendToSent">
 			INSERT INTO [Sent] (userID, msgID)
 			VALUES (
@@ -145,33 +145,34 @@
 			)
 		</cfquery>
 
-		<!-- send email to user informating them of unread emails -->
-		<cfset emailToolObj=createObject('component','CS491-RDE.components.emailTool')>
+		<!--- send email to user informating them of unread emails --->
+		<!--- <cfset emailToolObj=createObject('component','CS491-RDE.components.emailTool')>
 		<cfset emailAddress=emailToolObj.retrieveEmailAddress(recipientID)>
 		<cfset emailSubject="RDEApplication Unread messages">
 		<cfset emailMessage="You have received a new message in your RDEApplication Inbox<br>">
-		<cfset emailToolObj.sendEmail(emailAddress,emailSubject,emailMessage)>
-
-		<cfreturn serializeJSON("sendToSent", 'struct') /> 
+		<cfset emailToolObj.sendEmail(emailAddress,emailSubject,emailMessage)>  --->
+		
+		<cfset successMsg={"response": "sent"} />
+		<cfreturn serializeJSON(successMsg) /> 
 
 	</cffunction>
 
 	<cffunction name="deleteMessage" access="remote" returntype="Any" return Format="json" httpmethod="GET" restpath="deleteEmail" >
 
-		<!-- retrieve current User's userID' -->
+		<!--- retrieve current User's userID' --->
 		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 		<cfset senderID = SessionClass.passUserID()> 
 
 		<cfset msgID = url.msgID />
 
-		<!-- Delete message from sender's inbox (Sent Table) --> 
+		<!--- Delete message from sender's inbox (Sent Table) ---> 
 		<cfquery name="deleteFromInbox">
 			DELETE FROM Inbox 
 			WHERE msgID = <cfqueryPARAM value="#msgID#" cfsqltype="CF_SQL_INTEGER">
 			AND userID = <cfqueryPARAM value="#senderID#" cfsqltype="CF_SQL_INTEGER">
 		</cfquery>
 
-		<!-- Insert message into sender's trash box (Sent Table) --> 
+		<!--- Insert message into sender's trash box (Sent Table) ---> 
 		<cfquery name="InsertIntoTrash">
 			INSERT INTO Trash (msgID, userID)
 			VALUES(
@@ -185,7 +186,7 @@
 	</cffunction>
 
 	<cffunction name="readMessage" access="remote" returntype="Any" returnFormat="json" httpmethod="PUT" restpath="readMessage" produces="application/json"> 
-		<!-- retrieve current User's userID' -->
+		<!--- retrieve current User's userID' --->
 		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/> 
 		<cfset userID = SessionClass.passUserID() />
 
@@ -200,7 +201,7 @@
 	</cffunction>
 
 	<cffunction name="getRecipientList" access="remote" returntype="Any" returnFormat="json" httpmethod="GET" restpath="getRecipientList" produces="application/json">
-		<!-- Retrieves the user's access level. This is so an error will be thrown if a user isn't logged in -->
+		<!--- Retrieves the user's access level. This is so an error will be thrown if a user isn't logged in --->
 		<cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 		<cfset userLevel = SessionClass.passUserAccessLevel() /> 
 

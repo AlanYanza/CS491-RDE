@@ -1,4 +1,4 @@
-<!-- Retrieve Number of unread Messages -->
+<!--- Retrieve Number of unread Messages for current user--->
 <cffunction name="getUnreadEmails" displayname="getNumberOfUnreadEmail" 
 hint="retrieves the number of unread emails for a user (for nav-bar purposes) and its not rest enabled">
 	<!-- Query for number of messages with readStatus='N' -->
@@ -20,7 +20,7 @@ hint="retrieves the number of unread emails for a user (for nav-bar purposes) an
 	</cfif>
 </cffunction>
 
-<!--header.cfm-->
+<!---header.cfm--->
 <nav class="navbar navbar-inverse">
 	<div class="container">
 		<div class="navbar-header">

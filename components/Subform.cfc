@@ -6,7 +6,7 @@
 	<cfset Variables.dataID=0>
 	<cfset Variables.appID=0>
 	
-	<!-- Constructor -->
+	<!--- Constructor --->
 	<cffunction name="init" displayname="subform constructor" hint="constructor for the subform CFC" >
 		<cfargument name="stateInput" type="string" />
 		<cfargument name="userIDInput" type="string" />
@@ -23,7 +23,7 @@
 		<cfreturn this>
 	</cffunction>
 	
-	<!-- Retrieved a Application's dataID(helper method) -->
+	<!--- Retrieved a Application's dataID(helper method) --->
 	<cffunction name="getDataID" returntype="numeric" displayname="retrieveApplicationDataID" hint="retrieves the dataID associated with an Application" >
 		<cfquery name="dataIDResult" result="queryStats">
 			SELECT dataID FROM UserFormData WHERE 
@@ -37,7 +37,7 @@
 		<cfreturn dataID>
 	</cffunction>
 	
-	<!-- Setter for fields(if not provided) -->
+	<!--- Setter for fields(if not provided) --->
 	<cffunction name="setFields" displayname="setSubformFields" hint="Set the fields for the subform" >
 		<cfargument name="fieldArrayInput" type="array" hint="array with the fields for the subform"  >
 		<cfset Var numElem=ArrayLen(fieldArrayInput)/>
@@ -46,7 +46,7 @@
 		</cfloop>
 	</cffunction>
 	
-	<!-- Setter for Checkbox fields(if not provided) -->
+	<!--- Setter for Checkbox fields(if not provided) --->
 	<cffunction name="setCheckFields" displayname="setSubformFields" hint="Set the fields for the subform" >
 		<cfargument name="fieldArrayInput" type="array" hint="array with the fields for the subform"  >
 		<cfset Var numElem=ArrayLen(fieldArrayInput)/>
@@ -55,47 +55,45 @@
 		</cfloop>
 	</cffunction>
 	
-	<!-- dynamically get the data contained in the Form(non-checkboxes)-->
+	<!--- dynamically get the data contained in the Form(non-checkboxes)--->
 	<cffunction name="extractFormData" displayname="getDataFromField" hint="Extract the data contain the form field elements" >
 		<cfloop array="#fieldNames#" index="i" >
 			<cfset fieldName=#i#/>
-			<!-- If element is undefined (not selected) put 'X' as its value -->
+			<!--- If element is undefined (not selected) put 'X' as its value --->
 			<cfif NOT IsDefined('form.#i#') >
 				<cfset fieldValue='X'/>
-			<!-- If element is defined get it value -->
+			<!--- If element is defined get it value --->
 			<cfelse>
 				<cfset fieldValue=#Form[i]#/>
 			</cfif>
-			<!-- Insert form field data into fieldValues-->
+			<!--- Insert form field data into fieldValues--->
 			<cfset StructInsert(fieldValues,fieldName,fieldValue)/>
 		</cfloop>
 	</cffunction>
 	
-	<!-- dynamically get the data contained in the Checkboxes-->
+	<!--- dynamically get the data contained in the Checkboxes--->
 	<cffunction name="extractCheckboxData" displayname="getDataFromField" hint="Extract the data contain the form field elements" >
 		<cfloop array="#checkFieldNames#" index="i" >
 			<cfset fieldName=#i#/>
 			<cfif NOT IsDefined('form.#i#') >
 				<cfset fieldValue='N'/>
-			<!-- If element is defined get it value -->
+			<!--- If element is defined get it value --->
 			<cfelse>
 				<cfset fieldValue=#Form[i]#/>
 			</cfif>
-			<!-- Insert form field data into fieldValues-->
+			<!--- Insert form field data into fieldValues--->
 			<cfset StructInsert(fieldValues,fieldName,fieldValue)/>
 		</cfloop>
 	</cffunction>
 	
-	<!-- Send User's signature to database'-->
+	<!--- Send User's signature to database'--->
 	<cffunction name="updateSignature" displayname="updateUserSignature" hint="sends user signature to database" >
 		<cfargument name="signatureField" hint="the name of the signature field" >
 		<cfargument name="dateField" hint="the name of the date field" >
-		<!-- Get string of signature from form and remove starting header -->
+		<!--- Get string of signature from form and remove starting header --->
 		<cfset binaryStringRep=form[arguments.signatureField]>
 		<cfset binaryStringRep=REReplace(binaryStringRep,'data:image/png;base64,','')>
-		<!-- Convert the base64 string representation to a binary string -->
-		<!---<cfset binaryString=BinaryDecode(binaryStringRep,"Base64")>--->
-		<!-- Insert the binary string into subTable -->
+		<!--- Insert the binary string into subTable --->
 		<cfquery>
 			UPDATE #tableName# SET #arguments.signatureField#= <cfqueryparam value="#binaryStringRep#" cfsqltype="cf_sql_longvarchar">,
 			#dateField#=getdate()  
@@ -103,7 +101,7 @@
 		</cfquery>
 	</cffunction>
 	
-	<!-- Retrieve user's signature from database --->
+	<!--- Retrieve user's signature from database ---->
 	<cffunction name="getSignature" displayname="getUserSignatureFromDB" hint="retrieves user signature from database" >
 		<cfargument name="signatureField" hint="the name of the signature field" >
 		<cfquery name="returnSignature" result="queryStat" >
@@ -113,7 +111,7 @@
 		<cfreturn returnSignature /> 
 	</cffunction>
 			
-	<!-- check if data already exist for subform -->
+	<!--- check if data already exist for subform --->
 	<cffunction name="checkIfDataExist" displayname="checkIfDataExistForUser" hint="Check to see if data exist for the user for a subform" 
 	returntype="boolean" >
 		<cfset Var dataID=getDataID() />
@@ -128,7 +126,7 @@
 		</cfif>
 	</cffunction>
 	
-	<!-- Create new subForm data (insert into table blank values) -->
+	<!--- Create new subForm data (insert into table blank values) --->
 	<cffunction name="createSubformData" displayname="createSubformData" hint="Insert a new entry into the subforms associated Table"> 
 		<cfset Var dataExist=checkIfDataExist()/>
 		<cfif dataExist eq 0>
@@ -140,7 +138,7 @@
 		</cfif>
 	</cffunction>
 	
-	<!-- Retrieve data form subform -->
+	<!--- Retrieve data form subform --->
 	<cffunction name="retrieveDataForSubform" displayname="retrieveSubformDataFromTable" 
 	hint="Retrieve user subform data from subforms's associated table" returntype="Query" >
 		<cfset Var dataID=getDataID()/>
@@ -151,21 +149,21 @@
 		<cfreturn formValues>
 	</cffunction>  
 	
-	<!-- Update Subform Data in the Subform Table -->
+	<!--- Update Subform Data in the Subform Table --->
 	<cffunction name="updateSubformData" displayname="updateSubformDataTable" 
 	hint="Updates the subform's associated Table with current subform data"  >
-		<!-- Prepare Set Statements-->
+		<!--- Prepare Set Statements--->
 		<cfset Var arrayCount=0 />
 		<cfquery >
 			UPDATE <cfoutput>#tableName#</cfoutput> SET 
-			 <!---loop through fieldValues and add it to query--->
+			 <!----loop through fieldValues and add it to query---->
 			<cfloop array="#fieldNames#" index="i">
 		    	<cfset arrayCount=arrayCount+1 />
 		    	<cfif arrayCount neq ArrayLen(#fieldNames#)>
-		    		<!--- if not last elements in array use , --->
+		    		<!---- if not last elements in array use , ---->
 		 			<cfoutput> #i# = '#fieldValues[i]#', </cfoutput>
 		 		<cfelse>
-		 			<!--- if last element in array do not add ,--->
+		 			<!---- if last element in array do not add ,---->
 		 			<cfoutput> #i# = '#fieldValues[i]#' </cfoutput>
 		    	</cfif>
 	 		</cfloop>
@@ -173,21 +171,21 @@
 		</cfquery>
 	</cffunction> 
 	
-	<!-- Update Subform Data in the Subform Table -->
+	<!--- Update Subform Data in the Subform Table --->
 	<cffunction name="updateCheckboxData" displayname="updateCheckboxSubformDataTable" 
 	hint="Updates the subform's associated Table with current subform data"  >
-		<!-- Prepare Set Statements-->
+		<!--- Prepare Set Statements--->
 		<cfset Var arrayCount=0 />
 		<cfquery >
 			UPDATE <cfoutput>#tableName#</cfoutput> SET 
-			 <!---loop through fieldValues and add it to query--->
+			 <!----loop through fieldValues and add it to query---->
 			<cfloop array="#checkFieldNames#" index="i">
 		    	<cfset arrayCount=arrayCount+1 />
 		    	<cfif arrayCount neq ArrayLen(#checkFieldNames#)>
-		    		<!--- if not last elements in array use , --->
+		    		<!---- if not last elements in array use , ---->
 		 			<cfoutput> #i# = '#fieldValues[i]#', </cfoutput>
 		 		<cfelse>
-		 			<!--- if last element in array do not add ,--->
+		 			<!---- if last element in array do not add ,---->
 		 			<cfoutput> #i# = '#fieldValues[i]#' </cfoutput>
 		    	</cfif>
 	 		</cfloop>
@@ -195,7 +193,7 @@
 		</cfquery>
 	</cffunction> 
 	
-	<!-- Represent Checkbox Field in Subform-->
+	<!--- Represent Checkbox Field in Subform--->
 	<cffunction name="showCheckbox" displayname="Represent Checkbox Value in subform" hint="represent a checkbox value based on query results" 
 	 returntype="string">
 	 	<cfargument name="fieldNameInput" hint="fieldName of interest to present query value with" type="string" >
@@ -208,7 +206,7 @@
 		</cfif>
 	</cffunction>
 	
-	<!-- Represent Radiobutton Field in Subform-->
+	<!--- Represent Radiobutton Field in Subform--->
 	<cffunction name="showRadioButton" displayname="Represent RadioButton Value in subform" hint="represent a RadioButton value based on query results" 
 	 returntype="string">
 	 	<cfargument name="fieldNameInput" hint="fieldName of interest to present query value with" type="string" >
@@ -222,7 +220,7 @@
 		</cfif>
 	</cffunction>
 	
-		<!-- Represent Selection Fields in Subform-->
+		<!--- Represent Selection Fields in Subform--->
 	<cffunction name="showSelectionField" displayname="Represent Selection Field Value in subform" hint="represent a Selection Field value based on query results" 
 	 returntype="string">
 	 	<cfargument name="fieldNameInput" hint="fieldName of interest to present query value with" type="string" >

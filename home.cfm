@@ -1,9 +1,10 @@
-<!-- Session Page Protection -->
+<!--- If user isn't logged in, redirect them back to login page --->
 <cfset SessionClass=createObject('component','components.SessionTools') >
 <cfset SessionClass.checkIfLoggedIn() >
+<!--- if user's access level isn't user,redirect them back to admin home page --->
 <cfset SessionClass.checkIfuser() >
-<cfset SessionClass.ClearSessionAppID() > <!-- If appID session variable set, clear it -->
-<!-- gather required page data -->
+<cfset SessionClass.ClearSessionAppID() > <!--- If appID session variable set, clear it --->
+<!--- gather required page data --->
 <cfset UserObj=createObject('component','components.User').init(session.userID)/>
 <cfset allApplications=UserObj.getAllApplication()/>
 <cfset directLink=UserObj.getDirectLink('NJ')/>
@@ -43,7 +44,7 @@
 				Application Progress saved.
 			</div>
 		</cfoutput>
-	<!-- If appID doesn't belong to current user -->
+	<!--- If appID doesn't belong to current user, alert user --->
 	</cfif>
 		<cfif IsDefined('url.no')>
 		<cfoutput>

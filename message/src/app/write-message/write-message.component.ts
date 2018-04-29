@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ViewChild, ElementRef, Component, OnInit } from '@angular/core';
 import { Msg } from '../msg';
 
 import { MessageService } from '../message/message.service';
 
-import { User } from '../user'
+import { User } from '../user';
 
 @Component({
 	selector: 'app-write-message',
@@ -14,16 +14,14 @@ export class WriteMessageComponent implements OnInit {
 
 	title = 'New Message';
 	users: User[];
-	accessLevel = "";
+	accessLevel = '';
 	msg: any = {};
 
 	constructor(private messageService: MessageService) { }
 
 	ngOnInit() {
 		this.getAccessLevel();
-		if (this.accessLevel === "admin"){
-			this.getRecipientList();
-		}
+		this.getRecipientList();
 	}
 
 	getAccessLevel() {
@@ -39,20 +37,20 @@ export class WriteMessageComponent implements OnInit {
 	sendMessage() {
 
 		// Only allow sending to admin for user
-		if (this.accessLevel === "user"){
-			this.msg.recipient="bg1@company.com";
-		} 
+		if (this.accessLevel === 'user') {
+			this.msg.recipient = 'bg1@company.com';
+		}
 
 		this.messageService.sendMessages(this.msg)
-			.subscribe(
- 				data => { 
- 					this.messageService.success("Your message was sent successfully!");
-					this.msg = {};
- 				},
- 				err => { 
- 					this.messageService.fail("Your message failed to send. Please try again later.")
- 					console.log(err)
- 				}
-		  	);		
+		.subscribe(
+			data => {
+				this.messageService.success('Your message was sent successfully!');
+				this.msg = {};
+			},
+			err => {
+				this.messageService.fail('Your message failed to send. Please try again later.');
+				console.log(err);
+			}
+		);
 	}
 }

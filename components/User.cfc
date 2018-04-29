@@ -1,14 +1,14 @@
 <cfcomponent>
 	<cfset Variables.userID=0/>
 	
-	<!-- constructor -->
+	<!--- constructor --->
 	<cffunction name="init" displayname="User constructor" hint="constructor for the userCFC" >
 		<cfargument name="userIDInput" type="numeric" hint="session userID of user logged in" >
 		<cfset userID=userIDInput/>
 		<cfreturn this>
 	</cffunction>
 	
-	<!-- get Application all Applications -->
+	<!--- get Application all Applications --->
 	<cffunction name="getAllApplication" hint="Retrieves all Application editable by user(status of 'P' or 'N')" 
 	returntype="Query" >
 		<cfquery name="applicationResult">
@@ -19,7 +19,7 @@
 		<cfreturn applicationResult>
 	</cffunction>
 	
-	<!-- check if application exist for state -->
+	<!--- check if application exist for state --->
 	<cffunction name="stateAppExist" displayname="CheckIfStateAppExist" hint="Checks to see if an Application exists for a state" 
 	returntype="Numeric" >
 		<cfargument name="stateInput" hint="state of Interest to see if form exist for" type="string" >
@@ -36,7 +36,7 @@
 		</cfif>
 	</cffunction>
 	
-	<!-- get FormTypeID for a State-->
+	<!--- get FormTypeID for a State--->
 	<cffunction name="getFormTypeID" displayname="getFormTypeIDForState" hint="retrives a formTypeID for indicated State" 
 	returntype="Numeric" >
 		<cfargument name="stateInput" hint="state of Interest to get formTypeID for" type="string" >
@@ -51,7 +51,7 @@
 		<cfreturn formTypeID>
 	</cffunction>
 	
-	<!-- Get Application Link based on a state -->
+	<!--- Get Application Link based on a state --->
 	<cffunction name="getDirectLink" displayname="getDirectLinkFromState" hint="retrieve the direct link for a indicated State" 
 	returntype="String" >
 		<cfargument name="stateInput" hint="state of Interest to get formTypeID for" type="string" >
@@ -67,7 +67,7 @@
 		<cfreturn directLink />
 	</cffunction>
 	
-	<!-- Get State from formTypeID--->
+	<!--- Get State from formTypeID---->
 	<cffunction name="getFormInfo" displayname="getStateFromFormTypeID" hint="retrieves the state using formTypeID"
 	  returntype="Query" >
 		<cfargument name="formtypeIDInput" type="numeric" hint="formTypeID retrieve from UserApplication Queries" >
@@ -79,7 +79,7 @@
 		<cfreturn formResult>
 	</cffunction>
 		
-	<!-- Get Document and Results ---> 
+	<!--- Get Document and Results ----> 
 	<cffunction name="getDocuments">
 		<cfquery name="DocumentName" result="queryStats">
 			SELECT document,isRequired, received, DateReceived
