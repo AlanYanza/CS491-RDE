@@ -1,6 +1,6 @@
 <!--- if user is not logged in, redirect them log in page --->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
-<cfset SessionClass.ClearSessionAppID() > <!-- If appID session variable set, clear it -->
+<cfset SessionClass.ClearSessionAppID() > <!--- If appID session variable set, clear it --->
 <cfset SessionClass.checkIfLoggedIn()/>
 <!--- if user doesn't have admin level access, redirect to home page --->
 <cfset SessionClass.checkIfadmin()>
