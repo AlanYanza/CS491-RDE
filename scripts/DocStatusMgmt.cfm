@@ -1,10 +1,11 @@
 <!--- Session Protection from user level access --->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<!--- If no appID exist in session, redirect to respective main page' --->
+<cfset SessionClass.NoAppIDRedirect()>
+<!--- If user doesn't have admin level access, redirect them to user home page --->
 <cfif session.accessLevel neq 'admin'>
 	<cfset SessionClass.checkIfadmin()>
-	<cfset SessionClass.NoAppIDRedirect()>
-	<cfset SessionClass.validateAppID()>
 </cfif>
 
 <!--- Get the appID from the session --->
@@ -37,5 +38,6 @@
 		document=<cfqueryparam value="#tempNameValue#">
 	</cfquery>
 </cfloop>
+<!--- Redirect user back to DocumentStatus Page --->
 <cfset urlDirect="/CS491-RDE/DocumentStatus.cfm?appID=" & appID & "&update">
 <cflocation url=#urlDirect# >

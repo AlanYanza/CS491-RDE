@@ -1,9 +1,12 @@
+<!--- If user is not logged  in, redirect them to log in page --->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
+<!--- If not an admin, check to see if appID set belong to user --->
 <cfif session.accessLevel neq 'admin'>
 	<cfset SessionClass.NoAppIDRedirect()>
 	<cfset SessionClass.validateAppID()>
 </cfif>
+
 <cfset formObj=createObject('component','CS491-RDE.components.Form').init('NJ',session.userID)>
 <!--- Determine which page form came from --->
 <cfset formSource=FORM.formPage/>
