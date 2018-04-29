@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-3 container-fluid" id="sidebar">
-			<!-- <nav class="navbar navbar-default">
+			<nav class="navbar navbar-default">
 				<div class="navbar-header">
 			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mail-tabs" aria-expanded="false">
 			        <span class="sr-only">Toggle navigation</span>
@@ -10,14 +10,14 @@
 			        <span class="icon-bar"></span>
 			      </button>
 			    </div>
-				<div class="navbar-collapse collapse" id="mail-tabs"> -->
+				<div class="navbar-collapse collapse" id="mail-tabs">
 					<ul class="nav nav-tabs" ng-init="selectedTab = 'inbox'">
 						<li role="navigation" [class.active]="selectedTab ==='inbox'" (click)="getMessages()"><a class="nav-link">Inbox <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></a></li>
 						<li role="navigation" [class.active]="selectedTab ==='sent'" (click)="getSent()"><a class="nav-link">Sent</a></li>
 						<li role="navigation" [class.active]="selectedTab ==='trash'" (click)="getTrash()"><a class="nav-link">Trash</a></li>
 					</ul>
-				<!-- </div>
-			</nav> -->
+				</div>
+			</nav>
 
 			<div class="mail-scroll">
 				<ul class="mail">
