@@ -1,19 +1,19 @@
-<!--- If user is not logged in, redirect them to login page --->
+<!-- Session Page Protection -->
 <cfset SessionClass=createObject('component',"CS491-RDE.components.SessionTools")/>
 <cfset SessionClass.checkIfLoggedIn()/>
 <cfif isDefined('url.appID')>
-	<!--- create a session variable for appID --->
+	<!-- create a session variable for appID -->
 	<cfset session.appID=url.appID>
 </cfif>
-<!--- If appID is not sent via url passing, redirects back to user home page --->
-<cfset SessionClass.NoAppIDRedirect()>
-<!--- If a user access level,checks to see appID set in session in valid --->
+<!-- If a user access level,More Session Page Protection -->
 <cfif session.accessLevel neq 'admin'>
+	<cfset SessionClass.checkIfuser()>
+	<cfset SessionClass.NoAppIDRedirect()>
 	<cfset SessionClass.validateAppID()>
 </cfif>
 <cfset tableName='NJSection4'/>
 <cfset subformClass=createObject('component','CS491-RDE.components.Subform').init('NJ',session.userID,tableName,session.appID)/>
-<!--- Application Page pre-processing --->
+<!-- Application Page pre-processing -->
 <cfset subformClass.createSubformData()/>
 <cfset subformData=subformClass.retrieveDataForSubform()/>
 <cfset applicantSignature=subformClass.getSignature("signature")/>
@@ -21,11 +21,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  	<title>Application</title>
-  	<cfinclude template="../head.cfm"/>
- 	<link rel="stylesheet" href="../css/signature-pad.css">
- 	<script src="../js/signature_pad.umd.js"></script>
- 	<script>
+ 	<title>Application</title>
+ 	<cfinclude template="../head.cfm"/>
+	<link rel="stylesheet" href="../css/signature-pad.css">
+	<script src="../js/signature_pad.umd.js"></script>
+	<script>
  		"use strict";
 		$(document).ready(function(){
 			<!--- Determine Flag(reviewing or editing) --->
@@ -37,16 +37,16 @@
 				</cfoutput>
 			</cfif>
 
-			var tempCanvas = document.getElementById("getDisplayImage");
-			var tempObject = new SignaturePad(tempCanvas, {backgroundColor: 'rgb(255, 255, 255)'});
-			var newHeight = $("#getDisplayImage").width() * .5257;
-			$("#getDisplayImage").css("height", newHeight.toString() + "px");
-			resizeCanvas(tempObject, tempCanvas);
-			tempObject.fromData(JSON.parse($("#signature").val()));
-			$("#signaturePic").html("<img src='" + tempObject.toDataURL() + "' class='img-responsive'  max-width='100%'>");
+			if ($("#signature").val() != "") {
+				var tempCanvas = document.getElementById("getDisplayImage");
+				var tempObject = new SignaturePad(tempCanvas, {backgroundColor: 'rgb(255, 255, 255)'});
+				var newHeight = $("#getDisplayImage").width() * .5257;
+				$("#getDisplayImage").css("height", newHeight.toString() + "px");
+				resizeCanvas(tempObject, tempCanvas);
+				tempObject.fromData(JSON.parse($("#signature").val()));
+				$("#signaturePic").html("<img src='" + tempObject.toDataURL() + "' class='img-responsive'  max-width='100%'>");
+			}
 			$("#temp").remove();
-
-
 			
 			$("button[type=submit][name=save]").click(function() {
 				$("form").find("input").removeAttr("required");
@@ -67,7 +67,6 @@
 					$("#contactOption").find("input").removeAttr("required");
 				}
 			}
-			console.log(JSON.parse($("#signature").val()));
 
 			contactCheck();
 			$("input[type=radio][name=perm]").change(contactCheck);
@@ -76,8 +75,10 @@
 				var newHeight = $("#signature-pad-body").width() * .5257;
 				$("#signature-pad-body").css("height", newHeight.toString() + "px");
 				resizeCanvas(signaturePad, canvas);
-            	signaturePad.fromData(JSON.parse($("#signature").val()));
-        	});			
+				if ($("#signature").val() != "") {
+					signaturePad.fromData(JSON.parse($("#signature").val()));
+				}
+ 			});
 		});
 		$(document).keypress(
 			function(event){
@@ -89,7 +90,6 @@
 		$(window).resize(function() {
 		 	var newHeight = $("#signature-pad-body").width() * .5257;
 			$("#signature-pad-body").css("height", newHeight.toString() + "px");
-			console.log($("#canvas").height()/$("#canvas").width());
 			resizeCanvas(signaturePad, canvas);
 		});
  	</script>
