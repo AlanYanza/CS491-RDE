@@ -5,8 +5,6 @@ import { MessageService } from '../message/message.service';
 
 import { User } from '../user';
 
-declare var jquery: any;
-
 @Component({
 	selector: 'app-write-message',
 	templateUrl: './write-message.component.html',
@@ -15,8 +13,9 @@ declare var jquery: any;
 export class WriteMessageComponent implements OnInit {
 
 	title = 'New Message';
-	users: User[];
-	accessLevel = "";
+	// users: User[];
+	users = [{ EMAIL: 'TEST', FIRSTNAME: 'FIRST', LASTNAME: 'LAST' }];
+	accessLevel = '';
 	msg: any = {};
 
 	constructor(private messageService: MessageService) { }
@@ -39,20 +38,20 @@ export class WriteMessageComponent implements OnInit {
 	sendMessage() {
 
 		// Only allow sending to admin for user
-		if (this.accessLevel === "user"){
-			this.msg.recipient="bg1@company.com";
-		} 
+		if (this.accessLevel === 'user') {
+			this.msg.recipient = 'bg1@company.com';
+		}
 
 		this.messageService.sendMessages(this.msg)
-			.subscribe(
- 				data => { 
- 					this.messageService.success("Your message was sent successfully!");
-					this.msg = {};
- 				},
- 				err => { 
- 					this.messageService.fail("Your message failed to send. Please try again later.")
- 					console.log(err)
- 				}
-		  	);		
+		.subscribe(
+			data => {
+				this.messageService.success('Your message was sent successfully!');
+				this.msg = {};
+			},
+			err => {
+				this.messageService.fail('Your message failed to send. Please try again later.');
+				console.log(err);
+			}
+		);
 	}
 }
