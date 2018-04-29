@@ -1,4 +1,4 @@
-export class Msg { 
+export class Msg {
 	MSGID: number;
 	SENDER: string;
 	RECIPIENT: string;

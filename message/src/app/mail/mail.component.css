@@ -51,12 +51,7 @@
 .date {
 	float: right;
 	color: gray;
-	font-size:;
 }
-
-/*.nav-mail {
-	background-color: #f0f0f0;
-}*/
 
 #content {
 	padding: 0;
@@ -71,10 +66,6 @@
 
 #trashIcon { 
 	float: right;
-}
-
-.navbar {
-
 }
 
 .nav {

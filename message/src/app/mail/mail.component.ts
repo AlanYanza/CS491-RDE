@@ -12,18 +12,19 @@ import { ActivatedRouteSnapshot } from '@angular/router';
 	styleUrls: ['./mail.component.css']
 })
 export class MailComponent implements OnInit {
-	title = "Inbox";
-	
-	mail: Msg[];
+	title = 'Inbox';
 
-	selectedMsg: Msg; 
+	// mail: Msg[];
+	mail = MAIL;
+
+	selectedMsg: Msg;
 	selectedTab: string;
-	page: number = 1;
+	page = 1;
 
-	constructor(private mailService : MailService) { }
+	constructor(private mailService: MailService) { }
 
 	ngOnInit() {
-		this.getMessages();
+		// this.getMessages();
 	}
 
 	getSent(): void {
