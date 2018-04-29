@@ -24,6 +24,7 @@
   	<title>Application</title>
   	<cfinclude template="../head.cfm"/>
  	<link rel="stylesheet" href="../css/signature-pad.css">
+ 	<script src="../js/signature_pad.umd.js"></script>
  	<script>
  		"use strict";
 		$(document).ready(function(){
@@ -34,8 +35,18 @@
 					$("input[type=hidden][name=formPage]").removeAttr("disabled");
 					$("input[type=hidden][name=tableName]").removeAttr("disabled");
 				</cfoutput>
-			</cfif>	
-			$("#signaturePic").html("<img src='" + $("#signature").val() + "' class='img-responsive'  max-width='100%'>");
+			</cfif>
+
+			var tempCanvas = document.getElementById("getDisplayImage");
+			var tempObject = new SignaturePad(tempCanvas, {backgroundColor: 'rgb(255, 255, 255)'});
+			var newHeight = $("#getDisplayImage").width() * .5257;
+			$("#getDisplayImage").css("height", newHeight.toString() + "px");
+			resizeCanvas(tempObject, tempCanvas);
+			tempObject.fromData(JSON.parse($("#signature").val()));
+			$("#signaturePic").html("<img src='" + tempObject.toDataURL() + "' class='img-responsive'  max-width='100%'>");
+			$("#temp").remove();
+
+
 			
 			$("button[type=submit][name=save]").click(function() {
 				$("form").find("input").removeAttr("required");
@@ -49,17 +60,24 @@
 					return;
 				}
 				if ($("input[type=radio][name=perm]:checked").val() == "Y") {
-					$("#contactOption").show("slow");
-					
+					$("#contactOption").show("slow");					
 				}
 				else {
 					$("#contactOption").hide("slow");
 					$("#contactOption").find("input").removeAttr("required");
 				}
 			}
+			console.log(JSON.parse($("#signature").val()));
 
 			contactCheck();
 			$("input[type=radio][name=perm]").change(contactCheck);
+
+			$("#signatureModal").on('shown.bs.modal', function () {
+				var newHeight = $("#signature-pad-body").width() * .5257;
+				$("#signature-pad-body").css("height", newHeight.toString() + "px");
+				resizeCanvas(signaturePad, canvas);
+            	signaturePad.fromData(JSON.parse($("#signature").val()));
+        	});			
 		});
 		$(document).keypress(
 			function(event){
@@ -68,6 +86,12 @@
 				}
 			}
 		);
+		$(window).resize(function() {
+		 	var newHeight = $("#signature-pad-body").width() * .5257;
+			$("#signature-pad-body").css("height", newHeight.toString() + "px");
+			console.log($("#canvas").height()/$("#canvas").width());
+			resizeCanvas(signaturePad, canvas);
+		});
  	</script>
 </head>
 <body>
@@ -109,16 +133,8 @@
 	<div class="row">
 		<div class="col-sm-3">
 			<label for="signature">Signature of Applicant <span style="color: red;">*</span></label>	
-			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#signatureModal">Click here to attach/edit your signature</button>
-<!---			<button type="button" class="btn btn-default" onclick='console.log($("#signature").val().length)'></button>--->
-				<!-- Convert Base64 Binary to String Representation -->
-				<cfif isBinary(applicantSignature.signature)>
-					<cfset binaryStringRep=BinaryEncode(applicantSignature.signature,"Base64")>
-					<cfset binaryStringRep='data:image/png;base64,' &  binaryStringRep >
-				<cfelse>
-					<cfset BinaryStringRep="">
-				</cfif>
-				<input type="hidden" name="signature" id="signature" value="<cfoutput>#binaryStringRep#</cfoutput>" />
+			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#signatureModal">Attach/Update your signature</button>
+			<input type="hidden" name="signature" id="signature" value='<cfoutput>#applicantSignature.signature#</cfoutput>' />
 		</div>
 		<div class="col-sm-6">
 			<div id="signaturePic">
@@ -133,7 +149,7 @@
 	<div class="row">
 		<div class="col-sm-3">
 			<label for="SpouseSig">Signature of Spouse/Partner</label>
-			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#spouseSignatureModal">Click here to attach/edit your signature</button>	
+			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#spouseSignatureModal">Attach/Update your signature</button>	
 		</div>
 		<div class="col-sm-6" id="spouseSignaturePic">
 		</div>
@@ -257,28 +273,27 @@
 		</cfif>
 	</div>
 	</form>
+	<div style="height: 50px;"></div>
 
 	<div id="signatureModal" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-lg">
-
 			<div class="modal-content">
 				<div class="modal-body">
 					<div id="sigBody">
 						<div id="signature-pad" class="signature-pad">
-						    <div class="signature-pad--body">
-						      <canvas></canvas>
-						    </div>
+							<div id="signature-pad-body" class="signature-pad--body">
+								<canvas id="canvas"></canvas>
+							</div>
 						    <div class="signature-pad--footer">
 						      <div class="description"><font size="3" color="black">Sign Above</font></div>
 
 						      <div class="signature-pad--actions">
 						        <div>
-						        	<button type="button" class="button clear" data-action="clear">Clear</button>
-						        	<button type="button" class="button" data-action="change-color" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">Change color</button>
-						        	<button type="button" class="button" data-action="undo">Undo</button>
+						        	<button type="button" class="btn btn-info" data-action="clear">Clear</button>
+						        	<button type="button" class="btn btn-info" data-action="undo">Undo</button>
 						        </div>
 						        <div>
-						          	<button type="button" class="button save" data-action="save">Save</button>
+						          	<button type="button" class="btn btn-success" data-action="save">Save</button>
 						        </div>
 						      </div>
 						    </div>
@@ -288,9 +303,11 @@
 			</div>
 		</div>
 	</div>
-	<script src="../js/signature_pad.umd.js"></script>
-  	<script src="../js/app.js"></script>
 
+	<div id="temp" style="position: relative; visibility: hidden; width: 100%; height: 100%; max-width: 660px; max-height: 347px; border: 1px solid #e8e8e8;">
+		<canvas id="getDisplayImage" style="position: relative; width: 100%; height: 100%;"></canvas>
+	</div>
+  	<script src="../js/app.js"></script>
 </div>
 </body>
 </html>

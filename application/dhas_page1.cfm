@@ -321,7 +321,7 @@
 				<option value="NJ" <cfset subformClass.showSelectionField('MState',subformData,'NJ')/>>NJ - New Jersey</option>
 				<option value="NM" <cfset subformClass.showSelectionField('MState',subformData,'NM')/>>NM - New Mexico</option>
 				<option value="NY" <cfset subformClass.showSelectionField('MState',subformData,'NY')/>>NY - New York</option>
-				<option value="NC" <cfset subformClass.showSelectionField('MState',subformData,'NJ')/>>NC - North Carolina</option>
+				<option value="NC" <cfset subformClass.showSelectionField('MState',subformData,'NC')/>>NC - North Carolina</option>
 				<option value="ND" <cfset subformClass.showSelectionField('MState',subformData,'ND')/>>ND - North Dakota</option>
 				<option value="OH" <cfset subformClass.showSelectionField('MState',subformData,'OH')/>>OH - Ohio</option>
 				<option value="OK" <cfset subformClass.showSelectionField('MState',subformData,'OK')/>>OK - Oklahoma</option>
@@ -528,7 +528,7 @@
 	</div>
 	</div>
 	<div class="text-center">
-		<button type="submit" class="btn btn-default" name="previous" value="prevous">Go to Instructions</button>
+		<button type="submit" class="btn btn-default" name="previous" value="prevous">Previous</button>
 		<cfif ((session.accessLevel eq 'admin') || (subformClass.isUserReview()))>
 			<button type="submit" class="btn btn-default" name="exit" value="exit">Exit</button>
 		<cfelse>
@@ -537,6 +537,7 @@
 		<button type="submit" class="btn btn-default" name="next" value="next">Next</button>
 	</div>
 	</form>
+	<div style="height: 50px;"></div>
 </div>
 </body>
 </html>
