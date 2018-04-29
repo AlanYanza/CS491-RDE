@@ -9,26 +9,25 @@ import { MailService } from '../mail.service';
 import { map } from 'rxjs/operators/map';
 
 @Component({
-  selector: 'app-mail-content',
-  templateUrl: './mail-content.component.html',
-  styleUrls: ['./mail-content.component.css']
+	selector: 'app-mail-content',
+	templateUrl: './mail-content.component.html',
+	styleUrls: ['./mail-content.component.css']
 })
 export class MailContentComponent implements OnInit {
-  title = "Message";
+	title = 'Message';
 
-  msg$ = this.route.data.pipe(
-	map((data: any): Msg => {
-		return data.message;
-	})
-	); 
-  
-  constructor(
-	private route: ActivatedRoute,
-	private mailService: MailService,
-	private location: Location
+	msg$ = this.route.data.pipe(
+		map((data: any): Msg => {
+			return data.message;
+		})
+		);
+
+	constructor(
+		private route: ActivatedRoute,
+		private mailService: MailService,
+		private location: Location
 	) { }
 
-  ngOnInit(): void {
-  }
-
+	ngOnInit(): void {
+	}
 }

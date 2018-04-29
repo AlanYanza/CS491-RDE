@@ -17,7 +17,6 @@
 .title {
 	background-color: #f0f0f0;
 	border-bottom: 1px solid #ddd;
-
 }
 
 .mail {
@@ -44,10 +43,6 @@
 	overflow-y: auto;
 }
 
-.subject { 
-	
-}
-
 .date {
 	float: right;
 	color: gray;
@@ -71,21 +66,35 @@
 .nav {
 	background-color: #136AA9; 
 }
-
+.navbar {
+	margin-bottom: 0px;
+	border: none;
+	min-height: 20px;
+}
 .nav-link {
 	cursor: pointer;
 	color: white;
 }
-
 .nav-link:hover {
 	background-color: #083759;
 }
 .navbar-toggle {
-	background-color: #136AA9;
+	float: left;
+	margin-bottom: 0px;
+	margin-left: 2px;
+}
+.navbar-collapse {
+	padding: 0px;
 }
 
 .pagination-styles {
-	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.pagination-styles /deep/ .ngx-pagination {
+	padding: 0px;
+	margin-bottom: 0px;
 }
 
 /* width */
