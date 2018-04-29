@@ -14,7 +14,12 @@
 		<div class="labeled">
 			<label class="col-form-label col-md-1">Subject:</label>
 			<div class="col-md-11">
-				<input type="text" class="form-control" [(ngModel)]="msg.subject" placeholder="Write subject here" aria-label="Write subject here" aria-describedby="basic-addon1">
+				<input type="text" required class="form-control" [(ngModel)]="msg.subject" #subject="ngModel" placeholder="Write subject here" aria-label="Write subject here" aria-describedby="basic-addon1">
+				<div *ngIf="subject.invalid && (subject.dirty || subject.touched)" class="alert alert-danger">
+					<div *ngIf="subject.errors.required">
+						Subject is required.
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -31,9 +36,13 @@
 				<input type="text" readonly class="form-control" placeholder="Admin" aria-label="Admin" [(ngModel)]="msg.recipient">
 			</div>
 		</div>
-
+		<div *ngIf="message.invalid && (message.dirty || message.touched)" class="alert alert-danger">
+			<div *ngIf="message.errors.required">
+				Message is required.
+			</div>
+		</div>
 		<div class="message">
-			<textarea class="input form-control" [(ngModel)]="msg.message" placeholder="Write message here"></textarea>
+			<textarea required class="input form-control" [(ngModel)]="msg.message" #message="ngModel" placeholder="Write message here"></textarea>
 		</div>
 	</div>
 </div>
