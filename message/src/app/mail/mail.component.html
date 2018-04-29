@@ -25,7 +25,7 @@
 					[class.read]="msg.READSTATUS === 'F'" 
 					[class.selected]="msg === selectedMsg" 
 					[routerLink] = "['/message', msg.MSGID]" 
-					(click)="onSelect(msg)"> 
+					(click)="onSelect(msg)" class="container-fluid"> 
 						<div>
 							<span class="subject">{{msg.SUBJECT}}</span>
 							<span class="date">{{msg.DATESENT}}</span>
