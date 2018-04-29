@@ -105,10 +105,13 @@
 					$("#insuredOption").removeAttr("required", "true");
 				}
 
-				else if ($("input[type=radio][name=relation]:checked").val() == "O") {				
-					console.log($("input[type=radio][name=relation]:checked").val());
+				else if ($("input[type=radio][name=relation]:checked").val() == "O") {
 					$("input[type=text][name=relOther]").attr("required");
 					$("input[type=text][name=relOther]").show("slow");
+					$("#insuredOption").show("slow");
+					$("#insuredOption").attr("required", "true");
+				}
+				else {
 					$("#insuredOption").show("slow");
 					$("#insuredOption").attr("required", "true");
 				}
