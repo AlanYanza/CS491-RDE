@@ -1,6 +1,7 @@
 .labeled {
 	border-bottom: 0.1px solid #f0f0f0;
 	padding: 15px;
+	padding-left: 30px;
 }
 
 .message {
