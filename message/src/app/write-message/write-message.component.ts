@@ -13,8 +13,7 @@ import { User } from '../user';
 export class WriteMessageComponent implements OnInit {
 
 	title = 'New Message';
-	// users: User[];
-	users = [{ EMAIL: 'TEST', FIRSTNAME: 'FIRST', LASTNAME: 'LAST' }];
+	users: User[];
 	accessLevel = '';
 	msg: any = {};
 
