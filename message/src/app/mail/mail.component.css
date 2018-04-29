@@ -88,10 +88,13 @@
 }
 
 .pagination-styles {
-	width: 100%;
+	display: flex;
+	justify-content: center;
 }
-.ngx-pagination {
-	padding: 0px !important;
+
+.pagination-styles /deep/ .ngx-pagination {
+	padding: 0px;
+	margin-bottom: 0px;
 }
 
 /* width */
