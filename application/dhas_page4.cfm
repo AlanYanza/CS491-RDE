@@ -37,6 +37,14 @@
 
 			$('[data-toggle="popover"]').popover();
 
+
+			$("button[type=button][name=reveal]").click(function() {
+				$("#InsSS").attr("type", "text");
+				setTimeout(function() {
+				    $("#InsSS").attr("type", "password");
+				}, 3000);
+			});
+
 			function SSISSDICheck() {
 				
 				if (($("input[type=radio][name=SSISSDIStatus]:checked").val() == "N") || ($("input[type=radio][name=SSISSDIStatus]:checked").val() == "U")) {
@@ -309,12 +317,19 @@
 		<div class="form-group row">
 			<div class="col-sm-6">	
 				<label for="InsName">Name of Insured</label>
+			</div>
+			<div class="col-sm-4">	
+				<label for="InsSS">Social Security Number:</label>
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-6">
 				<input type="text" class="form-control" name="InsName" value="<cfoutput>#subformData.InsName#</cfoutput>"/>
 			</div>
-			<div class="col-sm-6">
-				<label for="InsSS">Social Security Number:</label>
-				<input type="text" class="form-control" name="InsSS" value="<cfoutput>#subformData.InsSS#</cfoutput>"/>
+			<div class="col-sm-4">
+				<input type="password" class="form-control" id="InsSS" name="InsSS" value="<cfoutput>#subformData.InsSS#</cfoutput>"/>
 			</div>
+			<div class="col-sm-2"><button type="button" class="btn btn-default btn-block" name="reveal">View SSN</button></div>
 		</div>
 		<div class="form-group">
 			<label for="InsAddr">Street Address, City, State, Zip:</label>
