@@ -45,11 +45,15 @@
 				}, 3000);
 			});
 
-			function SSISSDICheck() {
-				
+			function SSISSDICheck() {				
 				if (($("input[type=radio][name=SSISSDIStatus]:checked").val() == "N") || ($("input[type=radio][name=SSISSDIStatus]:checked").val() == "U")) {
 					$("#SSISSDIOption").hide("slow");
 					$("#SSISSDIOption").find("input").removeAttr("required");
+					$("#SSISSDIOption").find("input[type=date]").val("1111-11-11");
+					$("#SSISSDIOption").find("input[type=text]").val("");
+					$("#SSISSDIOption").find("input[type=number]").val(0);
+					$("#SSISSDIOption").find("textarea").val("");
+					$("#SSISSDIOption").find("input[type=checkbox]").prop("checked", false );
 				}
 				else {
 					$("#SSISSDIOption").show("slow");					
@@ -78,6 +82,18 @@
 				}
 				else {
 					$("#marketOption").show("slow");
+				}
+			}
+
+			function dateCheck(unsureField, dateField) {
+				if ($("input[type=checkbox][name=" + unsureField + "]").is(":checked")) {
+					$("input[type=date][name=" + dateField + "]").val("1111-11-11");
+					$("input[type=date][name=" + dateField + "]").attr("readonly", "true");
+					$("input[type=date][name=" + dateField + "]").removeAttr("required");
+				}
+				else {
+					$("input[type=date][name=" + dateField + "]").removeAttr("readonly");
+					$("input[type=date][name=" + dateField + "]").attr("required", "true");
 				}
 			}
 
@@ -127,16 +143,18 @@
 			}
 
 			SSISSDICheck();
-			SSISSDIDateCheck();
+			// SSISSDIDateCheck();
+			dateCheck("UASSISSDIDate", "ASSISSDIDate");
 			marketCheck();
-			marketDateCheck();
+			// marketDateCheck();
+			dateCheck("UMarketDate", "AMarketDate");
 			covOtherCheck();
 			relationCheck();
 
 			$("input[type=radio][name=SSISSDIStatus]").change(SSISSDICheck);
-			$("input[type=checkbox][name=UASSISSDIDate]").click(SSISSDIDateCheck);
+			$("input[type=checkbox][name=UASSISSDIDate]").click(function(){dateCheck("UASSISSDIDate", "ASSISSDIDate");});
 			$("input[type=radio][name=AMarket]").change(marketCheck);
-			$("input[type=checkbox][name=UMarketDate]").click(marketDateCheck);
+			$("input[type=checkbox][name=UMarketDate]").click(function(){dateCheck("UMarketDate", "AMarketDate");});
 			$("input[type=checkbox][name=CovOther]").click(covOtherCheck);
 			$("input[type=radio][name=relation]").change(relationCheck);
 
@@ -378,6 +396,7 @@
 		NOTE: You MUST include a photocopy of the FRONT and BACK of your insurance card(s)/prescription card(s)
 		and any notice from your Insurance Company regarding Medicare Part D.
 	</em></strong>
+	<div style="height: 50px;"></div>
 </div>
 </body>
 </html>

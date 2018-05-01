@@ -356,6 +356,7 @@
 		<canvas id="getDisplayImage" style="position: relative; width: 100%; height: 100%;"></canvas>
 	</div>	
   	<script src="../js/app.js"></script>
+  	<div style="height: 50px;"></div>
 </div>
 </body>
 </html>
