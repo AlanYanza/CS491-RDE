@@ -26,12 +26,12 @@
 					[class.selected]="msg === selectedMsg" 
 					[routerLink] = "['/message', msg.MSGID]" 
 					(click)="onSelect(msg)" class="container-fluid"> 
-						<div>
+						<div class="col-md-10">
 							<span class="subject">{{msg.SUBJECT}}</span>
+							<span class="sender">{{msg.SENDER}}</span>
 							<span class="date">{{msg.DATESENT}}</span>
 						</div>
-						<div>
-							<span class="sender">{{msg.SENDER}}</span>
+						<div class="col-md-2">
 							<button *ngIf="selectedTab === 'inbox'" id="trashIcon" type="button" class="btn btn-danger btn-sm" (click)="deleteMessage(msg)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 						</div>
 					</li>
