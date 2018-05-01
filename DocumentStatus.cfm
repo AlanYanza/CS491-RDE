@@ -32,15 +32,15 @@
 </head>
 <body>
 <cfinclude template="navbar.cfm">
-<cfif  isAdmin eq 1>
-	<cfif isDefined('url.update') eq 1>
-		<div class="alert alert-success">
-			<a href="##" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			Changes Made Successfully
-		</div>
-	</cfif>
-</cfif>
 <div class="container">
+	<cfif  isAdmin eq 1>
+		<cfif isDefined('url.update') eq 1>
+			<div class="alert alert-success">
+				<a href="##" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				Changes Made Successfully
+			</div>
+		</cfif>
+	</cfif>
     <div class="panel panel-default">
         <div class="panel-heading">Application Status</div><br>
         <cfif isAdmin eq 1>
