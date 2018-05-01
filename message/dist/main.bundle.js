@@ -434,8 +434,8 @@ var MailComponent = /** @class */ (function () {
         this.selectedMsg = msg;
         if (this.selectedTab === 'inbox') {
             msg.READSTATUS = 'T';
+            this.mailService.readMessage(msg).subscribe();
         }
-        this.mailService.readMessage(msg).subscribe();
     };
     MailComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
