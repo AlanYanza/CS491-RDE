@@ -94,8 +94,9 @@
 
 <!--- Form Page 4 processing ---> 
 <cfif formSource eq 'page4' AND reviewMode eq 0>
-	<!--- Update User's signatures'--->
+	<!--- Update signatures'--->
 	<cfset subformObj.updateSignature("signature","signatureDate")/>
+	<cfset subformObj.updateSignature("spouseSig","spouseSigDate")/>
 	<!--- Set fields of the sub-form --->
 	<cfset fields=['CMName','agency','CMaddr','CMWPhone','CMFaxNum','CMCPhone','email','perm','HIVAware','CPName','relation','CPAddr','CPHPhone','CPWPhone','CPCPhone','PName','PPhone'] />
 	<cfset subformObj.setFields(fields)/>
