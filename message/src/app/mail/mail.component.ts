@@ -59,8 +59,7 @@ export class MailComponent implements OnInit {
 		this.selectedMsg = msg;
 		if (this.selectedTab === 'inbox') {
 			msg.READSTATUS = 'T';
+			this.mailService.readMessage(msg).subscribe();
 		}
-		this.mailService.readMessage(msg).subscribe();
 	}
-
 }
