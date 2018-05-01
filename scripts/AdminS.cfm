@@ -7,7 +7,7 @@
 
 <!--- Determine which button was pressed on admin Homepage --->
 <cfif Form.button eq 'Approve'>
-	<cfset appID=frm.appID/>
+	<cfset appID=form.appID/>
 	<cfset STATUS2 = 'A'/>
 	<cfdump var = '#STATUS2#'/>
 	<cfset AdminPull=createObject('component','CS491-RDE.components.Admin')/>
