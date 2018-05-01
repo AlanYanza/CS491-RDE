@@ -47,83 +47,62 @@
 				else {
 					$("#mediumOption").hide("slow");
 					$("#mediumOption").find("input").removeAttr("required");
+					$("#mediumOption").find("input[type=date]").val("1111-11-11");
+					$("#mediumOption").find("input[type=text]").val("");
+					$("#mediumOption").find("input[type=number]").val(0);
+					$("#mediumOption").find("textarea").val("");
+					$("#mediumOption").find("input[type=checkbox]").prop("checked", false );
 				}
 			}
 
-			function medicaidDateCheck() {
-				if ($("input[type=checkbox][name=UMedicaidDate]").is(":checked")) {
-					$("input[type=date][name=AMedicaidDate]").val("1111-11-11");
-					$("input[type=date][name=AMedicaidDate]").attr("readonly", "true");
-					$("input[type=date][name=AMedicaidDate]").removeAttr("required");
+			function dateCheck(unsureField, dateField) {
+				if ($("input[type=checkbox][name=" + unsureField + "]").is(":checked")) {
+					$("input[type=date][name=" + dateField + "]").val("1111-11-11");
+					$("input[type=date][name=" + dateField + "]").attr("readonly", "true");
+					$("input[type=date][name=" + dateField + "]").removeAttr("required");
 				}
 				else {
-					$("input[type=date][name=AMedicaidDate]").removeAttr("readonly");
-					$("input[type=date][name=AMedicaidDate]").attr("required", "true");
+					$("input[type=date][name=" + dateField + "]").removeAttr("readonly");
+					$("input[type=date][name=" + dateField + "]").attr("required", "true");
 				}
 			}
 
-			function medicareDateCheck() {
-				if ($("input[type=checkbox][name=UMedicareDate]").is(":checked")) {
-					$("input[type=date][name=AMedicareDate]").val("1111-11-11");
-					$("input[type=date][name=AMedicareDate]").attr("readonly", "true");
-					$("input[type=date][name=AMedicareDate]").removeAttr("required");
-				}
-				else {
-					$("input[type=date][name=AMedicareDate]").removeAttr("readonly");
-					$("input[type=date][name=AMedicareDate]").attr("required", "true");
-				}
-			}
-
-			function radioCheck(e) {
-				//$(e.data.location).hide();
-				if (typeof $(e.data.radio + ":checked").val() === "undefined") {
-					return;
-				}
-				if ($(e.data.radio + ":checked").val() != e.data.value) {
-					$(e.data.location).hide();
-					$(e.data.location).find("input").removeAttr("required");					
-					$(e.data.location).find(":checked").prop("checked", false );
-					$(e.data.location).find("input[type=text]").val("");
-					$(e.data.location).find("input[type=number]").val(0);
-					$(e.data.location).find("input[type=date]").val("1111-11-11");
-				}
-				else {
-					$(e.data.location).show();
-				}
-			}
-
-			function initRadioCheck(radio, value, location) {
+			function radioCheck(radio, value, location) {
 				if (typeof $(radio + ":checked").val() === "undefined") {
 					return;
 				}
 				if ($(radio + ":checked").val() != value) {
 					$(location).hide("slow");
 					$(location).find(":required").removeAttr("required");
-					
+					$(location).find("input[type=date]").val("1111-11-11");
+					$(location).find("input[type=text]").val("");
+					$(location).find("input[type=number]").val(0);
+					$(location).find("textarea").val("");
+					$(location).find("input[type=checkbox]").prop("checked", false );
+
 				}
 				else {					
 					$(location).show("slow");
 				}
 			}
 
-			$("input[type=radio][name=Medium]").change(mediumCheck);
-			$("input[type=checkbox][name=UMedicaidDate]").click(medicaidDateCheck);
-			$("input[type=checkbox][name=UMedicareDate]").click(medicareDateCheck);
-
-			initRadioCheck("input[type=radio][name=insured]", "Y", "#insuredOption");
+			radioCheck("input[type=radio][name=insured]", "Y", "#insuredOption");
 			mediumCheck();
-			initRadioCheck("input[type=radio][name=presCov]", "Y", "#presCovOption");
-			initRadioCheck("input[type=radio][name=AMedicaid]", "Y", "#AmedicaidOption");			
-			medicaidDateCheck();
-			initRadioCheck("input[type=radio][name=AMedicare]", "Y", "#AmedicareOption");
-			medicareDateCheck();
-			initRadioCheck("input[type=radio][name=AMedicareD]", "Y", "#AmedicareDOption");
+			radioCheck("input[type=radio][name=presCov]", "Y", "#presCovOption");
+			radioCheck("input[type=radio][name=AMedicaid]", "Y", "#AmedicaidOption");
+			dateCheck("UMedicaidDate", "AMedicaidDate");
+			radioCheck("input[type=radio][name=AMedicare]", "Y", "#AmedicareOption");
+			dateCheck("UMedicareDate", "AMedicareDate");
+			radioCheck("input[type=radio][name=AMedicareD]", "Y", "#AmedicareDOption");
 
-			$("input[type=radio][name=insured]").change({radio: "input[type=radio][name=insured]", value: "Y", location: "#insuredOption"}, radioCheck);
-			$("input[type=radio][name=presCov]").change({radio: "input[type=radio][name=presCov]", value: "Y", location: "#presCovOption"}, radioCheck);
-			$("input[type=radio][name=AMedicaid]").change({radio: "input[type=radio][name=AMedicaid]", value: "Y", location: "#AmedicaidOption"}, radioCheck);
-			$("input[type=radio][name=AMedicare]").change({radio: "input[type=radio][name=AMedicare]", value: "Y", location: "#AmedicareOption"}, radioCheck);
-			$("input[type=radio][name=AMedicareD]").change({radio: "input[type=radio][name=AMedicareD]", value: "Y", location: "#AmedicareDOption"}, radioCheck);
+			$("input[type=radio][name=insured]").change(function(){radioCheck("input[type=radio][name=insured]", "Y", "#insuredOption");});
+			$("input[type=radio][name=Medium]").change(mediumCheck);
+			$("input[type=radio][name=presCov]").change(function(){radioCheck("input[type=radio][name=presCov]", "Y", "#presCovOption");});
+			$("input[type=radio][name=AMedicaid]").change(function(){radioCheck("input[type=radio][name=AMedicaid]", "Y", "#AmedicaidOption");});
+			$("input[type=checkbox][name=UMedicaidDate]").click(function(){dateCheck("UMedicaidDate", "AMedicaidDate");});
+			$("input[type=radio][name=AMedicare]").change(function(){radioCheck("input[type=radio][name=AMedicare]", "Y", "#AmedicareOption");});
+			$("input[type=checkbox][name=UMedicareDate]").click(function(){dateCheck("UMedicareDate", "AMedicareDate");});
+			$("input[type=radio][name=AMedicareD]").change(function(){radioCheck("input[type=radio][name=AMedicareD]", "Y", "#AmedicareDOption");});
 
 			$("button[type=submit][name=save]").click(function() {
 				$("form").find("input").removeAttr("required");
@@ -373,8 +352,8 @@
 		</cfif>
 		<button type="submit" class="btn btn-default" name="next" value="next">Next</button>
 	</div>
-
 	</form>
-	</div>
+	<div style="height: 50px;"></div>
+</div>
 </body>
 </html>

@@ -73,23 +73,13 @@
 				}, 3000);
 			});
 
-			function asianCheck() {
-				if ($("input[type=checkbox][name=RAsian]").is(":checked")) {
-					$("#RasianOption").show("slow");
-					$("#RasianOption").find("input[type=checkbox]").prop("checked", false );
+			function raceCheck(race, raceOption) {
+				if ($("input[type=checkbox][name=" + race + "]").is(":checked")) {
+					$("#" + raceOption).show("slow");
+					$("#" + raceOption).find("input[type=checkbox]").prop("checked", false );
 				}
 				else {
-					$("#RasianOption").hide("slow");
-				}
-			}
-
-			function RNatHaCheck() {
-				if ($("input[type=checkbox][name=RNatHa]").is(":checked")) {
-					$("#RNatHaOption").show("slow");
-					$("#RNatHaOption").find("input[type=checkbox]").prop("checked", false );
-				}
-				else {
-					$("#RNatHaOption").hide("slow");
+					$("#" + raceOption).hide("slow");
 				}
 			}
 
@@ -124,20 +114,17 @@
 				}
 			}
 
-			$("button[type=submit][name=save]").click(function() {
-				$("form").find("input").removeAttr("required");
-			});
-			$("button[type=submit][name=previous]").click(function() {
-				$("form").find("input").removeAttr("required");
-			});
-			
-			asianCheck();
-			RNatHaCheck();
+			$("button[type=submit][name=save]").click(function(){$("form").find("input").removeAttr("required");});
+			$("button[type=submit][name=previous]").click(function(){$("form").find("input").removeAttr("required");});
+
+
+			raceCheck("RAsian", "RasianOption");
+			raceCheck("RNatHa", "RNatHaOption");
 			EHispCheck();
 			pregnant();
 			
-			$("input[type=checkbox][name=RAsian]").click(asianCheck);
-			$("input[type=checkbox][name=RNatHa]").click(RNatHaCheck);
+			$("input[type=checkbox][name=RAsian]").click(function(){raceCheck("RAsian", "RasianOption");});
+			$("input[type=checkbox][name=RNatHa]").click(function(){raceCheck("RNatHa", "RNatHaOption");});
 			$("input[type=radio][name=EHisp]").change(EHispCheck);
 			$("input[type=radio][name=genderBirth]").change(pregnant);
 
@@ -400,13 +387,9 @@
 	<hr/>
 
 	<label for="SSNum">What is your Social Security Number (if you have one)?</label>
-	<div class="form-group row">
-		<div class="col-sm-2">			
-			<input type="password" class="form-control" id="SSNum" name="SSNum"  maxlength="11" placeholder="xxx-xx-xxxx" value="<cfoutput>#subformData.SSNum#</cfoutput>" />
-		</div>
-		<div class="col-sm-10">
-			<button type="button" class="btn btn-default" name="reveal">View SSN</button>
-		</div>
+	<div class="form-group input-group">
+			<input type="password" class="form-control" id="SSNum" name="SSNum"  maxlength="11" placeholder="xxx-xx-xxxx" value="<cfoutput>#subformData.SSNum#</cfoutput>" />			
+			<span class="input-group-btn"><button type="button" class="btn btn-default" name="reveal">View SSN</button></span>
 	</div>
 	<div class="form-group">
 		<label for="USCitizen">Are you a U.S. citizen? (Responding to this question will not affect your eligibility for ADDP.) <span style="color: red;">*</span></label>

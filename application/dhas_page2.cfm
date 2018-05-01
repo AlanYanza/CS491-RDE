@@ -38,7 +38,6 @@
 				$("form").find("input").removeAttr("required");
 				$("form").find("input[type=number]").val(function() {
 					if ($(this).val() != "") {
-						console.log($(this).val());
 						return $(this).val();
 					}
 					else {
@@ -52,7 +51,6 @@
 				var income = $("#income").find("input[type=number]").serializeArray();
 				$.each(income, (function(i, j){
 					totalIncome += Number(j.value);
-					console.log(totalIncome.toFixed(2));
 				}));
 				$("input[type=number][name=totalHIncome]").val(totalIncome.toFixed(2));
 			}
@@ -245,6 +243,7 @@
 		<button type="submit" class="btn btn-default" name="next" value="next">Next</button>
 	</div>
 	</form>
+	<div style="height: 50px;"></div>
 </div>
 </body>
 </html>

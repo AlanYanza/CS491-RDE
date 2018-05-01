@@ -17,6 +17,7 @@
 <cfset subformClass.createSubformData()/>
 <cfset subformData=subformClass.retrieveDataForSubform()/>
 <cfset applicantSignature=subformClass.getSignature("signature")/>
+<cfset spouseSignature=subformClass.getSignature("spouseSig")/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,15 +38,20 @@
 				</cfoutput>
 			</cfif>
 
-			if ($("#signature").val() != "") {
-				var tempCanvas = document.getElementById("getDisplayImage");
-				var tempObject = new SignaturePad(tempCanvas, {backgroundColor: 'rgb(255, 255, 255)'});
-				var newHeight = $("#getDisplayImage").width() * .5257;
-				$("#getDisplayImage").css("height", newHeight.toString() + "px");
-				resizeCanvas(tempObject, tempCanvas);
-				tempObject.fromData(JSON.parse($("#signature").val()));
-				$("#signaturePic").html("<img src='" + tempObject.toDataURL() + "' class='img-responsive'  max-width='100%'>");
+			function getSig(sigInput, sigPic) {
+				if ($(sigInput).val() != "") {
+					var tempCanvas = document.getElementById("getDisplayImage");
+					var tempObject = new SignaturePad(tempCanvas, {backgroundColor: 'rgb(255, 255, 255)'});
+					var newHeight = $("#getDisplayImage").width() * .5257;
+					$("#getDisplayImage").css("height", newHeight.toString() + "px");
+					resizeCanvas(tempObject, tempCanvas);
+					tempObject.fromData(JSON.parse($(sigInput).val()));
+					$(sigPic).html("<img src='" + tempObject.toDataURL() + "' class='img-responsive'  max-width='100%'>");
+				}
 			}
+
+			getSig("#signature", "#signaturePic");
+			getSig("#spouseSig", "#spouseSignaturePic");
 			$("#temp").remove();
 			
 			$("button[type=submit][name=save]").click(function() {
@@ -74,9 +80,18 @@
 			$("#signatureModal").on('shown.bs.modal', function () {
 				var newHeight = $("#signature-pad-body").width() * .5257;
 				$("#signature-pad-body").css("height", newHeight.toString() + "px");
-				resizeCanvas(signaturePad, canvas);
+				resizeCanvas(applicantSigPad, canvas);
 				if ($("#signature").val() != "") {
-					signaturePad.fromData(JSON.parse($("#signature").val()));
+					applicantSigPad.fromData(JSON.parse($("#signature").val()));
+				}
+ 			});
+
+ 			$("#spouseSignatureModal").on('shown.bs.modal', function () {
+				var newHeight = $("#spouse-signature-pad-body").width() * .5257;
+				$("#spouse-signature-pad-body").css("height", newHeight.toString() + "px");
+				resizeCanvas(spouseSigPad, spouseSigCanvas);
+				if ($("#spouseSig").val() != "") {
+					spouseSigPad.fromData(JSON.parse($("#spouseSig").val()));
 				}
  			});
 		});
@@ -90,7 +105,10 @@
 		$(window).resize(function() {
 		 	var newHeight = $("#signature-pad-body").width() * .5257;
 			$("#signature-pad-body").css("height", newHeight.toString() + "px");
-			resizeCanvas(signaturePad, canvas);
+			newHeight = $("#spouse-signature-pad-body").width() * .5257;
+			$("#spouse-signature-pad-body").css("height", newHeight.toString() + "px");
+			resizeCanvas(applicantSigPad, canvas);
+			resizeCanvas(spouseSigPad, spouseSigCanvas);
 		});
  	</script>
 </head>
@@ -149,7 +167,8 @@
 	<div class="row">
 		<div class="col-sm-3">
 			<label for="SpouseSig">Signature of Spouse/Partner</label>
-			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#spouseSignatureModal">Attach/Update your signature</button>	
+			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#spouseSignatureModal">Attach/Update your signature</button>
+			<input type="hidden" name="spouseSig" id="spouseSig" value='<cfoutput>#spouseSignature.spouseSig#</cfoutput>' />
 		</div>
 		<div class="col-sm-6" id="spouseSignaturePic">
 		</div>
@@ -304,10 +323,40 @@
 		</div>
 	</div>
 
+	<div id="spouseSignatureModal" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div id="sigBody">
+						<div id="spouseSignaturePad" class="signature-pad">
+							<div id="spouse-signature-pad-body" class="signature-pad--body">
+								<canvas id="spouseCanvas"></canvas>
+							</div>
+						    <div class="signature-pad--footer">
+						      <div class="description"><font size="3" color="black">Sign Above</font></div>
+
+						      <div class="signature-pad--actions">
+						        <div>
+						        	<button type="button" class="btn btn-info" data-action="clear">Clear</button>
+						        	<button type="button" class="btn btn-info" data-action="undo">Undo</button>
+						        </div>
+						        <div>
+						          	<button type="button" class="btn btn-success" data-action="save">Save</button>
+						        </div>
+						      </div>
+						    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div id="temp" style="position: relative; visibility: hidden; width: 100%; height: 100%; max-width: 660px; max-height: 347px; border: 1px solid #e8e8e8;">
 		<canvas id="getDisplayImage" style="position: relative; width: 100%; height: 100%;"></canvas>
-	</div>
+	</div>	
   	<script src="../js/app.js"></script>
+  	<div style="height: 50px;"></div>
 </div>
 </body>
 </html>
