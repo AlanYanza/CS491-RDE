@@ -31,6 +31,9 @@
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
+.mail li > div > span {
+	display: block;
+}
 .mail-scroll {
 	flex: 1;
 	overflow-y: auto;
@@ -42,9 +45,21 @@
 	border-left: 0.1px solid gray;
 	height: 100%;
 }
+.subject {
+	/* display: inline-block; */
+}
+.sender {
+	color: #136AA9;
+	font-style: italic;
+
+}
+.date {
+	color: gray;
+}
 #trashIcon { 
 	float: right;
 }
+
 
 .show {
 	display: block !important;
