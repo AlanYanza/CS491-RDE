@@ -173,7 +173,7 @@ var AppModule = /** @class */ (function () {
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_7__app_routing_module__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_10__angular_common_http__["b" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_13_ngx_pagination__["a" /* NgxPaginationModule */],
@@ -197,7 +197,7 @@ var AppModule = /** @class */ (function () {
 /***/ "./src/app/mail-content/mail-content.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".labeled {\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpadding: 15px;\r\n\tpadding-left: 30px;\r\n}\r\n\r\n.message {\r\n\tpadding: 30px;\r\n}\r\n\r\n.nav-style {\r\n\tborder-bottom: 1px solid #f0f0f0;\r\n}\r\n\r\n.nav-style .active a {\r\n\tpadding: 5px 10px;\r\n    margin-top: 4px;\r\n    margin-right: 4px;\r\n}\r\n\r\nli.disabled > a:hover {\r\n\tcursor: default;\r\n}\r\n"
+module.exports = ".labeled {\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpadding: 15px;\r\n\tpadding-left: 30px;\r\n}\r\n\r\n.message {\r\n\tpadding: 30px;\r\n\twhite-space: pre-line;\r\n}\r\n\r\n.nav-style {\r\n\tborder-bottom: 1px solid #f0f0f0;\r\n}\r\n\r\n.nav-style .active a {\r\n\tpadding: 5px 10px;\r\n    margin-top: 4px;\r\n    margin-right: 4px;\r\n}\r\n\r\nli.disabled > a:hover {\r\n\tcursor: default;\r\n}\r\n"
 
 /***/ }),
 
@@ -612,14 +612,14 @@ var StatusPageComponent = /** @class */ (function () {
 /***/ "./src/app/write-message/write-message.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".container-div {\r\n\theight: 100%;\r\n\tdisplay: -webkit-box;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: flex;\r\n\t-webkit-box-orient: vertical;\r\n\t-webkit-box-direction: normal;\r\n\t    -ms-flex-direction: column;\r\n\t        flex-direction: column;\r\n}\r\n\r\n.email-form {\r\n\t-webkit-box-flex: 1;\r\n\t    -ms-flex: 1 0 auto;\r\n\t        flex: 1 0 auto;\r\n\tdisplay: -webkit-box;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: flex;\r\n\t-webkit-box-orient: vertical;\r\n\t-webkit-box-direction: normal;\r\n\t    -ms-flex-direction: column;\r\n\t        flex-direction: column;\r\n\r\n}\r\n\r\n.email-form .message {\r\n\t-webkit-box-flex: 1;\r\n\t    -ms-flex: 1 0 auto;\r\n\t        flex: 1 0 auto;\r\n\tdisplay: -webkit-box;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: flex;\r\n\t-webkit-box-orient: vertical;\r\n\t-webkit-box-direction: normal;\r\n\t    -ms-flex-direction: column;\r\n\t        flex-direction: column;\r\n\tmargin: 15px;\r\n}\r\n\r\n.email-form .message > textarea {\r\n\t-webkit-box-flex: 1;\r\n\t    -ms-flex: 1 0 auto;\r\n\t        flex: 1 0 auto;\r\n\tresize: none;\r\n\t-webkit-box-sizing: border-box;\r\n\t        box-sizing: border-box;\r\n}\r\n\r\n.email-form .labeled {\r\n\t-webkit-box-flex: 0;\r\n\t    -ms-flex: 0 0 auto;\r\n\t        flex: 0 0 auto;\r\n}\r\n\r\n.labeled {\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpadding: 15px;\r\n}\r\n\r\n.labeled .col-form-label {\r\n\tline-height: 270%;\r\n}\r\n\r\n.alert {\r\n\tpadding: 5px;\r\n\tmargin-bottom: 0px;\r\n}\r\n\r\n.input { \r\n\tborder: none;\r\n}\r\n\r\n.nav-style {\r\n\tborder-bottom: 1px solid #f0f0f0;\r\n}\r\n\r\n.nav-style li.disabled > a:hover {\r\n\tcursor: default;\r\n}\r\n\r\n.nav-style .active a {\r\n\tpadding: 5px 10px;\r\n    margin-top: 4px;\r\n    margin-right: 4px;\r\n\tbackground-color: #5cb85c;\r\n\tborder-color: #4cae4c;\r\n}\r\n\r\n.nav-style .active > a:focus,\r\n.nav-style .active > a:hover {\r\n\tcursor: pointer;\r\n\tbackground-color: #449d44;\r\n\tborder-color: #398439;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n"
+module.exports = ".container-div {\r\n\theight: 100%;\r\n\tdisplay: -webkit-box;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: flex;\r\n\t-webkit-box-orient: vertical;\r\n\t-webkit-box-direction: normal;\r\n\t    -ms-flex-direction: column;\r\n\t        flex-direction: column;\r\n}\r\n\r\n#emailForm {\r\n\tdisplay: -webkit-box;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: flex;\r\n\t-webkit-box-flex: 1;\r\n\t    -ms-flex: 1 0 auto;\r\n\t        flex: 1 0 auto;\r\n}\r\n\r\n.email-form {\r\n\t-webkit-box-flex: 1;\r\n\t    -ms-flex: 1 1 auto;\r\n\t        flex: 1 1 auto;\r\n\tdisplay: -webkit-box;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: flex;\r\n\t-webkit-box-orient: vertical;\r\n\t-webkit-box-direction: normal;\r\n\t    -ms-flex-direction: column;\r\n\t        flex-direction: column;\r\n}\r\n\r\n.email-form .message {\r\n\t-webkit-box-flex: 1;\r\n\t    -ms-flex: 1 0 auto;\r\n\t        flex: 1 0 auto;\r\n\tdisplay: -webkit-box;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: flex;\r\n\t-webkit-box-orient: vertical;\r\n\t-webkit-box-direction: normal;\r\n\t    -ms-flex-direction: column;\r\n\t        flex-direction: column;\r\n\tmargin: 15px;\r\n}\r\n\r\n.email-form .message > textarea {\r\n\t-webkit-box-flex: 1;\r\n\t    -ms-flex: 1 0 auto;\r\n\t        flex: 1 0 auto;\r\n\tresize: none;\r\n\t-webkit-box-sizing: border-box;\r\n\t        box-sizing: border-box;\r\n}\r\n\r\n.email-form .labeled {\r\n\t-webkit-box-flex: 0;\r\n\t    -ms-flex: 0 0 auto;\r\n\t        flex: 0 0 auto;\r\n}\r\n\r\n.labeled {\r\n\tborder-bottom: 0.1px solid #f0f0f0;\r\n\tpadding: 15px;\r\n}\r\n\r\n.labeled .col-form-label {\r\n\tline-height: 270%;\r\n}\r\n\r\n.alert {\r\n\tpadding: 5px;\r\n\tmargin-bottom: 0px;\r\n}\r\n\r\n.input { \r\n\tborder: none;\r\n}\r\n\r\n.nav-style {\r\n\tborder-bottom: 1px solid #f0f0f0;\r\n}\r\n\r\n.nav-style li.disabled > a:hover {\r\n\tcursor: default;\r\n}\r\n\r\n.nav-style .active a {\r\n\tpadding: 5px 10px;\r\n    margin-top: 4px;\r\n    margin-right: 4px;\r\n\tbackground-color: #5cb85c;\r\n\tborder-color: #4cae4c;\r\n}\r\n\r\n.nav-style .active > a:focus,\r\n.nav-style .active > a:hover {\r\n\tcursor: pointer;\r\n\tbackground-color: #449d44;\r\n\tborder-color: #398439;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
 /***/ "./src/app/write-message/write-message.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-div\">\n\t<ul class=\"nav nav-pills nav-style\">\n\t\t<li role=\"navigation\">\n\t\t\t<a [routerLink] = \"['/']\">X</a>\n\t\t</li>\n\t\t<li class=\"disabled\" role=\"presentation\">\n\t\t\t<a>{{ title | uppercase }}</a>\n\t\t</li>\n\t\t<li class=\"active pull-right\" role=\"navigation\">\n\t\t\t<a (click)=\"sendMessage()\">Send</a>\n\t\t</li>\n\t</ul>\n\t<div class=\"email-form form-group col-*-col*\">\n\t\t<div class=\"labeled\">\n\t\t\t<label class=\"col-form-label col-md-1\">Subject:</label>\n\t\t\t<div class=\"col-md-11\">\n\t\t\t\t<input type=\"text\" required class=\"form-control\" [(ngModel)]=\"msg.subject\" #subject=\"ngModel\" placeholder=\"Write subject here\" aria-label=\"Write subject here\" aria-describedby=\"basic-addon1\">\n\t\t\t\t<div *ngIf=\"subject.invalid && (subject.dirty || subject.touched)\" class=\"alert alert-danger\">\n\t\t\t\t\t<div *ngIf=\"subject.errors.required\">\n\t\t\t\t\t\tSubject is required.\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"labeled\">\n\t\t\t<label for=\"To\" class=\"col-form-label col-xs-1\">To:</label>\n\n\t\t\t<div *ngIf=\"accessLevel === 'admin'\" class=\"col-xs-11\"> \n\t\t\t\t<ng-select required [(ngModel)]=\"msg.recipient\">\n\t\t\t\t\t<ng-option *ngFor=\"let user of users\" [value]=\"user.EMAIL\">{{user.FIRSTNAME}} {{user.LASTNAME}}, {{user.EMAIL}}</ng-option> \n\t\t\t\t</ng-select>\n\t\t\t</div>\n\n\t\t\t<div *ngIf=\"accessLevel === 'user'\" class=\"col-xs-11\">\n\t\t\t\t<input type=\"text\" readonly class=\"form-control\" placeholder=\"Admin\" aria-label=\"Admin\" [(ngModel)]=\"msg.recipient\">\n\t\t\t</div>\n\t\t</div>\n\t\t<div *ngIf=\"message.invalid && (message.dirty || message.touched)\" class=\"alert alert-danger\">\n\t\t\t<div *ngIf=\"message.errors.required\">\n\t\t\t\tMessage is required.\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"message\">\n\t\t\t<textarea required class=\"input form-control\" [(ngModel)]=\"msg.message\" #message=\"ngModel\" placeholder=\"Write message here\"></textarea>\n\t\t</div>\n\t</div>\n</div>\n"
+module.exports = "<div class=\"container-div\">\n\t<ul class=\"nav nav-pills nav-style\">\n\t\t<li role=\"navigation\">\n\t\t\t<a [routerLink] = \"['/']\">X</a>\n\t\t</li>\n\t\t<li class=\"disabled\" role=\"presentation\">\n\t\t\t<a>{{ title | uppercase }}</a>\n\t\t</li>\n\t\t<li class=\"active pull-right\" role=\"navigation\">\n\t\t\t<a (click)=\"sendMessage()\">Send</a>\n\t\t</li>\n\t</ul>\n\t<form #emailForm=\"ngForm\" id=\"emailForm\">\n\t\t<div class=\"email-form form-group col-*-col*\">\n\t\t\t<div class=\"labeled\">\n\t\t\t\t<label class=\"col-form-label col-md-1\">Subject:</label>\n\t\t\t\t<div class=\"col-md-11\">\n\t\t\t\t\t<input name=\"subject\" type=\"text\" required class=\"form-control\" [(ngModel)]=\"msg.subject\" #subject=\"ngModel\" placeholder=\"Write subject here\" aria-label=\"Write subject here\" aria-describedby=\"basic-addon1\">\n\t\t\t\t\t<div *ngIf=\"(subject.invalid && submitted) || (subject.invalid && (subject.dirty || subject.touched))\" class=\"alert alert-danger\">\n\t\t\t\t\t\t<div *ngIf=\"subject.errors.required\">\n\t\t\t\t\t\t\tSubject is required.\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div class=\"labeled\">\n\t\t\t\t<label for=\"To\" class=\"col-form-label col-xs-1\">To:</label>\n\n\t\t\t\t<div *ngIf=\"accessLevel === 'admin'\" class=\"col-xs-11\"> \n\t\t\t\t\t<ng-select name=\"recipient\" required [(ngModel)]=\"msg.recipient\">\n\t\t\t\t\t\t<ng-option *ngFor=\"let user of users\" [value]=\"user.EMAIL\">{{user.FIRSTNAME}} {{user.LASTNAME}}, {{user.EMAIL}}</ng-option> \n\t\t\t\t\t</ng-select>\n\t\t\t\t</div>\n\n\t\t\t\t<div *ngIf=\"accessLevel === 'user'\" class=\"col-xs-11\">\n\t\t\t\t\t<input name=\"recipient\" type=\"text\" readonly class=\"form-control\" placeholder=\"Admin\" aria-label=\"Admin\" [(ngModel)]=\"msg.recipient\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div *ngIf=\"(message.invalid && submitted) || (message.invalid && (message.dirty || message.touched))\" class=\"alert alert-danger\">\n\t\t\t\t<div *ngIf=\"message.errors.required\">\n\t\t\t\t\tMessage is required.\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"message\">\n\t\t\t\t<textarea required name=\"message\" class=\"input form-control\" [(ngModel)]=\"msg.message\" #message=\"ngModel\" placeholder=\"Write message here\"></textarea>\n\t\t\t</div>\n\t\t</div>\n\t</form>\n</div>\n\n"
 
 /***/ }),
 
@@ -630,6 +630,7 @@ module.exports = "<div class=\"container-div\">\n\t<ul class=\"nav nav-pills nav
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WriteMessageComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__message_message_service__ = __webpack_require__("./src/app/message/message.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -639,6 +640,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 var WriteMessageComponent = /** @class */ (function () {
@@ -664,19 +666,27 @@ var WriteMessageComponent = /** @class */ (function () {
     };
     WriteMessageComponent.prototype.sendMessage = function () {
         var _this = this;
+        this.submitted = true;
         // Only allow sending to admin for user
         if (this.accessLevel === 'user') {
             this.msg.recipient = 'bg1@company.com';
         }
-        this.messageService.sendMessages(this.msg)
-            .subscribe(function (data) {
-            _this.messageService.success('Your message was sent successfully!');
-            _this.msg = {};
-        }, function (err) {
-            _this.messageService.fail('Your message failed to send. Please try again later.');
-            console.log(err);
-        });
+        if (this.emailForm.valid) {
+            this.messageService.sendMessages(this.msg)
+                .subscribe(function (data) {
+                _this.messageService.success('Your message was sent successfully!');
+                _this.msg = {};
+            }, function (err) {
+                _this.messageService.fail('Your message failed to send. Please try again later.');
+                console.log(err);
+            });
+        }
     };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_10" /* ViewChild */])('emailForm'),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_10" /* ViewChild */])('message'),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormGroup */])
+    ], WriteMessageComponent.prototype, "emailForm", void 0);
     WriteMessageComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-write-message',

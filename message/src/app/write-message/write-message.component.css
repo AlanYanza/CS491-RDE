@@ -4,11 +4,14 @@
 	flex-direction: column;
 }
 
-.email-form {
+#emailForm {
+	display: flex;
 	flex: 1 0 auto;
+}
+.email-form {
+	flex: 1 1 auto;
 	display: flex;
 	flex-direction: column;
-
 }
 .email-form .message {
 	flex: 1 0 auto;
@@ -29,7 +32,6 @@
 	border-bottom: 0.1px solid #f0f0f0;
 	padding: 15px;
 }
-
 .labeled .col-form-label {
 	line-height: 270%;
 }
