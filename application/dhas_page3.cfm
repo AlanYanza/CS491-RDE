@@ -61,7 +61,6 @@
 					$(location).find("input[type=number]").val(0);
 					$(location).find("textarea").val("");
 					$(location).find("input[type=checkbox]").prop("checked", false );
-
 				}
 				else {					
 					$(location).show("slow");
@@ -78,7 +77,7 @@
 			radioCheck("input[type=radio][name=AMedicareD]", "Y", "#AmedicareDOption");
 
 			$("input[type=radio][name=insured]").change(function(){radioCheck("input[type=radio][name=insured]", "Y", "#insuredOption");});
-			("input[type=radio][name=Medium]").change(function(){radioCheck("input[type=radio][name=Medium]", "S", "#mediumOption");});
+			$("input[type=radio][name=Medium]").change(function(){radioCheck("input[type=radio][name=Medium]", "S", "#mediumOption");});
 			$("input[type=radio][name=presCov]").change(function(){radioCheck("input[type=radio][name=presCov]", "Y", "#presCovOption");});
 			$("input[type=radio][name=AMedicaid]").change(function(){radioCheck("input[type=radio][name=AMedicaid]", "Y", "#AmedicaidOption");});
 			$("input[type=checkbox][name=UMedicaidDate]").click(function(){dateCheck("UMedicaidDate", "AMedicaidDate");});
