@@ -58,9 +58,15 @@
 			}
 
 			$("#income input[type=number]").keyup(calTotal);
-
-	  		$("button[type=submit][name=save]").click(dataCorrection);
-			$("button[type=submit][name=previous]").click(dataCorrection);
+			
+			$("button[type=submit][name=save]").click(function(){
+				$("form").find("*").removeAttr("required");
+				dataCorrection();
+			});
+			$("button[type=submit][name=previous]").click(function(){
+				$("form").find("*").removeAttr("required");
+				dataCorrection();
+			});
 
 		});
 		$(document).keypress(

@@ -354,7 +354,7 @@
 		</div>
 	</div>
 
-	<div id="temp" style="position: relative; visibility: hidden; width: 100%; height: 100%; max-width: 660px; max-height: 347px; border: 1px solid #e8e8e8;">
+	<div id="temp" style="position: relative; visibility: hidden; width: 100%; height: 100%; max-width: 660px; max-height: 347px;">
 		<canvas id="getDisplayImage" style="position: relative; width: 100%; height: 100%;"></canvas>
 	</div>	
   	<script src="../js/app.js"></script>

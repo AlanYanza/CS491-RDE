@@ -60,18 +60,6 @@
 				}
 			}
 
-			function SSISSDIDateCheck() {
-				if ($("input[type=checkbox][name=UASSISSDIDate]").is(":checked")) {					
-					$("input[type=date][name=ASSISSDIDate]").val("1111-11-11");
-					$("input[type=date][name=ASSISSDIDate]").attr("readonly", "true");
-					$("input[type=date][name=ASSISSDIDate]").removeAttr("required");
-				}
-				else {
-					$("input[type=date][name=ASSISSDIDate]").removeAttr("readonly");
-					$("input[type=date][name=ASSISSDIDate]").attr("required", "true");
-				}
-			}
-
 			function marketCheck() {
 				if (typeof $("input[type=radio][name=AMarket]:checked").val() === "undefined") {
 					return;
@@ -94,18 +82,6 @@
 				else {
 					$("input[type=date][name=" + dateField + "]").removeAttr("readonly");
 					$("input[type=date][name=" + dateField + "]").attr("required", "true");
-				}
-			}
-
-			function marketDateCheck() {
-				if ($("input[type=checkbox][name=UMarketDate]").is(":checked")) {
-					$("input[type=date][name=AMarketDate]").val("1111-11-11");
-					$("input[type=date][name=AMarketDate]").attr("readonly", "true");
-					$("input[type=date][name=AMarketDate]").removeAttr("required");
-				}
-				else {
-					$("input[type=date][name=AMarketDate]").removeAttr("readonly");
-					$("input[type=date][name=AMarketDate]").attr("required", "true");
 				}
 			}
 
@@ -143,10 +119,8 @@
 			}
 
 			SSISSDICheck();
-			// SSISSDIDateCheck();
 			dateCheck("UASSISSDIDate", "ASSISSDIDate");
 			marketCheck();
-			// marketDateCheck();
 			dateCheck("UMarketDate", "AMarketDate");
 			covOtherCheck();
 			relationCheck();
@@ -166,11 +140,10 @@
 			});
 			
 			function insideTextArea(){
-	  			if ($(event.target)[0]==$("textarea")[0] || $(event.target)[0]==$("textarea")[1] || $(event.target)[0]==$("textarea")[2]){
+	  			if ($(event.target)[0]==$("textarea")[0] || $(event.target)[0]==$("textarea")[1] || $(event.target)[0]==$("textarea")[2]) {
 					return true;
 				}
-				else 
-				{
+				else {
 					return false;
 				}
 			}
@@ -178,13 +151,12 @@
 			$(document).keypress(
 				function(event){
 					//&& ($(event.target)[0]!=$("textarea")[0]) allows return in address textareas
-					if (event.which == '13'  && insideTextArea()==false) 
-						{
-							event.preventDefault();
-						}
+					if (event.which == '13'  && insideTextArea()==false) {
+						event.preventDefault();
 					}
+				}
 			);
-			});
+		});
 		
 	</script>
 </head>

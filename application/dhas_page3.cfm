@@ -37,25 +37,6 @@
 			$('[data-toggle="popover"]').popover();
 			$("form").find("input").attr("autocomplete", "off");
 
-			function mediumCheck() {
-				if (typeof $("input[type=radio][name=Medium]:checked").val() === "undefined") {
-					return;
-				}
-				if ($("input[type=radio][name=Medium]:checked").val() != "S") {
-					$("#mediumOption").show("slow");
-					
-				}
-				else {
-					$("#mediumOption").hide("slow");
-					$("#mediumOption").find("input").removeAttr("required");
-					$("#mediumOption").find("input[type=date]").val("1111-11-11");
-					$("#mediumOption").find("input[type=text]").val("");
-					$("#mediumOption").find("input[type=number]").val(0);
-					$("#mediumOption").find("textarea").val("");
-					$("#mediumOption").find("input[type=checkbox]").prop("checked", false );
-				}
-			}
-
 			function dateCheck(unsureField, dateField) {
 				if ($("input[type=checkbox][name=" + unsureField + "]").is(":checked")) {
 					$("input[type=date][name=" + dateField + "]").val("1111-11-11");
@@ -88,7 +69,7 @@
 			}
 
 			radioCheck("input[type=radio][name=insured]", "Y", "#insuredOption");
-			mediumCheck();
+			radioCheck("input[type=radio][name=Medium]", "S", "#mediumOption");
 			radioCheck("input[type=radio][name=presCov]", "Y", "#presCovOption");
 			radioCheck("input[type=radio][name=AMedicaid]", "Y", "#AmedicaidOption");
 			dateCheck("UMedicaidDate", "AMedicaidDate");
@@ -97,7 +78,7 @@
 			radioCheck("input[type=radio][name=AMedicareD]", "Y", "#AmedicareDOption");
 
 			$("input[type=radio][name=insured]").change(function(){radioCheck("input[type=radio][name=insured]", "Y", "#insuredOption");});
-			$("input[type=radio][name=Medium]").change(mediumCheck);
+			("input[type=radio][name=Medium]").change(function(){radioCheck("input[type=radio][name=Medium]", "S", "#mediumOption");});
 			$("input[type=radio][name=presCov]").change(function(){radioCheck("input[type=radio][name=presCov]", "Y", "#presCovOption");});
 			$("input[type=radio][name=AMedicaid]").change(function(){radioCheck("input[type=radio][name=AMedicaid]", "Y", "#AmedicaidOption");});
 			$("input[type=checkbox][name=UMedicaidDate]").click(function(){dateCheck("UMedicaidDate", "AMedicaidDate");});

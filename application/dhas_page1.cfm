@@ -115,10 +115,6 @@
 				}
 			}
 
-			$("button[type=submit][name=save]").click(function(){$("form").find("input").removeAttr("required");});
-			$("button[type=submit][name=previous]").click(function(){$("form").find("input").removeAttr("required");});
-
-
 			raceCheck("RAsian", "RasianOption");
 			raceCheck("RNatHa", "RNatHaOption");
 			EHispCheck();
@@ -128,6 +124,9 @@
 			$("input[type=checkbox][name=RNatHa]").click(function(){raceCheck("RNatHa", "RNatHaOption");});
 			$("input[type=radio][name=EHisp]").change(EHispCheck);
 			$("input[type=radio][name=genderBirth]").change(pregnant);
+
+			$("button[type=submit][name=save]").click(function(){$("form").find("*").removeAttr("required");});
+			$("button[type=submit][name=previous]").click(function(){$("form").find("*").removeAttr("required");});
 
 		});
 		$(document).keypress(function(event){
