@@ -57,29 +57,32 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">Start New Application</div>
-		<div class="panel-body table-responsive"">
+		<div class="panel-body table-responsive">
 		<table class="table table-hover text-center">
-			<tr><th style="width: 50%;">Application Type</th></tr>
-			<td><cfoutput>NJ-Participation in (ADDP) / HICP</cfoutput></td>
-			<cfoutput >
+			<tr>
+				<th style="width: 50%;">Application Type</th>
+				<th></th>
+			</tr>
+			<tr>
+				<td>NJ-Participation in (ADDP) / HICP</td>
 				<td><a class="btn btn-primary" href='application/dhas_instructions_page1.cfm?new'>Start new application</a></td>
-			</cfoutput>
+			</tr>
 			</table>
 		</div>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">Existing Application</div>
 		<div class="panel-body table-responsive">
-	        <span class="help-block">Click the AppID to edit or view applications.</span>
+			<br/>
 	        <table class="table table-hover">
 	        	<tr><th>AppID</th><th>State</th><th>Application Description</th>
 	        		<th>Date Submitted</th><th>Status</th><th></th><th></th></tr>
-	        	<!-- Interate though resultSet and display data-->
+	        	<!--- Interate though resultSet and display data--->
 				<cfloop query="allApplications">
 					<cfoutput><tr></cfoutput>
-					<!-- Determine State of Form-->
+					<!--- Determine State of Form--->
 					<cfset formInfo=UserObj.getFormInfo(#formTypeID#)/>
-					<!-- Determine the Status of Application -->
+					<!--- Determine the Status of Application --->
 					<cfif #status# eq 'P'>
 						<cfset outputStatus='Not Submitted'/>
 					<cfelseif #status# eq 'N'>
@@ -91,9 +94,9 @@
 					<cfelseif #status# eq 'D'>
 						<cfset outputStatus='Denied'/>
 					</cfif>
-					<!-- determine the direct Link based on state -->
+					<!--- determine the direct Link based on state --->
 					<cfset outputLink=UserObj.getDirectLink(formInfo.state)/>
-					<!-- create html row for Application -->
+					<!--- create html row for Application --->
 					<cfset userEditLink=#outputLink# & '?appID=' & #appID# > 
 					<cfoutput>
 						<tr><td>#appID#</td>
@@ -102,12 +105,12 @@
 							<td>#dateSubmited#</td>
 							<td>#outputStatus#</td>
 							<td>
-								<a class="btn btn-info" href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'">View Documents</a>
+								<a class="btn btn-info" href='/CS491-RDE/DocumentStatus.cfm?appID=#appID#'>View Documents</a>
 							<td>
 								<cfif #status# eq 'P' OR #status# eq 'N' >
-									<a class="btn btn-success" href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'">Edit Application</a>
+									<a class="btn btn-warning" href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'>Edit Application</a>
 								<cfelse>
-									<a class="btn btn-success" href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'">Review Application</a>
+									<a class="btn btn-success" href='/CS491-RDE/application/dhas_page1.cfm?appID=#appID#'>Review Application</a>
 								</cfif>
 							</td>
 						</tr>

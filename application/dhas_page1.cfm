@@ -38,6 +38,7 @@
 			</cfif>
 			
 			$('[data-toggle="popover"]').popover();
+			$("form").find("input").attr("autocomplete", "off");
 
 			$("#same").change(function(){
 				if (document.getElementById('same').checked){

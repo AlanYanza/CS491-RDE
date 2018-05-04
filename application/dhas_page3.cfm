@@ -35,6 +35,7 @@
 			</cfif>			
 
 			$('[data-toggle="popover"]').popover();
+			$("form").find("input").attr("autocomplete", "off");
 
 			function mediumCheck() {
 				if (typeof $("input[type=radio][name=Medium]:checked").val() === "undefined") {

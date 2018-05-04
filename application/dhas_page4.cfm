@@ -36,7 +36,7 @@
 			</cfif>	
 
 			$('[data-toggle="popover"]').popover();
-
+			$("form").find("input").attr("autocomplete", "off");
 
 			$("button[type=button][name=reveal]").click(function() {
 				$("#InsSS").attr("type", "text");

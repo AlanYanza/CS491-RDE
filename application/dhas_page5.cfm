@@ -38,6 +38,8 @@
 				</cfoutput>
 			</cfif>
 
+			$("form").find("input").attr("autocomplete", "off");
+
 			function getSig(sigInput, sigPic) {
 				if ($(sigInput).val() != "") {
 					var tempCanvas = document.getElementById("getDisplayImage");

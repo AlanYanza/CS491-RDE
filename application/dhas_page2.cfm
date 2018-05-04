@@ -33,6 +33,8 @@
 					$("input[type=hidden][name=tableName]").removeAttr("disabled");
 				</cfoutput>
 			</cfif>
+
+			$("form").find("input").attr("autocomplete", "off");
 			
 			function dataCorrection(){
 				$("form").find("input").removeAttr("required");
