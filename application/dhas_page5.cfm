@@ -40,6 +40,16 @@
 
 			$("form").find("input").attr("autocomplete", "off");
 
+			var requiredFields = ["perm","CPName","Relation","CPAddr"];
+
+			function checkRequired(selector) {
+				$(selector).find("*").each(function(){
+					if (requiredFields.indexOf($(this).attr("name")) != -1 ){
+						$(this).attr("required", true);
+					}
+				});
+			}
+
 			function getSig(sigInput, sigPic) {
 				if ($(sigInput).val() != "") {
 					var tempCanvas = document.getElementById("getDisplayImage");
@@ -68,7 +78,8 @@
 					return;
 				}
 				if ($("input[type=radio][name=perm]:checked").val() == "Y") {
-					$("#contactOption").show("slow");					
+					$("#contactOption").show("slow");
+					checkRequired("#contactOption");
 				}
 				else {
 					$("#contactOption").hide("slow");

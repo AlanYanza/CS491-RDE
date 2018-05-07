@@ -36,7 +36,7 @@
 					$("input[type=hidden][name=tableName]").removeAttr("disabled");
 				</cfoutput>
 			</cfif>
-			
+
 			$('[data-toggle="popover"]').popover();
 			$("form").find("input").attr("autocomplete", "off");
 
@@ -77,10 +77,10 @@
 			function raceCheck(race, raceOption) {
 				if ($("input[type=checkbox][name=" + race + "]").is(":checked")) {
 					$("#" + raceOption).show("slow");
-					$("#" + raceOption).find("input[type=checkbox]").prop("checked", false );
 				}
 				else {
 					$("#" + raceOption).hide("slow");
+					$("#" + raceOption).find("input[type=checkbox]").prop("checked", false );
 				}
 			}
 

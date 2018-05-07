@@ -45,7 +45,18 @@
 				}, 3000);
 			});
 
-			function SSISSDICheck() {				
+			var requiredFields = ["SSISSDIStatus","ASSISSDIDate","RespASSISSI","AMarket","AMarketDate","RespAMarket","relation",
+				"InsName","InsAddr","InsAddrCounty","InsPhone","EligVetDrugBen","RecPresDrugBen"];
+
+			function checkRequired(selector) {
+				$(selector).find("*").each(function(){
+					if (requiredFields.indexOf($(this).attr("name")) != -1 ){
+						$(this).attr("required", true);
+					}
+				});
+			}
+
+			function SSISSDICheck() {
 				if (($("input[type=radio][name=SSISSDIStatus]:checked").val() == "N") || ($("input[type=radio][name=SSISSDIStatus]:checked").val() == "U")) {
 					$("#SSISSDIOption").hide("slow");
 					$("#SSISSDIOption").find("input").removeAttr("required");
@@ -56,7 +67,8 @@
 					$("#SSISSDIOption").find("input[type=checkbox]").prop("checked", false );
 				}
 				else {
-					$("#SSISSDIOption").show("slow");					
+					$("#SSISSDIOption").show("slow");
+					checkRequired("#SSISSDIOption");
 				}
 			}
 
@@ -70,6 +82,7 @@
 				}
 				else {
 					$("#marketOption").show("slow");
+					checkRequired("#marketOption");
 				}
 			}
 
@@ -92,7 +105,7 @@
 				}
 				else {
 					$("input[type=text][name=CovOtherTxt]").hide();
-					$("input[type=text][name=CovOtherTxt]").removeAttr("required", "true");
+					$("input[type=text][name=CovOtherTxt]").removeAttr("required");
 				}
 			}
 			
@@ -102,18 +115,18 @@
 
 				if ($("input[type=radio][name=relation]:checked").val() == "S") {
 					$("#insuredOption").hide("slow");
-					$("#insuredOption").removeAttr("required", "true");
+					$("#insuredOption").find("input").removeAttr("required");;
 				}
 
 				else if ($("input[type=radio][name=relation]:checked").val() == "O") {
 					$("input[type=text][name=relOther]").attr("required");
 					$("input[type=text][name=relOther]").show("slow");
 					$("#insuredOption").show("slow");
-					$("#insuredOption").attr("required", "true");
+					checkRequired("#insuredOption");
 				}
 				else {
 					$("#insuredOption").show("slow");
-					$("#insuredOption").attr("required", "true");
+					checkRequired("#insuredOption");
 				}
 
 			}
@@ -306,7 +319,7 @@
 	<div id="insuredOption">
 		<div class="form-group row">
 			<div class="col-sm-6">	
-				<label for="InsName">Name of Insured</label>
+				<label for="InsName">Name of Insured <span style="color: red;">*</span></label>
 			</div>
 			<div class="col-sm-4">	
 				<label for="InsSS">Social Security Number:</label>
@@ -314,7 +327,7 @@
 		</div>
 		<div class="form-group row">
 			<div class="col-sm-6">
-				<input type="text" class="form-control" name="InsName" value="<cfoutput>#subformData.InsName#</cfoutput>"/>
+				<input type="text" class="form-control" name="InsName" value="<cfoutput>#subformData.InsName#</cfoutput>" required />
 			</div>
 			<div class="col-sm-4">
 				<input type="password" class="form-control" id="InsSS" name="InsSS" value="<cfoutput>#subformData.InsSS#</cfoutput>"/>
@@ -322,17 +335,17 @@
 			<div class="col-sm-2"><button type="button" class="btn btn-default btn-block" name="reveal">View SSN</button></div>
 		</div>
 		<div class="form-group">
-			<label for="InsAddr">Street Address, City, State, Zip:</label>
-			<input type="text" class="form-control" name="InsAddr" value="<cfoutput>#subformData.InsAddr#</cfoutput>"/>
+			<label for="InsAddr">Street Address, City, State, Zip: <span style="color: red;">*</span></label>
+			<input type="text" class="form-control" name="InsAddr" value="<cfoutput>#subformData.InsAddr#</cfoutput>" required />
 		</div>
 		<div class="form-group row">
 			<div class="col-sm-6">	
-				<label for="InsAddrCounty">County:</label>
-				<input type="text" class="form-control" name="InsAddrCounty" value="<cfoutput>#subformData.InsAddrCounty#</cfoutput>"/>
+				<label for="InsAddrCounty">County: <span style="color: red;">*</span></label>
+				<input type="text" class="form-control" name="InsAddrCounty" value="<cfoutput>#subformData.InsAddrCounty#</cfoutput>" required />
 			</div>
 			<div class="col-sm-6">
-				<label for="InsPhone">Telephone Number</label>
-				<input type="tel" class="form-control" name="InsPhone" value="<cfoutput>#subformData.InsPhone#</cfoutput>"/>
+				<label for="InsPhone">Telephone Number <span style="color: red;">*</span></label>
+				<input type="tel" class="form-control" name="InsPhone" value="<cfoutput>#subformData.InsPhone#</cfoutput>" required />
 			</div>
 		</div>
 	</div>

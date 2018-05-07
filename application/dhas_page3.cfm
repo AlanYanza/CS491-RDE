@@ -37,6 +37,17 @@
 			$('[data-toggle="popover"]').popover();
 			$("form").find("input").attr("autocomplete", "off");
 
+			var requiredFields = ["insured","Medium","EmpUnName","EmpUnAddr","presCov","PresCovCap","PresCovCapAmt","presCovMail",
+				"AMedicaid","AMedicaidDate","RespMedicaid","AMedicare","Respmedicare","AMedicareD","ALIS"];
+
+			function checkRequired(selector) {
+				$(selector).find("*").each(function(){
+					if (requiredFields.indexOf($(this).attr("name")) != -1 ){
+						$(this).attr("required", true);
+					}
+				});
+			}
+
 			function dateCheck(unsureField, dateField) {
 				if ($("input[type=checkbox][name=" + unsureField + "]").is(":checked")) {
 					$("input[type=date][name=" + dateField + "]").val("1111-11-11");
@@ -55,7 +66,7 @@
 				}
 				if ($("input[type=radio][name=Medium]:checked").val() != "S") {
 					$("#mediumOption").show("slow");
-					
+					checkRequired("#mediumOption");
 				}
 				else {
 					$("#mediumOption").hide("slow");
@@ -83,6 +94,7 @@
 				}
 				else {					
 					$(location).show("slow");
+					checkRequired(location);
 				}
 			}
 
