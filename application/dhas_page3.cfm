@@ -233,7 +233,7 @@
 		</div>
 
 		<div class="form-group">
-			<label>If you have insurance, does it provide prescription coverage?</label>
+			<label>If you have insurance, does it provide prescription coverage? <span style="color: red;">*</span></label>
 			<br/>
 			<label class="radio-inline"><input type="radio" name="presCov" value="Y" <cfset subformClass.showRadioButton('presCov',subformData,'Y')/> required/>Yes</label>
 			<label class="radio-inline"><input type="radio" name="presCov" value="N" <cfset subformClass.showRadioButton('presCov',subformData,'N')/>/>No</label>
@@ -242,7 +242,10 @@
 
 		<div id="presCovOption">
 			<div class="form-group">
-				<label>If you have prescription drug coverage through insurance, is there a cap on the annual amount your insurance will pay for medications?</label>
+				<label>
+					If you have prescription drug coverage through insurance, is there a cap on the annual amount your insurance will pay for medications? 
+					<span style="color: red;">*</span>
+				</label>
 				<br/>
 				<label class="radio-inline"><input type="radio" name="PresCovCap" value="Y" <cfset subformClass.showRadioButton('presCovCap',subformData,'Y')/> required/>Yes</label>
 				<label class="radio-inline"><input type="radio" name="PresCovCap" value="N" <cfset subformClass.showRadioButton('presCovCap',subformData,'N')/>/>No</label>
@@ -250,7 +253,7 @@
 			</div>
 
 			<div class="row">
-				<label class="col-sm-4">What is the amount of the cap?</label>
+				<label class="col-sm-4">What is the amount of the cap? <span style="color: red;">*</span></label>
 				<div class="input-group col-sm-8">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
 					<input type="number" class="form-control" name="PresCovCapAmt" value="<cfoutput>#subformData.PresCovCapAmt#</cfoutput>" required/>
@@ -259,9 +262,9 @@
 		</div>
 
 		<div class="form-group">
-			<label>Do you have prescription coverage through a mail order company?</label>
+			<label>Do you have prescription coverage through a mail order company? <span style="color: red;">*</span></label>
 			<br/>
-			<label class="radio-inline"><input type="radio" name="presCovMail" value="Y" <cfset subformClass.showRadioButton('presCovMail',subformData,'Y')/>/>Yes</label>
+			<label class="radio-inline"><input type="radio" name="presCovMail" value="Y" <cfset subformClass.showRadioButton('presCovMail',subformData,'Y')/> required />Yes</label>
 			<label class="radio-inline"><input type="radio" name="presCovMail" value="N" <cfset subformClass.showRadioButton('presCovMail',subformData,'N')/>/>No</label>
 			<label class="radio-inline"><input type="radio" name="presCovMail" value="P" <cfset subformClass.showRadioButton('presCovMail',subformData,'P')/>/>Partial</label>
 		</div>
