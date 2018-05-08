@@ -18,7 +18,7 @@ export class WriteMessageComponent implements OnInit {
 	emailForm: FormGroup;
 	message: ElementRef; 
 
-	submitted: boolean;
+	submitted: boolean; // if user clicked send button 
 
 	title = 'New Message';
 	users: User[];
@@ -32,6 +32,7 @@ export class WriteMessageComponent implements OnInit {
 		this.getRecipientList();
 	}
 
+	/* GET user's access level (admin/user) */ 
 	getAccessLevel() {
 		this.messageService.getAccessLevel()
 			.subscribe(level => this.accessLevel = level);
@@ -54,10 +55,12 @@ export class WriteMessageComponent implements OnInit {
 			this.messageService.sendMessages(this.msg)
 			.subscribe(
 				data => {
+					// alert 
 					this.messageService.success('Your message was sent successfully!');
 					this.msg = {};
 				},
 				err => {
+					//alert 
 					this.messageService.fail('Your message failed to send. Please try again later.');
 					console.log(err);
 				}

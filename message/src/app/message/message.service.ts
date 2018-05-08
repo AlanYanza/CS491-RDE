@@ -18,6 +18,7 @@ import { Alert } from '../alert';
 @Injectable()
 export class MessageService {
 
+	// Observable that can read cold data 
 	private subject = new BehaviorSubject<Alert>(null);
 
 	private baseURL = '/rest/restapi/MessageSystem/';
@@ -39,21 +40,17 @@ export class MessageService {
 			tap(_ => console.log(`found user matching "${term}"`))
 		);
 	}
-
+	/*GET entire recipient list */
 	getRecipientList(): Observable<User[]> {
-		return this.http.get<User[]>(this.getRecipientListURL)
-		.pipe(
-			tap(res => console.log(res))
-		);
+		return this.http.get<User[]>(this.getRecipientListURL);
 	}
 
+	/*GET user access level (admin/user) */
 	getAccessLevel(): Observable<string> {
-		return this.http.get<string>(this.getAccessLevelURL)
-		.pipe(
-			tap(res => console.log(res))
-		);
+		return this.http.get<string>(this.getAccessLevelURL);
 	}
 
+	/*POST message sent by user */
 	sendMessages(msg): Observable<any> {
 		const params = new HttpParams()
 			.set('subject', msg.subject)
@@ -68,16 +65,19 @@ export class MessageService {
 			catchError(this.handleError));
 	}
 
+	/*Successful on sending Message */
 	success(message: string) {
 		this.router.navigate(['/']);
 		this.subject.next({ type: 'success', text: message});
 	}
 
+	/*fail on sending Message */
 	fail(message: string) {
 		this.router.navigate(['/']);
 		this.subject.next({ type: 'error', text: message});
 	}
 
+	/*Successful on sending Message */
 	getAlert(): Observable<Alert> {
 		return this.subject.asObservable();
 	}

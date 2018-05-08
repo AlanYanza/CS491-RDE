@@ -12,6 +12,8 @@ import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable()
 export class MailService implements Resolve<Msg> {
+
+	// Store retrieved mail here 
 	mail: Observable<Msg[]>;
 
 	private baseURL = '/rest/restapi/MessageSystem/';
@@ -34,18 +36,12 @@ export class MailService implements Resolve<Msg> {
 			catchError(this.handleError<any>('getMessage',[]))
 
 	  	);
-		// return MAIL.find(msg => msg.msgID === +routeSnapshot.params.msgID);
 	}
-
-	// getMessages(): Observable<Msg[]> { 
-	// 	return of(MAIL); 
-	// }	
 
 	//Will return observable for messages in sent table 
 	getSent(): Observable<Msg[]> {
 		this.mail = this.http.get<Msg[]>(this.getSentURL)
 		.pipe(
-			tap (res => console.log('Sent response:', res)), 
 			catchError(this.handleError<any>('getSent', []))
 		);
 		return this.mail;
@@ -55,7 +51,6 @@ export class MailService implements Resolve<Msg> {
 	getTrash(): Observable<Msg[]> {
 		this.mail = this.http.get<Msg[]>(this.getTrashURL)
 		.pipe(
-			tap (res => console.log('Sent response:', res)), 
 			catchError(this.handleError<any>('getSent', []))
 		);
 
@@ -66,7 +61,6 @@ export class MailService implements Resolve<Msg> {
 	getMessages(): Observable<Msg[]> { 
 		this.mail = this.http.get<Msg[]>(this.getMessageURL)
 		.pipe(
-			tap( res => console.log('HTTP response:', res)),
 			catchError(this.handleError<any>('getMessages',[]))
 		); 
 		return this.mail;
@@ -78,7 +72,6 @@ export class MailService implements Resolve<Msg> {
 
 		return this.http.get<Msg>(this.deleteMessageURL, {params:params})
 		.pipe(
-			tap( res => console.log('Delete:', res)),
 			catchError(this.handleError<any>('deleteMessage',[]))
 		);
 	}
@@ -89,7 +82,6 @@ export class MailService implements Resolve<Msg> {
 
 		return this.http.put<Msg>(this.readMessageURL, null, {params:params})
 		.pipe(
-			tap( res => console.log('Read:', res)),
 			catchError(this.handleError<any>('readMessage', []))
 			);
 	}

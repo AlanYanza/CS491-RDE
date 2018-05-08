@@ -12,13 +12,14 @@ import { ActivatedRouteSnapshot } from '@angular/router';
 	styleUrls: ['./mail.component.css']
 })
 export class MailComponent implements OnInit {
+	// Displayed on navbar 
 	title = 'Inbox';
 
 	mail: Msg[];
 
 	selectedMsg: Msg;
 	selectedTab: string;
-	page = 1;
+	page = 1; //Used for pagination 
 
 	constructor(private mailService: MailService) { }
 
@@ -57,6 +58,7 @@ export class MailComponent implements OnInit {
 	// Called when message is selected in mailbox
 	onSelect(msg: Msg): void {
 		this.selectedMsg = msg;
+		// Only read messages if in inbox. Not in sent and trash inboxes.
 		if (this.selectedTab === 'inbox') {
 			msg.READSTATUS = 'T';
 			this.mailService.readMessage(msg).subscribe();
