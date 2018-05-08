@@ -36,8 +36,9 @@
 					$("input[type=hidden][name=tableName]").removeAttr("disabled");
 				</cfoutput>
 			</cfif>
-			
+
 			$('[data-toggle="popover"]').popover();
+			$("form").find("input").attr("autocomplete", "off");
 
 			$("#same").change(function(){
 				if (document.getElementById('same').checked){
@@ -76,10 +77,10 @@
 			function raceCheck(race, raceOption) {
 				if ($("input[type=checkbox][name=" + race + "]").is(":checked")) {
 					$("#" + raceOption).show("slow");
-					$("#" + raceOption).find("input[type=checkbox]").prop("checked", false );
 				}
 				else {
 					$("#" + raceOption).hide("slow");
+					$("#" + raceOption).find("input[type=checkbox]").prop("checked", false );
 				}
 			}
 
@@ -114,10 +115,6 @@
 				}
 			}
 
-			$("button[type=submit][name=save]").click(function(){$("form").find("input").removeAttr("required");});
-			$("button[type=submit][name=previous]").click(function(){$("form").find("input").removeAttr("required");});
-
-
 			raceCheck("RAsian", "RasianOption");
 			raceCheck("RNatHa", "RNatHaOption");
 			EHispCheck();
@@ -127,6 +124,9 @@
 			$("input[type=checkbox][name=RNatHa]").click(function(){raceCheck("RNatHa", "RNatHaOption");});
 			$("input[type=radio][name=EHisp]").change(EHispCheck);
 			$("input[type=radio][name=genderBirth]").change(pregnant);
+
+			$("button[type=submit][name=save]").click(function(){$("form").find("*").removeAttr("required");});
+			$("button[type=submit][name=previous]").click(function(){$("form").find("*").removeAttr("required");});
 
 		});
 		$(document).keypress(function(event){

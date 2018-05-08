@@ -67,13 +67,13 @@
 	or the Health Insurance Continuation Program (HICP),
 	please go to our websites at:<br/>
 	<strong>FOR ADDP: </strong><a href="http://nj.gov/health/hivstdtb/hiv-aids/medications.shtml" target="_blank">http://nj.gov/health/hivstdtb/hiv-aids/medications.shtml</a><br/>
-	<strong>FOR HICP: </strong><a href="http://nj.gov/health/hivstdtb/hiv-aids/hicp.shtml" target="_blank">http://nj.gov/health/hivstdtb/hiv-aids/hicp.shtml</a><br>
+	<strong>FOR HICP: </strong><a href="http://nj.gov/health/hivstdtb/hiv-aids/hicp.shtml" target="_blank">http://nj.gov/health/hivstdtb/hiv-aids/hicp.shtml</a><br/>
 
 	<br/>
 	
 	<p>
 	<strong>IT IS THE CLIENT&#39;S RESPONSIBIITY TO REPORT ANY CHANGES IN
-	CIRCUMSTANCES THAT WOULD IMPACT ELIGIBILITY FOR ADDP OR HICP.</strong><br>
+	CIRCUMSTANCES THAT WOULD IMPACT ELIGIBILITY FOR ADDP OR HICP.</strong><br/>
 	</p>
 
 	<ul class="pager">

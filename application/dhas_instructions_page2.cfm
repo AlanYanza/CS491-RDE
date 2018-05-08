@@ -28,14 +28,17 @@
 	<p>Maximum Allowable Household Income Limits for this ADDP and HICP as of January 2015 are listed below.</p>
 	<p>If you need current income limits, call 1-877-613-4533</p>
 	<table class="table text-center">
-		<tr><th colspan="2" class="text-center">Federal Poverty Level for January 2015 to January 2016</th></tr>
-		<tr><td><font size = 2>Number of Person in Household</font></td><td><font size = 2>Maximum Allowable Household Income</font></td></tr>
-		<tr><td align="center"><font size = 2>1</font></td><td align="center"><font size = 2>$58,850</font></td></tr>
-		<tr><td align="center"><font size = 2>2</font></td><td align="center"><font size = 2>$79,650</font></td></tr>
-		<tr><td align="center"><font size = 2>3</font></td><td align="center"><font size = 2>$100,450</font></td></tr>
-		<tr><td align="center"><font size = 2>4</font></td><td align="center"><font size = 2>$121,250</font></td></tr>
-		<tr><td align="center"><font size = 2>5</font></td><td align="center"><font size = 2>$142,050</font></td></tr>
-	</table><br/>
+		<tbody>
+			<tr><th colspan="2" class="text-center">Federal Poverty Level for January 2015 to January 2016</th></tr>
+			<tr><td>Number of Person in Household</td><td>Maximum Allowable Household Income</td></tr>
+			<tr><td >1</td><td >$58,850</td></tr>
+			<tr><td >2</td><td >$79,650</td></tr>
+			<tr><td >3</td><td >$100,450</td></tr>
+			<tr><td >4</td><td >$121,250</td></tr>
+			<tr><td >5</td><td >$142,050</td></tr>
+		</tbody>
+	</table>
+	<br/>
 	<p>For households with more than 5 persons, add $20,800 for each additional person.</p>
 	<p>
 		If you or any member of your household filed a Federal, State and/or City Income Tax Return last year, a copy of each completed and

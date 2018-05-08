@@ -35,24 +35,17 @@
 			</cfif>			
 
 			$('[data-toggle="popover"]').popover();
+			$("form").find("input").attr("autocomplete", "off");
 
-			function mediumCheck() {
-				if (typeof $("input[type=radio][name=Medium]:checked").val() === "undefined") {
-					return;
-				}
-				if ($("input[type=radio][name=Medium]:checked").val() != "S") {
-					$("#mediumOption").show("slow");
-					
-				}
-				else {
-					$("#mediumOption").hide("slow");
-					$("#mediumOption").find("input").removeAttr("required");
-					$("#mediumOption").find("input[type=date]").val("1111-11-11");
-					$("#mediumOption").find("input[type=text]").val("");
-					$("#mediumOption").find("input[type=number]").val(0);
-					$("#mediumOption").find("textarea").val("");
-					$("#mediumOption").find("input[type=checkbox]").prop("checked", false );
-				}
+			var requiredFields = ["insured","Medium","EmpUnName","EmpUnAddr","presCov","PresCovCap","PresCovCapAmt","presCovMail",
+				"AMedicaid","AMedicaidDate","RespMedicaid","AMedicare","Respmedicare","AMedicareD","ALIS"];
+
+			function checkRequired(selector) {
+				$(selector).find("*").each(function(){
+					if (requiredFields.indexOf($(this).attr("name")) != -1 ){
+						$(this).attr("required", true);
+					}
+				});
 			}
 
 			function dateCheck(unsureField, dateField) {
@@ -64,6 +57,25 @@
 				else {
 					$("input[type=date][name=" + dateField + "]").removeAttr("readonly");
 					$("input[type=date][name=" + dateField + "]").attr("required", "true");
+				}
+			}
+
+			function mediumCheck() {
+				if (typeof $("input[type=radio][name=Medium]:checked").val() === "undefined") {
+					return;
+				}
+				if ($("input[type=radio][name=Medium]:checked").val() != "S") {
+					$("#mediumOption").show("slow");
+					checkRequired("#mediumOption");
+				}
+				else {
+					$("#mediumOption").hide("slow");
+					$("#mediumOption").find("input").removeAttr("required");
+					$("#mediumOption").find("input[type=date]").val("1111-11-11");
+					$("#mediumOption").find("input[type=text]").val("");
+					$("#mediumOption").find("input[type=number]").val(0);
+					$("#mediumOption").find("textarea").val("");
+					$("#mediumOption").find("input[type=checkbox]").prop("checked", false );
 				}
 			}
 
@@ -79,10 +91,10 @@
 					$(location).find("input[type=number]").val(0);
 					$(location).find("textarea").val("");
 					$(location).find("input[type=checkbox]").prop("checked", false );
-
 				}
 				else {					
 					$(location).show("slow");
+					checkRequired(location);
 				}
 			}
 
@@ -233,7 +245,7 @@
 		</div>
 
 		<div class="form-group">
-			<label>If you have insurance, does it provide prescription coverage?</label>
+			<label>If you have insurance, does it provide prescription coverage? <span style="color: red;">*</span></label>
 			<br/>
 			<label class="radio-inline"><input type="radio" name="presCov" value="Y" <cfset subformClass.showRadioButton('presCov',subformData,'Y')/> required/>Yes</label>
 			<label class="radio-inline"><input type="radio" name="presCov" value="N" <cfset subformClass.showRadioButton('presCov',subformData,'N')/>/>No</label>
@@ -242,7 +254,10 @@
 
 		<div id="presCovOption">
 			<div class="form-group">
-				<label>If you have prescription drug coverage through insurance, is there a cap on the annual amount your insurance will pay for medications?</label>
+				<label>
+					If you have prescription drug coverage through insurance, is there a cap on the annual amount your insurance will pay for medications? 
+					<span style="color: red;">*</span>
+				</label>
 				<br/>
 				<label class="radio-inline"><input type="radio" name="PresCovCap" value="Y" <cfset subformClass.showRadioButton('presCovCap',subformData,'Y')/> required/>Yes</label>
 				<label class="radio-inline"><input type="radio" name="PresCovCap" value="N" <cfset subformClass.showRadioButton('presCovCap',subformData,'N')/>/>No</label>
@@ -250,7 +265,7 @@
 			</div>
 
 			<div class="row">
-				<label class="col-sm-4">What is the amount of the cap?</label>
+				<label class="col-sm-4">What is the amount of the cap? <span style="color: red;">*</span></label>
 				<div class="input-group col-sm-8">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
 					<input type="number" class="form-control" name="PresCovCapAmt" value="<cfoutput>#subformData.PresCovCapAmt#</cfoutput>" required/>
@@ -259,9 +274,9 @@
 		</div>
 
 		<div class="form-group">
-			<label>Do you have prescription coverage through a mail order company?</label>
+			<label>Do you have prescription coverage through a mail order company? <span style="color: red;">*</span></label>
 			<br/>
-			<label class="radio-inline"><input type="radio" name="presCovMail" value="Y" <cfset subformClass.showRadioButton('presCovMail',subformData,'Y')/>/>Yes</label>
+			<label class="radio-inline"><input type="radio" name="presCovMail" value="Y" <cfset subformClass.showRadioButton('presCovMail',subformData,'Y')/> required />Yes</label>
 			<label class="radio-inline"><input type="radio" name="presCovMail" value="N" <cfset subformClass.showRadioButton('presCovMail',subformData,'N')/>/>No</label>
 			<label class="radio-inline"><input type="radio" name="presCovMail" value="P" <cfset subformClass.showRadioButton('presCovMail',subformData,'P')/>/>Partial</label>
 		</div>

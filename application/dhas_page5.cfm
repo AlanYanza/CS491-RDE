@@ -38,6 +38,18 @@
 				</cfoutput>
 			</cfif>
 
+			$("form").find("input").attr("autocomplete", "off");
+
+			var requiredFields = ["perm","CPName","Relation","CPAddr"];
+
+			function checkRequired(selector) {
+				$(selector).find("*").each(function(){
+					if (requiredFields.indexOf($(this).attr("name")) != -1 ){
+						$(this).attr("required", true);
+					}
+				});
+			}
+
 			function getSig(sigInput, sigPic) {
 				if ($(sigInput).val() != "") {
 					var tempCanvas = document.getElementById("getDisplayImage");
@@ -66,7 +78,8 @@
 					return;
 				}
 				if ($("input[type=radio][name=perm]:checked").val() == "Y") {
-					$("#contactOption").show("slow");					
+					$("#contactOption").show("slow");
+					checkRequired("#contactOption");
 				}
 				else {
 					$("#contactOption").hide("slow");
@@ -352,7 +365,7 @@
 		</div>
 	</div>
 
-	<div id="temp" style="position: relative; visibility: hidden; width: 100%; height: 100%; max-width: 660px; max-height: 347px; border: 1px solid #e8e8e8;">
+	<div id="temp" style="position: relative; visibility: hidden; width: 100%; height: 100%; max-width: 660px; max-height: 347px;">
 		<canvas id="getDisplayImage" style="position: relative; width: 100%; height: 100%;"></canvas>
 	</div>	
   	<script src="../js/app.js"></script>
