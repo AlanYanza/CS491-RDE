@@ -3,3 +3,5 @@ testForm.cfm
 testRest.cfm
 RestTestCFC.cfc
 testMailer.cfm
+.project
+settings.xml
